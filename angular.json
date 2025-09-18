@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/simple_app",
+            "outputPath": "dist/annance",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
