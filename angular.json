@@ -46,7 +46,8 @@
                   "maximumError": "2mb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/annances/"
             },
             "development": {
               "buildOptimizer": false,
