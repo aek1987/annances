@@ -10,7 +10,8 @@ export class RegisterComponent {
   user = {
     username: '',
     email: '',
-    password: ''
+    password: '',
+    phone:''
   };
   message: string = '';
 

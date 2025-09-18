@@ -1,44 +1,61 @@
 <div class="container mt-5">
-    <h2>Inscription</h2>
-    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
-      <div class="form-group">
-        <label for="username">Nom d'utilisateur</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          class="form-control"
-          [(ngModel)]="user.username"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          class="form-control"
-          [(ngModel)]="user.email"
-          required
-          email
-        />
-      </div>
-      <div class="form-group">
-        <label for="password">Mot de passe</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          class="form-control"
-          [(ngModel)]="user.password"
-          required
-          minlength="6"
-        />
-      </div>
-      <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">
-        S'inscrire
-      </button>
-    </form>
-  </div>
-  
+  <h2>Inscription Candidat</h2>
+  <form (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
+    
+    <!-- Nom complet -->
+    <div class="form-group mb-3">
+      <label for="fullname">Nom complet</label>
+      <input
+        type="text"
+        id="fullname"
+        name="fullname"
+        class="form-control"
+        [(ngModel)]="user.username"
+        required
+      />
+    </div>
+
+    <!-- Email -->
+    <div class="form-group mb-3">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        class="form-control"
+        [(ngModel)]="user.email"
+        required
+      />
+    </div>
+
+    <!-- Mot de passe -->
+    <div class="form-group mb-3">
+      <label for="password">Mot de passe</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        class="form-control"
+        [(ngModel)]="user.password"
+        required
+        minlength="6"
+      />
+    </div>
+
+    <!-- Numéro de téléphone -->
+    <div class="form-group mb-3">
+      <label for="phone">Numéro de téléphone</label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        class="form-control"
+        [(ngModel)]="user.phone"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100" [disabled]="!registerForm.valid">
+      S'inscrire
+    </button>
+  </form>
+</div>
