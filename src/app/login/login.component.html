@@ -1,0 +1,55 @@
+<div class="container auth-container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg p-4">
+        <h2 class="text-center mb-4">Connexion</h2>
+
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+          <!-- Email -->
+          <div class="form-group mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              [(ngModel)]="loginData.email"
+              required
+              email
+              placeholder="Entrez votre email"
+            />
+            <div *ngIf="loginForm.submitted && !loginData.email" class="text-danger small">
+              Email est requis.
+            </div>
+          </div>
+
+          <!-- Mot de passe -->
+          <div class="form-group mb-3">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              [(ngModel)]="loginData.password"
+              required
+              placeholder="Entrez votre mot de passe"
+            />
+            <div *ngIf="loginForm.submitted && !loginData.password" class="text-danger small">
+              Mot de passe est requis.
+            </div>
+          </div>
+
+          <!-- Boutons -->
+          <button type="submit" class="btn btn-primary w-100 mb-3" [disabled]="!loginForm.valid">
+            Se connecter
+          </button>
+
+          <a routerLink="/register" class="btn btn-outline-primary w-100">
+            Créer un compte
+          </a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/products">
+        <div class="brand-container">
+            <img src="assets/2.jpg" alt="Logo" style="height: 40px; margin-right: 10px;" class="navbar-logo">
+            <span class="brand-title">{{ 'BRAND' | translate }}</span>
+        </div>
+        <div class="company-info d-flex align-items-center mt-2">
+            <p class="mb-0 me-3 d-flex align-items-center">
+                <fa-icon [icon]="faMapMarkerAlt"></fa-icon>
+                                Route National 11, Mohammadia, Alger
+                <a href="https://www.google.com/maps?q=Route+National+11+Mohammadia+Alger" target="_blank"></a>
+            </p>
+            <p class="mb-0 d-flex align-items-center">
+                <fa-icon [icon]="faPhone"></fa-icon>     0698616281
+            </p>
+        </div>
+    </a>
+    
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+           
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/greet">
+                    <fa-icon [icon]="faShoppingCart"></fa-icon> {{ 'Home' | translate }}
+                    <span *ngIf="CountItem > 0" class="badge text-white">
+                        {{ CountItem }}
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/confirm-order">
+                    <fa-icon [icon]="faShoppingCart"></fa-icon> {{ 'Favories' | translate }}
+                    <span *ngIf="CountItem > 0" class="badge text-white">
+                        {{ CountItem }}
+                    </span>
+                </a>
+            </li>
+           
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/orders">
+                    <fa-icon [icon]="faReceipt"></fa-icon> {{ 'COMMANDES' | translate }}
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <fa-icon [icon]="faUser"></fa-icon> {{ 'USER' | translate }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li *ngIf="!isAuthenticated"><a class="dropdown-item" routerLink="/login">Se connecter</a></li>
+                    <li *ngIf="isAuthenticated"><a class="dropdown-item" (click)="logout()">Se déconnecter</a></li>
+                    <li *ngIf="!isAuthenticated"><a class="dropdown-item" routerLink="/register">S'inscrire</a></li>
+                    <li *ngIf="!isAuthenticated"><a class="dropdown-item" (click)="goToStock()">Stock</a></li>
+                    <li *ngIf="!isAuthenticated"><a class="dropdown-item" (click)="goToManager()">Manager</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <fa-icon [icon]="faGlobe"></fa-icon> Langue
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                    <li><a class="dropdown-item" (click)="switchLanguage('fr')">Français</a></li>
+                    <li><a class="dropdown-item" (click)="switchLanguage('ar')">العربية</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

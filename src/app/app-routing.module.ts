@@ -1,0 +1,44 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+import { CartComponent } from './cart/cart.component';
+import { OrderTrackingComponent } from './order-tracking/order-tracking.component';
+import { ProductComponent } from './product/product.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { DeliveryFormComponent } from './delivery-form/delivery-form.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { StcoktManagerComponent } from './stock-manager/stock-manager.component';
+import { OrderManagementComponent } from './order-management/order-management.component';
+import { AdminGuard } from './admin.guard';
+import { GreetingComponent } from './greeting/greeting.component';
+
+
+const routes: Routes = [
+  { path: 'ordersAllClient', component: OrderManagementComponent, canActivate: [AdminGuard] },
+  { path: 'stock', component:  StcoktManagerComponent  }, 
+  { path: 'products', component:  ProductComponent  }, 
+  { path: 'product/:id', component: ProductDetailComponent }, // Détails du produit
+  { path: 'login', component:  LoginComponent }, 
+  { path: 'register', component:  RegisterComponent },
+   { path: 'delivery', component:  DeliveryFormComponent },  
+  { path: 'confirm-order', component: OrderConfirmationComponent },  // Ajoutez cette route
+  { path: 'cart', component: CartComponent  },
+  { path: 'greet', component: GreetingComponent  },
+
+ { path: 'orders', component: OrderTrackingComponent },
+
+
+
+ // Page d'accueil par défaut
+  { path: '', component: GreetingComponent, pathMatch: 'full' },
+
+  //  Page 404 → redirection vers accueil
+  { path: '**', redirectTo: '' }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

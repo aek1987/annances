@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Annonce 1",
+    "price": 100,
+    "description": "Première annonce locale",
+    "category": "Véhicules",
+    "image": "assets/images/car1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Annonce 2",
+    "price": 200,
+    "description": "Deuxième annonce locale",
+    "category": "Immobilier",
+    "image": "assets/images/house1.jpg"
+  }
+]

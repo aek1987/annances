@@ -1,0 +1,94 @@
+.navbar {
+    background-color: #f8f9fa; /* Fond gris très clair */
+    color: #333333; /* Texte sombre pour le contraste */
+    padding: 10px;
+    border-bottom: 2px solid #d4af37; /* Légère bordure dorée pour un effet élégant */
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: #333333; /* Texte sombre pour les liens de navigation */
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.navbar-brand .brand-title {
+    color: #b8860b; /* Doré pâle pour la marque */
+    font-weight: bold;
+}
+
+.company-info p, .company-info a {
+    color: #555555; /* Gris moyen pour les informations de contact */
+    font-size: 13px;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%2855, 55, 55, 0.9%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-nav .nav-link {
+    margin-right: 15px;
+    color: #333333; /* Texte sombre pour les liens */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #b8860b; /* Doré clair au survol */
+}
+
+.badge {
+    background-color: #f0ad4e; /* Orange pâle pour le badge du panier */
+    color: #ffffff;
+}
+
+.dropdown-menu {
+    background-color: #f8f9fa; /* Fond clair pour le menu déroulant */
+}
+
+.dropdown-menu .dropdown-item {
+    color: #333333; /* Texte sombre pour les éléments du menu déroulant */
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #e9ecef; /* Gris clair au survol */
+}
+
+/* Animation de pulsation en boucle */
+@keyframes pulse {
+    0%, 100% {
+      transform: scale(1); /* Taille d'origine */
+    }
+    50% {
+      transform: scale(1.1); /* Taille agrandie à mi-parcours */
+    }
+  }
+  
+  /* Appliquer l'animation à la marque et au logo */
+.brand-container {
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    animation: pulse 4s infinite ease-in-out; /* Animation de 10 secondes en boucle */
+  }
+  
+  /* Transition pour que l'image et le texte grandissent ensemble */
+  .navbar-logo, .brand-title {
+    transition: transform 0.3s ease;
+  }
+   
+  /* Agrandit l'image et le texte lorsque l'utilisateur passe la souris dessus */
+  .brand-container:hover {
+    transform: scale(1.1); /* Augmentation de la taille globale */
+  }
+  
+
+  /* Optionnel : agrandir légèrement le texte séparément */
+  .brand-title {
+    font-size: 1.2rem; /* Taille de texte normale */
+    transition: transform 1s ease, color s ease;
+  }
+  
+  .brand-container:hover .brand-title {
+    color: #007bff; /* Change la couleur du texte */
+    transform: scale(1.2); /* Agrandit le texte lors du survol */
+  }
+  
+

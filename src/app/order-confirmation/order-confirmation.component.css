@@ -1,0 +1,59 @@
+/* Ajustement général pour un look plus professionnel */
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.card-footer {
+  background-color: #f8f9fa;
+  border-top: none;
+}
+
+/* Boutons avec ombre et effet de hover */
+.btn-success {
+  background-color: #28a745;
+  border: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-outline-danger {
+  border: 2px solid #dc3545;
+  color: #dc3545;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Alertes avec transition */
+.alert {
+  transition: opacity 0.4s ease, transform 0.3s ease;
+  opacity: 1;
+}
+
+.alert-dismissible .btn-close {
+  padding: 0.5rem;
+}
+
+/* Effet de fermeture en douceur */
+.alert-dismissible.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.alert-dismissible.fade {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* Icônes et texte espacés */
+.btn i {
+  margin-right: 0.5rem;
+}

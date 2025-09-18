@@ -1,0 +1,120 @@
+
+<!-- Barre de catégories -->
+<section class="categories-bar bg-light py-3">
+  <div class="container d-flex flex-wrap justify-content-center gap-3">
+
+    <!-- Emploi -->
+    <div class="dropdown">
+      <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        💼 Emploi
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" routerLink="/products?category=offres-emploi">Offres d’emploi</a></li>
+        <li><a class="dropdown-item" routerLink="/products?category=cv">Candidats / CV</a></li>
+        <li><a class="dropdown-item" routerLink="/products?category=formation">Formations</a></li>
+      </ul>
+    </div>
+
+    <!-- Véhicules -->
+    <div class="dropdown">
+      <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        🚗 Véhicules
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" routerLink="/products?category=voitures">Voitures</a></li>
+        <li><a class="dropdown-item" routerLink="/products?category=motos">Motos</a></li>
+        <li><a class="dropdown-item" routerLink="/products?category=utilitaires">Utilitaires</a></li>
+      </ul>
+    </div>
+
+    <!-- Immobilier -->
+    <div class="dropdown">
+      <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        🏠 Immobilier
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" routerLink="/products?category=ventes">Ventes</a></li>
+        <li><a class="dropdown-item" routerLink="/products?category=locations">Locations</a></li>
+        <li><a class="dropdown-item" routerLink="/products?category=colocation">Colocation</a></li>
+      </ul>
+    </div>
+
+    <!-- Loisirs -->
+    <div class="dropdown">
+      <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        🎮 Loisirs
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" routerLink="/products?category=sport">Sport</a></li>
+        <li><a class="dropdown-item" routerLink="/products?category=musique">Musique</a></li>
+        <li><a class="dropdown-item" routerLink="/products?category=voyages">Voyages</a></li>
+      </ul>
+    </div>
+
+    <!-- Services -->
+    <div class="dropdown">
+      <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        🛠️ Services
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" routerLink="/products?category=bricolage">Bricolage</a></li>
+        <li><a class="dropdown-item" routerLink="/products?category=transport">Transport</a></li>
+        <li><a class="dropdown-item" routerLink="/products?category=sante">Santé & Bien-être</a></li>
+      </ul>
+    </div>
+
+    <!-- Téléphonie -->
+    <div class="dropdown">
+      <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        📱 Téléphonie
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" routerLink="/products?category=smartphones">Smartphones</a></li>
+        <li><a class="dropdown-item" routerLink="/products?category=accessoires">Accessoires</a></li>
+        <li><a class="dropdown-item" routerLink="/products?category=forfaits">Forfaits</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- Hero Section -->
+<div class="hero-section d-flex align-items-center text-center text-white">
+  <div class="container">
+    <h1 class="display-3 fw-bold">Trouvez votre annances</h1>
+    <p class="lead mt-3">
+      Explorez des milliers d’offres et postulez en un clic.
+    </p>
+
+    <!-- Boutons actions -->
+    <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+      <a routerLink="/jobs" class="btn btn-lg btn-light px-4 shadow-sm">
+        🔍 Voir les annonces
+      </a>
+      <a routerLink="/post-ad" class="btn btn-lg btn-warning px-4 shadow-sm text-dark fw-bold">
+        ➕ Déposer une annonce
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<section class="features py-5">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-4">
+        <h4 class="fw-bold">🔍 Recherche facile</h4>
+        <p>Filtrez les offres selon vos compétences et vos préférences.</p>
+      </div>
+      <div class="col-md-4">
+        <h4 class="fw-bold">📄 Postulez rapidement</h4>
+        <p>Déposez votre candidature en un seul clic.</p>
+      </div>
+      <div class="col-md-4">
+        <h4 class="fw-bold">💼 Espace candidat</h4>
+        <p>Gérez vos candidatures et suivez leur évolution.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
