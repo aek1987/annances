@@ -24,7 +24,7 @@ jobs:
         npm install
 
     - name: Build Angular app
-      run: ng build annancesApp --configuration production --base-href "/annances/"
+      run: ng build  --configuration production --base-href "/annances/"
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
