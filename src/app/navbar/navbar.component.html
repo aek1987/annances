@@ -24,14 +24,15 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
            
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/greet">
-                    <fa-icon [icon]="faShoppingCart"></fa-icon> {{ 'Home' | translate }}
-                    <span *ngIf="CountItem > 0" class="badge text-white">
-                        {{ CountItem }}
-                    </span>
-                </a>
-            </li>
+           <li class="nav-item">
+  <a class="nav-link" routerLink="/greet">
+    <fa-icon [icon]="faHome"></fa-icon> {{ 'Home' | translate }}
+    <span *ngIf="CountItem > 0" class="badge text-white">
+      {{ CountItem }}
+    </span>
+  </a>
+</li>
+
             <li class="nav-item">
                 <a class="nav-link" routerLink="/confirm-order">
                     <fa-icon [icon]="faShoppingCart"></fa-icon> {{ 'Favories' | translate }}
