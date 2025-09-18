@@ -6,7 +6,7 @@ on:
       - master   # ou main, selon ta branche principale
 
 jobs:
-  build-and-deploy:
+  build-and-deploy_nekaa:
     runs-on: ubuntu-latest
 
     steps:
