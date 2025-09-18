@@ -25,7 +25,7 @@ jobs:
       run: ng build --configuration production --base-href "/annances/"
 
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v6
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages        # la branche qui contiendra le site
         folder: dist/annances   # le dossier build Angular
