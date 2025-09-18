@@ -26,6 +26,9 @@ jobs:
     - name: Build Angular app
       run: ng build  --configuration production --base-href "/annances/"
 
+    - name: Check dist folder
+      run: ls -R dist
+
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
