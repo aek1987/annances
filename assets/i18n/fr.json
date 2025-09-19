@@ -1,0 +1,23 @@
+{
+  "PRODUCTS_AVAILABLE": "Available Products",
+  "SEARCH_PLACEHOLDER": "Search for products...",
+  "SEARCH_BUTTON": "Search",
+  "BRANDS": "Brands",
+  "USER": "utilisateur",
+  "Home": "Accueil",
+  "PRICE": "Price:",
+   "BRAND": "Annances Store",
+   "COMMANDES": "commande",
+   "PANIER": "panier",
+   "ACHETER": "Acheter",
+    "AJOUTER_AU_PANIER": "ajouter au panier",  
+    "MOINS3": "moins de 3 millions",
+    "MOINS4": "moins de 4 millions",
+    "MOINS5": "moins de 5 millions",
+    "MARQUE": "marque",
+    "PRIX": "prix",
+    "TOTAL": "total",
+    "FRAIS": "frais de livraison",
+    "TOTAL_A_PAYER": "total à payer"  
+  
+}

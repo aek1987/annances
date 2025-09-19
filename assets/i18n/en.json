@@ -1,0 +1,15 @@
+{
+    "TITLE": "Welcome",
+    "ADD_TO_CART": "Add to Cart",
+    "PRICE": "Price",
+
+    "USER": "user",
+    "NAVBAR": {
+    "BRAND": "My Brands"
+     },
+     "COMMANDES":"orders",
+     "PANIER":"basket",
+     "MOINS 3":"moins de 3 millions"
+     
+  }
+  
