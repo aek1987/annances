@@ -25,7 +25,7 @@ jobs:
       run: npm install -g @angular/cli
 
     - name: Build Angular app
-      run: ng build --configuration production --base-href "/"
+      run: ng build --configuration production --base-href "/annances/"
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
