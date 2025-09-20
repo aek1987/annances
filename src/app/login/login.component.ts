@@ -14,25 +14,56 @@ export class LoginComponent {
   };
 
   constructor(private authService: AuthService, private router: Router) {}
-
+errorMessage: string = '';
   onSubmit() {
-    this.authService.login(this.loginData)
-      .subscribe(
-        (response: any) => {
-          // Vérification de l'email et du mot de passe
-          if (this.loginData.email === 'nekaaabdelakder1987@gmail.com' && this.loginData.password === 'nekaa') {
-            localStorage.setItem('userRole', 'admin'); // Définir le rôle d'administrateur
-          } else {
-            localStorage.setItem('userRole', 'user'); // Définir un rôle par défaut pour les autres utilisateurs
-          }
+  this.errorMessage = ''; // reset erreur avant chaque tentative
 
-          this.router.navigate(['/product']);  // Rediriger après connexion
-          alert('Login réussi');
-        },
-        (error) => {
-          console.error('Login échoué', error);
-          alert('Login échoué. Veuillez vérifier vos informations.');
-        }
-      );
-  }
+  this.authService.login(this.loginData).subscribe({
+    next: (response: any) => {
+      // Le backend devrait renvoyer { token, role }
+      const { token, role } = response;
+     console.log("role=== "+response.role);
+      this.authService.setSession(token, role); // 👈 délégué au service
+
+   // 👉 Redirection en fonction du rôle
+     switch (role) {
+  case 'entreprise':
+    this.router.navigate(['/entreprise']);
+    break;
+  case 'condidat':
+    this.router.navigate(['/offre-emploi']);
+    break;
+      case 'standard':
+    this.router.navigate(['/products']);
+    break;
+     case 'admin':
+    this.router.navigate(['/greet']);
+    break;
+  default:
+    this.router.navigate(['/']); // fallback, page d’accueil par ex.
+    break;
+}
+
+   
+
+      // Exemple avec SweetAlert
+      // Swal.fire('✅ Connexion réussie', `Bienvenue ${this.loginData.email}`, 'success');
+    },
+    error: (error) => {
+      console.error('❌ Échec de connexion', error);
+
+      if (error.status === 401) {
+        this.errorMessage = 'Email ou mot de passe incorrect.';
+      } else if (error.status === 0) {
+        this.errorMessage = 'Serveur injoignable. Vérifiez votre connexion.';
+      } else {
+        this.errorMessage = 'Une erreur inattendue est survenue.';
+      }
+    },
+    complete: () => {
+      console.log('Tentative de login terminée.');
+    }
+  });
+}
+
 }

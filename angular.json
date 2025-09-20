@@ -46,6 +46,11 @@
                   "maximumError": "2mb"
                 }
               ],
+               "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/404.html"
+            ],
               "outputHashing": "all",
               "baseHref": "/annances/"
             },

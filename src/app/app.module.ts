@@ -26,6 +26,9 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ThousandSeparatorPipe } from './pipe/thousand-separator.pipe';
 import { OrderManagementComponent } from './order-management/order-management.component';
 import { CartComponent } from './cart/cart.component';
+import { OffreEmploiComponent } from './offre-emploi/offre-emploi.component';
+import { AnnanceEmploiComponent } from './annance-emploi/annance-emploi.component';
+import { EntrepriseComponent } from './entreprise/entreprise.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -48,7 +51,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     CarouselComponent,  
     ProductDetailComponent,
     ThousandSeparatorPipe,
-    OrderManagementComponent
+    OrderManagementComponent,    
+    OffreEmploiComponent,
+    AnnanceEmploiComponent,
+    EntrepriseComponent
    
   ],
   imports: [CommonModule,

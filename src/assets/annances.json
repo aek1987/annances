@@ -1,18 +1,82 @@
 [
   {
     "id": 1,
-    "name": "Annonce 1",
-    "price": 100,
-    "description": "Première annonce locale",
-    "category": "Véhicules",
-    "image": "assets/images/car1.jpg"
+    "name": "Développeur Angular",
+    "price": 0,
+    "description": "Poste pour développeur Angular confirmé, 3 ans d'expérience requis.",
+    "category": "Emploi",
+    "image": "assets/images/job1.jpg"
   },
   {
     "id": 2,
-    "name": "Annonce 2",
-    "price": 200,
-    "description": "Deuxième annonce locale",
-    "category": "Immobilier",
-    "image": "assets/images/house1.jpg"
+    "name": "Designer Graphique",
+    "price": 0,
+    "description": "Designer UX/UI recherché pour projet web et mobile.",
+    "category": "Emploi",
+    "image": "assets/images/job2.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Assistant Administratif",
+    "price": 0,
+    "description": "Gestion des documents, organisation et suivi des dossiers.",
+    "category": "Emploi",
+    "image": "assets/images/job3.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Commercial B2B",
+    "price": 0,
+    "description": "Vente de services aux entreprises, expérience souhaitée de 2 ans.",
+    "category": "Emploi",
+    "image": "assets/images/job4.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Community Manager",
+    "price": 0,
+    "description": "Gestion des réseaux sociaux et création de contenu attractif.",
+    "category": "Emploi",
+    "image": "assets/images/job5.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Technicien Réseaux",
+    "price": 0,
+    "description": "Installation et maintenance des infrastructures réseau.",
+    "category": "Emploi",
+    "image": "assets/images/job6.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Chef de Projet IT",
+    "price": 0,
+    "description": "Coordination de projets informatiques et suivi d'équipe technique.",
+    "category": "Emploi",
+    "image": "assets/images/job7.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Rédacteur Web",
+    "price": 0,
+    "description": "Création de contenu SEO et optimisation pour les moteurs de recherche.",
+    "category": "Emploi",
+    "image": "assets/images/job8.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Chargé de Comptabilité",
+    "price": 0,
+    "description": "Saisie et suivi des factures, gestion des paiements.",
+    "category": "Emploi",
+    "image": "assets/images/job9.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Agent de Support Client",
+    "price": 0,
+    "description": "Assistance téléphonique et chat, gestion des réclamations clients.",
+    "category": "Emploi",
+    "image": "assets/images/job10.jpg"
   }
 ]

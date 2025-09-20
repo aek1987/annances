@@ -50,6 +50,7 @@ maxLimit: number = 400000;  // Limite maximale pour le slider
   this.productService.getAnnancessLocal().subscribe({
     next: (data) => {
       this.products = data;
+      this.filteredProducts = [...this.products];
     },
     error: (err) => {
       console.error("Erreur de chargement des produits", err);

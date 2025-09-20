@@ -11,7 +11,8 @@ export class RegisterComponent {
     username: '',
     email: '',
     password: '',
-    phone:''
+    phone:'',
+    fonction:''
   };
   message: string = '';
 

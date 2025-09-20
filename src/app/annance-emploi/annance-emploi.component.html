@@ -1,0 +1,44 @@
+<div class="container mt-4">
+
+  <h2>Créer une annonce d'emploi</h2>
+  <form (ngSubmit)="ajouterAnnonce()">
+    <div class="mb-3">
+      <label for="titre" class="form-label">Titre</label>
+      <input type="text" id="titre" class="form-control" [(ngModel)]="nouvelleAnnonce.titre" name="titre" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" class="form-control" [(ngModel)]="nouvelleAnnonce.description" name="description" rows="3" required></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="salaire" class="form-label">Salaire</label>
+      <input type="number" id="salaire" class="form-control" [(ngModel)]="nouvelleAnnonce.salaire" name="salaire">
+    </div>
+
+    <div class="mb-3">
+      <label for="localisation" class="form-label">Localisation</label>
+      <input type="text" id="localisation" class="form-control" [(ngModel)]="nouvelleAnnonce.localisation" name="localisation">
+    </div>
+
+    <div class="mb-3">
+      <label for="categorie" class="form-label">Catégorie</label>
+      <input type="text" id="categorie" class="form-control" [(ngModel)]="nouvelleAnnonce.categorie" name="categorie">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter l'annonce</button>
+  </form>
+
+  <hr>
+
+  <h3>Liste des annonces</h3>
+  <div *ngIf="annonces.length === 0">Aucune annonce pour le moment.</div>
+  <div class="list-group">
+    <div *ngFor="let annonce of annonces" class="list-group-item">
+      <h5>{{ annonce.titre }}</h5>
+      <p>{{ annonce.description }}</p>
+      <p><strong>Salaire :</strong> {{ annonce.salaire }} | <strong>Localisation :</strong> {{ annonce.localisation }} | <strong>Catégorie :</strong> {{ annonce.categorie }}</p>
+    </div>
+  </div>
+</div>

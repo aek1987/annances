@@ -1,14 +1,15 @@
-
-  <!-- 404.html -->
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>404 - Page non trouvée</title>
-</head>
-<body>
-  <script>
-    window.location.replace('/');
-  </script>
-</body>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+      // Redirige vers index.html en gardant la route
+      sessionStorage.redirect = location.href;
+      window.location.href = '/annances/';
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
 </html>
