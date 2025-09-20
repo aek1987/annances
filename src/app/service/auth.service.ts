@@ -23,7 +23,7 @@ export class AuthService {
   // Liste des comptes fictifs
   private accounts: Account[] = [
     { email: 'condidat@gmail.com', password: '123', role: 'condidat' },
-    { email: 'enterprise@gmail.com', password: '123', role: 'entreprise' },
+    { email: 'entreprise@gmail.com', password: '123', role: 'entreprise' },
     { email: 'admin@gmail.com', password: 'admin', role: 'admin' }
   ];
 
