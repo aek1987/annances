@@ -18,7 +18,7 @@ export class ProfilComponent {
   editMode = false;
 
   profil = {
-    photo: 'assets/user.png', // image par défaut
+    photo: '../../assets/user.png', // image par défaut
     nom: 'Jean Dupont',
     email: 'jean.dupont@mail.com',
     titre: 'Développeur Full Stack',
@@ -29,7 +29,7 @@ export class ProfilComponent {
       { poste: 'Développeur Angular', entreprise: 'Capgemini', duree: '2 ans' },
       { poste: 'Développeur Java', entreprise: 'Sopra Steria', duree: '1 an' }
     ],
-    cv: 'assets/exemple_cv.pdf'
+    cv: './../assets/exemple_cv.pdf'
   };
 
   newCompetence = '';
