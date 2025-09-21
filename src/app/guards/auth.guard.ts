@@ -1,19 +1,31 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, CanActivateChild, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanActivateChild {
+
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(): boolean {
-    if (this.authService.isAuthenticated()) {
-      return true;
+  // Vérifie l'accès à la route principale
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    return this.checkLogin();
+  }
+
+  // Vérifie l'accès aux enfants de la route (LayoutComponent)
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    return this.checkLogin();
+  }
+
+  private checkLogin(): boolean {
+    const user = this.authService.getUser();
+    if (user && user.role === 'candidat') {
+      return true; // accès autorisé
     } else {
-      // Redirigez l'utilisateur vers la page de connexion s'il n'est pas authentifié
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']); // redirection vers login si non connecté ou mauvais rôle
       return false;
     }
   }

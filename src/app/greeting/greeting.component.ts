@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./greeting.component.css']
 })
 export class GreetingComponent {
+ showDropdowns: boolean = false; // false = caché, true = visible
 
+  toggleDropdowns() {
+    this.showDropdowns = !this.showDropdowns;
+  }
 }

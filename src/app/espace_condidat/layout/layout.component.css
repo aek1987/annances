@@ -1,6 +1,8 @@
+
 .layout-container {
-  display: flex;       /* met sidebar et contenu sur la même ligne */
+  display: flex;
   min-height: 100vh;
+  padding-top: 60px; /* égal à la hauteur de la navbar */
 }
 
 .sidebar {

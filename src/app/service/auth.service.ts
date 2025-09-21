@@ -1,67 +1,78 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
-  interface Account {
+
+interface Account {
   email: string;
   password: string;
   role: string;
 }
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://reqres.in/api/login';  // Assurez-vous que cette URL est correcte
-  private userRole: string | null = null;
-
-  constructor(private http: HttpClient) {
-
-    this.userRole = localStorage.getItem('userRole');
-  }
-
-  // 🔹 Simulation d’un login local
-  // Liste des comptes fictifs
   private accounts: Account[] = [
     { email: 'condidat@gmail.com', password: '123', role: 'condidat' },
     { email: 'entreprise@gmail.com', password: '123', role: 'entreprise' },
     { email: 'admin@gmail.com', password: 'admin', role: 'admin' }
   ];
 
-login(credentials: { email: string; password: string }): Observable<any> {
-   const account = this.accounts.find(acc => 
-      acc.email === credentials.email && acc.password === credentials.password
-    );
-  
-    return of({
-      token: 'fake-token',
-      role: account ? account.role : 'standard'  // rôle par défaut si non trouvé
-    });
-}
+  constructor() {}
 
- // Gestion de session
-  setSession(token: string, role: string) {
-    localStorage.setItem('authToken', token);
-    localStorage.setItem('userRole', role || 'user');
+  login(credentials: { email: string; password: string }): Observable<any> {
+    const account = this.accounts.find(
+      acc => acc.email === credentials.email && acc.password === credentials.password
+    );
+
+    if (account) {
+      // Stocke l'utilisateur complet + token
+      this.setSession('fake-token', account);
+      return of({ token: 'fake-token', role: account.role });
+    } else {
+      return of({ token: null, role: 'standard' });
+    }
   }
+
+  // 🔹 Nouvelle version de setSession
+  setSession(token: string, user: Account) {
+    localStorage.setItem('authToken', token);
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('authToken');
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('authToken') && !!localStorage.getItem('user');
   }
 
-// Enregistre l'utilisateur dans localStorage
-register(user: any): boolean {
-  const existingUser = localStorage.getItem(user.email);
-  if (existingUser) {
-    return false; // L'utilisateur existe déjà
+  getUser(): Account | null {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
   }
-  localStorage.setItem(user.email, JSON.stringify(user)); // Enregistre l'utilisateur
+
+  isAdmin(): boolean {
+    const user = this.getUser();
+    return user?.role === 'admin';
+  }
+  register(user: Account): boolean {
+  // Récupère tous les utilisateurs enregistrés
+  const usersString = localStorage.getItem('users');
+  const users: Account[] = usersString ? JSON.parse(usersString) : [];
+
+  // Vérifie si l'utilisateur existe déjà
+  const exists = users.find(u => u.email === user.email);
+  if (exists) {
+    return false; // utilisateur déjà existant
+  }
+
+  // Ajoute le nouvel utilisateur
+  users.push(user);
+  localStorage.setItem('users', JSON.stringify(users));
   return true;
 }
 
-  isAdmin(): boolean {
-    return localStorage.getItem('userRole')=== 'admin';/// renvoi true if amdin
-  }
+
 }

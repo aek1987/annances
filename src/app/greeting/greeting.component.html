@@ -9,12 +9,12 @@
         💼 Emploi
       </button>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" routerLink="/products?category=offres-emploi">Offres d’emploi</a></li>
+        <li><a class="dropdown-item" routerLink="/offres-emploi">Offres d’emploi</a></li>
         <li><a class="dropdown-item" routerLink="/products?category=cv">Candidats / CV</a></li>
         <li><a class="dropdown-item" routerLink="/products?category=formation">Formations</a></li>
       </ul>
     </div>
-
+<div *ngIf="showDropdowns">
     <!-- Véhicules -->
     <div class="dropdown">
       <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
@@ -76,6 +76,7 @@
     </div>
 
   </div>
+  </div>
 </section>
 
 <!-- Hero Section -->
@@ -87,7 +88,7 @@
   <div class="container">
     <h1 class="display-3 fw-bold">Trouvez votre annonce idéale</h1>
     <p class="lead mt-3">
-      Explorez des milliers d’offres d’emploi, de véhicules, d’immobilier et plus encore.
+      Explorez des milliers d’offres d’emploi
     </p>
 
     <!-- Boutons actions -->
