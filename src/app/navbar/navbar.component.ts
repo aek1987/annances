@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 
-import { faShoppingCart, faReceipt ,faUser, faGlobe, faSearch, faMapMarkerAlt, faMap, faPhone, faHome } from '@fortawesome/free-solid-svg-icons'; // Importer les icônes
+import { faShoppingCart, faReceipt ,faUser, faGlobe, faSearch, faMapMarkerAlt, faMap, faPhone, faHome, faStar } from '@fortawesome/free-solid-svg-icons'; // Importer les icônes
 import { TranslateService } from '@ngx-translate/core';
 import { CartService } from '../service/cart.service';
 
@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit{
   faUser = faUser;
   faGlobe = faGlobe;
   faHome = faHome;
+  faStar = faStar;
   CountItem :number=0;
 
   faSearch = faSearch;  // Icône de recherche

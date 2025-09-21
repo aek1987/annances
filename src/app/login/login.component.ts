@@ -31,7 +31,7 @@ errorMessage: string = '';
     this.router.navigate(['/entreprise']);
     break;
   case 'condidat':
-    this.router.navigate(['/offre-emploi']);
+    this.router.navigate(['/offres-emploi']);
     break;
       case 'standard':
     this.router.navigate(['/products']);

@@ -35,7 +35,7 @@
 
             <li class="nav-item">
                 <a class="nav-link" routerLink="/confirm-order">
-                    <fa-icon [icon]="faShoppingCart"></fa-icon> {{ 'Favories' | translate }}
+                    <fa-icon [icon]="faStar"></fa-icon> {{ 'Favories' | translate }}
                     <span *ngIf="CountItem > 0" class="badge text-white">
                         {{ CountItem }}
                     </span>
@@ -55,7 +55,7 @@
                     <li *ngIf="!isAuthenticated"><a class="dropdown-item" routerLink="/login">Se connecter</a></li>
                     <li *ngIf="isAuthenticated"><a class="dropdown-item" (click)="logout()">Se déconnecter</a></li>
                     <li *ngIf="!isAuthenticated"><a class="dropdown-item" routerLink="/register">S'inscrire</a></li>
-                    <li *ngIf="!isAuthenticated"><a class="dropdown-item" (click)="goToStock()">Stock</a></li>
+                   
                     <li *ngIf="!isAuthenticated"><a class="dropdown-item" (click)="goToManager()">Manager</a></li>
                 </ul>
             </li>

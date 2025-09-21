@@ -2,7 +2,7 @@
 .hero-section {
   position: relative;
   min-height: 90vh;
-  background: url('/assets/job.jpg') no-repeat center center;
+  background: url('../../assets/job.jpg') no-repeat center center;
   background-size: cover;
   display: flex;
   justify-content: center;

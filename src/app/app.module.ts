@@ -9,7 +9,6 @@ import { ProductComponent } from './product/product.component';
 import { OrderTrackingComponent } from './order-tracking/order-tracking.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 import { NavbarComponent } from './navbar/navbar.component';  // Import FormsModule
-
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -26,9 +25,10 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ThousandSeparatorPipe } from './pipe/thousand-separator.pipe';
 import { OrderManagementComponent } from './order-management/order-management.component';
 import { CartComponent } from './cart/cart.component';
-import { OffreEmploiComponent } from './offre-emploi/offre-emploi.component';
 import { AnnanceEmploiComponent } from './annance-emploi/annance-emploi.component';
 import { EntrepriseComponent } from './entreprise/entreprise.component';
+import { OffresEmploiComponent } from './espace_condidat/offre-emploi/offres-emploi.component';
+import { ProfilComponent } from './espace_condidat/profil/profil.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -52,9 +52,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProductDetailComponent,
     ThousandSeparatorPipe,
     OrderManagementComponent,    
-    OffreEmploiComponent,
+    OffresEmploiComponent ,
     AnnanceEmploiComponent,
-    EntrepriseComponent
+    EntrepriseComponent,
+    ProfilComponent
    
   ],
   imports: [CommonModule,

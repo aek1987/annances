@@ -6,6 +6,7 @@ interface JobOffer {
   description: string;
   category: string;
   salary: number;
+  
 }
 
 @Component({

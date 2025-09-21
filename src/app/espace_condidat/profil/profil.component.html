@@ -1,0 +1,67 @@
+<div class="profil-card">
+  <!-- Photo + Nom -->
+  <div class="text-center">
+    <img [src]="profil.photo" alt="Photo de profil" class="profil-photo">
+    <h2>{{ profil.nom }}</h2>
+    <p class="text-muted">{{ profil.titre }} - {{ profil.localisation }}</p>
+  </div>
+
+  <!-- Bio -->
+  <div class="section">
+    <h4>À propos</h4>
+    <p *ngIf="!editMode">{{ profil.bio }}</p>
+    <textarea *ngIf="editMode" [(ngModel)]="profil.bio" class="form-control"></textarea>
+  </div>
+
+  <!-- Compétences -->
+  <div class="section">
+    <h4>Compétences</h4>
+    <div class="skills">
+      <span *ngFor="let c of profil.competences; let i = index" class="badge bg-primary m-1">
+        {{ c }} <span *ngIf="editMode" (click)="removeCompetence(i)" style="cursor:pointer">❌</span>
+      </span>
+    </div>
+    <div *ngIf="editMode" class="mt-2">
+      <input class="form-control" [(ngModel)]="newCompetence" placeholder="Ajouter une compétence">
+      <button class="btn btn-sm btn-success mt-1" (click)="addCompetence()">+ Ajouter</button>
+    </div>
+  </div>
+
+  <!-- Expériences -->
+  <div class="section">
+    <h4>Expériences</h4>
+    <ul>
+      <li *ngFor="let e of profil.experiences; let i = index">
+        <b>{{ e.poste }}</b> chez {{ e.entreprise }} ({{ e.duree }})
+        <span *ngIf="editMode" (click)="removeExperience(i)" style="cursor:pointer">❌</span>
+      </li>
+    </ul>
+    <div *ngIf="editMode">
+      <input class="form-control mb-1" [(ngModel)]="newExperience.poste" placeholder="Poste">
+      <input class="form-control mb-1" [(ngModel)]="newExperience.entreprise" placeholder="Entreprise">
+      <input class="form-control mb-1" [(ngModel)]="newExperience.duree" placeholder="Durée">
+      <button class="btn btn-sm btn-success" (click)="addExperience()">+ Ajouter</button>
+    </div>
+  </div>
+
+  <!-- CV -->
+  <div class="section">
+    <h4>CV</h4>
+    <p><a [href]="profil.cv" target="_blank">📄 Voir mon CV</a></p>
+    <input *ngIf="editMode" class="form-control" [(ngModel)]="profil.cv">
+  </div>
+
+  <!-- Actions -->
+  <div class="text-center mt-3">
+    <button *ngIf="!editMode" class="btn btn-primary" (click)="toggleEdit()">✏️ Modifier</button>
+    <button class="btn btn-outline-dark retour-btn" (click)="retour()">
+  ⬅ Retour aux offres
+</button>
+
+    <div *ngIf="editMode">
+      <button class="btn btn-success" (click)="saveProfil()">💾 Sauvegarder</button>
+      <button class="btn btn-secondary" (click)="toggleEdit()">❌ Annuler</button>
+    </div>
+  </div>
+</div>
+

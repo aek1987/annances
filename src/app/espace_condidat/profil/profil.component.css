@@ -1,0 +1,41 @@
+.profil-card {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+}
+
+.profil-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #007bff;
+  margin-bottom: 15px;
+}
+
+.section {
+  margin-top: 20px;
+}
+
+.skills .badge {
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 20px;
+}
+/* Bouton retour stylisé */
+.retour-btn {
+  width: 100%;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
+}
+
+.retour-btn:hover {
+  background: #343a40;
+  color: #fff;
+  transform: translateX(-3px);
+}

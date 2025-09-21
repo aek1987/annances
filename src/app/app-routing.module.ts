@@ -12,9 +12,10 @@ import { StcoktManagerComponent } from './stock-manager/stock-manager.component'
 import { OrderManagementComponent } from './order-management/order-management.component';
 import { AdminGuard } from './admin.guard';
 import { GreetingComponent } from './greeting/greeting.component';
-import { OffreEmploiComponent } from './offre-emploi/offre-emploi.component';
 import { AnnanceEmploiComponent } from './annance-emploi/annance-emploi.component';
 import { EntrepriseComponent } from './entreprise/entreprise.component';
+import { OffresEmploiComponent } from './espace_condidat/offre-emploi/offres-emploi.component';
+import { ProfilComponent } from './espace_condidat/profil/profil.component';
 
 
 const routes: Routes = [
@@ -27,11 +28,15 @@ const routes: Routes = [
    { path: 'delivery', component:  DeliveryFormComponent },  
   { path: 'confirm-order', component: OrderConfirmationComponent },  // Ajoutez cette route
   { path: 'cart', component: CartComponent  },
+
   { path: 'greet', component: GreetingComponent  },
-  
+   { path: 'entreprise', component: EntrepriseComponent  },
    { path: 'annance-emploi', component: AnnanceEmploiComponent  },
-   { path: 'offre-emploi', component: OffreEmploiComponent  },
-    { path: 'entreprise', component: EntrepriseComponent  },
+   
+   { path: 'offres-emploi', component: OffresEmploiComponent  },
+   { path: 'settings', component: ProfilComponent  },
+   
+  
 
  { path: 'orders', component: OrderTrackingComponent },
 

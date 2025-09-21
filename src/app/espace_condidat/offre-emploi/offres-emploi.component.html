@@ -1,0 +1,88 @@
+<div class="layout">
+ <!-- 📌 Barre latérale : Profil Candidat -->
+<aside class="sidebar">
+  <h3>Mon Profil</h3>
+
+ 
+
+  <!-- 📌 Liens rapides -->
+  <div class="profile-links">
+    
+    <ul>
+      <li><a routerLink="/settings">⚙️ Paramètres du compte</a></li>
+      <li><a routerLink="/my-applications">📄 Mes candidatures</a></li>
+      <li><a routerLink="/saved-jobs">⭐ Offres sauvegardées</a></li>
+      <li><a routerLink="/alerts">🔔 Mes alertes emploi</a></li>
+      <li><a routerLink="/edit-cv">📑 Mettre à jour mon CV</a></li>
+     
+    </ul>
+  </div>
+
+  <!-- 📌 Suivi candidatures -->
+  <div class="profile-actions">
+   
+    <ul>
+      <li *ngFor="let c of candidatures">
+        {{ c.offre }} - <b>{{ c.status }}</b>
+      </li>
+    </ul>
+  </div>
+</aside>
+
+
+  <!-- 📄 Contenu principal -->
+  <main class="main-content">
+    <!-- 🔎 Recherche avancée -->
+    <div class="search-bar">
+      <input type="text" placeholder="Mots-clés" [(ngModel)]="searchTerm">
+      <input type="text" placeholder="Localisation" [(ngModel)]="searchLocation">
+      <input type="number" placeholder="Salaire minimum" [(ngModel)]="searchSalary">
+      <input type="text" placeholder="Expérience" [(ngModel)]="searchExperience">
+      <button (click)="applyFilters()">Rechercher</button>
+    </div>
+
+    <!-- 🎯 Filtres -->
+    <div class="filters">
+      <select [(ngModel)]="selectedContract" (change)="applyFilters()">
+        <option value="">Type de contrat</option>
+        <option value="CDI">CDI</option>
+        <option value="CDD">CDD</option>
+        <option value="Stage">Stage</option>
+        <option value="Remote">Télétravail</option>
+      </select>
+
+      <select [(ngModel)]="selectedSector" (change)="applyFilters()">
+        <option value="">Secteur</option>
+        <option *ngFor="let secteur of sectors" [value]="secteur">{{ secteur }}</option>
+      </select>
+    </div>
+
+    <!-- 📄 Liste des offres -->
+    <div class="offres-list">
+      <div class="offre-card" *ngFor="let offre of filteredOffres">
+        <h3>{{ offre.title }}</h3>
+        <p><b>Entreprise :</b> {{ offre.company }}</p>
+        <p><b>Lieu :</b> {{ offre.location }}</p>
+        <p><b>Salaire :</b> {{ offre.salary | currency:'EUR' }}</p>
+        <p><b>Contrat :</b> {{ offre.contract }}</p>
+        <p>{{ offre.description }}</p>
+
+        <div class="actions">
+          <button (click)="postuler(offre)">
+            {{ offre.status ? offre.status : 'Postuler' }}
+          </button>
+          <button (click)="toggleFavori(offre)">
+            {{ offre.favori ? '★ Retirer Favori' : '☆ Ajouter Favori' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 📩 Alerte email -->
+    <div class="alertes">
+      <h4>S’abonner aux alertes</h4>
+      <input type="email" placeholder="Votre email" [(ngModel)]="alertEmail">
+      <button (click)="subscribeAlert()">S’abonner</button>
+    </div>
+  </main>
+</div>
