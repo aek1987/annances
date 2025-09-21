@@ -16,6 +16,8 @@ import { AnnanceEmploiComponent } from './annance-emploi/annance-emploi.componen
 import { EntrepriseComponent } from './entreprise/entreprise.component';
 import { OffresEmploiComponent } from './espace_condidat/offre-emploi/offres-emploi.component';
 import { ProfilComponent } from './espace_condidat/profil/profil.component';
+import { LayoutComponent } from './espace_condidat/layout/layout.component';
+import { FavoritesComponent } from './espace_condidat/favorites/favorites.component';
 
 
 const routes: Routes = [
@@ -32,11 +34,17 @@ const routes: Routes = [
   { path: 'greet', component: GreetingComponent  },
    { path: 'entreprise', component: EntrepriseComponent  },
    { path: 'annance-emploi', component: AnnanceEmploiComponent  },
+
    
-   { path: 'offres-emploi', component: OffresEmploiComponent  },
-   { path: 'settings', component: ProfilComponent  },
    
-  
+   {  path: '', component: LayoutComponent, children: [
+      { path: '', redirectTo: 'offers', pathMatch: 'full' },
+     { path: 'offres-emploi', component: OffresEmploiComponent  },
+     { path: 'favorites', component: FavoritesComponent },
+     { path: 'settings', component: ProfilComponent  },
+      
+    ]}
+    ,
 
  { path: 'orders', component: OrderTrackingComponent },
 

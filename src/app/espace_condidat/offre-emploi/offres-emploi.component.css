@@ -1,9 +1,4 @@
-.offres-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
+
 
 /* 🔎 Barre de recherche */
 .search-bar {
@@ -198,4 +193,9 @@
   color: #fff;
   padding: 20px;
   min-width: 280px;
+}
+
+.main-content {
+  margin-left: 260px; /* largeur sidebar */
+  padding: 20px;
 }

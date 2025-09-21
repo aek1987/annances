@@ -1,0 +1,15 @@
+.layout-container {
+  display: flex; /* mettre les éléments en ligne */
+  min-height: 100vh; /* hauteur totale de la page */
+}
+
+.sidebar {
+  width: 250px; /* largeur fixe */
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.main-content {
+  flex: 1; /* prend tout l'espace restant */
+  padding: 20px;
+}
