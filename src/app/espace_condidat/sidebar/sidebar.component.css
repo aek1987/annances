@@ -15,3 +15,11 @@
   align-items: center;
   padding-top: 80px; /* décale vers le bas (ajuste la valeur) */
 }
+.profil-photo {
+  width: 80px;         /* largeur de l'avatar */
+  height: 80px;        /* hauteur égale pour faire un cercle */
+  border-radius: 50%;  /* rend l'image ronde */
+  object-fit: cover;   /* recadre l'image sans déformation */
+  display: block;
+  margin: 0 auto;      /* centre l'avatar */
+}

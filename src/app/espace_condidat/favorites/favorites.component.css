@@ -1,0 +1,30 @@
+
+
+
+.favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.favorite-item {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.btn-remove {
+  margin-top: 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-remove:hover {
+  background-color: #c0392b;
+}

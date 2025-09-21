@@ -1,15 +1,16 @@
 .layout-container {
-  display: flex; /* mettre les éléments en ligne */
-  min-height: 100vh; /* hauteur totale de la page */
+  display: flex;       /* met sidebar et contenu sur la même ligne */
+  min-height: 100vh;
 }
 
 .sidebar {
-  width: 250px; /* largeur fixe */
+  width: 250px;        /* largeur fixe de la sidebar */
   background-color: #f0f0f0;
   padding: 20px;
 }
 
 .main-content {
-  flex: 1; /* prend tout l'espace restant */
+  flex: 1;             /* prend tout l'espace restant */
   padding: 20px;
+  margin-left: 0;      /* ← aucun espace entre sidebar et contenu */
 }

@@ -1,12 +1,17 @@
 <aside class="sidebar">
   <h3>Mon Profil</h3>
-
+<!-- Photo + Nom -->
+  <div class="text-center">
+  <img [src]="profil.photo" alt="Photo de profil" class="profil-photo">
+    <h4>{{ profil.nom }}</h4>
+  
+  </div>
   <!-- 📌 Liens rapides -->
   <div class="profile-links">
     <ul>
-      <li><a routerLink="/settings">⚙️ Paramètres du compte</a></li>
+      <li><a routerLink="/settings">⚙️Paramètres du compte</a></li>
       <li><a routerLink="/my-applications">📄 Mes candidatures</a></li>
-      <li><a routerLink="/saved-jobs">⭐ Offres sauvegardées</a></li>
+      <li><a routerLink="/favorites">⭐ Offres sauvegardées</a></li>
       <li><a routerLink="/alerts">🔔 Mes alertes emploi</a></li>
       <li><a routerLink="/edit-cv">📑 Mettre à jour mon CV</a></li>
       <li><a routerLink="/offres-emploi">💼 Voir les offres</a></li>

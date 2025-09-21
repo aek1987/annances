@@ -1,1 +1,16 @@
-<p>favorites works!</p>
+<div class="favorites-page">
+  <h2>⭐ Mes offres favorites</h2>
+
+  <div *ngIf="favoriteJobs.length === 0">
+    <p>Vous n'avez aucune offre sauvegardée pour le moment.</p>
+  </div>
+
+  <div class="favorites-list">
+    <div *ngFor="let job of favoriteJobs" class="favorite-item">
+      <h3>{{ job.title }}</h3>
+      <p>{{ job.company }} - {{ job.location }}</p>
+      <small>Ajouté le {{ job.dateSaved }}</small>
+      <button class="btn-remove" (click)="removeFavorite(job.id)">❌ Supprimer</button>
+    </div>
+  </div>
+</div>
