@@ -1,0 +1,21 @@
+<div class="page-container">
+  <h2>📄 Mes candidatures</h2>
+
+  <div *ngIf="candidatures.length === 0">
+    <p>Vous n'avez aucune candidature pour le moment.</p>
+  </div>
+
+  <div class="candidature-list">
+    <div *ngFor="let c of candidatures" class="candidature-item">
+      <h3>{{ c.poste }}</h3>
+      <p>{{ c.entreprise }} - Candidaté le {{ c.date }}</p>
+      <span class="statut" [ngClass]="c.statut.toLowerCase()">
+        {{ c.statut }}
+      </span>
+      <div class="actions">
+        <button (click)="voirDetails(c)">👁 Voir détails</button>
+        <button (click)="annulerCandidature(c.id)">❌ Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>

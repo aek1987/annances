@@ -1,0 +1,21 @@
+<div class="page-container">
+  <h2>🔔 Mes alertes emploi</h2>
+
+  <div *ngIf="alertes.length === 0">
+    <p>Vous n'avez aucune alerte configurée.</p>
+  </div>
+
+  <div class="alert-list">
+    <div *ngFor="let a of alertes" class="alert-item">
+      <h3>{{ a.motCle }} - {{ a.lieu }}</h3>
+      <p>Fréquence : {{ a.frequence }}</p>
+      <p>Status : <b>{{ a.active ? 'Active ✅' : 'Désactivée ❌' }}</b></p>
+      <div class="actions">
+        <button (click)="toggleAlerte(a)">
+          {{ a.active ? 'Désactiver' : 'Activer' }}
+        </button>
+        <button (click)="supprimerAlerte(a.id)">❌ Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>

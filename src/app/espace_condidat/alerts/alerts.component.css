@@ -1,0 +1,26 @@
+.page-container {
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  max-width: 700px;
+  margin: 0 auto; /* centre horizontalement */
+}
+
+.alert-item {
+  padding: 15px;
+  border-left: 4px solid #3498db;
+  background: #f8faff;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.alert-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.alert-date {
+  font-size: 0.8rem;
+  color: #666;
+}

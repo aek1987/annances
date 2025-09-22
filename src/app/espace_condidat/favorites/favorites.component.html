@@ -1,11 +1,13 @@
 <div class="favorites-page">
   <h2>⭐ Mes offres favorites</h2>
 
-  <div *ngIf="favoriteJobs.length === 0">
+  <!-- ✅ Message si aucune offre -->
+  <div class="no-favorites" *ngIf="favoriteJobs.length === 0">
     <p>Vous n'avez aucune offre sauvegardée pour le moment.</p>
   </div>
 
-  <div class="favorites-list">
+  <!-- ✅ Liste des offres sauvegardées -->
+  <div class="favorites-list" *ngIf="favoriteJobs.length > 0">
     <div *ngFor="let job of favoriteJobs" class="favorite-item">
       <h3>{{ job.title }}</h3>
       <p>{{ job.company }} - {{ job.location }}</p>

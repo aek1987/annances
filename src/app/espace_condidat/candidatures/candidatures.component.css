@@ -1,0 +1,39 @@
+.page-container {
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  max-width: 800px;
+  margin: 0 auto; /* centre horizontalement */
+}
+
+.candidature-item {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  background: #fafafa;
+  transition: box-shadow 0.2s ease;
+}
+
+.candidature-item:hover {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.candidature-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status {
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.status.en-attente { background: #f1c40f; color: #fff; }
+.status.entretien { background: #3498db; color: #fff; }
+.status.refuse { background: #e74c3c; color: #fff; }
+.status.accepte { background: #2ecc71; color: #fff; }

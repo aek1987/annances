@@ -1,46 +1,72 @@
-.favorites-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* un peu plus d’espace entre les cartes */
-  max-width: 800px; /* limite la largeur pour plus de lisibilité */
-  margin: 0 auto;   /* centre la liste */
+.favorites-page {
+  max-width: 800px;
+  margin: 20px auto; /* ✅ Centre le contenu */
+  padding: 20px;
+  text-align: center; /* ✅ Centre le texte */
 }
 
-.favorite-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.favorite-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.favorite-item h4 {
-  margin: 0;
-  font-size: 18px;
+.favorites-page h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
   color: #333;
 }
 
+/* ✅ Message si aucune offre */
+.no-favorites {
+  padding: 15px;
+  background: #f8f9fa;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  color: #666;
+  font-style: italic;
+}
+
+/* ✅ Liste des offres */
+.favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* ✅ Style d’une offre */
+.favorite-item {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.favorite-item h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.favorite-item p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.favorite-item small {
+  display: block;
+  margin-bottom: 10px;
+  color: #999;
+}
+
+/* ✅ Bouton supprimer */
 .btn-remove {
-  padding: 6px 12px;
-  border: none;
-  background-color: #e74c3c;
+  background: #dc3545;
   color: white;
-  font-size: 14px;
-  font-weight: 500;
+  border: none;
+  padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  font-size: 14px;
+  transition: background 0.3s ease;
 }
 
 .btn-remove:hover {
-  background-color: #c0392b;
+  background: #b02a37;
 }
