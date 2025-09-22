@@ -22,44 +22,43 @@ import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
+  // Partie admin
   { path: 'ordersAllClient', component: OrderManagementComponent, canActivate: [AdminGuard] },
-  { path: 'stock', component:  StcoktManagerComponent  }, 
-  { path: 'products', component:  ProductComponent  }, 
-  { path: 'product/:id', component: ProductDetailComponent }, // Détails du produit
-  { path: 'login', component:  LoginComponent }, 
-  { path: 'register', component:  RegisterComponent },
-   { path: 'delivery', component:  DeliveryFormComponent },  
-  { path: 'confirm-order', component: OrderConfirmationComponent },  // Ajoutez cette route
-  { path: 'cart', component: CartComponent  },
+  { path: 'stock', component: StcoktManagerComponent }, 
+  { path: 'products', component: ProductComponent }, 
+  { path: 'product/:id', component: ProductDetailComponent },
+  { path: 'orders', component: OrderTrackingComponent },
 
-  { path: 'greet', component: GreetingComponent  },
-   { path: 'entreprise', component: EntrepriseComponent  },
-   { path: 'annance-emploi', component: AnnanceEmploiComponent  },
+  // Partie publique
+  { path: 'login', component: LoginComponent }, 
+  { path: 'register', component: RegisterComponent },
+  { path: 'delivery', component: DeliveryFormComponent },
+  { path: 'confirm-order', component: OrderConfirmationComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'greet', component: GreetingComponent },
+  { path: 'entreprise', component: EntrepriseComponent },
+  { path: 'annance-emploi', component: AnnanceEmploiComponent },
 
-   
-   
-   {  path: 'condidat', component: LayoutComponent,
-    // canActivate: [AuthGuard],        // protège le layout
-    //canActivateChild: [AuthGuard],   // protège toutes les routes enfants
+  // Partie espace candidat (protégé)
+  {  
+    path: 'candidat', component: LayoutComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     children: [
+      { path: 'offres-emploi', component: OffresEmploiComponent },
+      { path: 'favorites', component: FavoritesComponent },
+      { path: 'settings', component: ProfilComponent },
       { path: '', redirectTo: 'offres-emploi', pathMatch: 'full' },
-     { path: 'offres-emploi', component: OffresEmploiComponent  },
-     { path: 'favorites', component: FavoritesComponent },
-     { path: 'settings', component: ProfilComponent  },
-      
-    ]}
-    ,
+    ]
+  },
 
- { path: 'orders', component: OrderTrackingComponent },
+  // Page d’accueil par défaut
+  { path: '', redirectTo: 'greet', pathMatch: 'full' },
 
-
-
- // Page d'accueil par défaut
-  { path: '', component: GreetingComponent, pathMatch: 'full' },
-
-  //  Page 404 → redirection vers accueil
-  { path: '**', redirectTo: '' }
+  // Page 404
+  { path: '**', redirectTo: 'greet' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

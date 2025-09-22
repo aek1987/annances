@@ -27,9 +27,9 @@ export class AuthService {
     if (account) {
       // Stocke l'utilisateur complet + token
       this.setSession('fake-token', account);
-      return of({ token: 'fake-token', role: account.role });
+      return of({ token: 'fake-token', user: account });
     } else {
-      return of({ token: null, role: 'standard' });
+      return of({ token: null, user: { role: 'standard' }});
     }
   }
 

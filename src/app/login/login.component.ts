@@ -22,16 +22,16 @@ errorMessage: string = '';
     next: (response: any) => {
       // Le backend devrait renvoyer { token, role }
       const { token, role } = response;
-     console.log("role=== "+response.role);
-      this.authService.setSession(token, role); // 👈 délégué au service
+     console.log("role=== "+response.user.role);
+     this.authService.setSession(token, response.user); // 👈 délégué au service
 
    // 👉 Redirection en fonction du rôle
-     switch (role) {
+     switch (response.user.role) {
   case 'entreprise':
     this.router.navigate(['/entreprise']);
     break;
   case 'condidat':
-    this.router.navigate(['/condidat']);  console.log("page condidat");
+    this.router.navigate(['/candidat']);  console.log("page condidat");
     break;
       case 'standard':
     this.router.navigate(['/products']);

@@ -1,4 +1,12 @@
 
+
+
+
+.main-content {
+  flex: 1;             /* prend tout l'espace restant */
+  padding: 20px;
+  margin-left: 0;      /* ← aucun espace entre sidebar et contenu */
+}
 .layout-container {
   display: flex;
   min-height: 100vh;
@@ -6,13 +14,14 @@
 }
 
 .sidebar {
-  width: 250px;        /* largeur fixe de la sidebar */
-  background-color: #f0f0f0;
+  width: 250px;               /* largeur fixe */
+  background-color: #f8f9fa;  /* couleur plus neutre */
   padding: 20px;
+  border-right: 1px solid #ddd; /* ligne de séparation */
 }
 
 .main-content {
-  flex: 1;             /* prend tout l'espace restant */
-  padding: 20px;
-  margin-left: 0;      /* ← aucun espace entre sidebar et contenu */
+  flex: 1;                    /* prend l’espace restant */
+  padding: 30px;              /* plus de respiration */
+  background: #fff;           /* fond clair pour contraster */
 }

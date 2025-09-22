@@ -20,13 +20,22 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return this.checkLogin();
   }
 
-  private checkLogin(): boolean {
-    const user = this.authService.getUser();
-    if (user && user.role === 'candidat') {
-      return true; // accès autorisé
+private checkLogin(): boolean {
+  const user = this.authService.getUser();
+  console.log("valeur récupérée par getUser " + user?.role);
+
+  if (user) {
+    if (user.role === 'condidat') {
+      return true;
     } else {
-      this.router.navigate(['/login']); // redirection vers login si non connecté ou mauvais rôle
+      console.log("Mauvais rôle → accès refusé");
+      this.router.navigate(['/login']);
       return false;
     }
+  } else {
+    console.log("Pas connecté → redirection login");
+    this.router.navigate(['/login']);
+    return false;
   }
+}
 }
