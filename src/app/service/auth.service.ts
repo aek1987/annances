@@ -1,21 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { Account } from '../modeles/accounts';
 
-interface Account {
-  email: string;
-  password: string;
-  role: string;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private accounts: Account[] = [
-    { email: 'condidat@gmail.com', password: '123', role: 'condidat' },
-    { email: 'entreprise@gmail.com', password: '123', role: 'entreprise' },
-    { email: 'admin@gmail.com', password: 'admin', role: 'admin' }
-  ];
+private accounts: Account[] = [
+  // 👤 Candidats
+  { email: 'ali.candidat@gmail.com',     password: '123',   role: 'candidat', username: 'Ali Benomar',     fonction: 'Développeur Java',        phone: '0550-123-456' },
+  { email: 'sara.candidat@gmail.com',    password: '1234',  role: 'candidat', username: 'Sara Bensalem',   fonction: 'Ingénieure Data',         phone: '0551-987-654' },
+  { email: 'mohamed.job@gmail.com',      password: 'pass',  role: 'candidat', username: 'Mohamed Lamine',  fonction: 'Technicien Réseau',       phone: '0552-111-222' },
+  { email: 'amina.cv@gmail.com',         password: 'amina', role: 'candidat', username: 'Amina Karim',     fonction: 'Designer UX/UI',          phone: '0553-333-444' },
+  { email: 'youssef.talent@gmail.com',   password: 'youss', role: 'candidat', username: 'Youssef Haddad',  fonction: 'Développeur Angular',     phone: '0554-555-666' },
+  { email: 'nadia.profil@gmail.com',     password: 'nadia', role: 'candidat', username: 'Nadia Rahmani',   fonction: 'Chef de projet IT',       phone: '0555-777-888' },
+  { email: 'candidat@gmail.com',     password: '123', role: 'candidat', username: 'Nadia Rahmani',   fonction: 'Chef de projet IT',       phone: '0555-777-888' },
+  // 🏢 Entreprises
+  { email: 'hr@techcorp.com',            password: '123',   role: 'entreprise', username: 'TechCorp SARL', fonction: 'Recruteur',               phone: '021-123-456' },
+  { email: 'jobs@foodly.com',            password: 'jobs',  role: 'entreprise', username: 'Foodly Group',  fonction: 'Responsable RH',          phone: '021-654-987' },
+  { email: 'contact@webdev.fr',          password: 'azerty',role: 'entreprise', username: 'WebDev France', fonction: 'Manager Recrutement',     phone: '+33-1-2345-6789' },
+
+  // 👑 Admin
+  { email: 'admin@gmail.com',            password: 'admin', role: 'admin',     username: 'Super Admin',    fonction: 'Administrateur système',  phone: '010-000-0000' }
+];
+
 
   constructor() {}
 
@@ -26,6 +35,7 @@ export class AuthService {
 
     if (account) {
       // Stocke l'utilisateur complet + token
+
       this.setSession('fake-token', account);
       return of({ token: 'fake-token', user: account });
     } else {

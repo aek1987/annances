@@ -19,6 +19,8 @@ import { ProfilComponent } from './espace_condidat/profil/profil.component';
 import { LayoutComponent } from './espace_condidat/layout/layout.component';
 import { FavoritesComponent } from './espace_condidat/favorites/favorites.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AlertsComponent } from './espace_condidat/alerts/alerts.component';
+import { CandidaturesComponent } from './espace_condidat/candidatures/candidatures.component';
 
 
 const routes: Routes = [
@@ -48,6 +50,10 @@ const routes: Routes = [
       { path: 'offres-emploi', component: OffresEmploiComponent },
       { path: 'favorites', component: FavoritesComponent },
       { path: 'settings', component: ProfilComponent },
+      { path: 'alerts', component: AlertsComponent },
+      { path: 'mes-candidatures', component: CandidaturesComponent },
+      
+
       { path: '', redirectTo: 'offres-emploi', pathMatch: 'full' },
     ]
   },

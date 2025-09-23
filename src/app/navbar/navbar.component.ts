@@ -26,7 +26,8 @@ export class NavbarComponent implements OnInit{
   searchQuery: string = '';  // Contient la recherche en cours
   faMapMarkerAlt = faMapMarkerAlt;
   faMap = faMap;
-  faPhone = faPhone;
+  faPhone = faPhone; 
+   userName: string | null = null;
   constructor(private cartService: CartService, private authService: AuthService, private router: Router,private translate: TranslateService) {
 
   }
@@ -42,13 +43,11 @@ export class NavbarComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.isAuthenticated = this.authService.isAuthenticated();
-
-     // Subscribe to the totalItem$ observable
-     this.cartService.totalItem$.subscribe(count => {
-      this.CountItem = count; // Update CountItem with the latest value
-    });
-  
+   const user = this.authService.getUser();
+    if (user) {
+      this.userName = user.username; // récupère le nom stocké
+    }
+ 
 
   }
 
@@ -73,7 +72,10 @@ export class NavbarComponent implements OnInit{
   logout() {
     this.authService.logout();
     this.isAuthenticated = false;
-    this.router.navigate(['/register']);  // Redirige après déconnexion
+    this.router.navigate(['/greet']);  // Redirige après déconnexion
+   
+    this.userName = null;
+  
   }
  
   switchLanguage(language: string) {

@@ -34,7 +34,7 @@ errorMessage: string = '';
     this.router.navigate(['/candidat']);  console.log("page condidat");
     break;
       case 'standard':
-    this.router.navigate(['/products']);
+    this.router.navigate(['/greet']);
     break;
      case 'admin':
     this.router.navigate(['/greet']);

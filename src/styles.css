@@ -1,20 +1,123 @@
-/* You can add global styles to this file, and also import other style files */
-@import '~bootstrap/dist/css/bootstrap.min.css';
 
-body {
-    background-color: #f8f9fa;
-  }
-  
-  h1, h2 {
-    text-align: center;
-    color: #343a40;
-  }
-  
-  .container {
-    margin-top: 50px;
-  }
-  
-  .btn {
-    width: 100%;
-  }
-  
+  /* --- Layout général --- */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f6f9;
+  font-family: Arial, sans-serif;
+}
+/* --- Navbar fixe en haut --- */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* adapte selon ta navbar */
+  background: #1976d2; /* bleu par ex. */
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 2000; /* au-dessus de la sidebar */
+}
+
+/* --- Sidebar fixe sous le navbar --- */
+app-sidebar {
+  position: fixed;
+  top: 60px; /* démarre après la navbar */
+  left: 0;
+  width: 260px;
+  height: calc(100% - 60px); /* prend tout l’espace restant */
+  background: #ffffff;
+  border-right: 1px solid #ddd;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+/* --- Contenu principal --- */
+.main-content {
+  margin-left: 260px; /* largeur sidebar */
+  margin-top: 60px;   /* hauteur navbar */
+  padding: 20px;
+  background: #f9f9f9;
+  min-height: calc(100vh - 60px); /* occupe la page sous le header */
+}
+
+
+
+/* --- Barre de recherche --- */
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-bar input,
+.search-bar button {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* --- Filtres --- */
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filters select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* --- Carte offre --- */
+.offre-card {
+  background: #fdfdfd;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.offre-card:hover {
+  transform: translateY(-3px);
+}
+
+/* --- Actions boutons --- */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.actions button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.actions button:first-child {
+  background: #007bff;
+  color: white;
+}
+
+.actions button:last-child {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* --- Section alertes --- */
+.alertes {
+  margin-top: 30px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}

@@ -32,6 +32,8 @@ import { ProfilComponent } from './espace_condidat/profil/profil.component';
 import { SidebarComponent } from './espace_condidat/sidebar/sidebar.component';
 import { LayoutComponent } from './espace_condidat/layout/layout.component';
 import { FavoritesComponent } from './espace_condidat/favorites/favorites.component';
+import { CandidaturesComponent } from './espace_condidat/candidatures/candidatures.component';
+import { AlertsComponent } from './espace_condidat/alerts/alerts.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -61,7 +63,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProfilComponent,
     SidebarComponent,
     LayoutComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    CandidaturesComponent,
+    AlertsComponent
    
   ],
   imports: [CommonModule,

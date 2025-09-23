@@ -25,7 +25,7 @@ private checkLogin(): boolean {
   console.log("valeur récupérée par getUser " + user?.role);
 
   if (user) {
-    if (user.role === 'condidat') {
+    if (user.role === 'candidat') {
       return true;
     } else {
       console.log("Mauvais rôle → accès refusé");
