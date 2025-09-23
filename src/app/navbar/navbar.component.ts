@@ -5,6 +5,7 @@ import { AuthService } from '../service/auth.service';
 import { faShoppingCart, faReceipt ,faUser, faGlobe, faSearch, faMapMarkerAlt, faMap, faPhone, faHome, faStar } from '@fortawesome/free-solid-svg-icons'; // Importer les icônes
 import { TranslateService } from '@ngx-translate/core';
 import { CartService } from '../service/cart.service';
+import { Account } from '../modeles/accounts';
 
 @Component({
   selector: 'app-navbar',
@@ -27,7 +28,7 @@ export class NavbarComponent implements OnInit{
   faMapMarkerAlt = faMapMarkerAlt;
   faMap = faMap;
   faPhone = faPhone; 
-   userName: string | null = null;
+   currentUser: Account | null = null;
   constructor(private cartService: CartService, private authService: AuthService, private router: Router,private translate: TranslateService) {
 
   }
@@ -43,12 +44,9 @@ export class NavbarComponent implements OnInit{
   }
 
   ngOnInit() {
-   const user = this.authService.getUser();
-    if (user) {
-      this.userName = user.username; // récupère le nom stocké
-    }
- 
-
+     this.currentUser = this.authService.getUser();
+       this.isAuthenticated = this.authService.isAuthenticated();
+  
   }
 
   goToLogin() {
@@ -74,7 +72,7 @@ export class NavbarComponent implements OnInit{
     this.isAuthenticated = false;
     this.router.navigate(['/greet']);  // Redirige après déconnexion
    
-    this.userName = null;
+    this.currentUser = null;
   
   }
  

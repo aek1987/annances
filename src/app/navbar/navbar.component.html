@@ -49,7 +49,7 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <fa-icon [icon]="faUser"></fa-icon> {{ 'PROFIL' | translate }}
+                    <fa-icon [icon]="faUser"></fa-icon>  {{ currentUser?.username || 'PROFIL' }}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li *ngIf="!isAuthenticated"><a class="dropdown-item" routerLink="/login">Se connecter</a></li>

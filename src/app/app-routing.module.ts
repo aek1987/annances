@@ -14,7 +14,7 @@ import { AdminGuard } from './admin.guard';
 import { GreetingComponent } from './greeting/greeting.component';
 import { AnnanceEmploiComponent } from './annance-emploi/annance-emploi.component';
 import { EntrepriseComponent } from './entreprise/entreprise.component';
-import { OffresEmploiComponent } from './espace_condidat/offre-emploi/offres-emploi.component';
+import { OffresEmploiComponent } from './offre-emploi/offres-emploi.component';
 import { ProfilComponent } from './espace_condidat/profil/profil.component';
 import { LayoutComponent } from './espace_condidat/layout/layout.component';
 import { FavoritesComponent } from './espace_condidat/favorites/favorites.component';

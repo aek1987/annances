@@ -17,6 +17,7 @@ export class AlertService {
   error(message: string, title?: string) {
     this.alertMessage = message;
     this.toastr.error(message, title);
+    
   }
 
   warning(message: string, title?: string) {

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service'; // Service d'authentification
 import { Router } from '@angular/router';
+import { AlertService } from '../service/alerte-service.service';
+
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ export class LoginComponent {
     password: ''
   };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router,public  alertService :AlertService) {}
 errorMessage: string = '';
   onSubmit() {
   this.errorMessage = ''; // reset erreur avant chaque tentative
@@ -23,6 +25,7 @@ errorMessage: string = '';
       // Le backend devrait renvoyer { token, role }
       const { token, role } = response;
      console.log("role=== "+response.user.role);
+    
      this.authService.setSession(token, response.user); // 👈 délégué au service
 
    // 👉 Redirection en fonction du rôle
@@ -30,10 +33,13 @@ errorMessage: string = '';
   case 'entreprise':
     this.router.navigate(['/entreprise']);
     break;
-  case 'condidat':
-    this.router.navigate(['/candidat']);  console.log("page condidat");
+  case 'candidat':
+    console.log("success username "+response.user.username);
+    this.router.navigate(['/candidat']); 
     break;
-      case 'standard':
+     case 'standard': // le login est echoué   
+    console.log("Login Failed");
+    this.alertService.error('Invalid email or password', 'Login Failed'); 
     this.router.navigate(['/greet']);
     break;
      case 'admin':

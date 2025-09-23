@@ -4,7 +4,7 @@
     
     <!-- Nom complet -->
     <div class="form-group mb-3">
-      <label for="fullname">Nom complet</label>
+      <label for="fullname">Nom complet <span class="text-danger">*</span></label>
       <input
         type="text"
         id="fullname"
@@ -12,12 +12,16 @@
         class="form-control"
         [(ngModel)]="user.username"
         required
+        #fullname="ngModel"
       />
+      <div *ngIf="fullname.invalid && fullname.touched" class="text-danger small">
+        Nom complet obligatoire.
+      </div>
     </div>
 
     <!-- Email -->
     <div class="form-group mb-3">
-      <label for="email">Email</label>
+      <label for="email">Email <span class="text-danger">*</span></label>
       <input
         type="email"
         id="email"
@@ -25,12 +29,18 @@
         class="form-control"
         [(ngModel)]="user.email"
         required
+        email
+        #email="ngModel"
       />
+      <div *ngIf="email.invalid && email.touched" class="text-danger small">
+        <span *ngIf="email.errors?.['required']">Email obligatoire.</span>
+        <span *ngIf="email.errors?.['email']">Format email invalide.</span>
+      </div>
     </div>
 
     <!-- Mot de passe -->
     <div class="form-group mb-3">
-      <label for="password">Mot de passe</label>
+      <label for="password">Mot de passe <span class="text-danger">*</span></label>
       <input
         type="password"
         id="password"
@@ -39,7 +49,12 @@
         [(ngModel)]="user.password"
         required
         minlength="6"
+        #password="ngModel"
       />
+      <div *ngIf="password.invalid && password.touched" class="text-danger small">
+        <span *ngIf="password.errors?.['required']">Mot de passe obligatoire.</span>
+        <span *ngIf="password.errors?.['minlength']">Minimum 6 caractères.</span>
+      </div>
     </div>
 
     <!-- Numéro de téléphone -->
@@ -53,24 +68,27 @@
         [(ngModel)]="user.phone"
       />
     </div>
-<!-- Fonction -->
-<div class="form-group mb-3">
-  <label for="fonction">Fonction</label>
-  <select
-    id="fonction"
-    name="fonction"
-    class="form-control"
-    [(ngModel)]="user.fonction"
-    required
-  >
-    <option value="" disabled selected>Choisissez une fonction</option>
-    <option value="entreprise">Entreprise</option>
-    <option value="standard">Standard</option>
-    <option value="chercheur">Chercheur d'emploi</option>
-    
-    
-  </select>
-</div>
+
+    <!-- Fonction -->
+    <div class="form-group mb-3">
+      <label for="fonction">Fonction <span class="text-danger">*</span></label>
+      <select
+        id="fonction"
+        name="fonction"
+        class="form-control"
+        [(ngModel)]="user.fonction"
+        required
+        #fonction="ngModel"
+      >
+        <option value="" disabled selected>Choisissez une fonction</option>
+        <option value="entreprise">Entreprise</option>
+        <option value="standard">Standard</option>
+        <option value="chercheur">Chercheur d'emploi</option>
+      </select>
+      <div *ngIf="fonction.invalid && fonction.touched" class="text-danger small">
+        Fonction obligatoire.
+      </div>
+    </div>
 
     <button type="submit" class="btn btn-primary w-100" [disabled]="!registerForm.valid">
       S'inscrire
