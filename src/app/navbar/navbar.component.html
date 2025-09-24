@@ -7,31 +7,32 @@
         <div class="company-info d-flex align-items-center mt-2">
             <p class="mb-0 me-3 d-flex align-items-center">
                 <fa-icon [icon]="faMapMarkerAlt"></fa-icon>
-                                Route National 11, Mohammadia, Alger
+                Route National 11, Mohammadia, Alger
                 <a href="https://www.google.com/maps?q=Route+National+11+Mohammadia+Alger" target="_blank"></a>
             </p>
             <p class="mb-0 d-flex align-items-center">
-                <fa-icon [icon]="faPhone"></fa-icon>     0698616281
+                <fa-icon [icon]="faPhone"></fa-icon> 0698616281
             </p>
         </div>
     </a>
-    
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-           
-           <li class="nav-item">
-  <a class="nav-link" routerLink="/greet">
-    <fa-icon [icon]="faHome"></fa-icon> {{ 'Home' | translate }}
-    <span *ngIf="CountItem > 0" class="badge text-white">
-      {{ CountItem }}
-    </span>
-  </a>
-</li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/greet">
+                    <fa-icon [icon]="faHome"></fa-icon> {{ 'Home' | translate }}
+                    <span *ngIf="CountItem > 0" class="badge text-white">
+                        {{ CountItem }}
+                    </span>
+                </a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link" routerLink="/confirm-order">
@@ -41,26 +42,28 @@
                     </span>
                 </a>
             </li>
-           
+
             <li class="nav-item">
-                <a class="nav-link" routerLink="/orders">
-                    <fa-icon [icon]="faReceipt"></fa-icon> {{ 'CONDIDAT' | translate }}
+                <a class="nav-link" routerLink="/offres-emploi">
+                    <fa-icon [icon]="faReceipt"></fa-icon> {{ 'JOB' | translate }}
                 </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <fa-icon [icon]="faUser"></fa-icon>  {{ currentUser?.email }}
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    {{ currentUser?.username || ('PROFIL' | translate) }}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li *ngIf="!isAuthenticated"><a class="dropdown-item" routerLink="/login">Se connecter</a></li>
                     <li *ngIf="isAuthenticated"><a class="dropdown-item" (click)="logout()">Se déconnecter</a></li>
                     <li *ngIf="!isAuthenticated"><a class="dropdown-item" routerLink="/register">S'inscrire</a></li>
-                   
+
                     <li *ngIf="!isAuthenticated"><a class="dropdown-item" (click)="goToManager()">Manager</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <fa-icon [icon]="faGlobe"></fa-icon> Langue
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="languageDropdown">

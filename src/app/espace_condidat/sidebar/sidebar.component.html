@@ -1,11 +1,11 @@
 <aside class="sidebar">
-  <h3>Mon Profil</h3>
-<!-- Photo + Nom -->
-  <div class="text-center">
-  <img [src]="profil.photo" alt="Photo de profil" class="profil-photo">
-    <h4> {{ currentUser?.email || 'PROFIL' }}</h4>
   
-  </div>
+<!-- Photo + Nom -->
+ <div class="profil-container text-center">
+  <h2>Mon Profil</h2>
+  <img [src]="profil.photo" alt="Photo de profil" class="profil-photo">
+  <h2>{{ currentUser?.username || 'PROFIL' }}</h2>
+</div>
   <!-- 📌 Liens rapides -->
   <div class="profile-links">
     <ul>

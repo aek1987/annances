@@ -28,11 +28,25 @@
   }
 }
 
+
+.profil-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centre horizontalement */
+  justify-content: center; /* centre verticalement si nécessaire */
+  text-align: center;
+ margin: 30px auto 0 auto;/* centre par rapport au conteneur parent */
+}
+
 .profil-photo {
-  width: 80px;         /* largeur de l'avatar */
-  height: 80px;        /* hauteur égale pour faire un cercle */
-  border-radius: 50%;  /* rend l'image ronde */
-  object-fit: cover;   /* recadre l'image sans déformation */
-  display: block;
-  margin: 0 auto;      /* centre l'avatar */
+  width: 120px; /* ajuste selon ton design */
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px; /* espace entre photo et h2 */
+}
+
+.profil-container h2 {
+  font-size: 1.8rem; /* ajuste la taille du texte */
+  margin: 0;
 }

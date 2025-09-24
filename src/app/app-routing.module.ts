@@ -51,7 +51,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'greet', component: GreetingComponent },
   { path: 'annance-emploi', component: AnnanceEmploiComponent },
-
+  { path: 'offres-emploi', component: OffresEmploiComponent },
   // Partie espace candidat
   {
     path: 'candidat',

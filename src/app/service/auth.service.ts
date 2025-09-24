@@ -27,21 +27,21 @@ export class AuthService {
 ];*/
 private accounts: Account[] = [
   // 👤 Candidats
-  { email: 'ali.candidat@gmail.com', password: '123', role: 'candidat', refId: 1 },
-  { email: 'sara.candidat@gmail.com', password: '1234', role: 'candidat', refId: 2 },
-  { email: 'mohamed.job@gmail.com', password: 'pass', role: 'candidat', refId: 3 },
-  { email: 'amina.cv@gmail.com', password: 'amina', role: 'candidat', refId: 4 },
-  { email: 'youssef.talent@gmail.com', password: 'youss', role: 'candidat', refId: 5 },
-  { email: 'nadia.profil@gmail.com', password: 'nadia', role: 'candidat', refId: 6 },
-  { email: 'candidat@gmail.com', password: '123', role: 'candidat', refId: 7 },
+  { email: 'ali.candidat@gmail.com', password: '123',username: 'Sara Bensalem', role: 'candidat', refId: 1 },
+  { email: 'sara.candidat@gmail.com', password: '1234',username: 'Mohamed Lamine', role: 'candidat', refId: 2 },
+  { email: 'mohamed.job@gmail.com', password: 'pass',username: 'Amina Karim', role: 'candidat', refId: 3 },
+  { email: 'amina.cv@gmail.com', password: 'amina',  username: 'Youssef Haddad',role: 'candidat', refId: 4 },
+  { email: 'youssef.talent@gmail.com', password: 'youss', username: 'Nadia Rahmani', role: 'candidat', refId: 5 },
+  { email: 'nekaa.profil@gmail.com', password: 'nadia', username: 'nekaa aek',role: 'candidat', refId: 6 },
+  { email: 'candidat@gmail.com', password: '123',  username: 'candidat aek',role: 'candidat', refId: 7 },
 
   // 🏢 Entreprises
-  { email: 'hr@techcorp.com', password: '123', role: 'entreprise', refId: 1 },
-  { email: 'jobs@foodly.com', password: 'jobs', role: 'entreprise', refId: 2 },
-  { email: 'contact@webdev.fr', password: 'azerty', role: 'entreprise', refId: 3 },
+  { email: 'hr@techcorp.com', password: '123', username: 'candidat aek',role: 'entreprise', refId: 1 },
+  { email: 'jobs@foodly.com', password: 'jobs',username: 'candidat aek', role: 'entreprise', refId: 2 },
+  { email: 'contact@webdev.fr', password: 'azerty',username: 'candidat aek', role: 'entreprise', refId: 3 },
 
   // 👑 Admin
-  { email: 'admin@gmail.com', password: 'admin', role: 'admin', refId: 0 }
+  { email: 'admin@gmail.com', password: 'admin',username: 'candidat aek', role: 'admin', refId: 0 }
 ];
 
   constructor() {}

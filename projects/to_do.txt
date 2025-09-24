@@ -8,3 +8,4 @@ Création de compte candidat avec profil (CV, compétences, expériences).
 Suivi des candidatures (postulé / en cours / accepté / refusé). 
 Sauvegarde des offres (favoris).
 Alerte email / notification quand une nouvelle offre correspond
+creatio de compte entrprise ou condidate
