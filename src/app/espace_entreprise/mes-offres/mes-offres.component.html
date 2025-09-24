@@ -1,1 +1,12 @@
-<p>mes-offres works!</p>
+<div class="card">
+  <h3>📌 Mes offres publiées</h3>
+  <ul>
+    <li *ngFor="let offre of offres">
+      <strong>{{ offre.titre }}</strong> - {{ offre.localisation }}
+      <br />
+      {{ offre.description }}
+      <small>Publié le {{ offre.datePublication | date:'dd/MM/yyyy' }}</small>
+    </li>
+  </ul>
+</div>
+

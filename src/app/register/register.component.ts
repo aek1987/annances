@@ -11,12 +11,12 @@ import { AlertService } from '../service/alerte-service.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
- user: Account = {
+ user: User = {
   username: '',
   email: '',
   password: '',
   phone: '',
-  fonction: '',
+  fonction: 'candidat',
   role: 'candidat',
   photo: '../../assets/user.png'
 };

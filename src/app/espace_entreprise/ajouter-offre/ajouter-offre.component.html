@@ -1,1 +1,22 @@
-<p>ajouter-offre works!</p>
+<div class="card p-3">
+  <h3>➕ Ajouter une offre</h3>
+  <form (ngSubmit)="ajouterOffre()">
+    <div>
+      <label>Titre :</label>
+      <input [(ngModel)]="newOffre.titre" name="titre" required />
+    </div>
+
+    <div>
+      <label>Description :</label>
+      <textarea [(ngModel)]="newOffre.description" name="description" required></textarea>
+    </div>
+
+    <div>
+      <label>Localisation :</label>
+      <input [(ngModel)]="newOffre.localisation" name="localisation" required />
+    </div>
+
+    <button type="submit">✅ Publier</button>
+  </form>
+</div>
+

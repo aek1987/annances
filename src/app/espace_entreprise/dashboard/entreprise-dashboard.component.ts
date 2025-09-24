@@ -14,5 +14,6 @@ export class EntrepriseDashboardComponent {
 
   ngOnInit(): void {
     this.currentUser = this.authService.getUser();
+    
   }
 }

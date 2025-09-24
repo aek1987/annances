@@ -5,4 +5,5 @@ export interface User {
   phone: string;
   fonction: string;
   role?: 'candidat' | 'entreprise' | 'admin';
+  photo: string
 }
