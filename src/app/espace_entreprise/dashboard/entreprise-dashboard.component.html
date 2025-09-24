@@ -1,0 +1,33 @@
+<div class="dashboard-container">
+  <h2>Tableau de bord - Entreprise</h2>
+
+  <!-- ✅ Infos de l’entreprise -->
+  <div class="card">
+    <h3>Profil Entreprise</h3>
+    <p><strong>Nom :</strong> {{ currentUser?.username }}</p>
+    <p><strong>Fonction :</strong> {{ currentUser?.fonction }}</p>
+    <p><strong>Email :</strong> {{ currentUser?.email }}</p>
+    <p><strong>Téléphone :</strong> {{ currentUser?.phone }}</p>
+  </div>
+
+  <!-- ✅ Actions rapides -->
+  <div class="card">
+    <h3>Actions rapides</h3>
+    <ul>
+      <li><a routerLink="/offres/nouvelle">➕ Publier une offre</a></li>
+      <li><a routerLink="/candidatures-recues">📥 Voir les candidatures reçues</a></li>
+      <li><a routerLink="/profil-entreprise">⚙️ Modifier le profil</a></li>
+    </ul>
+  </div>
+
+  <!-- ✅ Statistiques -->
+  <div class="card">
+    <h3>Statistiques</h3>
+    <ul>
+      <li>Offres publiées : <strong>5</strong></li>
+      <li>Candidatures reçues : <strong>27</strong></li>
+      <li>Candidats retenus : <strong>3</strong></li>
+    </ul>
+  </div>
+</div>
+

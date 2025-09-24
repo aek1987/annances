@@ -1,0 +1,10 @@
+
+
+
+
+Recherche avancée (mots-clés, localisation, salaire, expérience). 
+Filtrage multi-critères (type de contrat, télétravail, secteur).
+Création de compte candidat avec profil (CV, compétences, expériences).
+Suivi des candidatures (postulé / en cours / accepté / refusé). 
+Sauvegarde des offres (favoris).
+Alerte email / notification quand une nouvelle offre correspond

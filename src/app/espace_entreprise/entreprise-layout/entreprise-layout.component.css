@@ -1,0 +1,26 @@
+* =========================
+   📌 Layout général
+   ========================= */
+.d-flex {
+  display: flex;
+  min-height: 100vh; /* prend toute la hauteur de l’écran */
+  background-color: #f8f9fa;
+}
+
+/* Sidebar Entreprise */
+app-sidebar-entreprise {
+  width: 260px;
+  background: #2c3e50;
+  color: #fff;
+  min-height: 100vh;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+}
+/* Contenu principal */
+main {
+  flex-grow: 1;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px 0 0 8px;
+}
