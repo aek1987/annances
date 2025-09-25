@@ -31,8 +31,8 @@ private accounts: Account[] = [
   { email: 'Lamine.candidat@gail.com', password: '1234',username: 'Mohamed Lamine', role: 'candidat', refId: 2 },
   { email: 'mohamed.job@gmail.com', password: 'pass',username: 'Amina Karim', role: 'candidat', refId: 3 },
   { email: 'amina.cv@gmail.com', password: 'amina',  username: 'Youssef Haddad',role: 'candidat', refId: 4 },
-  { email: 'youssef.talent@gmail.com', password: 'youss', username: 'Nadia Rahmani', role: 'candidat', refId: 5 },
-  { email: 'nekaa.profil@gmail.com', password: 'nadia', username: 'nekaa aek',role: 'candidat', refId: 6 },
+  { email: 'Haddad.talent@gmail.com', password: 'youss', username: 'Nadia Rahmani', role: 'candidat', refId: 5 },
+  { email: 'nekaa.profil@gmail.com', password: 'nekka', username: 'nekaa aek',role: 'candidat', refId: 6 },
   { email: 'candidat@gmail.com', password: '123',  username: 'candidat aek',role: 'candidat', refId: 7 },
 
   // 🏢 Entreprises

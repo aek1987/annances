@@ -1,12 +1,10 @@
-// src/app/models/entreprise.model.ts
 // src/app/modeles/entreprise.ts
 export interface Entreprise {
-  id :Number;
-  email: string;
-  password: string;
-  role: 'entreprise';
+  id: number;
   username: string;
-  fonction: string;
+  email: string;
   phone: string;
-  photo: string;
+  secteur?: string;
+  description?: string;
+  logo?: string; // chemin ou URL du logo
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Account } from 'src/app/modeles/accounts';
+import { Entreprise } from 'src/app/modeles/entreprise';
 import { AuthService } from 'src/app/service/auth.service';
+import { EntrepriseService } from 'src/app/service/entreprise.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,13 +10,15 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./entreprise-dashboard.component.css']
 })
 export class EntrepriseDashboardComponent {
- currentUser: Account | null = null;
+entreprise: Entreprise | null = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private entrepriseService: EntrepriseService) {}
 
   ngOnInit(): void {
-    this.currentUser = this.authService.getUser();
-   
-    
+    this.loadEntreprise();
+  }
+
+  loadEntreprise() {
+    this.entreprise = this.entrepriseService.getEntrepriseConnectee();
   }
 }
