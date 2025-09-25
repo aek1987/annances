@@ -1,23 +1,24 @@
-<div class="profil-card">
+<div class="candidat-card">
   <!-- Photo + Nom -->
   <div class="text-center">
-    <img [src]="profil.photo" alt="Photo de profil" class="profil-photo">
-    <h2>{{ profil.nom }}</h2>
-    <p class="text-muted">{{ profil.titre }} - {{ profil.localisation }}</p>
+    <img [src]="candidat?.photo" alt="Photo de candidat" class="candidat-photo">
+    <h2>{{ candidat?.username }}</h2>
+    <p class="text-muted">{{ candidat?.username }} - {{ candidat?.email }}</p>
   </div>
 
   <!-- Bio -->
-  <div class="section">
-    <h4>À propos</h4>
-    <p *ngIf="!editMode">{{ profil.bio }}</p>
-    <textarea *ngIf="editMode" [(ngModel)]="profil.bio" class="form-control"></textarea>
-  </div>
+<div class="section" *ngIf="candidat">
+  <h4>À propos</h4>
+  <p *ngIf="!editMode">{{ candidat.bio }}</p>
+  <textarea *ngIf="editMode" [(ngModel)]="candidat.bio" class="form-control"></textarea>
+</div>
+
 
   <!-- Compétences -->
   <div class="section">
     <h4>Compétences</h4>
     <div class="skills">
-      <span *ngFor="let c of profil.competences; let i = index" class="badge bg-primary m-1">
+      <span *ngFor="let c of candidat?.competences; let i = index" class="badge bg-primary m-1">
         {{ c }} <span *ngIf="editMode" (click)="removeCompetence(i)" style="cursor:pointer">❌</span>
       </span>
     </div>
@@ -31,7 +32,7 @@
   <div class="section">
     <h4>Expériences</h4>
     <ul>
-      <li *ngFor="let e of profil.experiences; let i = index">
+      <li *ngFor="let e of candidat?.experiences; let i = index">
         <b>{{ e.poste }}</b> chez {{ e.entreprise }} ({{ e.duree }})
         <span *ngIf="editMode" (click)="removeExperience(i)" style="cursor:pointer">❌</span>
       </li>
@@ -44,12 +45,15 @@
     </div>
   </div>
 
-  <!-- CV -->
-  <div class="section">
-    <h4>CV</h4>
-    <p><a [href]="profil.cv" target="_blank">📄 Voir mon CV</a></p>
-    <input *ngIf="editMode" class="form-control" [(ngModel)]="profil.cv">
-  </div>
+ <!-- CV -->
+
+<div class="section">
+  <h4>CV</h4>
+  <p><a [href]="candidatSafe.cv" target="_blank">📄 Voir mon CV</a></p>
+  <input *ngIf="editMode" class="form-control" [(ngModel)]="candidatSafe.cv">
+</div>
+
+
 
   <!-- Actions -->
   <div class="text-center mt-3">
@@ -59,7 +63,7 @@
 </button>
 
     <div *ngIf="editMode">
-      <button class="btn btn-success" (click)="saveProfil()">💾 Sauvegarder</button>
+      <button class="btn btn-success" (click)="savecandidat()">💾 Sauvegarder</button>
       <button class="btn btn-secondary" (click)="toggleEdit()">❌ Annuler</button>
     </div>
   </div>

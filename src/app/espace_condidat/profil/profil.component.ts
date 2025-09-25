@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { RouteConfigLoadEnd } from '@angular/router';
 import { Router } from '@angular/router';
+import { Candidat } from 'src/app/modeles/candidat';
+import { Experience } from 'src/app/modeles/experience';
+import { CandidatService } from 'src/app/service/candidate.service';
 
-interface Experience {
-  poste: string;
-  entreprise: string;
-  duree: string;
-}
+
 
 @Component({
   selector: 'app-profil',
@@ -14,26 +13,43 @@ interface Experience {
   styleUrls: ['./profil.component.css']
 })
 export class ProfilComponent {
-  constructor(private router: Router) {}
   editMode = false;
-
-  profil = {
-    photo: '../../assets/user.png', // image par défaut
-    nom: 'Jean Dupont',
-    email: 'jean.dupont@mail.com',
-    titre: 'Développeur Full Stack',
-    localisation: 'Paris, France',
-    bio: 'Passionné par le développement web et l’IA.',
-    competences: ['Angular', 'Java', 'Spring Boot'],
-    experiences: <Experience[]>[
-      { poste: 'Développeur Angular', entreprise: 'Capgemini', duree: '2 ans' },
-      { poste: 'Développeur Java', entreprise: 'Sopra Steria', duree: '1 an' }
-    ],
-    cv: './../assets/exemple_cv.pdf'
-  };
-
+   candidat: Candidat | null = null;
   newCompetence = '';
   newExperience: Experience = { poste: '', entreprise: '', duree: '' };
+  constructor(private router: Router,private candidatService :CandidatService ) 
+  {}
+  
+  
+    ngOnInit() {
+    this.loadCandidat();
+  }
+
+get candidatSafe(): Candidat {
+  return this.candidat ?? { 
+    refId: 0,
+    username: '',
+    email: '',
+    fonction: '',
+    phone: '',
+    photo: '../../assets/user.png',
+    competences: [],
+    experiences: [],
+    cv: ''
+  };
+}
+
+
+  
+  // 🔹 Charge le candidat connecté depuis le service
+loadCandidat() {
+  this.candidat = this.candidatService.getCandidatConnecte();
+  console.log("condidat info"+ this.candidat);
+  if (this.candidat) {
+    if (!this.candidat.competences) this.candidat.competences = [];
+    if (!this.candidat.experiences) this.candidat.experiences = [];
+  }
+}
 
   toggleEdit() {
     this.editMode = !this.editMode;
@@ -41,30 +57,30 @@ export class ProfilComponent {
   retour() {
    this.router.navigate(['/offres-emploi']);
   }
-  saveProfil() {
+  savecandidat() {
     this.editMode = false;
     alert('✅ Profil mis à jour avec succès');
   }
 
   addCompetence() {
-    if (this.newCompetence.trim()) {
-      this.profil.competences.push(this.newCompetence.trim());
+   /* if (this.newCompetence.trim()) {
+      this.candidat.competences.push(this.newCompetence.trim());
       this.newCompetence = '';
-    }
+    }*/
   }
 
   removeCompetence(index: number) {
-    this.profil.competences.splice(index, 1);
+  //  this.candidat.competences.splice(index, 1);
   }
 
   addExperience() {
-    if (this.newExperience.poste && this.newExperience.entreprise) {
+  /*  if (this.newExperience.poste && this.newExperience.entreprise) {
       this.profil.experiences.push({ ...this.newExperience });
       this.newExperience = { poste: '', entreprise: '', duree: '' };
-    }
+    }*/
   }
 
   removeExperience(index: number) {
-    this.profil.experiences.splice(index, 1);
+   // this.candidat.experiences.splice(index, 1);
   }
 }

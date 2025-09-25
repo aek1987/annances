@@ -28,7 +28,7 @@ export class AuthService {
 private accounts: Account[] = [
   // 👤 Candidats
   { email: 'ali.candidat@gmail.com', password: '123',username: 'Sara Bensalem', role: 'candidat', refId: 1 },
-  { email: 'sara.candidat@gmail.com', password: '1234',username: 'Mohamed Lamine', role: 'candidat', refId: 2 },
+  { email: 'Lamine.candidat@gail.com', password: '1234',username: 'Mohamed Lamine', role: 'candidat', refId: 2 },
   { email: 'mohamed.job@gmail.com', password: 'pass',username: 'Amina Karim', role: 'candidat', refId: 3 },
   { email: 'amina.cv@gmail.com', password: 'amina',  username: 'Youssef Haddad',role: 'candidat', refId: 4 },
   { email: 'youssef.talent@gmail.com', password: 'youss', username: 'Nadia Rahmani', role: 'candidat', refId: 5 },
