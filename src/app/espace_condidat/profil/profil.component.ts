@@ -31,6 +31,7 @@ get candidatSafe(): Candidat {
     username: '',
     email: '',
     fonction: '',
+    status:"active",
     phone: '',
     photo: '../../assets/user.png',
     competences: [],

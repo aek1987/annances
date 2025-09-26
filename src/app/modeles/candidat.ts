@@ -9,6 +9,7 @@ export interface Candidat {
   username: string;
   email?: string;
   fonction?: string;
+  status: 'active' | 'desactive' ;
   phone?: string;
   competences?: string[];
   bio?: string;

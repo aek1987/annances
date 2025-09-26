@@ -43,7 +43,7 @@ errorMessage: string = '';
     this.router.navigate(['/greet']);
     break;
      case 'admin':
-    this.router.navigate(['/greet']);
+    this.router.navigate(['/admin']);
     break;
   default:
     this.router.navigate(['/']); // fallback, page d’accueil par ex.

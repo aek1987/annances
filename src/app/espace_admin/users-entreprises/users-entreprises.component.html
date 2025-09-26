@@ -1,1 +1,42 @@
-<p>users-entreprises works!</p>
+<div class="container-fluid">
+  <h2 class="mb-4">🏢 Gestion des entreprises</h2>
+
+  <!-- Barre d’actions -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <input type="text" class="form-control w-50" placeholder="🔎 Rechercher une entreprise...">
+    <button class="btn btn-primary">
+      ➕ Ajouter une entreprise
+    </button>
+  </div>
+
+  <!-- Tableau entreprises -->
+  <div class="table-responsive shadow rounded">
+    <table class="table table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Logo</th>
+          <th>Nom entreprise</th>
+          <th>Email</th>
+          <th>Responsable</th>
+          <th>Téléphone</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entreprise of entreprises">
+          <td><img [src]="entreprise.username" alt="logo" class="rounded-circle" width="40" height="40"></td>
+          <td>{{ entreprise.username }}</td>
+          <td>{{ entreprise.email }}</td>
+          <td>{{ entreprise.phone }}</td>
+          <td>{{ entreprise.phone }}</td>
+          <td>
+            <button class="btn btn-sm btn-info me-1">👁 Voir</button>
+            <button class="btn btn-sm btn-warning me-1">✏ Modifier</button>
+            <button class="btn btn-sm btn-danger">🗑 Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

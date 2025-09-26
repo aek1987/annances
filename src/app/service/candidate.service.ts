@@ -9,13 +9,13 @@ import { AuthService } from './auth.service';
 export class CandidatService {
 
   private candidats: Candidat[] = [
-    { refId: 1, username: 'Sara Bensalem', email: 'ali.candidat@gmail.com', photo: '../../assets/user.png', fonction: 'Développeur Java', phone: '0550-123-456', competences: ['Java', 'Spring Boot'], bio: 'Passionnée de dev web', experiences: [{ poste: 'Dev Java', entreprise: 'Capgemini', duree: '2 ans' }] },
-    { refId: 2, username: 'Mohamed Lamine', email: 'sara.candidat@gmail.com', photo: '../../assets/user.png', fonction: 'Ingénieur Data', phone: '0551-987-654', competences: ['Python', 'SQL'], bio: 'Spécialiste data', experiences: [{ poste: 'Data Analyst', entreprise: 'Sopra Steria', duree: '1 an' }] },
-    { refId: 3, username: 'Amina Karim', email: 'mohamed.job@gmail.com', photo: '../../assets/user.png', fonction: 'Designer UX/UI', phone: '0553-333-444' },
-    { refId: 4, username: 'Youssef Haddad', email: 'amina.cv@gmail.com', photo: '../../assets/user.png', fonction: 'Développeur Angular', phone: '0554-555-666' },
-    { refId: 5, username: 'Nadia Rahmani', email: 'youssef.talent@gmail.com', photo: '../../assets/user.png', fonction: 'Chef de projet IT', phone: '0555-777-888' },
-    { refId: 6, username: 'nekaa aek', email: 'nekaa.profil@gmail.com', photo: '../../assets/user.png', fonction: 'Full Stack Developer', phone: '0556-000-111' },
-    { refId: 7, username: 'candidat aek', email: 'candidat@gmail.com', photo: '../../assets/user.png', fonction: 'Développeur', phone: '0557-222-333' }
+    { refId: 1, username: 'Sara Bensalem', email: 'ali.candidat@gmail.com', status: 'active'  ,photo: '../../assets/user.png', fonction: 'Développeur Java', phone: '0550-123-456', competences: ['Java', 'Spring Boot'], bio: 'Passionnée de dev web', experiences: [{ poste: 'Dev Java', entreprise: 'Capgemini', duree: '2 ans' }] },
+    { refId: 2, username: 'Mohamed Lamine', email: 'sara.candidat@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Ingénieur Data', phone: '0551-987-654', competences: ['Python', 'SQL'], bio: 'Spécialiste data', experiences: [{ poste: 'Data Analyst', entreprise: 'Sopra Steria', duree: '1 an' }] },
+    { refId: 3, username: 'Amina Karim', email: 'mohamed.job@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Designer UX/UI', phone: '0553-333-444' },
+    { refId: 4, username: 'Youssef Haddad', email: 'amina.cv@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Développeur Angular', phone: '0554-555-666' },
+    { refId: 5, username: 'Nadia Rahmani', email: 'youssef.talent@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Chef de projet IT', phone: '0555-777-888' },
+    { refId: 6, username: 'nekaa aek', email: 'nekaa.profil@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Full Stack Developer', phone: '0556-000-111' },
+    { refId: 7, username: 'candidat aek', email: 'candidat@gmail.com',  status: 'active',photo: '../../assets/user.png', fonction: 'Développeur', phone: '0557-222-333' }
   ];
 
   constructor(private authService :AuthService) { }

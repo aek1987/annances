@@ -1,0 +1,8 @@
+.sidebar {
+  width: 250px;              /* largeur du sidebar */
+  height: calc(100vh - 56px); /* 100% hauteur écran - hauteur navbar */
+  position: sticky;           /* reste collé sous la navbar */
+  top: 56px;                  /* correspond à la hauteur de la navbar Bootstrap */
+  background-color: #f8f9fa;  /* couleur claire */
+  padding: 1rem;
+}

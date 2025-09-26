@@ -29,7 +29,8 @@ export class NavbarComponent implements OnInit{
   faMap = faMap;
   faPhone = faPhone; 
    currentUser: Account | null = null;
-  constructor(private cartService: CartService, private authService: AuthService, private router: Router,private translate: TranslateService) {
+  constructor(private cartService: CartService,
+     private authService: AuthService, private router: Router,private translate: TranslateService) {
 
   }
 
@@ -44,9 +45,11 @@ export class NavbarComponent implements OnInit{
   }
 
   ngOnInit() {
-     this.currentUser = this.authService.getUser();
+   //  this.currentUser = this.authService.getUser();
      this.isAuthenticated = this.authService.isAuthenticated();
-  
+   this.authService.currentUser$.subscribe(user => {
+    this.currentUser = user;
+  });
   }
 
   goToLogin() {

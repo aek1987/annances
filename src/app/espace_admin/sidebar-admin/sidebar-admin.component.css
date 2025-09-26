@@ -1,8 +1,74 @@
+/* ===== Sidebar container ===== */
 .sidebar {
   width: 250px;
+  background: linear-gradient(180deg, #111827, #1f2937); /* dégradé sombre élégant */
+  color: #f3f4f6;
   min-height: 100vh;
+  border-right: 1px solid #0f172a;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+
+/* ===== Liste de navigation ===== */
+.sidebar .nav {
+  padding-left: 0;
+  margin-top: 5px;
+}
+
+.sidebar .nav-item {
+  margin-bottom: 6px;
+}
+
+/* ===== Liens ===== */
+.sidebar .nav-link {
+  color: #d1d5db;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 18px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  transition: all 0.25s ease;
+  letter-spacing: 0.3px;
+}
+
+/* Hover moderne */
+.sidebar .nav-link:hover {
+  background: rgba(59, 130, 246, 0.1); /* bleu translucide */
+  color: #3b82f6;
+  text-decoration: none;
+  transform: translateX(4px);
+}
+
+/* Actif */
+.sidebar .nav-link.active {
+  background: #3b82f6;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 3px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* ===== Icônes avant texte ===== */
+.sidebar .nav-link fa-icon {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+/* ===== Sous-menu (collapse) ===== */
+.sidebar .collapse .nav-link {
+  font-size: 13px;
+  padding: 8px 24px;
+  color: #9ca3af;
+}
+
+.sidebar .collapse .nav-link:hover {
+  color: #fff;
+  background: rgba(59, 130, 246, 0.2);
+  transform: none;
 }

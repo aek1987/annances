@@ -1,1 +1,24 @@
-<p>users-candidats works!</p>
+<div class="card p-3">
+  <h3>📋 Gestion des Candidats</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of candidats">
+        <td>{{ c.username }}</td>
+        <td>{{ c.email }}</td>
+        <td>{{ c.status }}</td>
+        <td>
+          <button class="btn btn-success btn-sm" (click)="changerStatut(c.refId,c.status)">Accepter</button>
+          <button class="btn btn-danger btn-sm" (click)="changerStatut(c.refId,c.status)">Refuser</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

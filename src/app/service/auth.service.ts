@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Account } from '../modeles/accounts';
 import { User } from '../modeles/user';
 
@@ -8,23 +8,7 @@ import { User } from '../modeles/user';
   providedIn: 'root'
 })
 export class AuthService {
-/*private accounts: Account[] = [
-  // 👤 Candidats
-  { email: 'ali.candidat@gmail.com', password: '123', role: 'candidat',  fonction: 'Développeur Java',  phone: '0550-123-456',photo: '../../assets/user.png',refId: 1  },
-  { email: 'sara.candidat@gmail.com', password: '1234',  role: 'candidat', username: 'Sara Bensalem',   fonction: 'Ingénieure Data',         phone: '0551-987-654',photo: '../../assets/user.png' ,refId: 1},
-  { email: 'mohamed.job@gmail.com', password: 'pass',  role: 'candidat', username: 'Mohamed Lamine',  fonction: 'Technicien Réseau',       phone: '0552-111-222' ,photo: '../../assets/user.png',refId: 1},
-  { email: 'amina.cv@gmail.com', password: 'amina', role: 'candidat', username: 'Amina Karim',     fonction: 'Designer UX/UI',          phone: '0553-333-444',photo: '../../assets/user.png',refId: 1 },
-  { email: 'youssef.talent@gmail.com',   password: 'youss', role: 'candidat', username: 'Youssef Haddad',  fonction: 'Développeur Angular',     phone: '0554-555-666',photo: '../../assets/user.png',refId: 1 },
-  { email: 'nadia.profil@gmail.com', password: 'nadia', role: 'candidat', username: 'Nadia Rahmani',   fonction: 'Chef de projet IT',       phone: '0555-777-888' ,photo: '../../assets/user.png',refId: 1},
-  { email: 'candidat@gmail.com',password: '123', role: 'candidat', username: 'Nadia Rahmani',   fonction: 'Chef de projet IT',  phone: '0555-777-888',photo: '../../assets/user.png' ,refId: 1},
-  
-  // 🏢 Entreprises
-  { email: 'hr@techcorp.com', password: '123',   role: 'entreprise', username: 'TechCorp SARL', fonction: 'Recruteur',  phone: '021-123-456',photo: '../../assets/user.png' ,refId: 1},
-  { email: 'jobs@foodly.com', password: 'jobs',  role: 'entreprise', username: 'Foodly Group',  fonction: 'Responsable RH', phone: '021-654-987' ,photo: '../../assets/user.png',refId: 1},
-  { email: 'contact@webdev.fr', password: 'azerty',role: 'entreprise', username: 'WebDev France', fonction: 'Manager Recrutement',  phone: '+33-1-2345-6789',photo: '../../assets/user.png',refId: 1 },
-  // 👑 Admin
-  { email: 'admin@gmail.com ',  password: 'admin', role: 'admin',     username: 'Super Admin',    fonction: 'Administrateur système',  phone: '010-000-0000',photo: '../../assets/user.png',refId: 1 }
-];*/
+
 private accounts: Account[] = [
   // 👤 Candidats
   { email: 'ali.candidat@gmail.com', password: '123',username: 'Sara Bensalem', role: 'candidat', refId: 1 },
@@ -43,8 +27,16 @@ private accounts: Account[] = [
   // 👑 Admin
   { email: 'admin@gmail.com', password: 'admin',username: 'candidat aek', role: 'admin', refId: 0 }
 ];
+// 🔔 BehaviorSubject pour suivre l’utilisateur connecté
+  private currentUserSubject = new BehaviorSubject<Account | null>(null);
+  currentUser$: Observable<Account | null> = this.currentUserSubject.asObservable();
 
-  constructor() {}
+  constructor() {
+     const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.currentUserSubject.next(JSON.parse(storedUser));
+    }
+  }
 
   login(credentials: { email: string; password: string }): Observable<any> {
     const account = this.accounts.find(
@@ -65,11 +57,13 @@ private accounts: Account[] = [
   setSession(token: string, user: Account) {
     localStorage.setItem('authToken', token);
     localStorage.setItem('user', JSON.stringify(user));
+    this.currentUserSubject.next(user); // 🔔 notifie Navbar + Sidebar
   }
 
   logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('authToken');
+    this.currentUserSubject.next(null);
   }
 
   isAuthenticated(): boolean {
@@ -79,6 +73,7 @@ private accounts: Account[] = [
   getUser(): Account | null {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
+    
   }
 
   isAdmin(): boolean {

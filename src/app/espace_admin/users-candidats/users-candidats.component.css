@@ -1,0 +1,20 @@
+h2 {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table thead {
+  background: #1f2937;
+  color: #fff;
+}
+
+.btn {
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
