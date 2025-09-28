@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Account } from 'src/app/modeles/accounts';
 import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
@@ -7,16 +8,31 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./sidebar-entreprise.component.css']
 })
 export class SidebarEntrepriseComponent {
-
+currentUser: Account | null = null;
    constructor(
        private authService: AuthService) {
   
     }
+     profil = {
+    photo: 'assets/company.png', // image par défaut
+    nom: 'Jean Dupont',
+    email: 'jean.dupont@mail.com',
+    titre: 'Développeur Full Stack',
+    localisation: 'Paris, France',
+    bio: 'Passionné par le développement web et l’IA.',
+    competences: ['Angular', 'Java', 'Spring Boot'],
+   
+    cv: './../assets/exemple_cv.pdf'
+  };
   
 ngOnInit(): void {
   this.authService.currentUser$.subscribe(user => {
-    //this.currentUser = user;
+    this.currentUser = user;
   });
 }
+
+
+ 
+
 
 }

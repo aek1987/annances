@@ -72,3 +72,27 @@
   margin-right: 10px;
   font-size: 16px;
 }
+
+
+
+.profil-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centre horizontalement */
+  justify-content: center; /* centre verticalement si nécessaire */
+  text-align: center;
+ margin: 30px auto 0 auto;/* centre par rapport au conteneur parent */
+}
+
+.profil-photo {
+  width: 120px; /* ajuste selon ton design */
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px; /* espace entre photo et h2 */
+}
+
+.profil-container h2 {
+  font-size: 1.8rem; /* ajuste la taille du texte */
+  margin: 0;
+}
