@@ -1,5 +1,9 @@
 import { Component, OnInit } from "@angular/core";
+import { Candidat } from "src/app/modeles/candidat";
 import { Offre } from "src/app/modeles/offres";
+import { AuthService } from "src/app/service/auth.service";
+import { CandidatService } from "src/app/service/candidate.service";
+import { CandidatureService } from "src/app/service/candidature.service";
 import { EntrepriseService } from "src/app/service/entreprise.service";
 import { OffresService } from "src/app/service/offres.service";
 
@@ -30,7 +34,7 @@ export class OffresEmploiComponent implements OnInit {
   filteredOffres: Offre[] = [];
 // Pour gérer les onglets
   activeTab: 'offres' | 'profil' = 'offres';
-
+ candidatConnecte: Candidat | null = null;
 
 // Profil
 profil = {
@@ -41,20 +45,22 @@ profil = {
   competences: [] as string[],
   cv: ''
 };
+
 // 🔹 Suivi des candidatures
 candidatures: Candidature[] = [];
 newSkill: string = '';
 offres: Offre[] = [];
-  constructor(private offreService: OffresService,private entrepriseService :EntrepriseService) {}
+  constructor(private offreService: OffresService,private entrepriseService :EntrepriseService ,  private candidatService: CandidatService,
+ private candidature: CandidatureService
 
-
-
-
+  ) {}
   
   ngOnInit(): void {
     // 🔥 Appel du service pour charger les offres
     this.offres = this.offreService.getAllOffres();
     this.filteredOffres = this.offres;   
+   this.candidatConnecte = this.candidatService.getCandidatConnecte();
+    console.log("condidat name  "+this.candidatConnecte?.username +" id= "+this.candidatConnecte?.refId);
   }
 
 getEntrepriseNom(id: number): string {
@@ -109,8 +115,23 @@ saveProfile() {
 
   // ✅ Postuler
   postuler(offre: Offre) {
-    offre.status = 'postulé';
-    alert(`Vous avez postulé à : ${offre.titre}`);
+   if (!this.candidatConnecte) {
+    alert('Vous devez être connecté pour postuler.');
+    return;
+  }
+
+  // Appelle le service pour créer la candidature
+  const candidature = this.candidature.addCandidature(
+    offre.id,
+    this.candidatConnecte.refId,
+    "Je suis très intéressé par cette offre." // message de candidature
+  );
+
+  // Change le statut de l’offre
+  offre.status = 'postulé';
+
+  // Confirmation
+  alert(`✅ Vous avez postulé à : ${offre.titre}\nCandidature ID : ${candidature.id}`);
   }
 
   // ⭐ Favoris

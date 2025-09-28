@@ -26,9 +26,7 @@ currentUser: Account | null = null;
   };
   
 ngOnInit(): void {
-  this.authService.currentUser$.subscribe(user => {
-    this.currentUser = user;
-  });
+ this.currentUser = this.authService.getUser();
 }
 
 

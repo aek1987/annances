@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { Account } from 'src/app/modeles/accounts';
 import { AuthService } from 'src/app/service/auth.service';
@@ -9,6 +10,8 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+
+  faLogout = faSignOutAlt;
 
   @Input() candidatures: any[] = [];
    profil = {

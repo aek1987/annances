@@ -7,8 +7,8 @@
 
   <div class="candidature-list">
     <div *ngFor="let c of candidatures" class="candidature-item">
-      <h3>{{ c.poste }}</h3>
-      <p>{{ c.entreprise }} - Candidaté le {{ c.date }}</p>
+      <h3>{{ c.id}}</h3>
+      <p>{{ c.candidatId}}</p>
       <span class="statut" [ngClass]="c.statut.toLowerCase()">
         {{ c.statut }}
       </span>

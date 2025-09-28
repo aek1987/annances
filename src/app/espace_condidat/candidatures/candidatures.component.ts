@@ -1,30 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Candidat } from 'src/app/modeles/candidat';
+import { Candidature } from 'src/app/modeles/candidature';
+import { CandidatService } from 'src/app/service/candidate.service';
+import { CandidatureService } from 'src/app/service/candidature.service';
 
-interface Candidature {
-  id: number;
-  poste: string;
-  entreprise: string;
-  date: string;
-  statut: 'En attente' | 'Entretien' | 'Refusé' | 'Accepté';
-}
+
+
 
 @Component({
   selector: 'app-candidatures',
   templateUrl: './candidatures.component.html',
   styleUrls: ['./candidatures.component.css']
 })
-export class CandidaturesComponent {
-  candidatures: Candidature[] = [
-    { id: 1, poste: 'Développeur Angular', entreprise: 'TechCorp', date: '2025-09-01', statut: 'En attente' },
-    { id: 2, poste: 'Administrateur Systèmes', entreprise: 'Innova', date: '2025-09-05', statut: 'Entretien' },
-    { id: 3, poste: 'Chef de projet IT', entreprise: 'SoftSolutions', date: '2025-09-12', statut: 'Refusé' }
-  ];
+export class CandidaturesComponent implements OnInit {
+ candidatConnecte: Candidat | null = null;
+  candidatures: Candidature[] = [];
+ constructor(  private candidatService: CandidatService,
+ private candidature: CandidatureService
+
+  ) {}
+  ngOnInit(): void {
+    
+
+    this.candidatConnecte = this.candidatService.getCandidatConnecte();
+    console.log("condidat name  "+this.candidatConnecte?.username +" id= "+this.candidatConnecte?.refId);
+ if (this.candidatConnecte) {
+      // Récupérer toutes les candidatures du candidat
+      this.candidatures = this.candidature.getCandidaturesByCandidat(this.candidatConnecte.refId)
+    }
+   
+  }
+  
+  
 
   annulerCandidature(id: number) {
     this.candidatures = this.candidatures.filter(c => c.id !== id);
   }
 
   voirDetails(candidature: Candidature) {
-    alert(`Détails candidature : ${candidature.poste} chez ${candidature.entreprise}`);
+   //lert(`Détails candidature : ${candidature.poste} chez ${candidature.entreprise}`);
   }
 }
