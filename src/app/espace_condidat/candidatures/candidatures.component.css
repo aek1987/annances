@@ -1,39 +1,59 @@
 .page-container {
-  background: #fff;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  padding: 20px;
   max-width: 800px;
-  margin: 0 auto; /* centre horizontalement */
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.candidature-list {
+  margin-top: 20px;
 }
 
 .candidature-item {
-  padding: 15px;
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 8px;
+  padding: 15px;
   margin-bottom: 15px;
-  background: #fafafa;
-  transition: box-shadow 0.2s ease;
+  background: #f9f9f9;
 }
 
-.candidature-item:hover {
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+.candidature-item h3 {
+  margin: 0 0 5px 0;
 }
 
-.candidature-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.candidature-item p {
+  margin: 4px 0;
 }
 
-.status {
+.statut {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
   font-weight: bold;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.85rem;
+  margin-top: 5px;
 }
 
-.status.en-attente { background: #f1c40f; color: #fff; }
-.status.entretien { background: #3498db; color: #fff; }
-.status.refuse { background: #e74c3c; color: #fff; }
-.status.accepte { background: #2ecc71; color: #fff; }
+/* Couleurs selon statut */
+.statut.en attente { background: #ffecb3; color: #856404; }
+.statut.acceptée { background: #c8e6c9; color: #256029; }
+.statut.refusée { background: #ffcdd2; color: #c62828; }
+
+.actions {
+  margin-top: 10px;
+}
+
+.actions button {
+  margin-right: 10px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.actions button:hover {
+  opacity: 0.8;
+}
+
+.actions button:first-child { background-color: #007bff; color: white; }
+.actions button:last-child { background-color: #dc3545; color: white; }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Candidat } from 'src/app/modeles/candidat';
 import { Candidature } from 'src/app/modeles/candidature';
+import { Offre } from 'src/app/modeles/offres';
 import { CandidatService } from 'src/app/service/candidate.service';
 import { CandidatureService } from 'src/app/service/candidature.service';
 
@@ -40,4 +41,18 @@ export class CandidaturesComponent implements OnInit {
   voirDetails(candidature: Candidature) {
    //lert(`Détails candidature : ${candidature.poste} chez ${candidature.entreprise}`);
   }
+
+  /*etOffre(offreId: number): Offre | undefined {
+  //return this.offres.find(o => o.id === offreId);
+  }
+
+  getOffreTitre(offreId: number): string {
+   ///nst offre = this.getOffre(offreId);
+   //eturn offre ? offre.titre : 'Offre supprimée';
+  }
+
+  getOffreEntreprise(offreId: number): string {
+  //const offre = this.getOffre(offreId);
+  //return offre ? offre.entreprise : 'N/A';
+  }*/
 }

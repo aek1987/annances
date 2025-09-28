@@ -20,3 +20,19 @@
   </ul>
 </div>
 
+
+
+<div *ngFor="let item of offresCandidatures" class="offre-section">
+  <h2>{{ item.offre.titre }} ({{ item.candidatures.length }} candidatures)</h2>
+  <div *ngIf="item.candidatures.length > 0; else aucune">
+    <ul>
+      <li *ngFor="let c of item.candidatures">
+        Candidat ID: {{ c.candidatId }} | Statut: {{ c.statut }} | Date: {{ c.dateCandidature | date:'short' }}
+        <p *ngIf="c.message">Message: {{ c.message }}</p>
+      </li>
+    </ul>
+  </div>
+  <ng-template #aucune>
+    <p>Aucune candidature pour cette offre.</p>
+  </ng-template>
+</div>

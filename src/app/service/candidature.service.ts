@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Candidature } from '../modeles/candidature';
+import { Offre } from '../modeles/offres';
 
 @Injectable({
   providedIn: 'root'
@@ -60,4 +61,17 @@ export class CandidatureService {
     }
     return false;
   }
+
+  // ✅ Récupérer toutes les candidatures reçues pour les offres d'une entreprise
+getCandidaturesByEntreprise(entrepriseId: number, offres: Offre[]): { offre: Offre, candidatures: Candidature[] }[] {
+  // Filtrer les offres de l'entreprise
+  const offresEntreprise = offres.filter(o => o.entrepriseId === entrepriseId);
+
+  // Retourner un tableau d'objets avec chaque offre et ses candidatures
+  return offresEntreprise.map(offre => ({
+    offre,
+    candidatures: this.getCandidaturesByOffre(offre.id)
+  }));
+}
+
 }

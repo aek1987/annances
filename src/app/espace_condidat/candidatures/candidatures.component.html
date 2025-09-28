@@ -5,13 +5,14 @@
     <p>Vous n'avez aucune candidature pour le moment.</p>
   </div>
 
-  <div class="candidature-list">
+  <div class="candidature-list" *ngIf="candidatures.length > 0">
     <div *ngFor="let c of candidatures" class="candidature-item">
-      <h3>{{ c.id}}</h3>
-      <p>{{ c.candidatId}}</p>
-      <span class="statut" [ngClass]="c.statut.toLowerCase()">
-        {{ c.statut }}
-      </span>
+     <!---- {{ getOffreTitre(c.offreId) }}</h3>
+      <p>Entreprise: {{ getOffreEntreprise(c.offreId) }}</p> -->
+      <p>Date de candidature: {{ c.dateCandidature | date:'mediumDate' }}</p>
+      <p *ngIf="c.message">Message: {{ c.message }}</p>
+      <span class="statut" [ngClass]="c.statut.toLowerCase()">{{ c.statut }}</span>
+
       <div class="actions">
         <button (click)="voirDetails(c)">👁 Voir détails</button>
         <button (click)="annulerCandidature(c.id)">❌ Annuler</button>
@@ -19,3 +20,4 @@
     </div>
   </div>
 </div>
+
