@@ -25,7 +25,7 @@ private accounts: Account[] = [
   { email: 'contact@webdev.fr', password: 'azerty',username: 'candidat aek', role: 'entreprise', refId: 3 },
 
   // 👑 Admin
-  { email: 'admin@gmail.com', password: 'admin',username: 'candidat aek', role: 'admin', refId: 0 }
+  { email: 'admin@gmail.com', password: 'admin',username: 'admin', role: 'admin', refId: 0 }
 ];
 // 🔔 BehaviorSubject pour suivre l’utilisateur connecté
   private currentUserSubject = new BehaviorSubject<Account | null>(null);

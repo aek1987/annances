@@ -12,7 +12,7 @@ export class SidebarComponent {
 
   @Input() candidatures: any[] = [];
    profil = {
-    photo: '../../assets/user.png', // image par défaut
+    photo: 'assets/user.png', // image par défaut
     nom: 'Jean Dupont',
     email: 'jean.dupont@mail.com',
     titre: 'Développeur Full Stack',
