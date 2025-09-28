@@ -1,12 +1,33 @@
-<div class="card">
-  <h3>📌 Mes offres publiées</h3>
-  <ul>
-    <li *ngFor="let offre of offres">
-      <strong>{{ offre.titre }}</strong> - {{ offre.localisation }}
-      <br />
-      {{ offre.description }}
-      <small>Publié le {{ offre.datePublication | date:'dd/MM/yyyy' }}</small>
-    </li>
-  </ul>
-</div>
+<div class="offers-wrap">
+  <h3 class="section-title">📌 Mes offres publiées</h3>
 
+  <div *ngIf="offres.length === 0" class="empty">
+    Vous n'avez publié aucune offre pour le moment.
+  </div>
+
+  <div class="offers-grid">
+    <article class="offer-card" *ngFor="let offre of offres">
+      <div class="card-head">
+        <h4 class="offer-title">{{ offre.titre }}</h4>
+        <span class="badge">{{ offre.contrat }}</span>
+      </div>
+
+      <p class="offer-desc">{{ offre.description }}</p>
+
+      <div class="meta">
+        📍 {{ offre.localisation }}  
+        💰 {{ offre.salaire | currency:'EUR':'symbol':'1.0-0' }}
+      </div>
+
+      <div class="card-footer">
+        <div class="date">Publié le {{ offre.datePublication | date:'dd/MM/yyyy' }}</div>
+
+        <div class="actions">
+          <button class="btn small" (click)="voirCandidatures(offre)">👥 Candidatures</button>
+          <button class="btn small edit" (click)="editOffre(offre)">✏️ Modifier</button>
+          <button class="btn small danger" (click)="deleteOffre(offre)">🗑️ Supprimer</button>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>

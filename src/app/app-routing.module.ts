@@ -13,7 +13,7 @@ import { OrderManagementComponent } from './order-management/order-management.co
 import { AdminGuard } from './admin.guard';
 import { GreetingComponent } from './greeting/greeting.component';
 import { AnnanceEmploiComponent } from './annance-emploi/annance-emploi.component';
-import { OffresEmploiComponent } from './offre-emploi/offres-emploi.component';
+
 import { ProfilComponent } from './espace_condidat/profil/profil.component';
 import { LayoutComponent } from './espace_condidat/layout/layout.component';
 import { FavoritesComponent } from './espace_condidat/favorites/favorites.component';
@@ -34,6 +34,7 @@ import { EntrepriseDashboardComponent } from './espace_entreprise/dashboard/entr
 import { CandidaturesRecuesComponent } from './espace_entreprise/candidatures-recues/candidatures-recues.component';
 
 import { EtrepriseSettingComponent } from './espace_entreprise/etreprise-setting/etreprise-setting.component';
+import { OffresEmploiComponent } from './espace_condidat/offre-emploi/offres-emploi.component';
 
 const routes: Routes = [
   // Partie admin

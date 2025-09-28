@@ -1,1 +1,22 @@
-<p>candidatures-recues works!</p>
+<div class="card p-3">
+  <h3>👥 Candidatures reçues</h3>
+
+  <div *ngIf="candidatures.length === 0" class="empty">
+    Aucune candidature reçue pour cette offre.
+  </div>
+
+  <ul *ngIf="candidatures.length > 0" class="list">
+    <li *ngFor="let c of candidatures">
+      <p><b>Candidat ID:</b> {{ c.candidatId }}</p>
+      <p><b>Date :</b> {{ c.dateCandidature | date:'dd/MM/yyyy' }}</p>
+     <!-- <p><b>Status :</b> {{ c.status }}</p>-->
+      <p *ngIf="c.message"><b>Message :</b> {{ c.message }}</p>
+
+      <div class="actions">
+        <button (click)="changerStatus(c.id, 'accepté')">✅ Accepter</button>
+        <button (click)="changerStatus(c.id, 'refusé')">❌ Refuser</button>
+      </div>
+    </li>
+  </ul>
+</div>
+

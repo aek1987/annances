@@ -24,4 +24,19 @@ offres: Offre[] = [];
       this.offres = this.offreService.getOffresByEntreprise(user.refId);
     }
   }
+
+   voirCandidatures(offre: Offre): void {
+    console.log('Voir candidatures pour offre:', offre);
+    // TODO: router vers /entreprise/candidatures/:offreId
+  }
+
+  editOffre(offre: Offre): void {
+    console.log('Modifier offre:', offre);
+    // TODO: router vers /entreprise/edit-offre/:id
+  }
+
+  deleteOffre(offre: Offre): void {
+    this.offreService.deleteOffre(offre.id);
+    this.offres = this.offres.filter(o => o.id !== offre.id);
+  }
 }

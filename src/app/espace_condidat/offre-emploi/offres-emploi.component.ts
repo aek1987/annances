@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { OffresService } from '../service/offres.service';
-import { Offre } from '../modeles/offres';
+import { Component, OnInit } from "@angular/core";
+import { Offre } from "src/app/modeles/offres";
+import { EntrepriseService } from "src/app/service/entreprise.service";
+import { OffresService } from "src/app/service/offres.service";
 
 
 interface Candidature {
@@ -18,22 +19,18 @@ export class OffresEmploiComponent implements OnInit {
   searchLocation: string = '';
   searchSalary: number | null = null;
   searchExperience: string = '';
-
   // 🎯 Filtres
   selectedContract: string = '';
   selectedRemote: string = '';
   selectedSector: string = '';
   sectors: string[] = ['Informatique', 'Finance', 'Santé', 'Éducation'];
-
   // 📩 Alerte email
   alertEmail: string = '';
-
   // 📂 Données d’exemple
- 
-
   filteredOffres: Offre[] = [];
 // Pour gérer les onglets
-activeTab: 'offres' | 'profil' = 'offres';
+  activeTab: 'offres' | 'profil' = 'offres';
+
 
 // Profil
 profil = {
@@ -48,13 +45,23 @@ profil = {
 candidatures: Candidature[] = [];
 newSkill: string = '';
 offres: Offre[] = [];
-  constructor(private offreService: OffresService) {}
+  constructor(private offreService: OffresService,private entrepriseService :EntrepriseService) {}
 
+
+
+
+  
   ngOnInit(): void {
     // 🔥 Appel du service pour charger les offres
     this.offres = this.offreService.getAllOffres();
-    this.filteredOffres = this.offres;
+    this.filteredOffres = this.offres;   
   }
+
+getEntrepriseNom(id: number): string {
+  const entreprise = this.entrepriseService.getEntrepriseById(id);
+  return entreprise ? entreprise.username : 'Entreprise inconnue';
+}
+
 addSkill() {
   if (this.newSkill.trim()) {
     this.profil.competences.push(this.newSkill.trim());
@@ -120,4 +127,5 @@ saveProfile() {
       alert('Veuillez entrer un email.');
     }
   }
+  
 }

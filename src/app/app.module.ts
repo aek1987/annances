@@ -26,7 +26,6 @@ import { ThousandSeparatorPipe } from './pipe/thousand-separator.pipe';
 import { OrderManagementComponent } from './order-management/order-management.component';
 import { CartComponent } from './cart/cart.component';
 import { AnnanceEmploiComponent } from './annance-emploi/annance-emploi.component';
-import { OffresEmploiComponent } from './offre-emploi/offres-emploi.component';
 import { ProfilComponent } from './espace_condidat/profil/profil.component';
 import { SidebarComponent } from './espace_condidat/sidebar/sidebar.component';
 import { LayoutComponent } from './espace_condidat/layout/layout.component';
@@ -49,6 +48,7 @@ import { AjouterOffreComponent } from './espace_entreprise/ajouter-offre/ajouter
 import { CandidaturesRecuesComponent } from './espace_entreprise/candidatures-recues/candidatures-recues.component';
 
 import { EtrepriseSettingComponent } from './espace_entreprise/etreprise-setting/etreprise-setting.component';
+import { OffresEmploiComponent } from './espace_condidat/offre-emploi/offres-emploi.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -72,7 +72,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProductDetailComponent,
     ThousandSeparatorPipe,
     OrderManagementComponent,    
-    OffresEmploiComponent ,
     AnnanceEmploiComponent,
     ProfilComponent,
     SidebarComponent,
@@ -95,7 +94,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MesOffresComponent,
     AjouterOffreComponent,
     CandidaturesRecuesComponent,
-    EtrepriseSettingComponent
+    EtrepriseSettingComponent,
+    OffresEmploiComponent
    
   ],
   imports: [CommonModule,
