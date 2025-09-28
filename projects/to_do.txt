@@ -1,7 +1,4 @@
 
-
-
-
 Recherche avancée (mots-clés, localisation, salaire, expérience). 
 Filtrage multi-critères (type de contrat, télétravail, secteur).
 Création de compte candidat avec profil (CV, compétences, expériences).
@@ -11,3 +8,9 @@ et vour les conditat recu pour entreprise
 Sauvegarde des offres (favoris).
 Alerte email / notification quand une nouvelle offre correspond
 creatio de compte entrprise ou condidate
+espace admin
+creation de compte et recuperaton de mot pass par gmaik
+
+epcase de criptr
+recher de candidats et des entreprise
+ajouter un offre limiter localet titre de poste
