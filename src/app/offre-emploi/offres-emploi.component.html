@@ -33,11 +33,11 @@
     <!-- 📄 Liste des offres -->
     <div class="offres-list">
       <div class="offre-card" *ngFor="let offre of filteredOffres">
-        <h3>{{ offre.title }}</h3>
-        <p><b>Entreprise :</b> {{ offre.company }}</p>
-        <p><b>Lieu :</b> {{ offre.location }}</p>
-        <p><b>Salaire :</b> {{ offre.salary | currency:'EUR' }}</p>
-        <p><b>Contrat :</b> {{ offre.contract }}</p>
+        <h3>{{ offre.titre }}</h3>
+        <p><b>Entreprise :</b> {{ offre.entrepriseId }}</p>
+        <p><b>Lieu :</b> {{ offre.localisation }}</p>
+        <p><b>Salaire :</b> {{ offre.salaire| currency:'EUR' }}</p>
+        <p><b>Contrat :</b> {{ offre.contrat }}</p>
         <p>{{ offre.description }}</p>
 
         <div class="actions">

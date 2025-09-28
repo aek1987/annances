@@ -49,6 +49,7 @@ export class NavbarComponent implements OnInit{
      this.isAuthenticated = this.authService.isAuthenticated();
    this.authService.currentUser$.subscribe(user => {
     this.currentUser = user;
+     this.isAuthenticated = !!user;
   });
   }
 
@@ -73,7 +74,7 @@ export class NavbarComponent implements OnInit{
   logout() {
     this.authService.logout();
     this.isAuthenticated = false;
-    this.router.navigate(['/greet']);  // Redirige après déconnexion
+    this.router.navigate(['/login']);  // Redirige après déconnexion
    
     this.currentUser = null;
   

@@ -1,1 +1,53 @@
-<p>offres-admin works!</p>
+<!-- src/app/components/gestion-offres/gestion-offres.component.html -->
+<div class="gestion-offres-container">
+  <h2 class="title">📌 Gestion des Offres</h2>
+
+  <!-- ✅ Formulaire d’ajout -->
+  <div class="form-section card">
+    <h3 class="section-title">➕ Ajouter une nouvelle offre</h3>
+    <form (ngSubmit)="addOffre()" #offreForm="ngForm" class="form-grid">
+      <input 
+        type="text" 
+        placeholder="Titre de l'offre" 
+        [(ngModel)]="newOffre.titre" 
+        name="titre"
+        required
+      />
+      <input 
+        type="text" 
+        placeholder="Localisation" 
+        [(ngModel)]="newOffre.localisation" 
+        name="localisation"
+        required
+      />
+      <textarea 
+        placeholder="Description de l'offre" 
+        [(ngModel)]="newOffre.description" 
+        name="description"
+        rows="4"
+        required
+      ></textarea>
+      <button type="submit" [disabled]="offreForm.invalid" class="btn-primary">✅ Ajouter</button>
+    </form>
+  </div>
+
+  <!-- ✅ Liste des offres -->
+  <div class="list-section card">
+    <h3 class="section-title">📋 Liste des offres publiées</h3>
+    <ul class="offres-list">
+      <li *ngFor="let offre of offres" class="offre-card">
+        <div class="offre-info">
+          <strong class="offre-title">{{ offre.titre }}</strong>
+          <span class="offre-location"> - {{ offre.localisation }}</span>
+          <p class="offre-description">{{ offre.description }}</p>
+          <small class="offre-date">📅 Publiée le {{ offre.datePublication | date:'dd/MM/yyyy' }}</small>
+        </div>
+        <div class="offre-actions">
+          <button (click)="deleteOffre(offre.id)" class="btn-danger">❌ Supprimer</button>
+        </div>
+      </li>
+    </ul>
+
+    <p *ngIf="offres.length === 0" class="empty-message">⚠️ Aucune offre publiée pour le moment.</p>
+  </div>
+</div>

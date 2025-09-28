@@ -1,16 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { OffresService } from '../service/offres.service';
+import { Offre } from '../modeles/offres';
 
-interface Offre {
-  id: number;
-  title: string;
-  company: string;
-  location: string;
-  description: string;
-  salary: number;
-  contract: string;
-  favori?: boolean;
-  status?: 'postulé' | 'en cours' | 'accepté' | 'refusé';
-}
+
 interface Candidature {
   offre: string;
   status: string;
@@ -37,35 +29,7 @@ export class OffresEmploiComponent implements OnInit {
   alertEmail: string = '';
 
   // 📂 Données d’exemple
-  offres: Offre[] = [
-    {
-      id: 1,
-      title: 'Développeur Angular',
-      company: 'TechCorp',
-      location: 'Paris',
-      description: 'Développement d’applications Angular 16.',
-      salary: 40000,
-      contract: 'CDI'
-    },
-    {
-      id: 2,
-      title: 'Data Analyst',
-      company: 'FinancePro',
-      location: 'Lyon',
-      description: 'Analyse de données financières.',
-      salary: 35000,
-      contract: 'CDD'
-    },
-    {
-      id: 3,
-      title: 'Développeur Java',
-      company: 'CodeFactory',
-      location: 'Remote',
-      description: 'Développement backend avec Spring Boot.',
-      salary: 42000,
-      contract: 'Remote'
-    }
-  ];
+ 
 
   filteredOffres: Offre[] = [];
 // Pour gérer les onglets
@@ -83,7 +47,14 @@ profil = {
 // 🔹 Suivi des candidatures
 candidatures: Candidature[] = [];
 newSkill: string = '';
+offres: Offre[] = [];
+  constructor(private offreService: OffresService) {}
 
+  ngOnInit(): void {
+    // 🔥 Appel du service pour charger les offres
+    this.offres = this.offreService.getAllOffres();
+    this.filteredOffres = this.offres;
+  }
 addSkill() {
   if (this.newSkill.trim()) {
     this.profil.competences.push(this.newSkill.trim());
@@ -111,21 +82,19 @@ saveProfile() {
     alert(`Profil mis à jour : ${this.profil.nom}, ${this.profil.email}`);
     // Ici tu pourrais enregistrer en backend via API
   }
-  ngOnInit(): void {
-    this.filteredOffres = this.offres;
-  }
+ 
 
   // 🔎 Appliquer les filtres
   applyFilters() {
     this.filteredOffres = this.offres.filter(offre => {
       return (
-        (!this.searchTerm || offre.title.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
-        (!this.searchLocation || offre.location.toLowerCase().includes(this.searchLocation.toLowerCase())) &&
-        (!this.searchSalary || offre.salary >= this.searchSalary) &&
-        (!this.selectedContract || offre.contract === this.selectedContract) &&
+        (!this.searchTerm || offre.titre.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
+        (!this.searchLocation || offre.localisation.toLowerCase().includes(this.searchLocation.toLowerCase())) &&
+        (!this.searchSalary || offre.salaire >= this.searchSalary) &&
+        (!this.selectedContract || offre.contrat === this.selectedContract) &&
         (!this.selectedRemote ||
-          (this.selectedRemote === 'oui' && offre.contract === 'Remote') ||
-          (this.selectedRemote === 'non' && offre.contract !== 'Remote')) &&
+          (this.selectedRemote === 'oui' && offre.contrat === 'Remote') ||
+          (this.selectedRemote === 'non' && offre.contrat !== 'Remote')) &&
         (!this.selectedSector || offre.description.toLowerCase().includes(this.selectedSector.toLowerCase()))
       );
     });
@@ -134,7 +103,7 @@ saveProfile() {
   // ✅ Postuler
   postuler(offre: Offre) {
     offre.status = 'postulé';
-    alert(`Vous avez postulé à : ${offre.title}`);
+    alert(`Vous avez postulé à : ${offre.titre}`);
   }
 
   // ⭐ Favoris

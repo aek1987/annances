@@ -1,22 +1,54 @@
 <div class="card p-3">
   <h3>➕ Ajouter une offre</h3>
+
   <form (ngSubmit)="ajouterOffre()">
+    <!-- Titre -->
     <div>
       <label>Titre :</label>
-      <input [(ngModel)]="newOffre.titre" name="titre" required />
+      <input [(ngModel)]="newOffre.titre" 
+             name="titre" 
+             required />
     </div>
 
+    <!-- Description -->
     <div>
       <label>Description :</label>
-      <textarea [(ngModel)]="newOffre.description" name="description" required></textarea>
+      <textarea [(ngModel)]="newOffre.description" 
+                name="description" 
+                required></textarea>
     </div>
 
+    <!-- Localisation -->
     <div>
       <label>Localisation :</label>
-      <input [(ngModel)]="newOffre.localisation" name="localisation" required />
+      <input [(ngModel)]="newOffre.localisation" 
+             name="localisation" 
+             required />
     </div>
 
+    <!-- Salaire -->
+    <div>
+      <label>Salaire (€) :</label>
+      <input [(ngModel)]="newOffre.salaire" 
+             name="salaire" 
+             type="number" 
+             min="0" />
+    </div>
+
+    <!-- Contrat -->
+    <div>
+      <label>Type de contrat :</label>
+      <select [(ngModel)]="newOffre.contrat" 
+              name="contrat" 
+              required>
+        <option value="CDI">CDI</option>
+        <option value="CDD">CDD</option>
+        <option value="Stage">Stage</option>
+        <option value="Remote">Remote</option>
+      </select>
+    </div>
+
+    <!-- Bouton -->
     <button type="submit">✅ Publier</button>
   </form>
 </div>
-

@@ -11,12 +11,14 @@ import { OffresService } from 'src/app/service/offres.service';
   styleUrls: ['./ajouter-offre.component.css']
 })
 export class AjouterOffreComponent {
-  newOffre: Offre = {
+newOffre: Offre = {
     id: 0,
     entrepriseId: 0,
     titre: '',
     description: '',
     localisation: '',
+    salaire: 0,
+    contrat: 'CDI',
     datePublication: new Date()
   };
 
@@ -25,15 +27,32 @@ export class AjouterOffreComponent {
     private offreService: OffresService
   ) {}
 
-  ajouterOffre() {
+ ajouterOffre() {
     const user = this.authService.getUser();
+
     if (user && user.role === 'entreprise') {
+      // Lier l’offre à l’entreprise connectée
       this.newOffre.entrepriseId = user.refId;
+      this.newOffre.datePublication = new Date();
+
+      // Ajouter l’offre via le service
       this.offreService.addOffre(this.newOffre);
+
       alert('✅ Offre ajoutée avec succès !');
-      this.newOffre = { id: 0, entrepriseId: 0, titre: '', description: '', localisation: '', datePublication: new Date() };
+
+      // Réinitialiser le formulaire
+      this.newOffre = {
+        id: 0,
+        entrepriseId: 0,
+        titre: '',
+        description: '',
+        localisation: '',
+        salaire: 0,
+        contrat: 'CDI',
+        datePublication: new Date()
+      };
     } else {
-      alert('❌ Vous devez être connecté en tant qu’entreprise.');
+      alert('❌ Vous devez être une entreprise pour publier une offre.');
     }
   }
 }
