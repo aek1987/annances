@@ -11,19 +11,36 @@ Alerte email / notification quand une nouvelle offre correspond
 creatio de compte entrprise ou condidate
 espace admin
 creation de compte et recuperaton de mot pass par gmail
-
+espace candidat 
+****************************
+Upload photo de profil (au lieu de choisir homme/femme).
+remplisage de profil
 Validation du profil avant de postuler
-
+les info  de offre actualise
+les info de mon candidature
+Upload du CV directement (PDF).
+alert d'emploi aucu  idee
+support et aide aucun iddee
 
 
 epcase de entreprise 
+
+********************************************
+tabelau de bord acces rapide
+ajouter u offree  refaire le design ajoutre des info
+
 ajouter un offre limiter localet titre de poste
 
+condidature recue aucun info
+la gard espace entre prise
+ parameter aucun
+
 Fonctionnalités supplémentaires
+abonement 
 
-Upload photo de profil (au lieu de choisir homme/femme).
 
-Upload du CV directement (PDF).
+
+
 
 Étoiles pour noter ses compétences ⭐⭐⭐⭐☆.
 

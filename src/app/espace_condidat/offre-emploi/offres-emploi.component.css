@@ -175,13 +175,39 @@
   padding: 20px;
 }
 
+
+
 .offre-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid #ccc;
   padding: 15px;
   margin-bottom: 15px;
-  background: white;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
+
+.offre-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details-link {
+  font-size: 0.9rem;
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.details-link:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
+
 
 .actions button {
   margin-right: 10px;
@@ -199,3 +225,5 @@
   margin-left: 260px; /* largeur sidebar */
   padding: 20px;
 }
+
+

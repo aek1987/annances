@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+
 import { CartComponent } from './cart/cart.component';
 import { OrderTrackingComponent } from './order-tracking/order-tracking.component';
 import { ProductComponent } from './product/product.component';
@@ -35,6 +35,8 @@ import { CandidaturesRecuesComponent } from './espace_entreprise/candidatures-re
 
 import { EtrepriseSettingComponent } from './espace_entreprise/etreprise-setting/etreprise-setting.component';
 import { OffresEmploiComponent } from './espace_condidat/offre-emploi/offres-emploi.component';
+import { AbonneeComponent } from './espace_entreprise/abonnee/abonnee.component';
+import { OffreDetailComponent } from './espace_condidat/offre-detail/offre-detail.component';
 
 const routes: Routes = [
   // Partie admin
@@ -48,7 +50,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'delivery', component: DeliveryFormComponent },
-  { path: 'confirm-order', component: OrderConfirmationComponent },
+ 
   { path: 'cart', component: CartComponent },
   { path: 'greet', component: GreetingComponent },
   { path: 'annance-emploi', component: AnnanceEmploiComponent },
@@ -65,6 +67,7 @@ const routes: Routes = [
       { path: 'settings', component: ProfilComponent },
       { path: 'alerts', component: AlertsComponent },
       { path: 'mes-candidatures', component: CandidaturesComponent },
+      {path: 'offre/:id',  component: OffreDetailComponent },
       { path: '', redirectTo: 'offres-emploi', pathMatch: 'full' },
     ]
   },
@@ -99,6 +102,7 @@ const routes: Routes = [
       { path: 'candidatures', component: CandidaturesRecuesComponent },
       { path: 'profil', component: ProfilComponent },
       { path: 'settings', component: EtrepriseSettingComponent },
+      { path: 'abonnement', component: AbonneeComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // redirection par défaut
     ]
   },

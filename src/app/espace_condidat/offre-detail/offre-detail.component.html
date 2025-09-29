@@ -1,0 +1,29 @@
+<div class="offre-detail-card" *ngIf="offre">
+  <h2>{{ offre.titre }}</h2>
+  <p><b>Entreprise :</b> {{ getEntrepriseNom(offre.entrepriseId) }}</p>
+  <p><b>Lieu :</b> {{ offre.localisation }}</p>
+  <p><b>Salaire :</b> {{ offre.salaire | currency:'EUR' }}</p>
+  <p><b>Contrat :</b> {{ offre.contrat }}</p>
+  <p><b>Date limite :</b> {{ offre.dateLimite | date:'dd/MM/yyyy' }}</p>
+
+  <h4>Description :</h4>
+  <p>{{ offre.description }}</p>
+
+  <h4>Compétences :</h4>
+  <ul>
+    <li *ngFor="let comp of offre.competences">{{ comp }}</li>
+  </ul>
+
+  <h4>Langues :</h4>
+  <ul>
+    <li *ngFor="let lang of offre.langues">{{ lang }}</li>
+  </ul>
+
+  <h4>Avantages :</h4>
+  <ul>
+    <li *ngFor="let avantage of offre.avantages">{{ avantage }}</li>
+  </ul>
+
+  <button class="btn btn-primary" (click)="postuler(offre)">Postuler</button>
+</div>
+

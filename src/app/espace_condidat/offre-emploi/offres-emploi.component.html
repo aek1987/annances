@@ -33,17 +33,17 @@
     <!-- 📄 Liste des offres -->
     <div class="offres-list">
       <div class="offre-card" *ngFor="let offre of filteredOffres">
-        <h3>{{ offre.titre }}</h3>
+        <div class="offre-header">
+      <h3>{{ offre.titre }}</h3>
+      <a class="details-link" [routerLink]="['/candidat/offre', offre.id]">Détails</a>
+        </div>
         <p><b>Entreprise :</b> {{ getEntrepriseNom(offre.entrepriseId) }}</p>
         <p><b>Lieu :</b> {{ offre.localisation }}</p>
         <p><b>Salaire :</b> {{ offre.salaire| currency:'EUR' }}</p>
         <p><b>Contrat :</b> {{ offre.contrat }}</p>
-        <p>{{ offre.description }}</p>
-
-
-
-        <div class="actions">
-          
+        <p>{{ offre.description }}</p>     
+        
+        <div class="actions">       
           
           <button (click)="postuler(offre)">
             {{ offre.status ? offre.status : 'Postuler' }}
@@ -51,11 +51,8 @@
           <button (click)="toggleFavori(offre)">
             {{ offre.favori ? '★ Retirer Favori' : '☆ Ajouter Favori' }}
           </button>
-        </div>
-        
+        </div>        
       </div>
-
-
     </div>
 
     <!-- 📩 Alerte email -->

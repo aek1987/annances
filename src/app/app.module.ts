@@ -7,7 +7,7 @@ import { GreetingComponent } from './greeting/greeting.component';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { OrderTrackingComponent } from './order-tracking/order-tracking.component';
-import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+
 import { NavbarComponent } from './navbar/navbar.component';  // Import FormsModule
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -49,6 +49,8 @@ import { CandidaturesRecuesComponent } from './espace_entreprise/candidatures-re
 
 import { EtrepriseSettingComponent } from './espace_entreprise/etreprise-setting/etreprise-setting.component';
 import { OffresEmploiComponent } from './espace_condidat/offre-emploi/offres-emploi.component';
+import { AbonneeComponent } from './espace_entreprise/abonnee/abonnee.component';
+import { OffreDetailComponent } from './espace_condidat/offre-detail/offre-detail.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -63,7 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProductComponent,
     CartComponent,
     OrderTrackingComponent,
-    OrderConfirmationComponent,
+   
     NavbarComponent,
     RegisterComponent,
     DeliveryFormComponent,
@@ -95,7 +97,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AjouterOffreComponent,
     CandidaturesRecuesComponent,
     EtrepriseSettingComponent,
-    OffresEmploiComponent
+    OffresEmploiComponent,
+    AbonneeComponent,
+    OffreDetailComponent
    
   ],
   imports: [CommonModule,
