@@ -27,51 +27,36 @@
     padding: 10px;
   }
 }
-
-
 .profil-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* centre horizontalement */
-  justify-content: center; /* centre verticalement si nécessaire */
-  text-align: center;
- margin: 30px auto 50px auto;/* centre par rapport au conteneur parent */
+  padding: 20px;
 }
 
 .profil-photo {
-  width: 120px; /* ajuste selon ton design */
+  width: 120px;
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 10px; /* espace entre photo et h2 */
+  margin-bottom: 15px;
+  border: 3px solid #ddd;
 }
 
-.profil-container h2 {
-  font-size: 1.8rem; /* ajuste la taille du texte */
-  margin: 0;
+.status-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-
-
-
-.profile-links ul {
-  list-style: none; /* supprime les puces */
-  padding: 0;
-  margin: 0;
+.status-badge.active {
+  background-color: #d4f8e8;
+  color: #1e7d4d;
+  border: 1px solid #1e7d4d;
 }
 
-.profile-links ul li {
-  margin-bottom: 12px; /* espace vertical entre les liens */
-}
-
-.profile-links ul li a {
-  text-decoration: none;
-  color: #333; /* couleur du texte */
-  font-weight: 500;
-  display: block; /* pour que le margin-bottom fonctionne correctement */
-  transition: color 0.3s;
-}
-
-.profile-links ul li a:hover {
-  color: #007bff; /* couleur au survol */
+.status-badge.inactive {
+  background-color: #ffe5e5;
+  color: #a71d2a;
+  border: 1px solid #a71d2a;
 }

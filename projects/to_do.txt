@@ -1,7 +1,8 @@
 
-Recherche avancée (mots-clés, localisation, salaire, expérience). 
-Filtrage multi-critères (type de contrat, télétravail, secteur).
+
+
 Création de compte candidat avec profil (CV, compétences, expériences).
+avec un cv vide 
 Suivi des candidatures (postulé / en cours / accepté / refusé).  pour candit 
 et vour les conditat recu pour entreprise
 
@@ -11,6 +12,9 @@ creatio de compte entrprise ou condidate
 espace admin
 creation de compte et recuperaton de mot pass par gmaik
 
-epcase de criptr
-recher de candidats et des entreprise
+
+
+
+
+epcase de entreprise 
 ajouter un offre limiter localet titre de poste

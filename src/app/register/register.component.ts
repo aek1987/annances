@@ -4,6 +4,8 @@ import { User } from '../modeles/user';
 import { Account } from '../modeles/accounts';
 import { Router } from '@angular/router';
 import { AlertService } from '../service/alerte-service.service';
+import { CandidatService } from '../service/candidate.service';
+import { EntrepriseService } from '../service/entreprise.service';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +28,9 @@ message: string = '';
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastr: AlertService
+    private toastr: AlertService,
+     private candidatService:CandidatService,
+    private  entrepriseService :EntrepriseService 
   ) {}
 
   onSubmit() {
@@ -37,13 +41,22 @@ message: string = '';
     }
 
     // 👉 Appelle AuthService.register()
-    const registered = this.authService.register(this.user);
-
-    if (registered) {
-      this.toastr.success('Compte créé avec succès ✅', 'Inscription réussie');
-      this.router.navigate(['/login']); // redirige vers login
-    } else {
-      this.toastr.error('Cet email existe déjà ❌', 'Inscription échouée');
+      const newAccount = this.authService.register(this.user);
+   
+  if (newAccount) {
+    if (this.user.role === 'candidat') {
+    
+      this.candidatService.createEmptyCandidat(newAccount.refId,this.user.username, this.user.email);
+    } else if (this.user.role === 'entreprise') {
+      this.entrepriseService.createEmptyEntreprise(newAccount.refId,this.user.username, this.user.email);
     }
+
+    this.toastr.success('Compte créé avec succès ✅', 'Inscription réussie');
+    this.router.navigate(['/login']);
+  } else {
+    this.toastr.error('Cet email existe déjà ❌', 'Inscription échouée');
+  }
+
+  
   }
 }

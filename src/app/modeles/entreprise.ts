@@ -7,4 +7,5 @@ export interface Entreprise {
   secteur?: string;
   description?: string;
   logo?: string; // chemin ou URL du logo
+   status: 'active' | 'desactive';
 }

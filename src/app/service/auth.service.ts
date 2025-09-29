@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Account } from '../modeles/accounts';
 import { User } from '../modeles/user';
+import { CandidatService } from './candidate.service';
+import { EntrepriseService } from './entreprise.service';
 
 
 @Injectable({
@@ -31,11 +33,9 @@ private accounts: Account[] = [
   private currentUserSubject = new BehaviorSubject<Account | null>(null);
   currentUser$: Observable<Account | null> = this.currentUserSubject.asObservable();
 
-  constructor() {
-     const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      this.currentUserSubject.next(JSON.parse(storedUser));
-    }
+  constructor( ) 
+  {
+   
   }
 
   login(credentials: { email: string; password: string }): Observable<any> {
@@ -80,21 +80,33 @@ private accounts: Account[] = [
     const user = this.getUser();
     return user?.role === 'admin';
   }
-// ✅ Enregistrement
-  register(user: User): boolean {
-    const usersString = localStorage.getItem('users');
-    const users: Account[] = usersString ? JSON.parse(usersString) : [];
+register(user: User): Account | null {
+   console.log(" creation nouveau compte utilisateur ");
+  // Vérifie si l'email existe déjà dans le tableau accounts
+  const exists = this.accounts.find(acc => acc.email === user.email);
+  if (exists) {
+     console.log(" utilisateur déjà existant"+exists);
+    return null; // utilisateur déjà existant
 
-    // Vérifie si l'email existe déjà
-    const exists = users.find(u => u.email === user.email);
-    if (exists) {
-      return false; // utilisateur déjà existant
-    }
-
-    // Ajoute le nouvel utilisateur
-   // users.push(user);
-   // localStorage.setItem('users', JSON.stringify(users));
-    return true;
   }
+
+  // Crée un nouvel Account à partir du User
+  const newAccount: Account = {
+    email: user.email,
+    password: user.password,
+    username: user.username,
+    role: user.role || 'candidat', // par défaut 'candidat' si pas précisé
+    refId: this.accounts.length + 1 // génère un nouvel ID simple
+  };
+
+  // Ajoute le nouvel utilisateur au tableau accounts
+ 
+  this.accounts.push(newAccount);
+   
+   
+
+  return newAccount; // inscription réussie
+}
+
 
 }

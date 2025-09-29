@@ -1,11 +1,28 @@
 <aside class="sidebar">
   
 <!-- Photo + Nom -->
- <div class="profil-container text-center">
+<div class="profil-container text-center">
   <h2>Mon Profil</h2>
+
+  <!-- Photo -->
   <img [src]="profil.photo" alt="Photo de profil" class="profil-photo">
-  <h2>{{ currentUser?.username || 'PROFIL' }}</h2>
+
+  <!-- Nom -->
+  <h3>{{ currentUser?.username || 'PROFIL' }}</h3>
+
+  <!-- Status avec badge -->
+  <h4>
+    <span 
+      class="status-badge" 
+      [ngClass]="{
+        'active': candidat?.status === 'active',
+        'inactive': candidat?.status === 'desactive'
+      }">
+      {{ candidat?.status || 'non défini' }}
+    </span>
+  </h4>
 </div>
+
   <!-- 📌 Liens rapides -->
   <div class="profile-links">
     <ul>

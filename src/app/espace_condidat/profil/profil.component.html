@@ -24,7 +24,7 @@
     </div>
     <div *ngIf="editMode" class="mt-2">
       <input class="form-control" [(ngModel)]="newCompetence" placeholder="Ajouter une compétence">
-      <button class="btn btn-sm btn-success mt-1" (click)="addCompetence()">+ Ajouter</button>
+      <button class="btn btn-sm btn-success mt-1" (click)="addCompetence(newCompetence)">+ Ajouter</button>
     </div>
   </div>
 
@@ -41,7 +41,7 @@
       <input class="form-control mb-1" [(ngModel)]="newExperience.poste" placeholder="Poste">
       <input class="form-control mb-1" [(ngModel)]="newExperience.entreprise" placeholder="Entreprise">
       <input class="form-control mb-1" [(ngModel)]="newExperience.duree" placeholder="Durée">
-      <button class="btn btn-sm btn-success" (click)="addExperience()">+ Ajouter</button>
+      <button class="btn btn-sm btn-success" (click)="addExperience(experience)">+ Ajouter</button>
     </div>
   </div>
 

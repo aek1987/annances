@@ -10,9 +10,9 @@ export interface Candidat {
   email?: string;
   fonction?: string;
   status: 'active' | 'desactive' ;
-  phone?: string;
-  competences?: string[];
+  phone?: string; 
   bio?: string;
-  experiences?: Experience[];
+  experiences: Experience[];
+  competences: string[];
   cv?: string;   // 🔹 chemin ou URL du CV
 }

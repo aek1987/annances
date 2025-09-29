@@ -8,10 +8,10 @@ import { AuthService } from './auth.service';
 export class EntrepriseService {
 
   private entreprises: Entreprise[] = [
-    { id: 101, username: 'TechCorp SARL', email: 'hr@techcorp.com', phone: '021-123-456', secteur: 'Informatique', description: 'Société innovante spécialisée dans le développement logiciel.', logo: '../../assets/company.png' },
-    { id: 2, username: 'Foodly Group', email: 'jobs@foodly.com', phone: '021-654-987', secteur: 'Agroalimentaire', description: 'Leader dans la transformation agroalimentaire.', logo: '../../assets/company.png' },
-    { id: 103, username: 'GreenTech Solutions', email: 'contact@greentech.com', phone: '021-987-123', secteur: 'Energie renouvelable', description: 'Entreprise écoresponsable spécialisée dans l’énergie solaire.', logo: '../../assets/company.png' },
-    { id: 4, username: 'MediCare', email: 'recrutement@medicare.com', phone: '021-555-666', secteur: 'Santé', description: 'Clinique privée de référence.', logo: '../../assets/company.png' }
+    { id: 101, username: 'TechCorp SARL', email: 'hr@techcorp.com', status: 'active'  , phone: '021-123-456', secteur: 'Informatique', description: 'Société innovante spécialisée dans le développement logiciel.', logo: '../../assets/company.png' },
+    { id: 2, username: 'Foodly Group', email: 'jobs@foodly.com',status: 'active', phone: '021-654-987', secteur: 'Agroalimentaire', description: 'Leader dans la transformation agroalimentaire.', logo: '../../assets/company.png' },
+    { id: 103, username: 'GreenTech Solutions', email: 'contact@greentech.com',status: 'active', phone: '021-987-123', secteur: 'Energie renouvelable', description: 'Entreprise écoresponsable spécialisée dans l’énergie solaire.', logo: '../../assets/company.png' },
+    { id: 4, username: 'MediCare', email: 'recrutement@medicare.com',status: 'active', phone: '021-555-666', secteur: 'Santé', description: 'Clinique privée de référence.', logo: '../../assets/company.png' }
   ];
 
   constructor(private authService: AuthService) {}
@@ -42,5 +42,21 @@ export class EntrepriseService {
       e.username.toLowerCase().includes(query.toLowerCase()) ||
       e.secteur?.toLowerCase().includes(query.toLowerCase())
     );
+  }
+
+  createEmptyEntreprise(refId: number, name: string, email: string): Entreprise {
+  const newEntreprise: Entreprise = {
+      id:refId ,
+      username: '',
+      email,
+      phone: '',
+      secteur: '',
+      description: '',
+      logo: '',
+      status: 'desactive'   // 🔴 par défaut
+    };
+
+    this.entreprises.push(newEntreprise);
+    return newEntreprise;
   }
 }
