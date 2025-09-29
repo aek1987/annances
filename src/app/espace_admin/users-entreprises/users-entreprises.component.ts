@@ -9,6 +9,7 @@ import { EntrepriseService } from 'src/app/service/entreprise.service';
 })
 export class UsersEntreprisesComponent {
  entreprises: Entreprise[] = [];
+ index=0;
 
   constructor(private entreprisesService: EntrepriseService) {}
 

@@ -14,7 +14,7 @@
     <table class="table table-hover align-middle">
       <thead class="table-dark">
         <tr>
-          <th>Logo</th>
+          <th>num</th>
           <th>Nom entreprise</th>
           <th>Email</th>
           <th>Responsable</th>
@@ -23,8 +23,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let entreprise of entreprises">
-          <td><img [src]="entreprise.username" alt="logo" class="rounded-circle" width="40" height="40"></td>
+        <tr *ngFor="let entreprise of entreprises; let i = index">
+          <td>{{i+1}}</td>
           <td>{{ entreprise.username }}</td>
           <td>{{ entreprise.email }}</td>
           <td>{{ entreprise.phone }}</td>
