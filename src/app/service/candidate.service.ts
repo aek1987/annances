@@ -9,13 +9,13 @@ import { AuthService } from './auth.service';
 export class CandidatService {
 
   private candidats: Candidat[] = [
-    { refId: 1, username: 'Sara Bensalem', email: 'ali.candidat@gmail.com', status: 'active'  ,photo: '../../assets/user.png', fonction: 'Développeur Java', phone: '0550-123-456', competences: ['Java', 'Spring Boot'], bio: 'Passionnée de dev web', experiences: [{ poste: 'Dev Java', entreprise: 'Capgemini', duree: '2 ans' }],formations:[] },
-    { refId: 2, username: 'Mohamed Lamine', email: 'sara.candidat@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Ingénieur Data', phone: '0551-987-654', competences: ['Python', 'SQL'], bio: 'Spécialiste data', experiences: [{ poste: 'Data Analyst', entreprise: 'Sopra Steria', duree: '1 an' }],formations:[] },
-    { refId: 3, username: 'Amina Karim', email: 'mohamed.job@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Designer UX/UI', phone: '0553-333-444',  competences:[],experiences:[],formations:[]},
-    { refId: 4, username: 'Youssef Haddad', email: 'amina.cv@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Développeur Angular', phone: '0554-555-666' ,  competences:[],experiences:[],formations:[]},
-    { refId: 5, username: 'Nadia Rahmani', email: 'youssef.talent@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Chef de projet IT', phone: '0555-777-888',  competences:[],experiences:[],formations:[] },
-    { refId: 6, username: 'nekaa aek', email: 'nekaa.profil@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Full Stack Developer', phone: '0556-000-111' ,  competences:[],experiences:[],formations:[]},
-    { refId: 7, username: 'candidat aek', email: 'candidat@gmail.com',  status: 'active',photo: '../../assets/user.png', fonction: 'Développeur', phone: '0557-222-333',  competences:[],experiences:[] ,formations:[]}
+    { refId: 1, username: 'Sara Bensalem', email: 'ali.candidat@gmail.com', status: 'active'  ,photo: '../../assets/user.png', fonction: 'Développeur Java', phone: '0550-123-456', competences: ['Java', 'Spring Boot'], bio: 'Passionnée de dev web', experiences: [{ poste: 'Dev Java', entreprise: 'Capgemini', duree: '2 ans' }],formations:[],cv:"" },
+    { refId: 2, username: 'Mohamed Lamine', email: 'sara.candidat@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Ingénieur Data', phone: '0551-987-654', competences: ['Python', 'SQL'], bio: 'Spécialiste data', experiences: [{ poste: 'Data Analyst', entreprise: 'Sopra Steria', duree: '1 an' }],formations:[] ,cv:""},
+    { refId: 3, username: 'Amina Karim', email: 'mohamed.job@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Designer UX/UI', phone: '0553-333-444',  competences:[],experiences:[],formations:[],cv:""},
+    { refId: 4, username: 'Youssef Haddad', email: 'amina.cv@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Développeur Angular', phone: '0554-555-666' ,  competences:[],experiences:[],formations:[],cv:""},
+    { refId: 5, username: 'Nadia Rahmani', email: 'youssef.talent@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Chef de projet IT', phone: '0555-777-888',  competences:[],experiences:[],formations:[] ,cv:""},
+    { refId: 6, username: 'nekaa aek', email: 'nekaa.profil@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Full Stack Developer', phone: '0556-000-111' ,  competences:[],experiences:[],formations:[],cv:""},
+    { refId: 7, username: 'candidat aek', email: 'candidat@gmail.com',  status: 'active',photo: '../../assets/user.png', fonction: 'Développeur', phone: '0557-222-333',  competences:[],experiences:[] ,formations:[],cv:""}
   ];
 
   constructor(private authService :AuthService) { }
@@ -56,6 +56,7 @@ getCandidatConnecte(): Candidat | null {
       email,
       status: 'desactive', // 🔴 par défaut
       photo:"assets/homme.png", // 🔴 par défaut
+      cv:"vide", 
       competences: [],
       experiences: [], formations: []
     };
@@ -75,23 +76,51 @@ updatePhoto(refId: number, newPhoto: string) {
   }
 }
 
-  // Vérifie si un candidat peut être activé
+ // Vérifie la complétude du profil et calcule la progression
+getProgression(candidat: Candidat): number {
+  let steps = 0;
+  let completed = 0;
+
+  // 📷 Photo
+  steps++;
+  if (candidat.photo && candidat.photo !== '../../assets/user.png') completed++;
+
+  // ✅ Compétences
+  steps++;
+  if (candidat.competences && candidat.competences.length > 0) completed++;
+
+  // ✅ Expériences
+  steps++;
+  if (candidat.experiences && candidat.experiences.length > 0) completed++;
+
+  // 🎓 Formations
+  steps++;
+  if (candidat.formations && candidat.formations.length > 0) completed++;
+
+  // 📄 CV
+  steps++;
+  if (candidat.cv && candidat.cv.length > 0) completed++;
+
+  // 🔢 Pourcentage
+  return Math.round((completed / steps) * 100);
+}
+
+// Active / désactive le compte selon la progression
 checkAndActivateCandidat(refId: number): void {
   const candidat = this.candidats.find(c => c.refId === refId);
   if (!candidat) return;
 
-  // 👉 Règles métier : doit avoir au moins 1 compétence et 1 expérience
-  const hasCompetence = candidat.competences && candidat.competences.length > 0;
-  const hasExperience = candidat.experiences && candidat.experiences.length > 0;
+  const progression = this.getProgression(candidat);
 
-  if (hasCompetence && hasExperience) {
+  if (progression >= 80) { // seuil = 80% complété
     candidat.status = 'active';
     console.log("✅ Candidat activé :", candidat);
   } else {
     candidat.status = 'desactive';
-    console.warn("⚠️ Profil incomplet, candidat reste désactivé :", candidat);
+    console.warn(`⚠️ Profil incomplet (${progression}%), candidat reste désactivé :`, candidat);
   }
 }
+
 
 // Vérifie si le candidat peut postuler
 canPostuler(refId: number): boolean {

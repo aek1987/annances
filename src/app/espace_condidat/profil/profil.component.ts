@@ -143,6 +143,10 @@ onCvUpload(event: Event) {
     reader.readAsDataURL(file); // encode en Base64
   }
 }
+get progression(): number {
+  if (!this.candidat) return 0;
+  return this.candidatService.getProgression(this.candidat);
+}
 
 
 }

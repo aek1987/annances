@@ -10,9 +10,9 @@ Sauvegarde des offres (favoris).
 Alerte email / notification quand une nouvelle offre correspond
 creatio de compte entrprise ou condidate
 espace admin
-creation de compte et recuperaton de mot pass par gmaik
+creation de compte et recuperaton de mot pass par gmail
 
-
+Validation du profil avant de postuler
 
 
 

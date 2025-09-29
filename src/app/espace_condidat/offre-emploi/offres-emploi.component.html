@@ -40,7 +40,11 @@
         <p><b>Contrat :</b> {{ offre.contrat }}</p>
         <p>{{ offre.description }}</p>
 
+
+
         <div class="actions">
+          
+          
           <button (click)="postuler(offre)">
             {{ offre.status ? offre.status : 'Postuler' }}
           </button>
@@ -48,7 +52,10 @@
             {{ offre.favori ? '★ Retirer Favori' : '☆ Ajouter Favori' }}
           </button>
         </div>
+        
       </div>
+
+
     </div>
 
     <!-- 📩 Alerte email -->

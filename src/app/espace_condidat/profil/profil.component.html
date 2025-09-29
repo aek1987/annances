@@ -11,6 +11,25 @@
     <img src="assets/femme.png" class="option-photo" (click)="changerPhoto('assets/femme.png')">
   </div>
   </div>
+  
+
+
+<!-- Afficher progression -->
+<div class="progress-container">
+  <label>Complétude du profil :</label>
+  <div class="progress-bar">
+    <div class="progress-fill" [style.width.%]="progression"></div>
+  </div>
+  <p>{{ progression }} %</p>
+</div>
+
+<p *ngIf="candidat?.status === 'active'" class="status-active">
+  ✅ Votre  profil peut etre active apre la la sauvegarde et la validation de l'adminstrateur
+</p>
+<p *ngIf="candidat?.status === 'desactive'" class="status-inactive">
+  ⚠️ Complétez votre profil pour activer votre compte
+</p>
+
  <!-- Afficher le CV si dispo -->
   <p *ngIf="candidatSafe.cv">
     <a [href]="candidatSafe.cv" target="_blank">📄 Voir mon CV</a>

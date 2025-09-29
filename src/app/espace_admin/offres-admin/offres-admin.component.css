@@ -1,155 +1,107 @@
-/* ✅ Container principal */
 .gestion-offres-container {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  color: #2c3e50;
+  max-width: 900px;
+  margin: 20px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ✅ Titres */
 .title {
   text-align: center;
-  font-size: 26px;
-  font-weight: bold;
-  margin-bottom: 30px;
-  color: #34495e;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-.section-title {
-  margin-bottom: 15px;
-  font-size: 20px;
-  font-weight: 600;
-  color: #2c3e50;
-}
-
-/* ✅ Card style */
-.card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 25px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-/* ✅ Formulaire */
-.form-grid {
+.search-section {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.form-grid input,
-.form-grid textarea {
-  padding: 12px;
-  border: 1px solid #dcdcdc;
-  border-radius: 8px;
+.search-section input {
+  width: 300px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
   font-size: 14px;
-  transition: all 0.3s ease;
 }
 
-.form-grid input:focus,
-.form-grid textarea:focus {
-  outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 5px rgba(52,152,219,0.3);
-}
-
-.btn-primary {
-  background: #3498db;
-  color: #fff;
-  font-weight: bold;
+.btn-search {
+  padding: 8px 12px;
   border: none;
-  border-radius: 8px;
-  padding: 12px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
 
-.btn-primary:hover {
-  background: #2980b9;
+.btn-search:hover {
+  background-color: #0056b3;
 }
 
-/* ✅ Liste des offres */
 .offres-list {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
 .offre-card {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  background: #fdfdfd;
-  border: 1px solid #e6e6e6;
-  border-radius: 10px;
   padding: 15px;
-  margin-bottom: 15px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-bottom: 1px solid #eee;
 }
 
-.offre-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+.offre-info {
+  max-width: 70%;
 }
 
 .offre-title {
   font-size: 18px;
-  color: #2c3e50;
+  color: #007bff;
 }
 
 .offre-location {
-  color: #7f8c8d;
+  font-size: 14px;
+  color: #666;
 }
 
 .offre-description {
   margin: 8px 0;
-  color: #555;
+  font-size: 14px;
 }
 
-.offre-date {
-  font-size: 12px;
-  color: #888;
-}
-
-/* ✅ Actions */
-.offre-actions {
-  margin-left: 15px;
-}
-
-.btn-danger {
-  background: #e74c3c;
+.offre-status span {
+  padding: 4px 10px;
+  border-radius: 4px;
   color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 6px;
-  cursor: pointer;
   font-weight: bold;
-  transition: background 0.3s ease;
+  font-size: 13px;
 }
 
-.btn-danger:hover {
-  background: #c0392b;
+.status-active { background-color: #28a745; }
+.status-pending { background-color: #ffc107; }
+.status-refused { background-color: #dc3545; }
+
+.offre-actions button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
 }
 
-/* ✅ Message vide */
+.btn-success { background-color: #28a745; color: #fff; }
+.btn-primary { background-color: #007bff; color: #fff; }
+.btn-danger { background-color: #dc3545; color: #fff; }
+
+.btn-success:hover { background-color: #218838; }
+.btn-primary:hover { background-color: #0056b3; }
+.btn-danger:hover { background-color: #c82333; }
+
 .empty-message {
   text-align: center;
-  margin-top: 20px;
+  color: #888;
   font-style: italic;
-  color: #7f8c8d;
-}
-
-/* ✅ Responsive */
-@media (max-width: 768px) {
-  .offre-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .offre-actions {
-    margin-top: 10px;
-    align-self: flex-end;
-  }
+  margin-top: 20px;
 }

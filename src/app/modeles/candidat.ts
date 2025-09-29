@@ -15,7 +15,7 @@ export interface Candidat {
   bio?: string;
   experiences: Experience[];
   competences: string[];
-  cv?: string; ///🔹 chemin ou URL du CV
+  cv: string; ///🔹 chemin ou URL du CV
   adresse?: string; 
   formations: Formation[];
 

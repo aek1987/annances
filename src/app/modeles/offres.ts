@@ -10,7 +10,13 @@ export interface Offre {
   contrat?: string;          // CDI, CDD, Stage, Remote...
   datePublication: Date;     // Date ajout
   favori?: boolean;
-  status?: 'postulé' | 'en cours' | 'accepté' | 'refusé';
+  status?: 'postulé' | 'en cours' | 'accepte' | 'refuse';
+  niveauExperience?: 'Junior' | 'Intermédiaire' | 'Senior' | 'Lead';
+  competences?: string[];
+  langues?: string[];
+  avantages?: string[];
+  dateLimite?: Date;
+  candidaturesCount?: number;
 }
 
 

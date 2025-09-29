@@ -10,7 +10,8 @@ import { OffresService } from 'src/app/service/offres.service';
 })
 export class OffresAdminComponent implements OnInit {
 
-
+searchQuery: string = '';
+filteredOffres: Offre[] = [];
 
   offres: Offre[] = [];
   newOffre: Partial<Offre> = {};
@@ -22,17 +23,17 @@ export class OffresAdminComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const currentUser = this.authService.getUser();
-    if (currentUser && currentUser.role === 'entreprise') {
-      this.entrepriseId = currentUser.refId;
-      this.loadOffres();
-    }
+   
+      
+      this.loadOffres(); 
+      this.filteredOffres = this.offres;
+    
   }
 
   loadOffres() {
-    if (this.entrepriseId !== null) {
-      this.offres = this.offreService.getOffresByEntreprise(this.entrepriseId);
-    }
+    
+      this.offres = this.offreService.getAllOffres();
+    
   }
 
   addOffre() {
@@ -50,4 +51,26 @@ export class OffresAdminComponent implements OnInit {
  /*   this.offreService.deleteOffre(id);
     this.loadOffres();*/
   }
+  
+  // Édite une offre (exemple basique : redirection vers page édition)
+  editOffre(offre: Offre): void {
+   // this.router.navigate(['/admin/offres/edit', offre.id]);
+  }
+  acceptOffre(offre: Offre): void {
+  offre.status = 'accepte';
+  // 🔹 Si tu utilises un service qui persiste les offres, tu peux appeler :
+  // this.offreService.updateOffre(offre);
+}
+searchOffres(): void {
+  if (!this.searchQuery.trim()) {
+    this.filteredOffres = this.offres;
+    return;
+  }
+
+  const query = this.searchQuery.toLowerCase();
+  this.filteredOffres = this.offres.filter(offre =>
+    (offre.titre?.toLowerCase().includes(query) || 
+     offre.localisation?.toLowerCase().includes(query))
+  );
+}
 }

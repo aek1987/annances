@@ -17,7 +17,7 @@ import { Offre } from '../modeles/offres';
   },
   {
     id: 2,
-    entrepriseId: 2, // Id de l’entreprise FinancePro
+    entrepriseId: 102, // Id de l’entreprise FinancePro
     titre: 'Data Analyst',
     description: 'Analyse de données financières.',
     localisation: 'Lyon',
