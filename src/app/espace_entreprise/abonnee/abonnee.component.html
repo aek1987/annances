@@ -1,0 +1,19 @@
+<!-- src/app/components/abonnement/abonnement.component.html -->
+<div class="abonnement-container">
+  <h2>📦 Vos abonnements</h2>
+  <p class="statut">Abonnement actuel : <b>{{ abonnementActif }}</b></p>
+
+  <div class="cards">
+    <div *ngFor="let ab of abonnements" class="card" [class.active]="ab.actif">
+      <h3>{{ ab.type }}</h3>
+      <p class="prix">{{ ab.prix }} € / {{ ab.duree }}</p>
+      <ul>
+        <li *ngFor="let a of ab.avantages">✔️ {{ a }}</li>
+      </ul>
+      <button (click)="souscrire(ab)" [disabled]="ab.actif">
+        {{ ab.actif ? 'Actif' : 'Souscrire' }}
+      </button>
+    </div>
+  </div>
+</div>
+
