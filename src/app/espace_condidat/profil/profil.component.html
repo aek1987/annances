@@ -1,10 +1,31 @@
 <div class="candidat-card">
   <!-- Photo + Nom -->
   <div class="text-center">
-    <img [src]="candidat?.photo" alt="Photo de candidat" class="candidat-photo">
+    <img [src]="candidat?.photo || 'assets/user.png'" alt="Photo de candidat" class="candidat-photo">
     <h2>{{ candidat?.username }}</h2>
     <p class="text-muted">{{ candidat?.username }} - {{ candidat?.email }}</p>
+
+    <!-- Choix rapide entre 2 photos -->
+  <div class="photo-options">
+    <img src="assets/homme.png" class="option-photo" (click)="changerPhoto('assets/homme.png')">
+    <img src="assets/femme.png" class="option-photo" (click)="changerPhoto('assets/femme.png')">
   </div>
+  </div>
+ <!-- Afficher le CV si dispo -->
+  <p *ngIf="candidatSafe.cv">
+    <a [href]="candidatSafe.cv" target="_blank">📄 Voir mon CV</a>
+  </p>
+
+  <!-- Upload si en mode édition -->
+  <div *ngIf="editMode">
+    <input type="file" class="form-control" accept="application/pdf" (change)="onCvUpload($event)">
+  </div>
+
+ <div class="section">
+  <h4>Informations personnelles</h4>
+  <p><b>Téléphone :</b> {{ candidat?.phone }} , Adresse : {{ candidat?.adresse }}</p>
+  
+</div>
 
   <!-- Bio -->
 <div class="section" *ngIf="candidat">
@@ -45,13 +66,24 @@
     </div>
   </div>
 
- <!-- CV -->
+
 
 <div class="section">
-  <h4>CV</h4>
-  <p><a [href]="candidatSafe.cv" target="_blank">📄 Voir mon CV</a></p>
-  <input *ngIf="editMode" class="form-control" [(ngModel)]="candidatSafe.cv">
+  <h4>Formations</h4>
+  <ul>
+    <li *ngFor="let f of candidat?.formations; let i = index">
+      🎓 {{ f.diplome }} - {{ f.ecole }} ({{ f.annee }})
+      <span *ngIf="editMode" (click)="removeFormation(i)" style="cursor:pointer">❌</span>
+    </li>
+  </ul>
+  <div *ngIf="editMode">
+    <input class="form-control mb-1" [(ngModel)]="newFormation.diplome" placeholder="Diplôme">
+    <input class="form-control mb-1" [(ngModel)]="newFormation.ecole" placeholder="École">
+    <input class="form-control mb-1" [(ngModel)]="newFormation.annee" placeholder="Année">
+    <button class="btn btn-sm btn-success" (click)="addFormation()">+ Ajouter</button>
+  </div>
 </div>
+
 
 
 

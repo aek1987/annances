@@ -60,3 +60,28 @@
   color: #a71d2a;
   border: 1px solid #a71d2a;
 }
+
+
+.profile-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-links ul li {
+  margin: 12px 0; /* ✅ espace vertical entre les lignes */
+}
+
+.profile-links ul li a {
+  text-decoration: none;
+  color: #080808d0;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px; /* ✅ espace entre l'icône et le texte */
+  transition: color 0.2s ease-in-out;
+}
+
+.profile-links ul li a:hover {
+  color: #007bff; /* ✅ effet hover bleu */
+}

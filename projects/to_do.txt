@@ -18,3 +18,17 @@ creation de compte et recuperaton de mot pass par gmaik
 
 epcase de entreprise 
 ajouter un offre limiter localet titre de poste
+
+Fonctionnalités supplémentaires
+
+Upload photo de profil (au lieu de choisir homme/femme).
+
+Upload du CV directement (PDF).
+
+Étoiles pour noter ses compétences ⭐⭐⭐⭐☆.
+
+Téléchargement du CV en PDF.
+
+Partage du profil (générer un lien public).
+
+Progression du profil : ex. 70% complété → encourage l’utilisateur à remplir plu

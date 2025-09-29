@@ -9,13 +9,13 @@ import { AuthService } from './auth.service';
 export class CandidatService {
 
   private candidats: Candidat[] = [
-    { refId: 1, username: 'Sara Bensalem', email: 'ali.candidat@gmail.com', status: 'active'  ,photo: '../../assets/user.png', fonction: 'Développeur Java', phone: '0550-123-456', competences: ['Java', 'Spring Boot'], bio: 'Passionnée de dev web', experiences: [{ poste: 'Dev Java', entreprise: 'Capgemini', duree: '2 ans' }] },
-    { refId: 2, username: 'Mohamed Lamine', email: 'sara.candidat@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Ingénieur Data', phone: '0551-987-654', competences: ['Python', 'SQL'], bio: 'Spécialiste data', experiences: [{ poste: 'Data Analyst', entreprise: 'Sopra Steria', duree: '1 an' }] },
-    { refId: 3, username: 'Amina Karim', email: 'mohamed.job@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Designer UX/UI', phone: '0553-333-444',  competences:[],experiences:[]},
-    { refId: 4, username: 'Youssef Haddad', email: 'amina.cv@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Développeur Angular', phone: '0554-555-666' ,  competences:[],experiences:[]},
-    { refId: 5, username: 'Nadia Rahmani', email: 'youssef.talent@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Chef de projet IT', phone: '0555-777-888',  competences:[],experiences:[] },
-    { refId: 6, username: 'nekaa aek', email: 'nekaa.profil@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Full Stack Developer', phone: '0556-000-111' ,  competences:[],experiences:[]},
-    { refId: 7, username: 'candidat aek', email: 'candidat@gmail.com',  status: 'active',photo: '../../assets/user.png', fonction: 'Développeur', phone: '0557-222-333',  competences:[],experiences:[] }
+    { refId: 1, username: 'Sara Bensalem', email: 'ali.candidat@gmail.com', status: 'active'  ,photo: '../../assets/user.png', fonction: 'Développeur Java', phone: '0550-123-456', competences: ['Java', 'Spring Boot'], bio: 'Passionnée de dev web', experiences: [{ poste: 'Dev Java', entreprise: 'Capgemini', duree: '2 ans' }],formations:[] },
+    { refId: 2, username: 'Mohamed Lamine', email: 'sara.candidat@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Ingénieur Data', phone: '0551-987-654', competences: ['Python', 'SQL'], bio: 'Spécialiste data', experiences: [{ poste: 'Data Analyst', entreprise: 'Sopra Steria', duree: '1 an' }],formations:[] },
+    { refId: 3, username: 'Amina Karim', email: 'mohamed.job@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Designer UX/UI', phone: '0553-333-444',  competences:[],experiences:[],formations:[]},
+    { refId: 4, username: 'Youssef Haddad', email: 'amina.cv@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Développeur Angular', phone: '0554-555-666' ,  competences:[],experiences:[],formations:[]},
+    { refId: 5, username: 'Nadia Rahmani', email: 'youssef.talent@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Chef de projet IT', phone: '0555-777-888',  competences:[],experiences:[],formations:[] },
+    { refId: 6, username: 'nekaa aek', email: 'nekaa.profil@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Full Stack Developer', phone: '0556-000-111' ,  competences:[],experiences:[],formations:[]},
+    { refId: 7, username: 'candidat aek', email: 'candidat@gmail.com',  status: 'active',photo: '../../assets/user.png', fonction: 'Développeur', phone: '0557-222-333',  competences:[],experiences:[] ,formations:[]}
   ];
 
   constructor(private authService :AuthService) { }
@@ -55,8 +55,9 @@ getCandidatConnecte(): Candidat | null {
       username,
       email,
       status: 'desactive', // 🔴 par défaut
+      photo:"assets/homme.png", // 🔴 par défaut
       competences: [],
-      experiences: []
+      experiences: [], formations: []
     };
 
     this.candidats.push(newCandidat);
@@ -66,6 +67,13 @@ getCandidatConnecte(): Candidat | null {
     return newCandidat;
   }
 
+updatePhoto(refId: number, newPhoto: string) {
+  const candidat = this.candidats.find(c => c.refId === refId);
+  if (candidat) {
+    candidat.photo = newPhoto;
+    console.log("📷 Photo mise à jour pour :", candidat.username);
+  }
+}
 
   // Vérifie si un candidat peut être activé
 checkAndActivateCandidat(refId: number): void {
@@ -90,4 +98,15 @@ canPostuler(refId: number): boolean {
   const candidat = this.candidats.find(c => c.refId === refId);
   return candidat ? candidat.status === 'active' : false;
 }
+
+ // 🔹 Mise à jour complète d’un candidat
+  updateCandidat(candidat: Candidat) {
+    const index = this.candidats.findIndex(c => c.refId === candidat.refId);
+    if (index !== -1) {
+      this.candidats[index] = candidat;
+     // this.saveAll(this.candidats);
+    }
+  }
+
+
 }

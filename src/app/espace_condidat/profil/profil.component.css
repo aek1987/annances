@@ -143,3 +143,26 @@
 .btn-secondary:hover {
   background: #4b5563;
 }
+
+/* Boutons d’édition */
+.photo-options {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.option-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border 0.3s, transform 0.2s;
+}
+
+.option-photo:hover {
+  border: 2px solid #007bff;
+  transform: scale(1.1);
+}
