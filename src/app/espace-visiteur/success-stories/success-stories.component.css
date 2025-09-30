@@ -1,55 +1,139 @@
-.stories-container {
-  max-width: 100%;       /* 🔒 ne dépasse jamais son conteneur */
-  width: 100%;           /* prend toute la largeur disponible */
-  padding: 20px;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-.stories-container h2 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-  color: #2c3e50;
-}
-
-.intro {
-  font-size: 1rem;
-  margin-bottom: 25px;
-  color: #555;
-}
-
-/* ✅ Grille responsive */
-.stories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
-  max-width: 100%;
+.stories-layout {
+  display: flex;
+  gap: 40px;           /* Plus d'espace entre les colonnes */
+  align-items: flex-start;
+  padding: 40px;
+  max-width: 1200px;
   margin: 0 auto;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 20px;
+  min-height: 600px;
 }
 
+/* Colonne gauche : Slider vertical */
+.stories-left {
+  width: 400px;        /* Largeur augmentée */
+  max-height: 600px;
+  overflow-y: auto;    /* Scroll vertical */
+  padding: 20px;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  flex-shrink: 0;      /* Empêche la réduction */
+}
+
+/* Personnalisation de la scrollbar */
+.stories-left::-webkit-scrollbar {
+  width: 6px;
+}
+
+.stories-left::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.stories-left::-webkit-scrollbar-thumb {
+  background: #3498db;
+  border-radius: 10px;
+}
+
+.stories-left::-webkit-scrollbar-thumb:hover {
+  background: #2980b9;
+}
+
+/* Colonne droite : Contenu principal */
+.stories-right {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stories-right h2 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.stories-right .intro {
+  font-size: 1.2rem;
+  color: #5a6c7d;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+/* Grille des stories */
+.stories-grid-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Cartes des stories */
 .story-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease;
-  overflow: hidden; /* 🔒 rien ne dépasse */
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border: 1px solid #e9ecef;
+  position: relative;
+  overflow: hidden;
+}
+
+.story-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(135deg, #3498db, #9b59b6);
 }
 
 .story-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
 }
 
 .story-photo {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
+  border: 3px solid #3498db;
+}
+
+.story-card h3 {
+  color: #2c3e50;
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.story-card h4 {
+  color: #3498db;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  font-weight: 500;
 }
 
 .temoignage {
   font-style: italic;
-  color: #444;
-  font-size: 0.95rem;
+  color: #5a6c7d;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+  position: relative;
+}
+
+.temoignage::before,
+.temoignage::after {
+  content: '"';
+  font-size: 1.5rem;
+  color: #3498db;
+  font-weight: bold;
 }

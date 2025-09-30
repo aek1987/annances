@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 interface SuccessStory {
   nom: string;
@@ -36,5 +36,20 @@ export class SuccessStoriesComponent {
       temoignage: "Nous avons recruté plusieurs talents motivés grâce à cette plateforme.",
       photo: "assets/images/company.jpg"
     }
-  ];
+  ]; @ViewChild('slider', { static: false }) slider!: ElementRef;
+
+  scrollLeft() {
+    this.slider.nativeElement.scrollBy({
+      left: -300,   // largeur approximative d'une carte + gap
+      behavior: 'smooth'
+    });
+  }
+
+  scrollRight() {
+    this.slider.nativeElement.scrollBy({
+      left: 300,
+      behavior: 'smooth'
+    });
+  }
+  
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { faStar, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faSignInAlt, faStar, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { Account } from 'src/app/modeles/accounts';
 import { Candidat } from 'src/app/modeles/candidat';
@@ -13,8 +13,7 @@ import { CandidatService } from 'src/app/service/candidate.service';
 })
 export class SidebarVisiteurComponent {
 
-   faStar = faStar;
-  faUserPlus = faUserPlus; 
+   faStar = faStar;  faUserPlus = faUserPlus; faSignInAlt = faSignInAlt;
 
   @Input() candidatures: any[] = [];
    profil = {
