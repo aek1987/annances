@@ -1,18 +1,20 @@
-
-
-
+projet global
+*************************
+format de salaire 
 Création de compte candidat avec profil (CV, compétences, expériences).
 avec un cv vide 
 Suivi des candidatures (postulé / en cours / accepté / refusé).  pour candit 
 et vour les conditat recu pour entreprise
 
-Sauvegarde des offres (favoris).
+.
 Alerte email / notification quand une nouvelle offre correspond
 creatio de compte entrprise ou condidate
 espace admin
 creation de compte et recuperaton de mot pass par gmail
+
 espace candidat 
 ****************************
+🔔 Notifications
 Upload photo de profil (au lieu de choisir homme/femme).
 remplisage de profil
 Validation du profil avant de postuler
@@ -21,10 +23,9 @@ les info de mon candidature
 Upload du CV directement (PDF).
 alert d'emploi aucu  idee
 support et aide aucun iddee
-
+Sauvegarde des offres (favoris)
 
 epcase de entreprise 
-
 ********************************************
 tabelau de bord acces rapide
 ajouter u offree  refaire le design ajoutre des info
@@ -34,13 +35,8 @@ ajouter un offre limiter localet titre de poste
 condidature recue aucun info
 la gard espace entre prise
  parameter aucun
-
 Fonctionnalités supplémentaires
 abonement 
-
-
-
-
 
 Étoiles pour noter ses compétences ⭐⭐⭐⭐☆.
 

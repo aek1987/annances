@@ -5,15 +5,13 @@ import { CartComponent } from './cart/cart.component';
 import { OrderTrackingComponent } from './order-tracking/order-tracking.component';
 import { ProductComponent } from './product/product.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { DeliveryFormComponent } from './delivery-form/delivery-form.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { StcoktManagerComponent } from './stock-manager/stock-manager.component';
+
 import { OrderManagementComponent } from './order-management/order-management.component';
 import { AdminGuard } from './admin.guard';
 import { GreetingComponent } from './greeting/greeting.component';
 import { AnnanceEmploiComponent } from './annance-emploi/annance-emploi.component';
-
 import { ProfilComponent } from './espace_condidat/profil/profil.component';
 import { LayoutComponent } from './espace_condidat/layout/layout.component';
 import { FavoritesComponent } from './espace_condidat/favorites/favorites.component';
@@ -32,29 +30,43 @@ import { AjouterOffreComponent } from './espace_entreprise/ajouter-offre/ajouter
 import { MesOffresComponent } from './espace_entreprise/mes-offres/mes-offres.component';
 import { EntrepriseDashboardComponent } from './espace_entreprise/dashboard/entreprise-dashboard.component';
 import { CandidaturesRecuesComponent } from './espace_entreprise/candidatures-recues/candidatures-recues.component';
-
 import { EtrepriseSettingComponent } from './espace_entreprise/etreprise-setting/etreprise-setting.component';
 import { OffresEmploiComponent } from './espace_condidat/offre-emploi/offres-emploi.component';
 import { AbonneeComponent } from './espace_entreprise/abonnee/abonnee.component';
 import { OffreDetailComponent } from './espace_condidat/offre-detail/offre-detail.component';
+import { OffreVisiteurComponent } from './espace-visiteur/offre-visiteur/offre-visiteur.component';
+import { LayoutVisteurComponent } from './espace-visiteur/layout-visteur/layout-visteur.component';
+import { AideSupportComponent } from './components/aide-support/aide-support.component';
+import { SuccessStoriesComponent } from './espace-visiteur/success-stories/success-stories.component';
+import { RegistersComponent } from './components/registers/registers.component';
+
 
 const routes: Routes = [
   // Partie admin
   { path: 'ordersAllClient', component: OrderManagementComponent, canActivate: [AdminGuard] },
-  { path: 'stock', component: StcoktManagerComponent },
-  { path: 'products', component: ProductComponent },
+   { path: 'products', component: ProductComponent },
   { path: 'product/:id', component: ProductDetailComponent },
   { path: 'orders', component: OrderTrackingComponent },
+  
 
   // Partie publique
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegistersComponent },
   { path: 'delivery', component: DeliveryFormComponent },
  
   { path: 'cart', component: CartComponent },
   { path: 'greet', component: GreetingComponent },
   { path: 'annance-emploi', component: AnnanceEmploiComponent },
-  { path: 'offres-emploi', component: OffresEmploiComponent },
+
+  {
+  path: 'visiteur',
+  component: LayoutVisteurComponent,
+  children: [
+    { path: '', component: OffreVisiteurComponent }, // par défaut
+    { path: 'aide-support', component: AideSupportComponent },
+    { path: 'success-stories', component: SuccessStoriesComponent }
+  ]
+},
   // Partie espace candidat
   {
     path: 'candidat',

@@ -1,0 +1,55 @@
+.stories-container {
+  max-width: 100%;       /* 🔒 ne dépasse jamais son conteneur */
+  width: 100%;           /* prend toute la largeur disponible */
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.stories-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.intro {
+  font-size: 1rem;
+  margin-bottom: 25px;
+  color: #555;
+}
+
+/* ✅ Grille responsive */
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.story-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+  overflow: hidden; /* 🔒 rien ne dépasse */
+}
+
+.story-card:hover {
+  transform: translateY(-4px);
+}
+
+.story-photo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.temoignage {
+  font-style: italic;
+  color: #444;
+  font-size: 0.95rem;
+}

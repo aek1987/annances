@@ -7,16 +7,13 @@ import { GreetingComponent } from './greeting/greeting.component';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { OrderTrackingComponent } from './order-tracking/order-tracking.component';
-
-import { NavbarComponent } from './navbar/navbar.component';  // Import FormsModule
+import { NavbarComponent } from './components/navbar/navbar.component';  // Import FormsModule
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { DeliveryFormComponent } from './delivery-form/delivery-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { StcoktManagerComponent } from './stock-manager/stock-manager.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CommonModule } from '@angular/common';
@@ -46,11 +43,22 @@ import { SidebarEntrepriseComponent } from './espace_entreprise/sidebar-entrepri
 import { MesOffresComponent } from './espace_entreprise/mes-offres/mes-offres.component';
 import { AjouterOffreComponent } from './espace_entreprise/ajouter-offre/ajouter-offre.component';
 import { CandidaturesRecuesComponent } from './espace_entreprise/candidatures-recues/candidatures-recues.component';
-
 import { EtrepriseSettingComponent } from './espace_entreprise/etreprise-setting/etreprise-setting.component';
 import { OffresEmploiComponent } from './espace_condidat/offre-emploi/offres-emploi.component';
 import { AbonneeComponent } from './espace_entreprise/abonnee/abonnee.component';
 import { OffreDetailComponent } from './espace_condidat/offre-detail/offre-detail.component';
+import { OffreVisiteurComponent } from './espace-visiteur/offre-visiteur/offre-visiteur.component';
+import { LayoutVisteurComponent } from './espace-visiteur/layout-visteur/layout-visteur.component';
+import { SidebarVisiteurComponent } from './espace-visiteur/sidebar-visiteur/sidebar-visiteur.component';
+import { AideSupportComponent } from './components/aide-support/aide-support.component';
+import { SuccessStoriesComponent } from './espace-visiteur/success-stories/success-stories.component';
+import { RegistersComponent } from './components/registers/registers.component';
+
+
+
+
+
+
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -61,15 +69,13 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     GreetingComponent,
+    RegistersComponent,
     LoginComponent,
     ProductComponent,
     CartComponent,
-    OrderTrackingComponent,
-   
+    OrderTrackingComponent,   
     NavbarComponent,
-    RegisterComponent,
     DeliveryFormComponent,
-    StcoktManagerComponent,
     CarouselComponent,  
     ProductDetailComponent,
     ThousandSeparatorPipe,
@@ -81,7 +87,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     FavoritesComponent,
     CandidaturesComponent,
     AlertsComponent,
-     DashboardComponent,
     UsersCandidatsComponent,
     UsersEntreprisesComponent,
     OffresAdminComponent,
@@ -99,7 +104,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     EtrepriseSettingComponent,
     OffresEmploiComponent,
     AbonneeComponent,
-    OffreDetailComponent
+    OffreDetailComponent,
+    OffreVisiteurComponent,
+    LayoutVisteurComponent,
+    SidebarVisiteurComponent,
+    AideSupportComponent,
+    SuccessStoriesComponent,
+    RegistersComponent,
+   
    
   ],
   imports: [CommonModule,

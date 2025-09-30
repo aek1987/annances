@@ -1,0 +1,71 @@
+
+<div class="layout">
+ <!-- 📌 Barre latérale : Profil Candidat -->
+<app-sidebar-visiteur [candidatures]="candidatures"></app-sidebar-visiteur>
+
+
+  <!-- 📄 Contenu principal -->
+  <main class="main-content">
+    <!-- 🔎 Recherche avancée -->
+    <div class="search-bar">
+      <input type="text" placeholder="Mots-clés" [(ngModel)]="searchTerm">
+      <input type="text" placeholder="Localisation" [(ngModel)]="searchLocation">
+      <input type="number" placeholder="Salaire minimum" [(ngModel)]="searchSalary">
+      <input type="text" placeholder="Expérience" [(ngModel)]="searchExperience">
+      <button (click)="applyFilters()">Rechercher</button>
+    </div>
+
+    <!-- 🎯 Filtres -->
+    <div class="filters">
+      <select [(ngModel)]="selectedContract" (change)="applyFilters()">
+        <option value="">Type de contrat</option>
+        <option value="CDI">CDI</option>
+        <option value="CDD">CDD</option>
+        <option value="Stage">Stage</option>
+        <option value="Remote">Télétravail</option>
+      </select>
+
+      <select [(ngModel)]="selectedSector" (change)="applyFilters()">
+        <option value="">Secteur</option>
+        <option *ngFor="let secteur of sectors" [value]="secteur">{{ secteur }}</option>
+      </select>
+    </div>
+
+    <!-- 📄 Liste des offres -->
+    <div class="offres-list">
+      <div class="offre-card" *ngFor="let offre of filteredOffres">
+        <div class="offre-header">
+      <h3>{{ offre.titre }}</h3>
+      <a class="details-link" [routerLink]="['/candidat/offre', offre.id]">Détails</a>
+        </div>
+       
+        <p><b>Lieu :</b> {{ offre.localisation }}</p>
+        <p class="salaire-line">
+        <span><b>Salaire :</b></span>
+        <span>{{ offre.salaire | currency:'EUR' }}</span>
+        </p>
+
+        <p><b>Contrat :</b> {{ offre.contrat }}</p>
+        <p><b>Secteur :</b> {{ getentreprise(offre.entrepriseId)?.secteur }}</p>
+        <p>{{ offre.description }}</p>     
+        
+        <div class="actions">       
+          
+          <button (click)="postuler(offre)">
+            {{ offre.status ? offre.status : 'Postuler' }}
+          </button>
+          <button (click)="toggleFavori(offre)">
+            {{ offre.favori ? '★ Retirer Favori' : '☆ Ajouter Favori' }}
+          </button>
+        </div>        
+      </div>
+    </div>
+
+    <!-- 📩 Alerte email -->
+    <div class="alertes">
+      <h4>S’abonner aux alertes</h4>
+      <input type="email" placeholder="Votre email" [(ngModel)]="alertEmail">
+      <button (click)="subscribeAlert()">S’abonner</button>
+    </div>
+  </main>
+</div>

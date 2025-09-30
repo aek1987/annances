@@ -1,0 +1,16 @@
+.support-container {
+  max-width: 800px;
+  margin: auto;
+  border-radius: 12px;
+  background: #fff;
+}
+
+h2, h4 {
+  color: #2c3e50;
+}
+
+.list-group-item {
+  border-left: 4px solid #007bff;
+  margin-bottom: 8px;
+  border-radius: 6px;
+}

@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../service/auth.service';
-import { User } from '../modeles/user';
-import { Account } from '../modeles/accounts';
 import { Router } from '@angular/router';
-import { AlertService } from '../service/alerte-service.service';
-import { CandidatService } from '../service/candidate.service';
-import { EntrepriseService } from '../service/entreprise.service';
+import { User } from 'src/app/modeles/user';
+import { AlertService } from 'src/app/service/alerte-service.service';
+import { AuthService } from 'src/app/service/auth.service';
+import { CandidatService } from 'src/app/service/candidate.service';
+import { EntrepriseService } from 'src/app/service/entreprise.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-registers',
+  templateUrl: './registers.component.html',
+  styleUrls: ['./registers.component.css']
 })
-export class RegisterComponent {
+export class RegistersComponent  {
  user: User = {
   username: '',
   email: '',

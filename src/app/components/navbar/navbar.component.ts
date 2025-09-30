@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../service/auth.service';
 
 import { faShoppingCart, faReceipt ,faUser, faGlobe, faSearch, faMapMarkerAlt, faMap, faPhone, faHome, faStar } from '@fortawesome/free-solid-svg-icons'; // Importer les icônes
 import { TranslateService } from '@ngx-translate/core';
-import { CartService } from '../service/cart.service';
-import { Account } from '../modeles/accounts';
+import { CartService } from '../../service/cart.service';
+import { Account } from '../../modeles/accounts';
+import { CandidatService } from '../../service/candidate.service';
 
 @Component({
   selector: 'app-navbar',
@@ -29,7 +30,7 @@ export class NavbarComponent implements OnInit{
   faMap = faMap;
   faPhone = faPhone; 
    currentUser: Account | null = null;
-  constructor(private cartService: CartService,
+  constructor(private candidatService: CandidatService,
      private authService: AuthService, private router: Router,private translate: TranslateService) {
 
   }
@@ -87,5 +88,18 @@ export class NavbarComponent implements OnInit{
 
   toggleExpand() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  goToJobs() {
+
+    const candidat = this.candidatService.getCandidatConnecte();
+
+  if (candidat) {
+    // ✅ Un candidat est connecté → espace candidat
+    this.router.navigate(['/candidat']);
+  } else {
+    // ❌ Aucun candidat connecté → espace visiteur
+    this.router.navigate(['/visiteur']);
+  }
   }
 }

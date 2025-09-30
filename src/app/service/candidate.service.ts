@@ -27,7 +27,7 @@ getCandidatConnecte(): Candidat | null {
 
   // Cherche le candidat correspondant dans la liste
   const candidat = this.candidats.find(c => c.refId === account.refId);
-  console.log("candidate n'est pas trouve")
+  
   return candidat || null;
 }
 

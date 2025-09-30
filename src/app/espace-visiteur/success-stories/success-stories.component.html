@@ -1,0 +1,14 @@
+<div class="stories-container">
+  <h2>🌟 Success Stories</h2>
+  <p class="intro">Découvrez les témoignages de nos candidats et partenaires satisfaits.</p>
+
+  <div class="stories-grid">
+    <div class="story-card" *ngFor="let story of stories">
+      <img [src]="story.photo" alt="{{story.nom}}" class="story-photo" />
+      <h3>{{ story.nom }}</h3>
+      <h4>{{ story.role }} - {{ story.entreprise }}</h4>
+      <p class="temoignage">“{{ story.temoignage }}”</p>
+    </div>
+  </div>
+</div>
+
