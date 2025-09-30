@@ -1,6 +1,9 @@
 projet global
 *************************
+reponsive design
 format de salaire 
+loging par email
+
 sucees storie decalage
 Création de compte candidat avec profil (CV, compétences, expériences).
 avec un cv vide 
@@ -14,9 +17,10 @@ creation de compte et recuperaton de mot pass par gmail
 
 espace candidat 
 ****************************
-🔔 Notifications
+🔔 Notifications menu
+cree un alert emploi
 Upload photo de profil (au lieu de choisir homme/femme).
-remplisage de profil
+verification de remplisage de profil
 Validation du profil avant de postuler
 les info  de offre actualise
 les info de mon candidature
@@ -29,9 +33,11 @@ epcase de entreprise
 ********************************************
 
 ajouter u offree  refaire le design ajoutre des info
-
 ajouter un offre limiter localet titre de poste
-
+Offres publiées : 5
+Offres publiées : 5
+Candidatures reçues : 27
+Candidats retenus : 3
 condidature recue aucun info
 la gard espace entre prise
  parameter aucun
