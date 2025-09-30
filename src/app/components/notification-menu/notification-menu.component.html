@@ -1,0 +1,30 @@
+<div class="dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" 
+     data-bs-toggle="dropdown" aria-expanded="false">
+    <fa-icon [icon]="faBell"></fa-icon>
+    <span *ngIf="nombreNonLues > 0" class="badge bg-danger">{{ nombreNonLues }}</span>
+  </a>
+  
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+    <li><h6 class="dropdown-header">Notifications</h6></li>
+    
+    <li *ngFor="let notification of notifications" 
+        [class]="'dropdown-item notification-item ' + (notification.lue ? '' : 'notification-non-lue')">
+      <div class="d-flex justify-content-between align-items-start">
+        <div class="me-3">
+          <h6 class="mb-1">{{ notification.title }}</h6>
+          <p class="mb-1 small">{{ notification.message }}</p> <!-- message existe -->
+          <small class="text-muted">{{ notification.date | date:'dd/MM/yyyy HH:mm' }}</small> <!-- date existe -->
+        </div>
+        <button class="btn-close btn-sm" (click)="supprimerNotification(notification.id)"></button> <!-- id existe -->
+      </div>
+    </li>
+    
+    <li *ngIf="notifications.length === 0">
+      <a class="dropdown-item text-muted">Aucune notification</a>
+    </li>
+    
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item text-center" href="#">Voir toutes les notifications</a></li>
+  </ul>
+</div>

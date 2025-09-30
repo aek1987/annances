@@ -1,0 +1,78 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Devenir Partenaire</h2>
+      <p class="lead">Rejoignez notre réseau de partenaires privilégiés</p>
+      
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <div class="avantage-card">
+            <h5><i class="fas fa-check-circle text-success"></i> Avantages du partenariat:</h5>
+            <ul>
+              <li>Visibilité accrue sur notre plateforme</li>
+              <li>Accès à notre base de talents</li>
+              <li>Publication d'offres illimitée</li>
+              <li>Support dédié</li>
+              <li>Événements exclusifs</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="avantage-card">
+            <h5><i class="fas fa-handshake text-primary"></i> Types de partenariat:</h5>
+            <ul>
+              <li>Partenariat Recrutement</li>
+              <li>Partenariat Académique</li>
+              <li>Partenariat Technologique</li>
+              <li>Partenariat Institutionnel</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card formulaire-card">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Demande de partenariat</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="partenariatForm" (ngSubmit)="soumettreFormulaire()">
+            <div class="mb-3">
+              <label class="form-label">Nom de l'entreprise</label>
+              <input type="text" class="form-control" formControlName="nomEntreprise" 
+                     [class.is-invalid]="nomEntrepriseInvalid">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" formControlName="email"
+                     [class.is-invalid]="emailInvalid">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Téléphone</label>
+              <input type="tel" class="form-control" formControlName="telephone">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Type de partenariat</label>
+              <select class="form-control" formControlName="typePartenaire">
+                <option value="recrutement">Recrutement</option>
+                <option value="academique">Académique</option>
+                <option value="technologique">Technologique</option>
+                <option value="institutionnel">Institutionnel</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" rows="3" formControlName="message"
+                        placeholder="Décrivez votre demande de partenariat..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-success w-100" 
+                    [disabled]="!partenariatForm.valid">
+              Envoyer la demande
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

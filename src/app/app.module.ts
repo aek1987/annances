@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GreetingComponent } from './greeting/greeting.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { OrderTrackingComponent } from './order-tracking/order-tracking.component';
 import { NavbarComponent } from './components/navbar/navbar.component';  // Import FormsModule
@@ -53,6 +53,11 @@ import { SidebarVisiteurComponent } from './espace-visiteur/sidebar-visiteur/sid
 import { AideSupportComponent } from './components/aide-support/aide-support.component';
 import { SuccessStoriesComponent } from './espace-visiteur/success-stories/success-stories.component';
 import { RegistersComponent } from './components/registers/registers.component';
+import { NotificationMenuComponent } from './components/notification-menu/notification-menu.component';
+import { EntreprisesRecrutentComponent } from './partenaire/entreprises-recrutent/entreprises-recrutent.component';
+import { DevenirPartenaireComponent } from './partenaire/devenir-partenaire/devenir-partenaire.component';
+import { NosPartenairesComponent } from './partenaire/nos-partenaires/nos-partenaires.component';
+import { StagesComponent } from './partenaire/stages/stages.component';
 
 
 
@@ -111,6 +116,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     AideSupportComponent,
     SuccessStoriesComponent,
     RegistersComponent,
+    NotificationMenuComponent,
+    EntreprisesRecrutentComponent,
+    DevenirPartenaireComponent,
+    NosPartenairesComponent,
+    StagesComponent,
    
    
   ],
@@ -118,6 +128,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+     ReactiveFormsModule, 
     HttpClientModule,FontAwesomeModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({

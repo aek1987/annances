@@ -39,6 +39,10 @@ import { LayoutVisteurComponent } from './espace-visiteur/layout-visteur/layout-
 import { AideSupportComponent } from './components/aide-support/aide-support.component';
 import { SuccessStoriesComponent } from './espace-visiteur/success-stories/success-stories.component';
 import { RegistersComponent } from './components/registers/registers.component';
+import { EntreprisesRecrutentComponent } from './partenaire/entreprises-recrutent/entreprises-recrutent.component';
+import { DevenirPartenaireComponent } from './partenaire/devenir-partenaire/devenir-partenaire.component';
+import { NosPartenairesComponent } from './partenaire/nos-partenaires/nos-partenaires.component';
+import { StagesComponent } from './partenaire/stages/stages.component';
 
 
 const routes: Routes = [
@@ -48,7 +52,12 @@ const routes: Routes = [
   { path: 'product/:id', component: ProductDetailComponent },
   { path: 'orders', component: OrderTrackingComponent },
   
-
+ // ... autres routes existantes
+  { path: 'entreprises-recrutent', component: EntreprisesRecrutentComponent },
+  { path: 'devenir-partenaire', component: DevenirPartenaireComponent },
+  { path: 'nos-partenaires', component: NosPartenairesComponent },
+  //{ path: 'offres-emploi', component: OffresEmploiComponent },
+  { path: 'stages', component: StagesComponent },
   // Partie publique
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistersComponent },

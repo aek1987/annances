@@ -1,0 +1,65 @@
+<div class="container mt-4">
+  <h2>Stages & Alternance</h2>
+  <p class="lead">Trouvez le stage parfait pour démarrer votre carrière</p>
+  
+  <div class="row">
+    <div class="col-md-6 mb-4" *ngFor="let stage of stages">
+      <div class="stage-card">
+        <div class="card-body">
+          <h5 class="stage-title">{{ stage.titre }}</h5>
+          <h6 class="stage-entreprise">{{ stage.entreprise }}</h6>
+          
+          <div class="stage-infos">
+            <div class="info-item">
+              <i class="fas fa-clock"></i>
+              <span>{{ stage.duree }}</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>{{ stage.localisation }}</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-graduation-cap"></i>
+              <span>{{ stage.domaine }}</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-coins"></i>
+              <span>{{ stage.gratification }}</span>
+            </div>
+          </div>
+          
+          <p class="stage-description">{{ stage.description }}</p>
+          
+          <div class="stage-competences">
+            <span class="competence" *ngFor="let competence of stage.competences">{{ competence }}</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted">Publié le {{ stage.datePublication }}</small>
+            <div class="stage-actions">
+              <button class="btn btn-primary btn-sm">Postuler</button>
+              <button class="btn btn-outline-secondary btn-sm ms-2">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row mt-5">
+    <div class="col-md-8 mx-auto">
+      <div class="cta-card">
+        <div class="card-body text-center">
+          <h4>Vous proposez des stages ?</h4>
+          <p class="mb-3">Publiez vos offres de stage et trouvez les meilleurs talents parmi nos étudiants</p>
+          <a routerLink="/devenir-partenaire" class="btn btn-success btn-lg">
+            Devenir partenaire stage
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

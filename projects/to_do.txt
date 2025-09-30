@@ -1,11 +1,11 @@
 projet global
 *************************
 format de salaire 
+sucees storie decalage
 Création de compte candidat avec profil (CV, compétences, expériences).
 avec un cv vide 
 Suivi des candidatures (postulé / en cours / accepté / refusé).  pour candit 
 et vour les conditat recu pour entreprise
-
 .
 Alerte email / notification quand une nouvelle offre correspond
 creatio de compte entrprise ou condidate

@@ -1,0 +1,100 @@
+.stage-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.stage-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.stage-title {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.stage-entreprise {
+  color: #3498db;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.stage-infos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.info-item i {
+  color: #3498db;
+  margin-right: 8px;
+  width: 16px;
+}
+
+.stage-description {
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.stage-competences {
+  margin-bottom: 15px;
+}
+
+.competence {
+  display: inline-block;
+  background: #ecf0f1;
+  color: #2c3e50;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.stage-actions .btn {
+  border-radius: 20px;
+  padding: 6px 20px;
+}
+
+.cta-card {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  border: none;
+  border-radius: 15px;
+  color: white;
+}
+
+.cta-card h4 {
+  margin-bottom: 10px;
+}
+
+.cta-card p {
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+.btn-success {
+  background-color: #27ae60;
+  border-color: #27ae60;
+  border-radius: 25px;
+  padding: 10px 30px;
+  font-weight: 600;
+}
+
+.btn-success:hover {
+  background-color: #219653;
+  border-color: #219653;
+  transform: translateY(-2px);
+}

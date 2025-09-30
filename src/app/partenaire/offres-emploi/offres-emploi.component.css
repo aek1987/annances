@@ -1,0 +1,99 @@
+.offre-card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.offre-card:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.offre-title {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.offre-entreprise {
+  color: #7f8c8d;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.offre-badges {
+  margin-bottom: 15px;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  margin-right: 8px;
+  margin-bottom: 5px;
+}
+
+.type-badge {
+  background-color: #3498db;
+}
+
+.localisation-badge {
+  background-color: #9b59b6;
+}
+
+.salaire-badge {
+  background-color: #27ae60;
+}
+
+.experience-badge {
+  background-color: #e67e22;
+}
+
+.offre-description {
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.offre-competences {
+  margin-bottom: 15px;
+}
+
+.competence-tag {
+  display: inline-block;
+  background: #ecf0f1;
+  color: #2c3e50;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-right: 8px;
+  margin-bottom: 5px;
+}
+
+.offre-actions {
+  min-width: 100px;
+  text-align: center;
+}
+
+.offre-footer {
+  border-top: 1px solid #ecf0f1;
+  padding-top: 10px;
+  margin-top: 15px;
+}
+
+.filtres-card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 20px;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+  border-color: #2980b9;
+}

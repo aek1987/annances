@@ -92,3 +92,10 @@
   }
   
 
+.notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.7em;
+  transform: translate(25%, -25%);
+}

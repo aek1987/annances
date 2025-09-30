@@ -1,0 +1,19 @@
+<div class="container mt-4">
+  <h2>Nos Partenaires</h2>
+  <p class="lead">Découvrez les entreprises et institutions qui nous font confiance</p>
+  
+  <div class="row mt-4">
+    <div class="col-md-3 mb-4 text-center" *ngFor="let partenaire of partenaires">
+      <div class="partner-card">
+        <div class="partner-logo">
+          <div class="logo-placeholder">
+            {{ partenaire.nom.substring(0, 2) }}
+          </div>
+        </div>
+        <h6 class="mt-2 partner-name">{{ partenaire.nom }}</h6>
+        <span class="partner-type">{{ partenaire.type }}</span>
+        <p class="partner-description">{{ partenaire.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>

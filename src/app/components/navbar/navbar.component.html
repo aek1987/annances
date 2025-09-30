@@ -34,20 +34,32 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/favories">
-                    <fa-icon [icon]="faStar"></fa-icon> {{ 'Favories' | translate }}
-                    <span *ngIf="CountItem > 0" class="badge text-white">
-                        {{ CountItem }}
-                    </span>
-                </a>
-            </li>
 
             <li class="nav-item">
                 <a class="nav-link" (click)="goToJobs()">
                     <fa-icon [icon]="faReceipt"></fa-icon> {{ 'JOB' | translate }}
                 </a>
             </li>
+
+             
+         <!-- Dans votre navbar, ajoutez cet élément -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="partenariatDropdown" role="button" 
+       data-bs-toggle="dropdown" aria-expanded="false">
+        <fa-icon [icon]="faHandshake"></fa-icon> Partenariat
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="partenariatDropdown">
+        <li><a class="dropdown-item" routerLink="/entreprises-recrutent">Entreprises qui recrutent</a></li>
+        <li><a class="dropdown-item" routerLink="/devenir-partenaire">Devenir partenaire</a></li>
+        <li><a class="dropdown-item" routerLink="/nos-partenaires">Nos partenaires</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" routerLink="/offres-emploi">Offres d'emploi</a></li>
+        <li><a class="dropdown-item" routerLink="/stages">Stages & Formation</a></li>
+        
+    </ul>
+</li>
+
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
@@ -58,9 +70,32 @@
                     <li *ngIf="isAuthenticated"><a class="dropdown-item" (click)="logout()">Se déconnecter</a></li>
                     <li *ngIf="!isAuthenticated"><a class="dropdown-item" routerLink="/register">S'inscrire</a></li>
 
-                    <li *ngIf="!isAuthenticated"><a class="dropdown-item" (click)="goToManager()">Manager</a></li>
+                   
                 </ul>
             </li>
+             <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarNotificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <fa-icon [icon]="faBell"></fa-icon>
+    <span *ngIf="notificationCount > 0" class="badge bg-danger notification-badge">
+      {{ notificationCount }}
+    </span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarNotificationDropdown">
+    <li *ngFor="let notification of notifications">
+      <a class="dropdown-item" href="#">
+        <div>
+          <strong>{{ notification.title }}</strong>
+          <p class="mb-0">{{ notification.message }}</p>
+          <small class="text-muted">{{ notification.date | date:'short' }}</small>
+        </div>
+      </a>
+    </li>
+    <li *ngIf="notifications.length === 0">
+      <a class="dropdown-item">Aucune notification</a>
+    </li>
+  </ul>
+</li>
+            
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">

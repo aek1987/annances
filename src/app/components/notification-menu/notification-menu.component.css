@@ -1,0 +1,21 @@
+/* notification-menu.component.css */
+.notification-item {
+  min-width: 300px;
+  border-left: 4px solid transparent;
+}
+
+.notification-item.notification-non-lue {
+  border-left-color: #007bff;
+  background-color: #f8f9fa;
+}
+
+.notification-item:hover {
+  background-color: #e9ecef;
+}
+
+.badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 0.7em;
+}

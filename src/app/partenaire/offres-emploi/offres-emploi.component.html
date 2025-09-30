@@ -1,0 +1,78 @@
+<div class="container mt-4">
+  <h2>Offres d'Emploi</h2>
+  
+  <div class="row mt-3">
+    <div class="col-md-8">
+      <div class="offre-card mb-4" *ngFor="let offre of offresEmploi">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start">
+            <div class="flex-grow-1">
+              <h5 class="offre-title">{{ offre.titre }}</h5>
+              <h6 class="offre-entreprise">{{ offre.entreprise }}</h6>
+              <div class="offre-badges">
+                <span class="badge type-badge">{{ offre.type }}</span>
+                <span class="badge localisation-badge">{{ offre.localisation }}</span>
+                <span class="badge salaire-badge">{{ offre.salaire }}</span>
+                <span class="badge experience-badge">{{ offre.experience }}</span>
+              </div>
+              <p class="offre-description">{{ offre.description }}</p>
+              <div class="offre-competences">
+                <span class="competence-tag" *ngFor="let competence of offre.competences">{{ competence }}</span>
+              </div>
+            </div>
+            <div class="offre-actions">
+              <button class="btn btn-primary btn-sm">Postuler</button>
+              <button class="btn btn-outline-secondary btn-sm mt-1">Sauvegarder</button>
+            </div>
+          </div>
+          <div class="offre-footer">
+            <small class="text-muted">Publiée le {{ offre.datePublication }}</small>
+            <small class="text-muted ms-3">{{ offre.candidatures }} candidatures</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card filtres-card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="fas fa-filter"></i> Filtres</h5>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label">Secteur</label>
+            <select class="form-control" [(ngModel)]="filtres.secteur">
+              <option value="">Tous les secteurs</option>
+              <option value="informatique">Informatique</option>
+              <option value="finance">Finance</option>
+              <option value="sante">Santé</option>
+              <option value="education">Éducation</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Localisation</label>
+            <select class="form-control" [(ngModel)]="filtres.localisation">
+              <option value="">Toutes les villes</option>
+              <option value="alger">Alger</option>
+              <option value="oran">Oran</option>
+              <option value="constantine">Constantine</option>
+              <option value="annaba">Annaba</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Type de contrat</label>
+            <select class="form-control" [(ngModel)]="filtres.contrat">
+              <option value="">Tous les contrats</option>
+              <option value="cdi">CDI</option>
+              <option value="cdd">CDD</option>
+              <option value="freelance">Freelance</option>
+              <option value="stage">Stage</option>
+            </select>
+          </div>
+          <button class="btn btn-primary w-100" (click)="appliquerFiltres()">Appliquer les filtres</button>
+          <button class="btn btn-outline-secondary w-100 mt-2" (click)="reinitialiserFiltres()">Réinitialiser</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

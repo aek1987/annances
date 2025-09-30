@@ -1,0 +1,19 @@
+<div class="container mt-4">
+  <h2>Entreprises qui Recrutent Actuellement</h2>
+  
+  <div class="row mt-4">
+    <div class="col-md-6 mb-3" *ngFor="let entreprise of entreprises">
+      <div class="card entreprise-card">
+        <div class="card-body">
+          <h5 class="card-title">{{ entreprise.nom }}</h5>
+          <p class="card-text">
+            <strong>Secteur:</strong> {{ entreprise.secteur }}<br>
+            <strong>Postes disponibles:</strong> {{ entreprise.postes }}<br>
+            <strong>Localisation:</strong> {{ entreprise.localisation }}
+          </p>
+          <a class="btn btn-primary btn-sm">Voir les offres</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

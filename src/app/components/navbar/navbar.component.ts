@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 
-import { faShoppingCart, faReceipt ,faUser, faGlobe, faSearch, faMapMarkerAlt, faMap, faPhone, faHome, faStar } from '@fortawesome/free-solid-svg-icons'; // Importer les icônes
+import { faShoppingCart, faReceipt ,faUser, faGlobe, faSearch, faMapMarkerAlt, faMap, faPhone, faHome, faStar, faBell } from '@fortawesome/free-solid-svg-icons'; // Importer les icônes
 import { TranslateService } from '@ngx-translate/core';
-import { CartService } from '../../service/cart.service';
 import { Account } from '../../modeles/accounts';
 import { CandidatService } from '../../service/candidate.service';
+import { faHandshake, faBuilding, faUsers, faBriefcase, faGraduationCap, faFileContract } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -22,14 +22,25 @@ export class NavbarComponent implements OnInit{
   faHome = faHome;
   faStar = faStar;
   CountItem :number=0;
-
   faSearch = faSearch;  // Icône de recherche
   isSearchVisible: boolean = false;  // Variable pour afficher ou masquer l'input
   searchQuery: string = '';  // Contient la recherche en cours
   faMapMarkerAlt = faMapMarkerAlt;
   faMap = faMap;
   faPhone = faPhone; 
-   currentUser: Account | null = null;
+  currentUser: Account | null = null;
+  faBell = faBell;
+  notificationCount = 0;
+  notifications: any[] = []; //
+
+faHandshake = faHandshake;
+  faBuilding = faBuilding;
+  faUsers = faUsers;
+  faBriefcase = faBriefcase;
+  faGraduationCap = faGraduationCap;
+  faFileContract = faFileContract;
+
+
   constructor(private candidatService: CandidatService,
      private authService: AuthService, private router: Router,private translate: TranslateService) {
 
