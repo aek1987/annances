@@ -58,6 +58,7 @@ import { EntreprisesRecrutentComponent } from './partenaire/entreprises-recruten
 import { DevenirPartenaireComponent } from './partenaire/devenir-partenaire/devenir-partenaire.component';
 import { NosPartenairesComponent } from './partenaire/nos-partenaires/nos-partenaires.component';
 import { StagesComponent } from './partenaire/stages/stages.component';
+import { EntrepriseDashboardComponent } from './espace_entreprise/dashboard/entreprise-dashboard.component';
 
 
 
@@ -121,6 +122,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     DevenirPartenaireComponent,
     NosPartenairesComponent,
     StagesComponent,
+    EntrepriseDashboardComponent
+   
+  
    
    
   ],
