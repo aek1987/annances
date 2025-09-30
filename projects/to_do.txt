@@ -27,7 +27,7 @@ Sauvegarde des offres (favoris)
 
 epcase de entreprise 
 ********************************************
-tabelau de bord acces rapide
+
 ajouter u offree  refaire le design ajoutre des info
 
 ajouter un offre limiter localet titre de poste

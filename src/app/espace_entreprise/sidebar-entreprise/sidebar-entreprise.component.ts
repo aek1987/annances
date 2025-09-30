@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faCreditCard, faLifeRing } from '@fortawesome/free-solid-svg-icons';
 import { Account } from 'src/app/modeles/accounts';
 import { AuthService } from 'src/app/service/auth.service';
 
@@ -9,6 +10,8 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class SidebarEntrepriseComponent {
 currentUser: Account | null = null;
+ faCreditCard = faCreditCard;
+  faLifeRing = faLifeRing;
    constructor(
        private authService: AuthService) {
   

@@ -16,6 +16,39 @@
   align-items: stretch; /* les éléments prennent toute la largeur */
 }
 
+
+
+
+.profile-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ✅ centre horizontalement tous les <li> */
+}
+
+.profile-links ul li {
+  margin: 12px 0; /* espace vertical entre les lignes */
+  width: 100%;    /* permet de centrer le contenu à l'intérieur */
+}
+
+.profile-links ul li a {
+  text-decoration: none;
+  color: #080808d0;
+  font-size: 15px;
+  display: flex;
+  justify-content: center; /* ✅ centre le texte + icône horizontalement */
+  align-items: center;
+  gap: 6px; /* espace entre l'icône et le texte */
+  transition: color 0.2s ease-in-out;
+  align-items: left;
+}
+
+.profile-links ul li a:hover {
+  color: #007bff; /* effet hover bleu */
+}
+
 /* Ajustement pour les petits écrans */
 @media (max-width: 768px) {
   .sidebar {
