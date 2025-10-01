@@ -135,8 +135,9 @@ canPostuler(refId: number): boolean {
     this.getProgression(candidat); // on va calculer 
     const index = this.candidats.findIndex(c => c.refId === candidat.refId);
     if (index !== -1) {
-      this.candidats[index] = candidat;
-      this.getStatus(candidat);
+      
+      candidat.status = this.getStatus(candidat);
+     this.candidats[index] = candidat;
      console.log("👤 Candidat chargé :",candidat +" status "+candidat.status);
    
     }
