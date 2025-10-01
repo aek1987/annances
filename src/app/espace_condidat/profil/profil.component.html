@@ -23,12 +23,27 @@
   <p>{{ progression }} %</p>
 </div>
 
+<p *ngIf="candidat?.status === 'incomplet'" class="status-inactive">
+  ⚠️ Votre profil est incomplet. Veuillez ajouter plus d’informations.
+</p>
+
+<p *ngIf="candidat?.status === 'complet'" class="status-pending">
+  ✅ Votre profil est presque prêt. Complétez toutes les informations.
+</p>
+
+<p *ngIf="candidat?.status === 'en_attente_validation'" class="status-pending">
+  ⏳ Votre profil est complet. Il sera actif après validation de l'administrateur.
+</p>
+
 <p *ngIf="candidat?.status === 'active'" class="status-active">
-  ✅ Votre  profil peut etre active apre la la sauvegarde et la validation de l'adminstrateur
+  🎉 Votre profil est actif et visible par les entreprises.
 </p>
+
 <p *ngIf="candidat?.status === 'desactive'" class="status-inactive">
-  ⚠️ Complétez votre profil pour activer votre compte
+  🚫 Votre compte est désactivé. Contactez l’administrateur.
 </p>
+
+
 
  <!-- Afficher le CV si dispo -->
   <p *ngIf="candidatSafe.cv">

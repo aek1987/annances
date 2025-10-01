@@ -2,18 +2,21 @@ projet global
 *************************
 fixer ensemble de secteur
 reponsive design
-format de salaire 
 loging par email
-
+losque je fait actualiser le nomsur la navr ne racfrachi pas
 sucees storie decalage
-Création de compte candidat avec profil (CV, compétences, expériences).
-avec un cv vide 
+Création de compte candidat avec profil vide 
+remplisage de profile
 Suivi des candidatures (postulé / en cours / accepté / refusé).  pour candit 
 et vour les conditat recu pour entreprise
-.
+
 Alerte email / notification quand une nouvelle offre correspond
 creatio de compte entrprise ou condidate
+
+
+/****************************/
 espace admin
+
 creation de compte et recuperaton de mot pass par gmail
 
 espace candidat 

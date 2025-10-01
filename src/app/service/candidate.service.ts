@@ -9,13 +9,13 @@ import { AuthService } from './auth.service';
 export class CandidatService {
 
   private candidats: Candidat[] = [
-    { refId: 1, username: 'Sara Bensalem', email: 'ali.candidat@gmail.com', status: 'active'  ,photo: '../../assets/user.png', fonction: 'Développeur Java', phone: '0550-123-456', competences: ['Java', 'Spring Boot'], bio: 'Passionnée de dev web', experiences: [{ poste: 'Dev Java', entreprise: 'Capgemini', duree: '2 ans' }],formations:[],cv:"" },
+    { refId: 1, username: 'Sara Bensalem', email: 'ali.candidat@gmail.com', status: 'desactive'  ,photo: '../../assets/user.png', fonction: 'Développeur Java', phone: '0550-123-456', competences: ['Java', 'Spring Boot'], bio: 'Passionnée de dev web', experiences: [{ poste: 'Dev Java', entreprise: 'Capgemini', duree: '2 ans' }],formations:[],cv:"" },
     { refId: 2, username: 'Mohamed Lamine', email: 'sara.candidat@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Ingénieur Data', phone: '0551-987-654', competences: ['Python', 'SQL'], bio: 'Spécialiste data', experiences: [{ poste: 'Data Analyst', entreprise: 'Sopra Steria', duree: '1 an' }],formations:[] ,cv:""},
     { refId: 3, username: 'Amina Karim', email: 'mohamed.job@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Designer UX/UI', phone: '0553-333-444',  competences:[],experiences:[],formations:[],cv:""},
     { refId: 4, username: 'Youssef Haddad', email: 'amina.cv@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Développeur Angular', phone: '0554-555-666' ,  competences:[],experiences:[],formations:[],cv:""},
     { refId: 5, username: 'Nadia Rahmani', email: 'youssef.talent@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Chef de projet IT', phone: '0555-777-888',  competences:[],experiences:[],formations:[] ,cv:""},
     { refId: 6, username: 'nekaa aek', email: 'nekaa.profil@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Full Stack Developer', phone: '0556-000-111' ,  competences:[],experiences:[],formations:[],cv:""},
-    { refId: 7, username: 'candidat aek', email: 'candidat@gmail.com',  status: 'active',photo: '../../assets/user.png', fonction: 'Développeur', phone: '0557-222-333',  competences:[],experiences:[] ,formations:[],cv:""}
+    { refId: 7, username: 'candidat aek', email: 'candidat@gmail.com',  status: 'active',photo: '../../assets/user1.png', fonction: 'Développeur', phone: '0557-222-333',  competences:[],experiences:[] ,formations:[],cv:""}
   ];
 
   constructor(private authService :AuthService) { }
@@ -101,13 +101,14 @@ getProgression(candidat: Candidat): number {
   steps++;
   if (candidat.cv && candidat.cv.length > 0) completed++;
 
+ 
   // 🔢 Pourcentage
   return Math.round((completed / steps) * 100);
 }
 
 // Active / désactive le compte selon la progression
 checkAndActivateCandidat(refId: number): void {
-  const candidat = this.candidats.find(c => c.refId === refId);
+ /* const candidat = this.candidats.find(c => c.refId === refId);
   if (!candidat) return;
 
   const progression = this.getProgression(candidat);
@@ -118,7 +119,7 @@ checkAndActivateCandidat(refId: number): void {
   } else {
     candidat.status = 'desactive';
     console.warn(`⚠️ Profil incomplet (${progression}%), candidat reste désactivé :`, candidat);
-  }
+  }*/
 }
 
 
@@ -129,13 +130,42 @@ canPostuler(refId: number): boolean {
 }
 
  // 🔹 Mise à jour complète d’un candidat
-  updateCandidat(candidat: Candidat) {
+  updateCandidat(candidat: Candidat) 
+  {
+    this.getProgression(candidat); // on va calculer 
     const index = this.candidats.findIndex(c => c.refId === candidat.refId);
     if (index !== -1) {
       this.candidats[index] = candidat;
-     // this.saveAll(this.candidats);
+      this.getStatus(candidat);
+     console.log("👤 Candidat chargé :",candidat +" status "+candidat.status);
+   
     }
+  
+  }
+getStatus(candidat: Candidat): 'active' | 'desactive' |'en_attente_validation'|'incomplet'|'complet' {
+  const progression = this.getProgression(candidat);
+ //alert(" mete jour de candidat : status"+candidat.status+" prog "+progression)
+// 🚀 Cas spécial : si déjà validé par l’admin, on ne touche pas
+ /* if (candidat.status === 'active') {
+    return 'active';
+  }*/
+
+  switch (true) {
+    case (progression < 50):
+      return 'incomplet';   // Trop peu d'infos
+
+    case (progression >= 50 && progression < 80):
+      return 'complet';     // Profil assez rempli
+
+    case (progression >= 80):
+      return 'en_attente_validation'; // Attente admin
+
+    default:
+      return 'desactive';   // fallback
   }
 
+}
+changerStatut(candidat: Candidat){candidat.status="active";}
+refuseStatut(candidat: Candidat){candidat.status="desactive";}
 
 }

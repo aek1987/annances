@@ -10,6 +10,7 @@ import { CandidatService } from 'src/app/service/candidate.service';
 })
 export class UsersCandidatsComponent implements OnInit {
   candidats: Candidat[] = [];
+  //candidat: Candidat | null = null;
 
   constructor(private candidatsService: CandidatService) {}
 
@@ -17,8 +18,8 @@ export class UsersCandidatsComponent implements OnInit {
     this.candidats = this.candidatsService.getCandidats();
   }
 
-  changerStatut(id: number, statut: string) {
-    //this.candidatsService.updateStatut(id, statut);
+  changerStatut(andidat: Candidat) {
+    this.candidatsService.changerStatut(andidat);
     this.candidats = this.candidatsService.getCandidats(); // refresh
   }
 }

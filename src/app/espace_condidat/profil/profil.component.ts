@@ -16,17 +16,31 @@ export class ProfilComponent {
   editMode = false;
   candidat: Candidat | null = null;
   newCompetence = '';
-  newExperience: Experience = { poste: '', entreprise: '', duree: '' };
-   // 🔹 Nouveau objet formation à remplir via le formulaire
+  newExperience: Experience = { poste: '', entreprise: '', duree: '' };   
   newFormation: Formation = {  diplome: '',   ecole: '',    annee: ''  };
-  constructor(private router: Router,private candidatService :CandidatService ) 
-  {}
+  experience: Experience = { poste: '', entreprise: '', duree: '' }//aucun idee
   
- experience: Experience = { poste: '', entreprise: '', duree: '' }
-    ngOnInit() {
+  constructor(private router: Router,private candidatService :CandidatService ) 
+  {}  
+ 
+   ngOnInit() {
     this.loadCandidat();
   }
+  
+  // 🔹 Charge le candidat connecté depuis le service
+loadCandidat() {
+  this.candidat = this.candidatService.getCandidatConnecte();
 
+
+/*  if (this.candidat) {
+   const progression = this.progression;     
+    this.candidat.status = this.candidatService.getStatus(this.candidat);
+    console.log("Progression calculée :", progression+" status :",  this.candidat.status);
+   
+   
+  }*/
+ 
+}
 get candidatSafe(): Candidat {
   return this.candidat ?? { 
     refId: 0,
@@ -43,28 +57,19 @@ get candidatSafe(): Candidat {
   };
 }
 
-
-  
-  // 🔹 Charge le candidat connecté depuis le service
-loadCandidat() {
-  this.candidat = this.candidatService.getCandidatConnecte();
-  console.log("condidat info"+ this.candidat);
-  if (this.candidat) {
-    if (!this.candidat.competences) this.candidat.competences = [];
-    if (!this.candidat.experiences) this.candidat.experiences = [];
-  }
-}
-
   toggleEdit() {
     this.editMode = !this.editMode;
   }
   retour() {
    this.router.navigate(['/offres-emploi']);
   }
+
   savecandidat() {
   if (this.candidat) {
-    this.candidatService.updateCandidat(this.candidat); // ✅ sauvegarde dans le service/localStorage
+     // ✅ sauvegarde dans le service/localStorage et calcluse de status 
+    this.candidatService.updateCandidat(this.candidat);
     this.editMode = false;
+    
     alert('✅ Profil mis à jour avec succès');
   }
 }
@@ -73,7 +78,7 @@ loadCandidat() {
   addCompetence(newSkill: string) {
   if (this.candidat) {
     this.candidat.competences.push(newSkill);
-    this.candidatService.checkAndActivateCandidat(this.candidat.refId);
+   
   }
   }
 
@@ -84,7 +89,7 @@ loadCandidat() {
   addExperience(newExp: Experience) {
  if (this.candidat) {
     this.candidat.experiences.push(newExp);
-    this.candidatService.checkAndActivateCandidat(this.candidat.refId);
+   
   }
   }
 
@@ -92,13 +97,7 @@ loadCandidat() {
    // this.candidat.experiences.splice(index, 1);
   }
 
- changerPhoto(photoPath: string) {
-  if (this.candidat) {
-    this.candidat.photo = photoPath;
-    this.candidatService.updatePhoto(this.candidat.refId, photoPath);
-  }
-}
-// ➕ Ajouter une formation
+
 addFormation() {
   if (!this.newFormation.diplome || !this.newFormation.ecole || !this.newFormation.annee) {
     alert('Veuillez remplir tous les champs');
@@ -122,6 +121,13 @@ removeFormation(index: number) {
     this.candidat.formations.splice(index, 1);
   }
 }
+ changerPhoto(photoPath: string) {
+  if (this.candidat) {
+    this.candidat.photo = photoPath;
+    this.candidatService.updatePhoto(this.candidat.refId, photoPath);
+  }
+}
+// 
 onCvUpload(event: Event) {
   const input = event.target as HTMLInputElement;
   if (input.files && input.files.length > 0) {

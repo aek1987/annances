@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Candidat } from 'src/app/modeles/candidat';
 import { Candidature } from 'src/app/modeles/candidature';
-import { Offre } from 'src/app/modeles/offres';
 import { CandidatService } from 'src/app/service/candidate.service';
 import { CandidatureService } from 'src/app/service/candidature.service';
 
