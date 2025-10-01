@@ -1,5 +1,4 @@
 
-
 /* 🔎 Barre de recherche */
 .search-bar {
   display: flex;
@@ -52,11 +51,16 @@
 }
 
 .offre-card {
+  display: flex;    /* active le mode flex */
+  flex-direction: column;
+    height: 100%;  /* occupe toute la hauteur */
   background: #fff;
+  flex-direction: column;   /* contenu en colonne */ 
   border-radius: 10px;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   transition: 0.3s;
+  border: 1px solid #eee;
 }
 
 .offre-card:hover {
@@ -75,11 +79,11 @@
 
 /* 🎬 Actions boutons */
 .actions {
-  margin-top: 15px;
+ margin-top: auto;  
   display: flex;
   gap: 10px;
 }
-
+ 
 .actions button {
   flex: 1;
   padding: 10px;
@@ -170,10 +174,6 @@
   margin-top: 10px;
 }
 
-.main-content {
-  flex: 1;
-  padding: 20px;
-}
 
 
 
@@ -208,22 +208,7 @@
 
 
 
-
 .actions button {
   margin-right: 10px;
 }
-/* Sidebar profil à droite */
-.profile-sidebar {
-  flex: 1;
-  background: #343a40;
-  color: #fff;
-  padding: 20px;
-  min-width: 280px;
-}
-
-.main-content {
-  margin-left: 260px; /* largeur sidebar */
-  padding: 20px;
-}
-
 

@@ -1,9 +1,14 @@
-<div class="layout-container">
-  <!-- Sidebar -->
-  <app-sidebar></app-sidebar>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar (1/4 = 3 colonnes sur 12) -->
+    <div class="col-12 col-md-2">
+      <app-sidebar></app-sidebar>
+    </div>
 
-  <!-- Contenu principal -->
-  <main class="main-content">
-    <router-outlet></router-outlet>
-  </main>
+    <!-- Contenu principal (3/4 = 9 colonnes sur 12) -->
+    <div class="col-12 col-md-10 main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
+

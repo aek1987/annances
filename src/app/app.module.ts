@@ -1,5 +1,5 @@
 
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CarouselComponent } from './carousel/carousel.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ThousandSeparatorPipe } from './pipe/thousand-separator.pipe';
@@ -60,12 +60,12 @@ import { NosPartenairesComponent } from './partenaire/nos-partenaires/nos-parten
 import { StagesComponent } from './partenaire/stages/stages.component';
 import { EntrepriseDashboardComponent } from './espace_entreprise/dashboard/entreprise-dashboard.component';
 
+import localeFr from '@angular/common/locales/fr';
 
 
 
 
-
-
+registerLocaleData(localeFr);
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -150,7 +150,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   
   ],
  
-  providers: [],
+  providers: [ { provide: LOCALE_ID, useValue: 'fr-FR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

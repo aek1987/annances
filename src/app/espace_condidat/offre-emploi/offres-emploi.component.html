@@ -1,10 +1,8 @@
-<div class="layout">
- <!-- 📌 Barre latérale : Profil Candidat -->
-<app-sidebar [candidatures]="candidatures"></app-sidebar>
 
 
-  <!-- 📄 Contenu principal -->
-  <main class="main-content">
+
+
+
     <!-- 🔎 Recherche avancée -->
     <div class="search-bar">
       <input type="text" placeholder="Mots-clés" [(ngModel)]="searchTerm">
@@ -39,7 +37,7 @@
         </div>
         <p><b>Entreprise :</b> {{ getEntrepriseNom(offre.entrepriseId) }}</p>
         <p><b>Lieu :</b> {{ offre.localisation }}</p>
-        <p><b>Salaire :</b> {{ offre.salaire| currency:'EUR' }}</p>
+        <p><b>Salaire :</b> {{ offre.salaire | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</p>
         <p><b>Contrat :</b> {{ offre.contrat }}</p>
         <p>{{ offre.description }}</p>     
         
@@ -61,5 +59,5 @@
       <input type="email" placeholder="Votre email" [(ngModel)]="alertEmail">
       <button (click)="subscribeAlert()">S’abonner</button>
     </div>
-  </main>
-</div>
+ 
+

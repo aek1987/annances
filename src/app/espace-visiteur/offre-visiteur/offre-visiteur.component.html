@@ -1,11 +1,19 @@
 
-<div class="layout">
- <!-- 📌 Barre latérale : Profil Candidat -->
-<app-sidebar-visiteur [candidatures]="candidatures"></app-sidebar-visiteur>
 
 
   <!-- 📄 Contenu principal -->
   <main class="main-content">
+
+
+    <!-- 👋 Message d'accueil pour visiteur -->
+    <div  class="welcome-visitor">
+      <h2>Bienvenue sur notre plateforme 🎉</h2>
+      <p>
+        Consultez des milliers d’offres d’emploi et trouvez votre prochain défi professionnel.<br>
+        👉 <a routerLink="/register">Créez un compte</a> pour postuler directement et sauvegarder vos annonces préférées !
+      </p>
+    </div>
+    
     <!-- 🔎 Recherche avancée -->
     <div class="search-bar">
       <input type="text" placeholder="Mots-clés" [(ngModel)]="searchTerm">
@@ -42,9 +50,10 @@
         <p><b>Lieu :</b> {{ offre.localisation }}</p>
         <p class="salaire-line">
         <span><b>Salaire :</b></span>
-        <span>{{ offre.salaire | currency:'EUR' }}</span>
+        <span>{{ offre.salaire | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
         </p>
-
+      
+ 
         <p><b>Contrat :</b> {{ offre.contrat }}</p>
         <p><b>Secteur :</b> {{ getentreprise(offre.entrepriseId)?.secteur }}</p>
         <p>{{ offre.description }}</p>     
@@ -63,4 +72,4 @@
 
   
   </main>
-</div>
+
