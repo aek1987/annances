@@ -59,8 +59,8 @@ faHandshake = faHandshake;
   ngOnInit() {
    //  this.currentUser = this.authService.getUser();
      this.isAuthenticated = this.authService.isAuthenticated();
-   this.authService.currentUser$.subscribe(user => {
-    this.currentUser = user;
+     this.authService.currentUser$.subscribe(user => {
+     this.currentUser = user;
      this.isAuthenticated = !!user;
   });
   }

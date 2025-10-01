@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Account } from '../modeles/accounts';
 import { User } from '../modeles/user';
-import { CandidatService } from './candidate.service';
-import { EntrepriseService } from './entreprise.service';
+
 
 
 @Injectable({
@@ -30,7 +29,8 @@ private accounts: Account[] = [
   { email: 'admin@gmail.com', password: 'admin',username: 'admin', role: 'admin', refId: 0 }
 ];
 // 🔔 BehaviorSubject pour suivre l’utilisateur connecté
-  private currentUserSubject = new BehaviorSubject<Account | null>(null);
+ 
+  private currentUserSubject = new BehaviorSubject<Account | null>(this.getUser());
   currentUser$: Observable<Account | null> = this.currentUserSubject.asObservable();
 
   constructor( ) 
