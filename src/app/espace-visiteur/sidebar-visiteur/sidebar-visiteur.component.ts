@@ -41,10 +41,15 @@ export class SidebarVisiteurComponent {
    // 🔹 Charge le candidat connecté depuis le service
 loadCandidat() {
   this.candidat = this.candidatService.getCandidatConnecte();
-  console.log("condidat info"+ this.candidat);
+ 
+ 
   if (this.candidat) {
+  
     if (!this.candidat.competences) this.candidat.competences = [];
     if (!this.candidat.experiences) this.candidat.experiences = [];
-  }
+     console.log("condidat info"+ this.candidat.username);
+  } else {  
+     console.log("⚠️ Aucun candidat trouvé !");
+    }
 }
 }
