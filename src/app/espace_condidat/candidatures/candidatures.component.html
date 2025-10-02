@@ -1,23 +1,40 @@
 <div class="page-container">
   <h2>📄 Mes candidatures</h2>
 
-  <div *ngIf="candidatures.length === 0">
-    <p>Vous n'avez aucune candidature pour le moment.</p>
+  <div *ngIf="candidatures.length === 0" class="empty-state">
+    <p>⚠️ Vous n'avez aucune candidature pour le moment.</p>
   </div>
 
   <div class="candidature-list" *ngIf="candidatures.length > 0">
-    <div *ngFor="let c of candidatures" class="candidature-item">
-     <!---- {{ getOffreTitre(c.offreId) }}</h3>
-      <p>Entreprise: {{ getOffreEntreprise(c.offreId) }}</p> -->
-      <p>Date de candidature: {{ c.dateCandidature | date:'mediumDate' }}</p>
-      <p *ngIf="c.message">Message: {{ c.message }}</p>
-      <span class="statut" [ngClass]="c.statut.toLowerCase()">{{ c.statut }}</span>
+    <div *ngFor="let c of candidatures" class="candidature-card">
+      
+      <!-- ✅ En-tête -->
+      <div class="candidature-header">
+        <h3>{{ (c.offreId) || 'Titre Offre' }}</h3>
+        <span class="statut" [ngClass]="c.statut.toLowerCase()">{{ c.statut }}</span>
+      </div>
 
+      <!-- ✅ Timeline -->
+      <div class="timeline">
+        <div *ngFor="let etape of etapes; let i = index" 
+             class="etape"
+             [class.active]="i <= getEtapeIndex(c.statut)">
+          <span class="circle">{{ i + 1 }}</span>
+          <span class="label">{{ etape }}</span>
+        </div>
+      </div>
+
+      <!-- ✅ Infos -->
+      <div class="candidature-body">
+        <p><b>Date :</b> {{ c.dateCandidature | date:'mediumDate' }}</p>
+        <p *ngIf="c.message"><b>Message :</b> {{ c.message }}</p>
+      </div>
+
+      <!-- ✅ Actions -->
       <div class="actions">
-        <button (click)="voirDetails(c)">👁 Voir détails</button>
-        <button (click)="annulerCandidature(c.id)">❌ Annuler</button>
+        <button class="btn btn-view" (click)="voirDetails(c)">👁 Voir détails</button>
+        <button class="btn btn-cancel" (click)="annulerCandidature(c.id)">❌ Annuler</button>
       </div>
     </div>
   </div>
 </div>
-

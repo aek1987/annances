@@ -120,7 +120,8 @@ saveProfile() {
 
   // ✅ Postuler
   postuler(offre: Offre) {
-   if (!this.candidatConnecte) {
+  
+    if (!this.candidatConnecte) {
     alert('Vous devez être connecté pour postuler.');
     return;
   }

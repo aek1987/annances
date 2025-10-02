@@ -1,46 +1,36 @@
-<div class="card p-3">
-  <h3>➕ Ajouter une offre</h3>
+<div class="offre-form-card">
+  <h3 class="form-title">➕ Ajouter une offre</h3>
 
-  <form (ngSubmit)="ajouterOffre()">
+  <form (ngSubmit)="ajouterOffre()" class="form-grid">
     <!-- Titre -->
-    <div>
-      <label>Titre :</label>
-      <input [(ngModel)]="newOffre.titre" 
-             name="titre" 
-             required />
+    <div class="form-group">
+      <label for="titre">Titre</label>
+      <input id="titre" [(ngModel)]="newOffre.titre" name="titre" required />
     </div>
 
-    <!-- Description -->
-    <div>
-      <label>Description :</label>
-      <textarea [(ngModel)]="newOffre.description" 
-                name="description" 
-                required></textarea>
-    </div>
+   <!-- Description -->
+<div class="form-group full-width">
+  <label for="description">Description</label>
+  <textarea id="description" [(ngModel)]="newOffre.description" name="description" required></textarea>
+</div>
+
 
     <!-- Localisation -->
-    <div>
-      <label>Localisation :</label>
-      <input [(ngModel)]="newOffre.localisation" 
-             name="localisation" 
-             required />
+    <div class="form-group">
+      <label for="localisation">Localisation</label>
+      <input id="localisation" [(ngModel)]="newOffre.localisation" name="localisation" required />
     </div>
 
     <!-- Salaire -->
-    <div>
-      <label>Salaire (€) :</label>
-      <input [(ngModel)]="newOffre.salaire" 
-             name="salaire" 
-             type="number" 
-             min="0" />
+    <div class="form-group">
+      <label for="salaire">Salaire (€)</label>
+      <input id="salaire" [(ngModel)]="newOffre.salaire" name="salaire" type="number" min="0" />
     </div>
 
     <!-- Contrat -->
-    <div>
-      <label>Type de contrat :</label>
-      <select [(ngModel)]="newOffre.contrat" 
-              name="contrat" 
-              required>
+    <div class="form-group">
+      <label for="contrat">Type de contrat</label>
+      <select id="contrat" [(ngModel)]="newOffre.contrat" name="contrat" required>
         <option value="CDI">CDI</option>
         <option value="CDD">CDD</option>
         <option value="Stage">Stage</option>
@@ -48,7 +38,45 @@
       </select>
     </div>
 
+    <!-- Niveau d’expérience -->
+    <div class="form-group">
+      <label for="experience">Niveau d’expérience</label>
+      <select id="experience" [(ngModel)]="newOffre.niveauExperience" name="niveauExperience">
+        <option value="Junior">Junior</option>
+        <option value="Intermédiaire">Intermédiaire</option>
+        <option value="Senior">Senior</option>
+        <option value="Lead">Lead</option>
+      </select>
+    </div>
+
+    <!-- Compétences -->
+    <div class="form-group">
+      <label for="competences">Compétences</label>
+      <input id="competences" [(ngModel)]="newOffre.competences" name="competences" placeholder="Ex: Angular, Java, SQL" (blur)="ajouterCompetences()" />
+    </div>
+
+    <!-- Langues -->
+    <div class="form-group">
+      <label for="langues">Langues demandées</label>
+      <input id="langues" [(ngModel)]="newOffre.langues" name="langues" placeholder="Ex: Français, Anglais" (blur)="ajouterLangues()" />
+    </div>
+
+    
+
+    <!-- Date limite -->
+    <div class="form-group">
+      <label for="dateLimite">Date limite de candidature</label>
+      <input id="dateLimite" [(ngModel)]="newOffre.dateLimite" name="dateLimite" type="date" />
+    </div>
+    <!-- Avantages -->
+<div class="form-group full-width">
+  <label for="avantages">Avantages</label>
+  <textarea id="avantages" [(ngModel)]="newOffre.avantages" name="avantages" rows="3" placeholder="Ex: Télétravail, mutuelle, tickets resto..."></textarea>
+</div>
+
     <!-- Bouton -->
-    <button type="submit">✅ Publier</button>
+    <div  (ngSubmit)="ajouterOffre()" class="form-actions">
+      <button type="submit" class="btn-publish">✅ Publier</button>
+    </div>
   </form>
 </div>

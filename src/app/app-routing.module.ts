@@ -43,6 +43,7 @@ import { EntreprisesRecrutentComponent } from './partenaire/entreprises-recruten
 import { DevenirPartenaireComponent } from './partenaire/devenir-partenaire/devenir-partenaire.component';
 import { NosPartenairesComponent } from './partenaire/nos-partenaires/nos-partenaires.component';
 import { StagesComponent } from './partenaire/stages/stages.component';
+import { ProfilComponentEntreprise } from './espace_entreprise/profil-entreprise/profi-entreprise.component';
 
 
 const routes: Routes = [
@@ -121,7 +122,7 @@ const routes: Routes = [
       { path: 'mes-offres', component: MesOffresComponent },
       { path: 'ajouter-offre', component: AjouterOffreComponent },
       { path: 'candidatures', component: CandidaturesRecuesComponent },
-      { path: 'profil', component: ProfilComponent },
+      { path: 'profil', component: ProfilComponentEntreprise  },
       { path: 'settings', component: EtrepriseSettingComponent },
       { path: 'abonnement', component: AbonneeComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // redirection par défaut

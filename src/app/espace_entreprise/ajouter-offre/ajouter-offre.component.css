@@ -1,81 +1,85 @@
-.card {
-  background: #fff;
+.offre-form-card {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 25px 30px;
+  background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  /*max-width: 650px;  élargit la carte */
-  margin: 40px auto;
-  padding: 30px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
-}
-
-h3 {
+.form-title {
+  font-size: 1.6rem;
   margin-bottom: 20px;
-  color: #2c3e50;
-  font-size: 22px;
   font-weight: 600;
+  color: #2c3e50;
   text-align: center;
 }
 
-form div {
-  margin-bottom: 18px;
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
 }
 
-label {
-  display: block;
-  font-weight: 600;
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 500;
   margin-bottom: 6px;
   color: #34495e;
-  font-size: 15px;
 }
 
-input,
-textarea,
-select {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid #ccc;
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 10px 12px;
+  border: 1px solid #dcdfe3;
   border-radius: 8px;
-  font-size: 15px;
-  background-color: #fafafa;
-  transition: border 0.2s ease, background 0.2s ease;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
   border-color: #3498db;
-  background-color: #fff;
   outline: none;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
 }
 
 textarea {
-  min-height: 100px;
   resize: vertical;
+  min-height: 80px;
+  grid-column: span 2; /* occupe toute la largeur */
 }
 
-button {
+.form-actions {
+  grid-column: span 2;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.btn-publish {
   background: #3498db;
-  color: white;
+  color: #fff;
   border: none;
   padding: 12px 20px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  width: 100%;
+  transition: background 0.3s, transform 0.2s;
 }
 
-button:hover {
+.btn-publish:hover {
   background: #2980b9;
-  transform: scale(1.02);
+  transform: translateY(-2px);
 }
-
-button:active {
-  transform: scale(0.98);
+/* Permet à certains champs de prendre toute la ligne */
+.full-width {
+  grid-column: span 2;
 }

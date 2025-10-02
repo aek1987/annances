@@ -15,6 +15,7 @@ import { CandidatureService } from 'src/app/service/candidature.service';
 export class CandidaturesComponent implements OnInit {
  candidatConnecte: Candidat | null = null;
   candidatures: Candidature[] = [];
+  etapes = ['en attente', 'entretien', 'acceptée', 'refusée', 'finalisé'];
  constructor(  private candidatService: CandidatService,
  private candidature: CandidatureService
 
@@ -32,6 +33,10 @@ export class CandidaturesComponent implements OnInit {
   }
   
   
+  // Retourne l’index de l’étape actuelle
+  getEtapeIndex(statut: string): number {
+    return this.etapes.indexOf(statut);
+  }
 
   annulerCandidature(id: number) {
     this.candidatures = this.candidatures.filter(c => c.id !== id);

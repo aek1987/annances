@@ -129,20 +129,7 @@ canPostuler(refId: number): boolean {
   return candidat ? candidat.status === 'active' : false;
 }
 
- // 🔹 Mise à jour complète d’un candidat
-  updateCandidat(candidat: Candidat) 
-  {
-    this.getProgression(candidat); // on va calculer 
-    const index = this.candidats.findIndex(c => c.refId === candidat.refId);
-    if (index !== -1) {
-      
-      candidat.status = this.getStatus(candidat);
-     this.candidats[index] = candidat;
-     console.log("👤 Candidat chargé :",candidat +" status "+candidat.status);
-   
-    }
-  
-  }
+ 
 getStatus(candidat: Candidat): 'active' | 'desactive' |'en_attente_validation'|'incomplet'|'complet' {
   const progression = this.getProgression(candidat);
  //alert(" mete jour de candidat : status"+candidat.status+" prog "+progression)
@@ -166,7 +153,12 @@ getStatus(candidat: Candidat): 'active' | 'desactive' |'en_attente_validation'|'
   }
 
 }
-changerStatut(candidat: Candidat){candidat.status="active";}
-refuseStatut(candidat: Candidat){candidat.status="desactive";}
+updateCandidatState(candidat: Candidat) {
+  const index = this.candidats.findIndex(c => c.refId === candidat.refId);
+  if (index !== -1) {
+    this.candidats[index] = candidat;
+  }
+}
+
 
 }

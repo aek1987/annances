@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OffresService } from '../../service/offres.service';
 import { Offre } from 'src/app/modeles/offres';
 import { Entreprise } from 'src/app/modeles/entreprise';
 
+import { EntrepriseService } from 'src/app/service/entreprise.service';
+import { OffresService } from 'src/app/service/offres.service';
 
 @Component({
   selector: 'app-offre-detail',
@@ -11,32 +12,58 @@ import { Entreprise } from 'src/app/modeles/entreprise';
   styleUrls: ['./offre-detail.component.css']
 })
 export class OffreDetailComponent implements OnInit {
-  offre: Offre | undefined;
+  @Input() offre?: Offre;
+  entreprises: Entreprise[] = [];
+  offresSimilaires: Offre[] = [];
 
   constructor(
-    private route: ActivatedRoute,
-    private offresService: OffresService
+    private offreService: OffresService,
+    private entrepriseService: EntrepriseService,
+    private route: ActivatedRoute
   ) {}
 
- 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.offre = this.offresService.getOffreById(id);
-  }
+    // Charger toutes les entreprises
+    this.entreprises = this.entrepriseService.getEntreprises();
 
-  postuler(offre: Offre) {
-    if (offre) {
-      offre.status = 'postulé';
-      alert(`Vous avez postulé pour l'offre : ${offre.titre}`);
+    // Vérifier si on récupère une offre par ID depuis l’URL
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      const offreId = Number(id);
+      this.offre = this.offreService.getOffreById(offreId);
+
+      // Charger les offres similaires
+      if (this.offre) {
+     //   this.offresSimilaires = this.offreService.getOffresSimilaires(this.offre);
+      }
     }
   }
 
-  toggleFavori(offre: Offre) {
-    if (offre) {
-      offre.favori = !offre.favori;
-    }
+  // Récupérer le nom de l’entreprise
+  getEntrepriseNom(entrepriseId: number): string {
+    const entreprise = this.entreprises.find(e => e.id === entrepriseId);
+    return entreprise ? entreprise.username : 'Entreprise inconnue';
   }
-  getEntrepriseNom(id: number): Entreprise | undefined {
-    return undefined;
+
+  // Récupérer toute l’entreprise (logo, site, etc.)
+  getEntreprise(entrepriseId: number): Entreprise | undefined {
+    return this.entreprises.find(e => e.id === entrepriseId);
+  }
+
+  // Postuler à une offre
+  postuler(offre: Offre): void {
+    alert(`Votre candidature a été envoyée pour le poste : ${offre.titre}`);
+    // ici tu peux appeler un service backend pour sauvegarder la candidature
+  }
+
+  // Ajouter / Retirer des favoris
+  toggleFavori(offre: Offre): void {
+    offre.favori = !offre.favori;
+    if (offre.favori) {
+      alert(`Offre "${offre.titre}" ajoutée à vos favoris ⭐`);
+    } else {
+      alert(`Offre "${offre.titre}" retirée de vos favoris ❌`);
+    }
+    // tu peux aussi sauvegarder ça dans localStorage ou un backend
   }
 }

@@ -1,19 +1,108 @@
-.offre-detail-card {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
+.offre-container {
+  background: #fff;
+  padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  background-color: #fff;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+  margin-top: 20px;
 }
 
-.offre-detail-card h2 {
-  color: #1d4ed8;
-  margin-bottom: 15px;
+.entreprise-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-.offre-detail-card h4 {
-  margin-top: 15px;
-  margin-bottom: 5px;
-  color: #2563eb;
+.logo-entreprise {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.titre-offre {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.nom-entreprise {
+  color: #666;
+  font-style: italic;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.tag {
+  background: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.tag.deadline {
+  background: #fee2e2;
+  color: #b91c1c;
+  font-weight: bold;
+}
+
+.section {
+  margin: 20px 0;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-postuler {
+  flex: 1;
+  padding: 12px;
+  background: #16a34a;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-postuler:hover {
+  background: #15803d;
+}
+
+.btn-favori {
+  flex: 1;
+  padding: 12px;
+  background: #facc15;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-favori:hover {
+  background: #eab308;
 }

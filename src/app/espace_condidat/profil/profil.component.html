@@ -63,7 +63,7 @@
 
   <!-- Bio -->
 <div class="section" *ngIf="candidat">
-  <h4>À propos</h4>
+  <h4>A propos de vous</h4>
   <p *ngIf="!editMode">{{ candidat.bio }}</p>
   <textarea *ngIf="editMode" [(ngModel)]="candidat.bio" class="form-control"></textarea>
 </div>

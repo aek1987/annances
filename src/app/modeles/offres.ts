@@ -14,7 +14,7 @@ export interface Offre {
   niveauExperience?: 'Junior' | 'Intermédiaire' | 'Senior' | 'Lead';
   competences?: string[];
   langues?: string[];
-  avantages?: string[];
+  avantages?: string;
   dateLimite?: Date;
   candidaturesCount?: number;
 }

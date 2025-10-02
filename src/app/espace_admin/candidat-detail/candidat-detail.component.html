@@ -1,0 +1,29 @@
+<div class="modal" *ngIf="candidat">
+  <div class="modal-content p-3">
+    <span class="close" (click)="fermer()">&times;</span>
+    <h4>{{ candidat?.username }}</h4>
+    <p>Email: {{ candidat?.email }}</p>
+    <p>Fonction: {{ candidat?.fonction }}</p>
+    <p>Statut: {{ candidat?.status }}</p>
+    <p>Téléphone: {{ candidat?.phone }}</p>
+    <p>Compétences: {{ candidat?.competences}}
+    <h5>Expériences:</h5>
+    <ul>
+      <li *ngFor="let e of candidat?.experiences">
+        {{ e.poste }} chez {{ e.entreprise }} ({{ e.duree }})
+      </li>
+    </ul>
+
+    <h5>Formations:</h5>
+    <ul>
+      <li *ngFor="let f of candidat?.formations">
+        🎓 {{ f.diplome }} - {{ f.ecole }} ({{ f.annee }})
+      </li>
+    </ul>
+
+    <p *ngIf="candidat?.cv">
+      <a [href]="candidat.cv" target="_blank">📄 Voir le CV</a>
+    </p>
+  </div>
+</div>
+

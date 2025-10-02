@@ -19,9 +19,12 @@ newOffre: Offre = {
     localisation: '',
     salaire: 0,
     contrat: 'CDI',
-    datePublication: new Date()
+    datePublication: new Date(),
+    competences: [],
+    langues: [],
+    avantages: ''
   };
-
+ 
   constructor(
     private authService: AuthService,
     private offreService: OffresService
@@ -55,4 +58,25 @@ newOffre: Offre = {
       alert('❌ Vous devez être une entreprise pour publier une offre.');
     }
   }
+
+ 
+
+ajouterCompetences() {
+  if (this.newOffre.competences) {
+  //  this.newOffre.competences = this.newOffre.competences.split(',').map(c => c.trim());
+  }
+}
+
+ajouterLangues() {
+  if (this.newOffre.langues) {
+   // this.newOffre.langues = this.newOffre.langues.split(',').map(l => l.trim());
+  }
+}
+
+ajouterAvantages() {
+  if (this.newOffre.avantages) {
+  //  this.newOffre.avantages = this.newOffre.avantages.split(',').map(a => a.trim());
+  }
+}
+
 }

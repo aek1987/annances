@@ -1,29 +1,84 @@
-<div class="offre-detail-card" *ngIf="offre">
-  <h2>{{ offre.titre }}</h2>
-  <p><b>Entreprise :</b> {{ getEntrepriseNom(offre.entrepriseId) }}</p>
-  <p><b>Lieu :</b> {{ offre.localisation }}</p>
-  <p><b>Salaire :</b> {{ offre.salaire | currency:'EUR' }}</p>
-  <p><b>Contrat :</b> {{ offre.contrat }}</p>
-  <p><b>Date limite :</b> {{ offre.dateLimite | date:'dd/MM/yyyy' }}</p>
+<div class="offre-container" *ngIf="offre">
+  <!-- En-tête avec logo et titre -->
+  <div class="entreprise-header">
+    <img *ngIf="getEntreprise(offre.entrepriseId)?.logo" 
+         [src]="getEntreprise(offre.entrepriseId)?.logo" 
+         alt="Logo entreprise" 
+         class="logo-entreprise">
+    <div>
+      <h2 class="titre-offre">{{ offre.titre }}</h2>
+      <p class="nom-entreprise">{{ getEntrepriseNom(offre.entrepriseId) }}</p>
+    </div>
+  </div>
 
-  <h4>Description :</h4>
-  <p>{{ offre.description }}</p>
+  <!-- Tags d’infos principales -->
+  <div class="tags">
+    <span class="tag"><i class="fas fa-map-marker-alt"></i> {{ offre.localisation }}</span>
+    <span class="tag"><i class="fas fa-euro-sign"></i> {{ offre.salaire | currency:'EUR' }}</span>
+    <span class="tag"><i class="fas fa-briefcase"></i> {{ offre.contrat }}</span>
+    <span class="tag"><i class="fas fa-calendar-alt"></i> Publiée le {{ offre.datePublication | date:'dd/MM/yyyy' }}</span>
+    <span class="tag deadline"><i class="fas fa-hourglass-half"></i> Limite : {{ offre.dateLimite | date:'dd/MM/yyyy' }}</span>
+  </div>
 
-  <h4>Compétences :</h4>
-  <ul>
-    <li *ngFor="let comp of offre.competences">{{ comp }}</li>
-  </ul>
+  <!-- Description du poste -->
+  <div class="section">
+    <h3>📋 Description du poste</h3>
+    <p>{{ offre.description }}</p>
+  </div>
 
-  <h4>Langues :</h4>
-  <ul>
-    <li *ngFor="let lang of offre.langues">{{ lang }}</li>
-  </ul>
-
-  <h4>Avantages :</h4>
-  <ul>
-    <li *ngFor="let avantage of offre.avantages">{{ avantage }}</li>
-  </ul>
-
-  <button class="btn btn-primary" (click)="postuler(offre)">Postuler</button>
+ <!-- Compétences requises -->
+<div class="section" *ngIf="offre.competences?.length">
+  <h3>🛠 Compétences requises</h3>
+  <div class="badges">
+    <span class="badge" *ngFor="let comp of offre.competences ?? []">
+      {{ comp }}
+    </span>
+  </div>
 </div>
 
+<!-- Langues -->
+<div class="section" *ngIf="offre.langues?.length">
+  <h3>🌍 Langues demandées</h3>
+  <ul>
+    <li *ngFor="let lang of offre.langues ?? []">
+      {{ lang }}
+    </li>
+  </ul>
+</div>
+
+<!-- Avantages -->
+<div class="section" *ngIf="offre.avantages?.length">
+  <h3>🎁 Avantages proposés</h3>
+  <ul>
+   
+      ✔ {{offre.avantages }}
+    
+  </ul>
+</div>
+
+  <!-- Lien vers entreprise -->
+  <div class="section" *ngIf="getEntreprise(offre.entrepriseId)?.site">
+    🌐 <a [href]="getEntreprise(offre.entrepriseId)?.site" target="_blank">
+      Visiter le site de l’entreprise
+    </a>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button class="btn-postuler" (click)="postuler(offre)">📩 Postuler</button>
+    <button class="btn-favori" (click)="toggleFavori(offre)">
+      {{ offre.favori ? '★ Retirer des favoris' : '☆ Sauvegarder' }}
+    </button>
+  </div>
+
+  <!-- Offres similaires -
+  <div class="section" *ngIf="offresSimilaires?.length > 0">
+    <h3>🔎 Offres similaires</h3>
+    <ul class="similaires">
+      <li *ngFor="let o of offresSimilaires">
+        <a [routerLink]="['/candidat/offre', o.id]">{{ o.titre }}</a> 
+        - <span>{{ o.localisation }}</span>
+      </li>
+    </ul>
+  </div>-->
+</div>

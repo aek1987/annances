@@ -67,7 +67,7 @@ get candidatSafe(): Candidat {
   savecandidat() {
   if (this.candidat) {
      // ✅ sauvegarde dans le service/localStorage et calcluse de status 
-    this.candidatService.updateCandidat(this.candidat);
+    this.candidatService.updateCandidatState(this.candidat);
     this.editMode = false;
     
     alert('✅ Profil mis à jour avec succès');

@@ -1,59 +1,87 @@
 .page-container {
-  padding: 20px;
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
-  font-family: Arial, sans-serif;
+  padding: 20px;
 }
 
-.candidature-list {
-  margin-top: 20px;
-}
-
-.candidature-item {
+.candidature-card {
+  background: #fff;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 15px;
-  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 3px 8px rgba(0,0,0,0.05);
 }
 
-.candidature-item h3 {
-  margin: 0 0 5px 0;
-}
-
-.candidature-item p {
-  margin: 4px 0;
+.candidature-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .statut {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-/* Couleurs selon statut */
-.statut.en attente { background: #ffecb3; color: #856404; }
-.statut.acceptée { background: #c8e6c9; color: #256029; }
-.statut.refusée { background: #ffcdd2; color: #c62828; }
-
-.actions {
-  margin-top: 10px;
-}
-
-.actions button {
-  margin-right: 10px;
   padding: 6px 12px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: capitalize;
 }
 
-.actions button:hover {
-  opacity: 0.8;
+.statut.en attente { background: #ffeeba; color: #856404; }
+.statut.entretien { background: #cce5ff; color: #004085; }
+.statut.acceptée { background: #d4edda; color: #155724; }
+.statut.refusée { background: #f8d7da; color: #721c24; }
+.statut.finalisé { background: #e2e3e5; color: #383d41; }
+
+/* ✅ Timeline */
+.timeline {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  position: relative;
 }
 
-.actions button:first-child { background-color: #007bff; color: white; }
-.actions button:last-child { background-color: #dc3545; color: white; }
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #ddd;
+  z-index: 1;
+}
+
+.etape {
+  text-align: center;
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.etape .circle {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  background: #ddd;
+  display: inline-block;
+  color: #fff;
+  font-weight: bold;
+}
+
+.etape.active .circle {
+  background: #007bff;
+}
+
+.etape .label {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.etape.active .label {
+  font-weight: bold;
+  color: #007bff;
+}

@@ -61,6 +61,8 @@ import { StagesComponent } from './partenaire/stages/stages.component';
 import { EntrepriseDashboardComponent } from './espace_entreprise/dashboard/entreprise-dashboard.component';
 
 import localeFr from '@angular/common/locales/fr';
+import { CandidatDetailComponent } from './espace_admin/candidat-detail/candidat-detail.component';
+import { ProfilComponentEntreprise } from './espace_entreprise/profil-entreprise/profi-entreprise.component';
 
 
 
@@ -122,7 +124,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     DevenirPartenaireComponent,
     NosPartenairesComponent,
     StagesComponent,
-    EntrepriseDashboardComponent
+    EntrepriseDashboardComponent,
+    CandidatDetailComponent,
+    ProfilComponentEntreprise
    
   
    

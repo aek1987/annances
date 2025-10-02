@@ -18,9 +18,29 @@ export class UsersCandidatsComponent implements OnInit {
     this.candidats = this.candidatsService.getCandidats();
   }
 
-  changerStatut(andidat: Candidat) {
-    this.candidatsService.changerStatut(andidat);
-    this.candidats = this.candidatsService.getCandidats(); // refresh
+changerStatut(candidat: Candidat, accepte: boolean) {
+  if (accepte) {
+    // On marque le candidat comme validé
+    candidat.status = 'active';
+    alert(`✅ Candidat ${candidat.username} accepté.`);
+  } else {
+    // On marque le candidat comme refusé ou désactivé
+    candidat.status = 'desactive';
+    alert(`🚫 Candidat ${candidat.username} refusé.`);
   }
+
+  // Si tu veux mettre à jour la liste dans ton service
+  this.candidatsService.updateCandidatState(candidat);
+}
+
+selectedCandidat: Candidat | null = null;
+voirDetail(c: Candidat) {
+  this.selectedCandidat = c;
+}
+
+fermerModal() {
+  this.selectedCandidat = null;
+}
+
 }
 

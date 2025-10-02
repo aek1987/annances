@@ -19,11 +19,18 @@
         <td>{{ c.username }}</td>
         <td>{{ c.email }}</td>
         <td>{{ c.status }}</td>
-        <td>
-          <button class="btn btn-success btn-sm" (click)="changerStatut(c)">Accepter</button>
-          <button class="btn btn-danger btn-sm" (click)="changerStatut(c)">Refuser</button>
-        </td>
+      <td>
+  <button class="btn btn-success btn-sm" (click)="changerStatut(c, true)">Accepter</button>
+  <button class="btn btn-danger btn-sm" (click)="changerStatut(c, false)">Refuser</button>
+  <button class="btn btn-info btn-sm" (click)="voirDetail(c)">Voir Détails</button>
+</td>
+
       </tr>
     </tbody>
   </table>
+  <!-- Modal -->
+  <app-candidat-detail 
+    [candidat]="selectedCandidat" 
+    (closeModal)="fermerModal()">
+  </app-candidat-detail>
 </div>
