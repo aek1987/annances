@@ -69,7 +69,7 @@ searchOffres(): void {
 
   const query = this.searchQuery.toLowerCase();
   this.filteredOffres = this.offres.filter(offre =>
-    (offre.titre?.toLowerCase().includes(query) || 
+    (offre.poste?.toLowerCase().includes(query) || 
      offre.localisation?.toLowerCase().includes(query))
   );
 }

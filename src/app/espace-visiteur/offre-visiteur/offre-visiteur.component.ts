@@ -57,7 +57,7 @@ offres: Offre[] = [];
     const entreprise = this.getentreprise(offre.entrepriseId);
 
     return (
-      (!this.searchTerm || offre.titre.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
+      (!this.searchTerm || offre.poste.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
       (!this.searchLocation || offre.localisation.toLowerCase().includes(this.searchLocation.toLowerCase())) &&
       (!this.searchSalary || offre.salaire >= this.searchSalary) &&
       (!this.selectedContract || offre.contrat === this.selectedContract) &&
@@ -85,7 +85,7 @@ offres: Offre[] = [];
   );
 
    // Confirmation
-  alert(`✅ Vous avez postulé à : ${offre.titre}\nCandidature ID : ${candidature.id}`);
+  alert(`✅ Vous avez postulé à : ${offre.poste}\nCandidature ID : ${candidature.id}`);
   }
 
   // ⭐ Favoris

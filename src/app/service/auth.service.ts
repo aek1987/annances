@@ -21,7 +21,7 @@ private accounts: Account[] = [
   { email: 'candidat@gmail.com', password: '123',  username: 'candidat aek',role: 'candidat', refId: 7 },
 
   // 🏢 Entreprises
-  { email: 'hr@techcorp.com', password: '123', username: 'candidat aek',role: 'entreprise', refId: 1 },
+  { email: 'hr@techcorp.com', password: '123', username: 'techcorp',role: 'entreprise', refId: 1 },
   { email: 'jobs@foodly.com', password: 'jobs',username: 'foodly', role: 'entreprise', refId: 2 },
   { email: 'contact@webdev.fr', password: 'azerty',username: 'candidat aek', role: 'entreprise', refId: 3 },
 

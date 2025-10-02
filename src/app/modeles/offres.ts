@@ -3,7 +3,7 @@
 export interface Offre {
   id: number;
   entrepriseId: number;      // 🔗 Lien vers l'entreprise
-  titre: string;             // Titre de l'offre
+  poste: string;             // Titre de l'offre
   description: string;       // Description
   localisation: string;      // Ville ou Remote
   salaire: number;          // Optionnel

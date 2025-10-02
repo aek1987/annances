@@ -8,17 +8,19 @@ import { Offre } from '../modeles/offres';
   {
     id: 1,
     entrepriseId: 101, // Id de l’entreprise TechCorp
-    titre: 'Développeur Angular',
+    poste: 'Développeur Angular',
     description: 'Développement d’applications Angular 16.',
     localisation: 'Paris',
     salaire: 40000,
     contrat: 'CDI',
-    datePublication: new Date('2025-01-10')
+    datePublication: new Date('2025-01-10'),
+    dateLimite:new Date('2025-02-10')
+
   },
   {
     id: 2,
     entrepriseId: 102, // Id de l’entreprise FinancePro
-    titre: 'Data Analyst',
+    poste: 'Data Analyst',
     description: 'Analyse de données financières.',
     localisation: 'Lyon',
     salaire: 35000,
@@ -28,7 +30,7 @@ import { Offre } from '../modeles/offres';
   {
     id: 3,
     entrepriseId: 103, // Id de l’entreprise CodeFactory
-    titre: 'Développeur Java',
+    poste: 'Développeur Java',
     description: 'Développement backend avec Spring Boot.',
     localisation: 'Remote',
     salaire: 42000,

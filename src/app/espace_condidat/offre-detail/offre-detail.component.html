@@ -6,11 +6,15 @@
          alt="Logo entreprise" 
          class="logo-entreprise">
     <div>
-      <h2 class="titre-offre">{{ offre.titre }}</h2>
-      <p class="nom-entreprise">{{ getEntrepriseNom(offre.entrepriseId) }}</p>
+      <h2 class="titre-offre">{{ getEntrepriseNom(offre.entrepriseId) }}</h2>
+      <p class="nom-entreprise">{{ offre.poste }}</p>
     </div>
   </div>
-
+ <!-- Description du poste -->
+  <div class="section">
+    <h3>{{offre.poste}}</h3>
+   
+  </div>
   <!-- Tags d’infos principales -->
   <div class="tags">
     <span class="tag"><i class="fas fa-map-marker-alt"></i> {{ offre.localisation }}</span>
@@ -20,11 +24,7 @@
     <span class="tag deadline"><i class="fas fa-hourglass-half"></i> Limite : {{ offre.dateLimite | date:'dd/MM/yyyy' }}</span>
   </div>
 
-  <!-- Description du poste -->
-  <div class="section">
-    <h3>📋 Description du poste</h3>
-    <p>{{ offre.description }}</p>
-  </div>
+  <p>{{ offre.description }}</p>
 
  <!-- Compétences requises -->
 <div class="section" *ngIf="offre.competences?.length">

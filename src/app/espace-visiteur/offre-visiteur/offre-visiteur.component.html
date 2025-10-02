@@ -43,7 +43,7 @@
     <div class="offres-list">
       <div class="offre-card" *ngFor="let offre of filteredOffres">
         <div class="offre-header">
-      <h3>{{ offre.titre }}</h3>
+      <h3>{{ offre.poste }}</h3>
       <a class="details-link" [routerLink]="['/candidat/offre', offre.id]">Détails</a>
         </div>
        

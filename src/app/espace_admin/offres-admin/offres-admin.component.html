@@ -13,7 +13,7 @@
     <ul class="offres-list">
       <li *ngFor="let offre of filteredOffres" class="offre-card">
         <div class="offre-info">
-          <strong class="offre-title">{{ offre.titre }}</strong>
+          <strong class="offre-title">{{ offre.poste }}</strong>
           <span class="offre-location"> - {{ offre.localisation }}</span>
           <p class="offre-description">{{ offre.description }}</p>
           <small class="offre-date">📅 Publiée le {{ offre.datePublication | date:'dd/MM/yyyy' }}</small>

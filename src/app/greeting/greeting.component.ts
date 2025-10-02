@@ -21,35 +21,57 @@ constructor(private authService: AuthService,private candidatService :CandidatSe
     this.showDropdowns = !this.showDropdowns;
   }
 
-   goToAnnonces() {
-   
-   this.currentUser = this.authService.getUser();
-   this.candidat = this.candidatService.getCandidatConnecte();
-  
+
+  deposerAnnonce() {
+
+  this.currentUser = this.authService.getUser();
   if (!this.currentUser) {
-    // Aucun utilisateur connecté → visiteur
-    this.router.navigate(['/visiteur']);
+    // 🚨 Aucun utilisateur connecté → aller au login
+    this.router.navigate(['/login']);
     return;
   }
 
   switch (this.currentUser.role) {
-    case 'candidat':
-      this.router.navigate(['/candidat']);
-      break;
-
     case 'entreprise':
-      this.router.navigate(['/entreprise']);
+      // ✅ Une entreprise connectée → dépôt d’annonce
+      this.router.navigate(['/ajouter-offre']);
       break;
-
-    case 'admin':
-      this.router.navigate(['/admin']);
-      break;
-
+   
     default:
-      // rôle inconnu → visiteur
-      this.router.navigate(['/visiteur']);
+      // 👀 rôle inconnu → envoyer au login
+      this.router.navigate(['/login']);
       break;
   }
+  }
+  goToAnnonces() {
+
+    this.currentUser = this.authService.getUser();
+    this.candidat = this.candidatService.getCandidatConnecte();
+
+    if (!this.currentUser) {
+      // Aucun utilisateur connecté → visiteur
+      this.router.navigate(['/visiteur']);
+      return;
+    }
+
+    switch (this.currentUser.role) {
+      case 'candidat':
+        this.router.navigate(['/candidat']);
+        break;
+
+      case 'entreprise':
+        this.router.navigate(['/entreprise']);
+        break;
+
+      case 'admin':
+        this.router.navigate(['/admin']);
+        break;
+
+      default:
+        // rôle inconnu → visiteur
+        this.router.navigate(['/visiteur']);
+        break;
+    }
 
 }
 }

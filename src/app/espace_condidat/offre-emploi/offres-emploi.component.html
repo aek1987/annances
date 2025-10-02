@@ -32,7 +32,7 @@
     <div class="offres-list">
       <div class="offre-card" *ngFor="let offre of filteredOffres">
         <div class="offre-header">
-      <h3>{{ offre.titre }}</h3>
+      <h3>{{ offre.poste }}</h3>
       <a class="details-link" [routerLink]="['/candidat/offre', offre.id]">Détails</a>
         </div>
         <p><b>Entreprise :</b> {{ getEntrepriseNom(offre.entrepriseId) }}</p>
@@ -41,7 +41,7 @@
         <p><b>Contrat :</b> {{ offre.contrat }}</p>
         <p>{{ offre.description }}</p>     
         
-        <div class="actions">       
+   <!--    <div class="actions">       
           
           <button (click)="postuler(offre)">
             {{ offre.status ? offre.status : 'Postuler' }}
@@ -49,7 +49,7 @@
           <button (click)="toggleFavori(offre)">
             {{ offre.favori ? '★ Retirer Favori' : '☆ Ajouter Favori' }}
           </button>
-        </div>        
+        </div>     -->    
       </div>
     </div>
 

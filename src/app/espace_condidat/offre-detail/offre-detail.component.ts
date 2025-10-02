@@ -52,7 +52,7 @@ export class OffreDetailComponent implements OnInit {
 
   // Postuler à une offre
   postuler(offre: Offre): void {
-    alert(`Votre candidature a été envoyée pour le poste : ${offre.titre}`);
+    alert(`Votre candidature a été envoyée pour le poste : ${offre.poste}`);
     // ici tu peux appeler un service backend pour sauvegarder la candidature
   }
 
@@ -60,9 +60,9 @@ export class OffreDetailComponent implements OnInit {
   toggleFavori(offre: Offre): void {
     offre.favori = !offre.favori;
     if (offre.favori) {
-      alert(`Offre "${offre.titre}" ajoutée à vos favoris ⭐`);
+      alert(`Offre "${offre.poste}" ajoutée à vos favoris ⭐`);
     } else {
-      alert(`Offre "${offre.titre}" retirée de vos favoris ❌`);
+      alert(`Offre "${offre.poste}" retirée de vos favoris ❌`);
     }
     // tu peux aussi sauvegarder ça dans localStorage ou un backend
   }

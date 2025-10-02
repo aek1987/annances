@@ -105,7 +105,7 @@ saveProfile() {
     const entreprise = this.getentreprise(offre.entrepriseId);
 
     return (
-      (!this.searchTerm || offre.titre.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
+      (!this.searchTerm || offre.poste.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
       (!this.searchLocation || offre.localisation.toLowerCase().includes(this.searchLocation.toLowerCase())) &&
       (!this.searchSalary || offre.salaire >= this.searchSalary) &&
       (!this.selectedContract || offre.contrat === this.selectedContract) &&
@@ -129,15 +129,14 @@ saveProfile() {
   // Appelle le service pour créer la candidature
   const candidature = this.candidature.addCandidature(
     offre.id,
-    this.candidatConnecte.refId,
-    "Je suis très intéressé par cette offre." // message de candidature
+    this.candidatConnecte.refId 
   );
 
   // Change le statut de l’offre
   offre.status = 'postulé';
 
   // Confirmation
-  alert(`✅ Vous avez postulé à : ${offre.titre}\nCandidature ID : ${candidature.id}`);
+  alert(`✅ Vous avez postulé à : ${offre.poste}\nCandidature ID : ${candidature.id}`);
   }
 
   // ⭐ Favoris

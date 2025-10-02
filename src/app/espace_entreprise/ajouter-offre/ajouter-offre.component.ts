@@ -14,7 +14,7 @@ export class AjouterOffreComponent {
 newOffre: Offre = {
     id: 0,
     entrepriseId: 0,
-    titre: '',
+    poste: '',
     description: '',
     localisation: '',
     salaire: 0,
@@ -24,7 +24,19 @@ newOffre: Offre = {
     langues: [],
     avantages: ''
   };
- 
+ postesInformatique: string[] = [
+  "Développeur Angular",
+  "Développeur Java",
+  "Développeur Full Stack",
+  "DevOps Engineer",
+  "Data Scientist",
+  "Administrateur Systèmes",
+  "Analyste Sécurité",
+  "Chef de Projet IT"
+];
+
+
+
   constructor(
     private authService: AuthService,
     private offreService: OffresService
@@ -47,7 +59,7 @@ newOffre: Offre = {
       this.newOffre = {
         id: 0,
         entrepriseId: 0,
-        titre: '',
+        poste: '',
         description: '',
         localisation: '',
         salaire: 0,

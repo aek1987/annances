@@ -2,11 +2,16 @@
   <h3 class="form-title">➕ Ajouter une offre</h3>
 
   <form (ngSubmit)="ajouterOffre()" class="form-grid">
-    <!-- Titre -->
-    <div class="form-group">
-      <label for="titre">Titre</label>
-      <input id="titre" [(ngModel)]="newOffre.titre" name="titre" required />
-    </div>
+   <!-- Poste proposé -->
+<div class="form-group">
+  <label for="poste">Poste</label>
+  <select id="poste" [(ngModel)]="newOffre.poste" name="poste" required>
+    <option value="" disabled selected>-- Sélectionner un poste --</option>
+    <option *ngFor="let poste of postesInformatique" [value]="poste">
+      {{ poste }}
+    </option>
+  </select>
+</div>
 
    <!-- Description -->
 <div class="form-group full-width">
