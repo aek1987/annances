@@ -34,7 +34,7 @@ constructor(private authService: AuthService,private candidatService :CandidatSe
   switch (this.currentUser.role) {
     case 'entreprise':
       // ✅ Une entreprise connectée → dépôt d’annonce
-      this.router.navigate(['/ajouter-offre']);
+      this.router.navigate(['/entreprise/ajouter-offre']);
       break;
    
     default:

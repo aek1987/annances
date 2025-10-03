@@ -45,6 +45,8 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-direction: column; /* Affiche en colonne */
+  gap: 10px;
 }
 
 .actions li {
