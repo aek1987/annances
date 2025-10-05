@@ -17,8 +17,8 @@ export class RegistersComponent  {
   email: '',
   password: '',
   phone: '',
-  fonction: 'candidat',
-  role: 'candidat',
+  fonction: '',
+  role: 'entreprise',
   photo: '../../assets/user.png'
 };
 message: string = '';
@@ -34,11 +34,11 @@ message: string = '';
 
   onSubmit() {
     // 👉 Vérifie que tous les champs sont remplis
-    if (!this.user.email || !this.user.password || !this.user.username) {
+    if (!this.user.phone ||  !this.user.email || !this.user.password || !this.user.username  || !this.user.role) {
       this.toastr.error('Veuillez remplir tous les champs obligatoires', 'Erreur');
       return;
     }
-
+   
     // 👉 Appelle AuthService.register()
       const newAccount = this.authService.register(this.user);
    
@@ -46,16 +46,19 @@ message: string = '';
     if (this.user.role === 'candidat') {
     
       this.candidatService.createEmptyCandidat(newAccount.refId,this.user.username, this.user.email);
+      
     } else if (this.user.role === 'entreprise') {
       this.entrepriseService.createEmptyEntreprise(newAccount.refId,this.user.username, this.user.email);
+        
     }
 
-    this.toastr.success('Compte créé avec succès ✅', 'Inscription réussie');
+    this.toastr.success(this.user.role+' Compte créé avec succès ✅', 'Inscription réussie');
     this.router.navigate(['/login']);
   } else {
     this.toastr.error('Cet email existe déjà ❌', 'Inscription échouée');
   }
-
-  
+ 
   }
+
+
 }

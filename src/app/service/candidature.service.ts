@@ -25,6 +25,7 @@ export class CandidatureService {
 
   // ✅ Récupérer les candidatures d’une offre
   getCandidaturesByOffre(offreId: number): Candidature[] {
+    
     return this.candidatures.filter(c => c.offreId === offreId);
   }
 

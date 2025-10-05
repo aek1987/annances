@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Account } from 'src/app/modeles/accounts';
+import { Candidature } from 'src/app/modeles/candidature';
 import { Entreprise } from 'src/app/modeles/entreprise';
+import { Offre } from 'src/app/modeles/offres';
 import { AuthService } from 'src/app/service/auth.service';
+import { CandidatureService } from 'src/app/service/candidature.service';
 import { EntrepriseService } from 'src/app/service/entreprise.service';
+import { OffresService } from 'src/app/service/offres.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,12 +15,34 @@ import { EntrepriseService } from 'src/app/service/entreprise.service';
   styleUrls: ['./entreprise-dashboard.component.css']
 })
 export class EntrepriseDashboardComponent {
-entreprise: Entreprise | null = null;
+entreprise: Entreprise | null=null;
 
-  constructor(private entrepriseService: EntrepriseService,private router: Router) {}
+ offres: Offre[] = [];candidatures: Candidature[] = [];
+
+ // Statistiques dynamiques
+  nbOffres = 10;
+  nbCandidatures = 27;
+  nbRetenus = 7;
+  constructor(private entrepriseService: EntrepriseService,private router: Router,private offresService: OffresService,
+    private candidatureService: CandidatureService,) {}
 
   ngOnInit(): void {
     this.loadEntreprise();
+    // ✅ Charger les offres de cette entreprise
+    if (this.entreprise) { this.offres = this.offresService.getOffresByEntreprise(this.entreprise.id);
+      this.nbOffres = this.offres.length;
+   
+   
+    // 🔹 Récupérer les candidatures associées à ces offres
+      this.candidatures = this.offres.flatMap(offre =>
+        this.candidatureService.getCandidaturesByOffre(offre.id)
+      );
+
+    // 🔹 Calculer les statistiques
+      this.nbOffres = this.offres.length;
+      this.nbCandidatures = this.candidatures.length;
+      this.nbRetenus = this.candidatures.filter(c => c.statut === 'acceptée').length;
+    }
   }
 // Dans votre composant
 testNavigation(route: string) {

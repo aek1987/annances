@@ -38,7 +38,7 @@ Sauvegarde des offres (favoris)
 epcase de entreprise 
 ********************************************
 
-
+creation de nouvell entreprise 
 la gard espace entre prise
  parameter aucun
 Fonctionnalités supplémentaires

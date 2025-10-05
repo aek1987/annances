@@ -28,6 +28,7 @@ export class EntrepriseService {
 
   // ✅ Liste complète
   getEntreprises(): Entreprise[] {
+
     return this.entreprises;
   }
 
@@ -47,7 +48,7 @@ export class EntrepriseService {
   createEmptyEntreprise(refId: number, name: string, email: string): Entreprise {
   const newEntreprise: Entreprise = {
       id:refId ,
-      username: '',
+      username: name,
       email,
       phone: '',
       secteur: '',
@@ -59,5 +60,23 @@ export class EntrepriseService {
     this.entreprises.push(newEntreprise);
     return newEntreprise;
   }
-  
+   // ✅ Active une entreprise
+  activerEntreprise(id: number): boolean {
+    const entreprise = this.getEntrepriseById(id);
+    if (entreprise) {
+      entreprise.status = 'active';
+      return true;
+    }
+    return false;
+  }
+
+  // ✅ Désactive une entreprise
+  desactiverEntreprise(id: number): boolean {
+    const entreprise = this.getEntrepriseById(id);
+    if (entreprise) {
+      entreprise.status = 'desactive';
+      return true;
+    }
+    return false;
+  }
 }

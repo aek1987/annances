@@ -44,6 +44,7 @@ import { DevenirPartenaireComponent } from './partenaire/devenir-partenaire/deve
 import { NosPartenairesComponent } from './partenaire/nos-partenaires/nos-partenaires.component';
 import { StagesComponent } from './partenaire/stages/stages.component';
 import { ProfilComponentEntreprise } from './espace_entreprise/profil-entreprise/profi-entreprise.component';
+import { DetailEntrepriseComponent } from './espace_admin/detail-entreprise/detail-entreprise.component';
 
 
 const routes: Routes = [
@@ -106,8 +107,10 @@ const routes: Routes = [
       { path: 'offres', component: OffresAdminComponent },
       { path: 'candidatures', component: CandidaturesAdminComponent },
       { path: 'alerts', component: AlertsAdminComponent },
-      { path: 'settings', component: SettingsAdminComponent },
-      { path: '', redirectTo: 'users/candidats', pathMatch: 'full' }, // redirection par défaut
+      { path: 'settings', component: SettingsAdminComponent },      
+      { path: 'entreprises/:id', component: DetailEntrepriseComponent } ,
+      { path: '', redirectTo: 'users/candidats', pathMatch: 'full' },
+       // redirection par défaut
     ]
   },
 
