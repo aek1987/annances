@@ -1,6 +1,4 @@
-* =========================
-   📌 Layout général
-   ========================= */
+
 .d-flex {
   display: flex;
   min-height: 100vh; /* prend toute la hauteur de l’écran */
