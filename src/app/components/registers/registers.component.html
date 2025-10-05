@@ -71,18 +71,18 @@
 
     <!-- Fonction -->
     <div class="form-group mb-3">
-      <label for="fonction">Fonction <span class="text-danger">*</span></label>
+      <label for="fonction">Fonction ou role<span class="text-danger">*</span></label>
       <select
         id="fonction"
         name="fonction"
         class="form-control"
-        [(ngModel)]="user.fonction"
+        [(ngModel)]="user.role"
         required
         #fonction="ngModel"
       >
         <option value="" disabled selected>Choisissez une fonction</option>
         <option value="entreprise">Entreprise</option>
-        <option value="chercheur">Chercheur d'emploi</option>
+        <option value="candidat">Chercheur d'emploi</option>
       </select>
       <div *ngIf="fonction.invalid && fonction.touched" class="text-danger small">
         Fonction obligatoire.
