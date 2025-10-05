@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Experience } from 'src/app/modeles/experience';
+import { Formation } from 'src/app/modeles/Formation';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +11,23 @@ export class CvParserService {
     const email = this.extraireEmail(cvText);
     const telephone = this.extraireTelephone(cvText);
     const nom = this.extraireNom(cvText);
+     const adresse = this.extraireAdresse(cvText);
     const poste = this.extraireTitre(cvText);
     const competences = this.extraireCompetences(cvText);
     const langues = this.extraireLangues(cvText);
+     const formations = this.extraireFormations(cvText);
+     const experiences = this.extraireExperiences(cvText);
 
     return {
       nom,
       email,
       telephone,
+      adresse,
       poste,
       competences,
-      langues
+      langues,
+      formations,
+      experiences
     };
   }
 
@@ -53,10 +61,73 @@ export class CvParserService {
     return lignes;
   }
 
+  // 🔹 Extraction des formations
+  private extraireFormations(texte: string): Formation[] {
+    const section = texte.match(/Formation(?:s)?(?:[\s\S]*?)(?=Expérience|Projet|Langue|$)/i);
+    if (!section) return [];
+
+    const lignes = section[0]
+      .split(/\n|•|-/)
+      .map(l => l.trim())
+      .filter(l => l.length > 0 && !/formation/i.test(l));
+
+    const formations: Formation[] = [];
+    lignes.forEach(ligne => {
+      // Exemple : "2017 - 2020 Licence Informatique - Université d’Alger"
+      const match = ligne.match(/(\d{4}).*?(\bLicence|Master|Ingénieur|BTS|Doctorat|Formation|Certificat|Diplôme\b).*?(Université|École|Institut)?\s*(.*)?/i);
+      if (match) {
+        const annee = match[1] || '';
+        const diplome = match[2] || 'Formation';
+        const ecole = match[4] || 'Établissement inconnu';
+        formations.push({ diplome, ecole, annee });
+      }
+    });
+
+    return formations;
+  }
+   // 🔹 Expériences
+  private extraireExperiences(texte: string): Experience[] {
+    const section = texte.match(/Expériences?(?:[\s\S]*?)(?=Formation|Compétences|Langue|$)/i);
+    if (!section) return [];
+
+    const lignes = section[0].split(/\n|•|-/).map(l => l.trim()).filter(Boolean);
+    const experiences: Experience[] = [];
+
+    for (let i = 0; i < lignes.length; i++) {
+      const line = lignes[i];
+      if (/(Développeur|Engineer|Technicien|Manager|Chef|Consultant|Architecte)/i.test(line)) {
+        const exp: Experience = {
+          poste: line,
+          entreprise: lignes[i + 1] || '',
+          duree: lignes[i + 2] || ''
+        };
+        experiences.push(exp);
+      }
+    }
+
+    return experiences;
+  }
+
   private extraireLangues(texte: string): string[] {
     const section = texte.match(/Langue(?:[\s\S]*?)(?=Centre|Intérêt|$)/i);
     if (!section) return [];
     const lignes = section[0].split(/:|,|\/|•/).map(s => s.trim()).filter(Boolean);
     return lignes;
+  }
+    // 🔹 Adresse
+  private extraireAdresse(texte: string): string {
+    // Recherche une ligne contenant des mots typiques d’adresse
+    const regex = /(Adresse\s*:\s*)?([\d]{0,3}\s?\w+(?:\s\w+){0,4},?\s?\w+(?:\s\w+){0,2})/i;
+    const match = texte.match(regex);
+    if (match && match[2]) {
+      return match[2].trim();
+    }
+
+    // Si rien trouvé, essayer de trouver une ligne avec "Rue", "Avenue", "Algérie", etc.
+    const lignes = texte.split('\n');
+    const probableAdresse = lignes.find(l =>
+      /(Rue|Avenue|Lot|Cité|Alger|Mostaganem|Oran|Paris|France|Algérie)/i.test(l)
+    );
+    return probableAdresse ? probableAdresse.trim() : '';
   }
 }

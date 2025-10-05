@@ -59,7 +59,12 @@ if (this.candidat) {
       this.candidat!.username = infos.nom || this.candidat!.username;
       this.candidat!.email = infos.email || this.candidat!.email;
       this.candidat!.phone = infos.telephone || this.candidat!.phone;
+       this.candidat!.adresse = infos.adresse || this.candidat!.adresse;
       this.candidat!.competences = infos.competences || this.candidat!.competences;
+      this.candidat!.langues = infos.langues || this.candidat!.langues;
+      this.candidat!.formations = infos.formations || this.candidat!.formations;
+      this.candidat!.experiences = infos.experiences || this.candidat!.experiences;
+
     //  this.candidat!.formations = infos.formations || this.candidat!.competences;
 
       alert('✅ CV analysé avec succès ! Informations ajoutées.');

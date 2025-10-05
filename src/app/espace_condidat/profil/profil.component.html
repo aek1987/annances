@@ -2,7 +2,7 @@
   <!-- Photo + Nom -->
   <div class="text-center">
     <img [src]="candidat?.photo || 'assets/user.png'" alt="Photo de candidat" class="candidat-photo">
-    <h2>{{ candidat?.username }}</h2>
+   <!-- <h2>{{ candidat?.username }}</h2>-->
     <p class="text-muted">{{ candidat?.username }} - {{ candidat?.email }}</p>
 
     <!-- Choix rapide entre 2 photos -->
@@ -18,7 +18,7 @@
 <div class="progress-container">
   <label>Complétude du profil :</label>
   <div class="progress-bar">
-    <div class="progress-fill" [style.width.%]="progression"></div>
+ <!-- - <div class="progress-fill" [style.width.%]="progression"></div>-->
   </div>
   <p>{{ progression }} %</p>
 </div>
@@ -82,39 +82,51 @@
       <button class="btn btn-sm btn-success mt-1" (click)="addCompetence(newCompetence)">+ Ajouter</button>
     </div>
   </div>
-
-  <!-- Expériences -->
-  <div class="section">
-    <h4>Expériences</h4>
-    <ul>
-      <li *ngFor="let e of candidat?.experiences; let i = index">
-        <b>{{ e.poste }}</b> chez {{ e.entreprise }} ({{ e.duree }})
-        <span *ngIf="editMode" (click)="removeExperience(i)" style="cursor:pointer">❌</span>
-      </li>
-    </ul>
-    <div *ngIf="editMode">
-      <input class="form-control mb-1" [(ngModel)]="newExperience.poste" placeholder="Poste">
-      <input class="form-control mb-1" [(ngModel)]="newExperience.entreprise" placeholder="Entreprise">
-      <input class="form-control mb-1" [(ngModel)]="newExperience.duree" placeholder="Durée">
-      <button class="btn btn-sm btn-success" (click)="addExperience(experience)">+ Ajouter</button>
-    </div>
-  </div>
-
-
-
+<!-- 🧳 Expériences -->
 <div class="section">
-  <h4>Formations</h4>
-  <ul>
-    <li *ngFor="let f of candidat?.formations; let i = index">
-      🎓 {{ f.diplome }} - {{ f.ecole }} ({{ f.annee }})
-      <span *ngIf="editMode" (click)="removeFormation(i)" style="cursor:pointer">❌</span>
+  <h4>🧳 Expériences professionnelles</h4>
+
+  <ul class="experience-list">
+    <li *ngFor="let e of candidat?.experiences; let i = index" class="experience-item">
+      <div>
+        <b class="poste">{{ e.poste }}</b>
+        <span class="entreprise">chez {{ e.entreprise }}</span>
+        <span class="duree">({{ e.duree }})</span>
+      </div>
+
+      <span *ngIf="editMode" class="delete-btn" (click)="removeExperience(i)">❌</span>
     </li>
   </ul>
-  <div *ngIf="editMode">
-    <input class="form-control mb-1" [(ngModel)]="newFormation.diplome" placeholder="Diplôme">
-    <input class="form-control mb-1" [(ngModel)]="newFormation.ecole" placeholder="École">
-    <input class="form-control mb-1" [(ngModel)]="newFormation.annee" placeholder="Année">
-    <button class="btn btn-sm btn-success" (click)="addFormation()">+ Ajouter</button>
+
+  <div *ngIf="editMode" class="edit-section mt-2">
+    <input class="form-control mb-1" [(ngModel)]="newExperience.poste" placeholder="Poste occupé">
+    <input class="form-control mb-1" [(ngModel)]="newExperience.entreprise" placeholder="Nom de l'entreprise">
+    <input class="form-control mb-1" [(ngModel)]="newExperience.duree" placeholder="Durée (ex : 2020 - 2023)">
+    <button class="btn btn-sm btn-success w-100" (click)="addExperience(newExperience)">+ Ajouter une expérience</button>
+  </div>
+</div>
+
+<!-- 🎓 Formations -->
+<div class="section mt-4">
+  <h4>🎓 Formations</h4>
+
+  <ul class="formation-list">
+    <li *ngFor="let f of candidat?.formations; let i = index" class="formation-item">
+      <div>
+        <b class="diplome">{{ f.diplome }}</b> — 
+        <span class="ecole">{{ f.ecole }}</span>
+        <span class="annee">({{ f.annee }})</span>
+      </div>
+
+      <span *ngIf="editMode" class="delete-btn" (click)="removeFormation(i)">❌</span>
+    </li>
+  </ul>
+
+  <div *ngIf="editMode" class="edit-section mt-2">
+    <input class="form-control mb-1" [(ngModel)]="newFormation.diplome" placeholder="Diplôme ou certificat">
+    <input class="form-control mb-1" [(ngModel)]="newFormation.ecole" placeholder="Établissement / École">
+    <input class="form-control mb-1" [(ngModel)]="newFormation.annee" placeholder="Année ou période">
+    <button class="btn btn-sm btn-success w-100" (click)="addFormation()">+ Ajouter une formation</button>
   </div>
 </div>
 
