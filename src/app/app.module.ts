@@ -66,6 +66,9 @@ import { ProfilComponentEntreprise } from './espace_entreprise/profil-entreprise
 import { DetailEntrepriseComponent } from './espace_admin/detail-entreprise/detail-entreprise.component';
 
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environments/environment';
 
 
 registerLocaleData(localeFr);
@@ -141,6 +144,8 @@ export function HttpLoaderFactory(http: HttpClient) {
      ReactiveFormsModule, 
     HttpClientModule,FontAwesomeModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right', // Position des messages toast
       timeOut: 3000, // Temps d'affichage en millisecondes

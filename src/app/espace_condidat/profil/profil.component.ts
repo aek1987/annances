@@ -53,7 +53,7 @@ if (this.candidat) {
     try {
       const texte = await this.pdfReader.extraireTexte(file);
       const infos = this.cvParser.extraireInformations(texte);
-      //console.log('📄 Infos détectées depuis le CV :', infos);
+         console.log('📄 Infos détectées depuis le CV :', infos);
 
       // auto-remplissage partiel
       this.candidat!.username = infos.nom || this.candidat!.username;
@@ -66,6 +66,7 @@ if (this.candidat) {
       this.candidat!.experiences = infos.experiences || this.candidat!.experiences;
 
     //  this.candidat!.formations = infos.formations || this.candidat!.competences;
+    
 
       alert('✅ CV analysé avec succès ! Informations ajoutées.');
     //  this.updateProgression();

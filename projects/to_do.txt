@@ -17,7 +17,7 @@ creatio de compte entrprise ou condidate
 /****************************/
 espace admin
 Statistiques get vrai Statistiques
-Actions rapide l"alignement
+
 creation de compte et recuperaton de mot pass par gmail
 
 espace candidat 
@@ -38,7 +38,8 @@ Sauvegarde des offres (favoris)
 epcase de entreprise 
 ********************************************
 
-creation de nouvell entreprise 
+on ne peut pas ajouter un offre si le status n'est pas active 
+agouter logon 
 la gard espace entre prise
  parameter aucun
 Fonctionnalités supplémentaires

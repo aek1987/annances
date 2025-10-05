@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service'; // Service d'authentification
 import { Router } from '@angular/router';
 import { AlertService } from '../service/alerte-service.service';
+import { AuthgService } from '../service/google/authg.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class LoginComponent {
     password: ''
   };
 
-  constructor(private authService: AuthService, private router: Router,public  alertService :AlertService) {}
+  constructor(private authService: AuthService, private authServiceg: AuthgService,private router: Router,public  alertService :AlertService) {}
 errorMessage: string = '';
   onSubmit() {
   this.errorMessage = ''; // reset erreur avant chaque tentative
@@ -71,5 +72,9 @@ errorMessage: string = '';
     }
   });
 }
-
+ loginWithGoogle() {
+    this.authServiceg.loginWithGoogle()
+      .then(res => console.log('Utilisateur connecté avec Google:', res.user))
+      .catch(err => console.error(err));
+  }
 }
