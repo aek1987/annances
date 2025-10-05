@@ -1,12 +1,12 @@
 <div class="modal" *ngIf="candidat">
   <div class="modal-content p-3">
     <span class="close" (click)="fermer()">&times;</span>
-    <h4>{{ candidat?.username }}</h4>
-    <p>Email: {{ candidat?.email }}</p>
-    <p>Fonction: {{ candidat?.fonction }}</p>
-    <p>Statut: {{ candidat?.status }}</p>
-    <p>Téléphone: {{ candidat?.phone }}</p>
-    <p>Compétences: {{ candidat?.competences}}
+    <h4>{{ candidat.username }}</h4>
+    <p>Email: {{ candidat.email }}</p>
+    <p>Fonction: {{ candidat.fonction }}</p>
+    <p>Statut: {{ candidat.status }}</p>
+    <p>Téléphone: {{ candidat.phone }}</p>
+    <p>Compétences: {{ candidat.competences}}
     <h5>Expériences:</h5>
     <ul>
       <li *ngFor="let e of candidat?.experiences">

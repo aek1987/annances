@@ -118,8 +118,21 @@
   </div>
 </div>
 
+<div class="section">
+  <h4>Langues maîtrisées</h4>
 
+  <div class="langues">
+    <span *ngFor="let l of candidat?.langues; let i = index" class="badge bg-info text-dark m-1">
+      {{ l }}
+      <span *ngIf="editMode" (click)="removeLangue(i)" style="cursor:pointer">❌</span>
+    </span>
+  </div>
 
+  <div *ngIf="editMode" class="mt-2">
+    <input class="form-control" [(ngModel)]="newLangue" placeholder="Ajouter une langue (ex: Français, Anglais)">
+    <button class="btn btn-sm btn-success mt-1" (click)="addLangue()">+ Ajouter</button>
+  </div>
+</div>
 
   <!-- Actions -->
   <div class="text-center mt-3">

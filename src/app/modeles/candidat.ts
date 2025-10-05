@@ -18,5 +18,6 @@ export interface Candidat {
   cv: string; ///🔹 chemin ou URL du CV
   adresse?: string; 
   formations: Formation[];
+  langues?: string[]; 
 
 }

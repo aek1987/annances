@@ -4,6 +4,8 @@ import { Candidat } from 'src/app/modeles/candidat';
 import { Experience } from 'src/app/modeles/experience';
 import { Formation } from 'src/app/modeles/Formation';
 import { CandidatService } from 'src/app/service/candidate.service';
+import { CvParserService } from 'src/app/service/cv/cv-parser.service';
+import { PdfReaderService } from 'src/app/service/cv/pdf-reader.service';
 
 
 
@@ -19,8 +21,9 @@ export class ProfilComponent {
   newExperience: Experience = { poste: '', entreprise: '', duree: '' };   
   newFormation: Formation = {  diplome: '',   ecole: '',    annee: ''  };
   experience: Experience = { poste: '', entreprise: '', duree: '' }//aucun idee
-  
-  constructor(private router: Router,private candidatService :CandidatService ) 
+  cvText: string = '';
+  newLangue: string = '';
+  constructor(private router: Router,private candidatService :CandidatService,private pdfReader: PdfReaderService ,private cvParser: CvParserService) 
   {}  
  
    ngOnInit() {
@@ -41,6 +44,40 @@ if (this.candidat) {
   }*/
  
 }
+
+ // ✅ Gestion des fichiers PDF CV
+  async onCvUpload(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    try {
+      const texte = await this.pdfReader.extraireTexte(file);
+      const infos = this.cvParser.extraireInformations(texte);
+      //console.log('📄 Infos détectées depuis le CV :', infos);
+
+      // auto-remplissage partiel
+      this.candidat!.username = infos.nom || this.candidat!.username;
+      this.candidat!.email = infos.email || this.candidat!.email;
+      this.candidat!.phone = infos.telephone || this.candidat!.phone;
+      this.candidat!.competences = infos.competences || this.candidat!.competences;
+    //  this.candidat!.formations = infos.formations || this.candidat!.competences;
+
+      alert('✅ CV analysé avec succès ! Informations ajoutées.');
+    //  this.updateProgression();
+    } catch (error) {
+      console.error('Erreur lecture CV :', error);
+      alert('❌ Erreur lors de l’analyse du CV.');
+    }
+  }
+
+  extraireInfosCandidat(texte: string) {
+    // Exemple très simple (tu peux améliorer avec des regex)
+    const email = texte.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/);
+    const phone = texte.match(/\+?\d[\d\s().-]{7,}/);
+
+    console.log('📧 Email détecté :', email ? email[0] : 'Aucun');
+    console.log('📞 Téléphone détecté :', phone ? phone[0] : 'Aucun');
+  }
 get candidatSafe(): Candidat {
   return this.candidat ?? { 
     refId: 0,
@@ -128,32 +165,23 @@ removeFormation(index: number) {
   }
 }
 // 
-onCvUpload(event: Event) {
-  const input = event.target as HTMLInputElement;
-  if (input.files && input.files.length > 0) {
-    const file = input.files[0];
 
-    if (file.type !== 'application/pdf') {
-      alert('Seuls les fichiers PDF sont acceptés');
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (this.candidat) {
-        // On stocke le contenu du PDF en base64 (ou en URL si backend)
-        this.candidat.cv = reader.result as string;
-        
-      }
-    };
-    reader.readAsDataURL(file); // encode en Base64
-  }
-}
 get progression(): number {
   if (!this.candidat) return 0;
   return this.candidatService.getProgression(this.candidat);
 }
 
+
+addLangue() {
+  if (this.newLangue.trim()) {
+  //  this.candidat?.langues.push(this.newLangue.trim());
+    this.newLangue = '';
+  }
+}
+
+removeLangue(index: number) {
+ // this.candidat?.langues.splice(index, 1);
+}
 
 }
 
