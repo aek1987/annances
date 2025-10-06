@@ -57,14 +57,10 @@ import { Offre } from '../modeles/offres';
   }
 
   // ✅ Ajouter une offre
-  addOffre(offre: Omit<Offre, 'id' | 'datePublication'>): Offre {
-    const newOffre: Offre = {
-      ...offre,
-      id: this.nextId++,
-      datePublication: new Date()
-    };
-    this.offres.push(newOffre);
-    return newOffre;
+  addOffre(newoffre:Offre): Offre [] {
+  
+    this.offres.push(newoffre);  return this.offres
+    
   }
 
   // ✅ Modifier une offre

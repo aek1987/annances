@@ -4,7 +4,7 @@ fixer ensemble de secteur
 reponsive design
 loging par email
 
-goToJobs()  greeting page
+
 Création de compte candidat avec profil vide 
 remplisage de profile
 Suivi des candidatures (postulé / en cours / accepté / refusé).  pour candit 
