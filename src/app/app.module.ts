@@ -69,6 +69,9 @@ import { DetailEntrepriseComponent } from './espace_admin/detail-entreprise/deta
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
+import { OffreDetailVisiteurComponent } from './espace-visiteur/offre-detail-visiteur/offre-detail-visiteur.component';
+
+
 
 
 registerLocaleData(localeFr);
@@ -117,6 +120,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     OffresEmploiComponent,
     AbonneeComponent,
     OffreDetailComponent,
+    OffreDetailVisiteurComponent,
     OffreVisiteurComponent,
     LayoutVisteurComponent,
     SidebarVisiteurComponent,

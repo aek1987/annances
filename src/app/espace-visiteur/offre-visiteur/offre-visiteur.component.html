@@ -2,7 +2,7 @@
 
 
   <!-- 📄 Contenu principal -->
-  <main class="main-content">
+  <main class="content-offres-liste">
 
 
     <!-- 👋 Message d'accueil pour visiteur -->
@@ -81,7 +81,7 @@
       <div class="offre-card" *ngFor="let offre of filteredOffres">
         <div class="offre-header">
       <h3>{{ offre.poste }}</h3>
-      <a class="details-link" [routerLink]="['/candidat/offre', offre.id]">Détails</a>
+      <a class="details-link" [routerLink]="['/visiteur/offre', offre.id]">Détails</a>
         </div>
        
         <p><b>Lieu :</b> {{ offre.localisation }}</p>
@@ -97,12 +97,7 @@
         
         <div class="actions">       
           
-          <button (click)="postuler(offre)">
-            {{ offre.status ? offre.status : 'Postuler' }}
-          </button>
-          <button (click)="toggleFavori(offre)">
-            {{ offre.favori ? '★ Retirer Favori' : '☆ Ajouter Favori' }}
-          </button>
+        
         </div>        
       </div>
     </div>

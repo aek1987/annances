@@ -45,6 +45,8 @@ import { NosPartenairesComponent } from './partenaire/nos-partenaires/nos-parten
 import { StagesComponent } from './partenaire/stages/stages.component';
 import { ProfilComponentEntreprise } from './espace_entreprise/profil-entreprise/profi-entreprise.component';
 import { DetailEntrepriseComponent } from './espace_admin/detail-entreprise/detail-entreprise.component';
+import { OffreDetailVisiteurComponent } from './espace-visiteur/offre-detail-visiteur/offre-detail-visiteur.component';
+
 
 
 const routes: Routes = [
@@ -75,7 +77,8 @@ const routes: Routes = [
   children: [
     { path: '', component: OffreVisiteurComponent }, // par défaut
     { path: 'aide-support', component: AideSupportComponent },
-    { path: 'success-stories', component: SuccessStoriesComponent }
+    { path: 'success-stories', component: SuccessStoriesComponent },
+    { path: 'offre/:id', component: OffreDetailVisiteurComponent }
   ]
 },
   // Partie espace candidat

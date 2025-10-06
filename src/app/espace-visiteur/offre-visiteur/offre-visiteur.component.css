@@ -1,11 +1,9 @@
 /* 🔹 Contenu principal */
-.main-content {
-  flex: 1;
-  padding: 20px;
-  margin: 0;               /* supprime les espaces autour */
-  margin-left: 260px;      /* largeur sidebar si elle est à gauche */
+.content-offres-liste {
+  padding: 0px;
+  background-color: #f9fafb;
+  min-height: 100vh;
 }
-
 /* 🔹 Message d'accueil visiteur collé sous la navbar */
 .welcome-visitor {
   margin-top: 0;           /* pas d’espace en haut */
@@ -85,8 +83,7 @@
   flex-direction: column;
     height: 100%;  /* occupe toute la hauteur */
   background: #fff;
-  flex-direction: column;   /* contenu en colonne */
- 
+  flex-direction: column;   /* contenu en colonne */ 
   border-radius: 10px;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;

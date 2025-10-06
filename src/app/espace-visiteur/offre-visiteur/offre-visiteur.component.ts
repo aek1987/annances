@@ -3,7 +3,6 @@ import { Candidat } from 'src/app/modeles/candidat';
 import { Candidature } from 'src/app/modeles/candidature';
 import { Entreprise } from 'src/app/modeles/entreprise';
 import { Offre } from 'src/app/modeles/offres';
-import { CandidatService } from 'src/app/service/candidate.service';
 import { CandidatureService } from 'src/app/service/candidature.service';
 import { EntrepriseService } from 'src/app/service/entreprise.service';
 import { OffresService } from 'src/app/service/offres.service';
@@ -37,7 +36,7 @@ candidatures: Candidature[] = [];
 entrepise: Entreprise  | undefined
 newSkill: string = '';
 offres: Offre[] = [];
-  constructor(private offreService: OffresService,private entrepriseService :EntrepriseService ,  private candidatService: CandidatService,
+  constructor(private offreService: OffresService,private entrepriseService :EntrepriseService ,  
  private candidature: CandidatureService
 
   ) {}
@@ -164,6 +163,10 @@ applyFilters() {
   return entrepise;
 
   }
+gotodetail(offre :Offre){
 
+//this.router.navigate(['/offre-detail', offre.id]);
+console.log("offree selectione par visiteur "+offre.id);
+}
 }
 
