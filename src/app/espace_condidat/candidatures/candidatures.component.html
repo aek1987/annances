@@ -8,13 +8,16 @@
   <div class="candidature-list" *ngIf="candidatures.length > 0">
     <div *ngFor="let c of candidatures" class="candidature-card">
       
-      <!-- ✅ En-tête -->
+      <!-- En-tête -->
       <div class="candidature-header">
-        <h3>{{ (c.offreId) || 'Titre Offre' }}</h3>
+        <div class="title">
+          <h3>{{getOffre(c.id)?.poste || 'Titre Offre' }}</h3>
+       <!--  <p class="entreprise">{{ getEntreprise(getOffre(c.id)?.entrepriseId)?.username || 'Entreprise' }}</p>-->
+        </div>
         <span class="statut" [ngClass]="c.statut.toLowerCase()">{{ c.statut }}</span>
       </div>
 
-      <!-- ✅ Timeline -->
+      <!-- Timeline -->
       <div class="timeline">
         <div *ngFor="let etape of etapes; let i = index" 
              class="etape"
@@ -24,13 +27,15 @@
         </div>
       </div>
 
-      <!-- ✅ Infos -->
+      <!-- Infos complémentaires -->
       <div class="candidature-body">
         <p><b>Date :</b> {{ c.dateCandidature | date:'mediumDate' }}</p>
+        <p *ngIf="getOffre(c.id)?.localisation"><b>Localisation :</b> {{ getOffre(c.id)?.localisation }}</p>
+        <p *ngIf="getOffre(c.id)?.contrat"><b>Contrat :</b> {{ getOffre(c.id)?.contrat }}</p>
         <p *ngIf="c.message"><b>Message :</b> {{ c.message }}</p>
       </div>
 
-      <!-- ✅ Actions -->
+      <!-- Actions -->
       <div class="actions">
         <button class="btn btn-view" (click)="voirDetails(c)">👁 Voir détails</button>
         <button class="btn btn-cancel" (click)="annulerCandidature(c.id)">❌ Annuler</button>

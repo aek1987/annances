@@ -1,134 +1,110 @@
-
-  /* Photo principale */
-  .candidat-photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 4px solid #3498db;
-    object-fit: cover;
-    margin-bottom: 10px;
-    transition: transform 0.3s;
-
-   /* &:hover {
-      transform: scale(1.05);
-    }*/
-  }
-
-  h2 {
-    margin: 10px 0 5px;
-    font-weight: bold;
-    color: #2c3e50;
-  }
-
-  .text-muted {
-    color: #7f8c8d;
-    font-size: 0.95rem;
-  }
-
-  /* Choix rapide de photo */
-  .photo-options {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
-
-    .option-photo {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: border 0.3s, transform 0.3s;
-
-  /*    &:hover {
-        border: 2px solid #3498db;
-        transform: scale(1.1);
-      }*/
-    }
-  
-
-  /* Progression */
-  .progress-container {
-    margin: 20px 0;
-
- /*   label {
-      font-weight: 500;
-      color: #34495e;
-    }*/
-
-    .progress-bar {
-      background: #ecf0f1;
-      border-radius: 8px;
-      overflow: hidden;
-      height: 15px;
-      margin: 8px 0;
-
-      .progress-fill {
-        height: 100%;
-        background: linear-gradient(90deg, #3498db, #2ecc71);
-        transition: width 0.4s ease-in-out;
-      }
-    }
-  }
-
-  /* Statut profil */
-  .status-active {
-    color: #27ae60;
-    font-weight: 500;
-  }
-
-  .status-inactive {
-    color: #e67e22;
-    font-weight: 500;
-  }
-   .status-pending {
-    color: #2927ae;
-    font-weight: 500;
-  }
-
-  /* Sections */
-  .section {
-    margin: 25px 0;
-    padding: 15px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
-
-  /*  h4 {
-      border-left: 4px solid #3498db;
-      padding-left: 10px;
-      margin-bottom: 10px;
-      font-weight: 600;
-      color: #2c3e50;
-    }*/
-  }
-
-  /* Compétences badges */
-  .skills {
-    .badge {
-      font-size: 0.85rem;
-      padding: 8px 12px;
-      border-radius: 6px;
-      background: #3498db;
-      color: #fff;
-      cursor: default;
-    }
-  }
-
-  /* Boutons actions
-  .text-center {
-    .btn {
-      margin: 5px;
-      padding: 10px 20px;
-      font-weight: 500;
-    }
-
-    .retour-btn {
-      margin-top: 10px;
-    }
-  }*/
+/* Photo principale */
+.candidat-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #3498db;
+  object-fit: cover;
+  margin-bottom: 10px;
+  transition: transform 0.3s;
 }
 
+.candidat-photo:hover {
+  transform: scale(1.05);
+}
 
+/* Conteneur principal (ne plus centrer) */
+.text-center {
+  text-align: left; /* Aligne tout à gauche */
+}
 
+/* Tous les boutons */
+.text-center button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-weight: 500;
+  text-align: left; 
+}
 
+/* Bouton retour spécifique */
+.text-center .retour-btn {
+  margin-top: 10px;
+}
+
+/* Options de photo */
+.photo-options {
+  display: flex;
+  gap: 10px; /* espace entre les photos */
+  justify-content: flex-start; /* aligné à gauche */
+  margin-top: 10px;
+}
+
+.option-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid transparent;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.option-photo:hover {
+  transform: scale(1.1);
+  border-color: #3498db;
+}
+
+/* Titres et texte */
+h2 {
+  margin: 10px 0 5px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.text-muted {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+}
+
+/* Progression */
+.progress-container {
+  margin: 20px 0;
+}
+
+.progress-bar {
+  background: #ecf0f1;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 15px;
+  margin: 8px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  transition: width 0.4s ease-in-out;
+}
+
+/* Statut profil */
+.status-active { color: #27ae60; font-weight: 500; }
+.status-inactive { color: #e67e22; font-weight: 500; }
+.status-pending { color: #2927ae; font-weight: 500; }
+
+/* Sections */
+.section {
+  margin: 25px 0;
+  padding: 15px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+/* Compétences badges */
+.skills .badge {
+  font-size: 0.85rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #3498db;
+  color: #fff;
+  cursor: default;
+}

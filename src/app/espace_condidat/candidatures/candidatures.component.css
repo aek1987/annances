@@ -2,86 +2,126 @@
   max-width: 900px;
   margin: auto;
   padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
+/* Carte candidature */
 .candidature-card {
   background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
   padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0px 3px 8px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
+  transition: transform 0.2s;
 }
 
+.candidature-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Header carte */
 .candidature-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 15px;
+}
+
+.candidature-header .title h3 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+.candidature-header .title .entreprise {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin-top: 3px;
 }
 
 .statut {
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 0.9rem;
-  text-transform: capitalize;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #fff;
 }
 
-.statut.en attente { background: #ffeeba; color: #856404; }
-.statut.entretien { background: #cce5ff; color: #004085; }
-.statut.acceptée { background: #d4edda; color: #155724; }
-.statut.refusée { background: #f8d7da; color: #721c24; }
-.statut.finalisé { background: #e2e3e5; color: #383d41; }
+/* Statut couleurs */
+.statut.en-attente { background: #f0ad4e; }
+.statut.en-cours { background: #0275d8; }
+.statut.acceptee { background: #5cb85c; }
+.statut.refusee { background: #d9534f; }
+.statut.finalisee { background: #6c757d; }
 
-/* ✅ Timeline */
+/* Timeline */
 .timeline {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0;
-  position: relative;
-}
-
-.timeline::before {
-  content: "";
-  position: absolute;
-  top: 18px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: #ddd;
-  z-index: 1;
+  margin: 15px 0;
 }
 
 .etape {
-  text-align: center;
-  flex: 1;
-  position: relative;
-  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 18%;
 }
 
 .etape .circle {
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  background: #ddd;
-  display: inline-block;
+  background: #ccc;
   color: #fff;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  font-size: 0.8rem;
 }
 
 .etape.active .circle {
-  background: #007bff;
+  background: #3498db;
 }
 
 .etape .label {
-  display: block;
-  margin-top: 8px;
-  font-size: 0.85rem;
-  color: #555;
+  font-size: 0.75rem;
+  text-align: center;
 }
 
-.etape.active .label {
-  font-weight: bold;
-  color: #007bff;
+/* Infos candidature */
+.candidature-body p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+/* Boutons actions */
+.actions {
+  margin-top: 15px;
+}
+
+.actions button {
+  margin-right: 10px;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+}
+
+.btn-view { background: #3498db; color: #fff; }
+.btn-view:hover { background: #2980b9; }
+
+.btn-cancel { background: #e74c3c; color: #fff; }
+.btn-cancel:hover { background: #c0392b; }
+
+/* Etat vide */
+.empty-state {
+  text-align: center;
+  color: #7f8c8d;
+  margin-top: 50px;
 }

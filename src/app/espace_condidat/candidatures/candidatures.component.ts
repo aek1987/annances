@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Candidat } from 'src/app/modeles/candidat';
 import { Candidature } from 'src/app/modeles/candidature';
+import { Entreprise } from 'src/app/modeles/entreprise';
+import { Offre } from 'src/app/modeles/offres';
 import { CandidatService } from 'src/app/service/candidate.service';
 import { CandidatureService } from 'src/app/service/candidature.service';
+import { EntrepriseService } from 'src/app/service/entreprise.service';
+import { OffresService } from 'src/app/service/offres.service';
 
 
 
@@ -15,15 +19,13 @@ import { CandidatureService } from 'src/app/service/candidature.service';
 export class CandidaturesComponent implements OnInit {
  candidatConnecte: Candidat | null = null;
   candidatures: Candidature[] = [];
-  etapes = ['en attente', 'entretien', 'acceptée', 'refusée', 'finalisé'];
- constructor(  private candidatService: CandidatService,
- private candidature: CandidatureService
+  etapes = ['en attente', 'analyse', 'acceptée', 'refusée', 'finalisé'];
+ constructor(  private candidatService: CandidatService,private offresService:OffresService,
+ private candidature: CandidatureService,  private entrepriseService: EntrepriseService,
 
   ) {}
   ngOnInit(): void {
-    
-
-    this.candidatConnecte = this.candidatService.getCandidatConnecte();
+        this.candidatConnecte = this.candidatService.getCandidatConnecte();
     console.log("condidat name  "+this.candidatConnecte?.username +" id= "+this.candidatConnecte?.refId);
  if (this.candidatConnecte) {
       // Récupérer toutes les candidatures du candidat
@@ -46,17 +48,18 @@ export class CandidaturesComponent implements OnInit {
    //lert(`Détails candidature : ${candidature.poste} chez ${candidature.entreprise}`);
   }
 
-  /*etOffre(offreId: number): Offre | undefined {
-  //return this.offres.find(o => o.id === offreId);
+  getOffre(offreId: number): Offre | undefined {
+  return this.offresService.getOffreById(offreId);
   }
-
+/*
   getOffreTitre(offreId: number): string {
    ///nst offre = this.getOffre(offreId);
    //eturn offre ? offre.titre : 'Offre supprimée';
-  }
-
-  getOffreEntreprise(offreId: number): string {
-  //const offre = this.getOffre(offreId);
-  //return offre ? offre.entreprise : 'N/A';
   }*/
+
+  // Récupérer toute l’entreprise (logo, site, etc.)
+  getEntreprise(entrepriseId: number): Entreprise | undefined {
+   return this.entrepriseService.getEntrepriseById(entrepriseId);
+ }
+ 
 }

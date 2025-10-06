@@ -184,7 +184,7 @@ private offres: Offre[] = [
     return this.offres;
   }
 
-  // ✅ Récupérer une offre par ID
+  // ✅ Récupérer une offre par ID id de offre 
   getOffreById(id: number): Offre | undefined {
     return this.offres.find(o => o.id === id);
   }
