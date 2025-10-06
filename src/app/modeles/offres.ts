@@ -10,6 +10,7 @@ export interface Offre {
   contrat?: string;          // CDI, CDD, Stage, Remote...
   datePublication: Date;     // Date ajout
   favori?: boolean;
+  teletravail?: string;
   status?: 'postulé' | 'en cours' | 'accepte' | 'refuse';
   niveauExperience?: 'Junior' | 'Intermédiaire' | 'Senior' | 'Lead';
   competences?: string[];
