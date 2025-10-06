@@ -13,9 +13,9 @@ import { OffresService } from 'src/app/service/offres.service';
 })
 export class OffreDetailComponent implements OnInit {
   @Input() offre?: Offre;
-  entreprises: Entreprise[] = [];
+  
   offresSimilaires: Offre[] = [];
-
+  entrprise:Entreprise | undefined;
   constructor(
     private offreService: OffresService,
     private entrepriseService: EntrepriseService,
@@ -24,13 +24,15 @@ export class OffreDetailComponent implements OnInit {
 
   ngOnInit(): void {
     // Charger toutes les entreprises
-    this.entreprises = this.entrepriseService.getEntreprises();
+  
 
     // Vérifier si on récupère une offre par ID depuis l’URL
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       const offreId = Number(id);
       this.offre = this.offreService.getOffreById(offreId);
+      if(this.offre)
+      this.entrprise= this.getEntreprise(this.offre.entrepriseId);
 
       // Charger les offres similaires
       if (this.offre) {
@@ -39,16 +41,12 @@ export class OffreDetailComponent implements OnInit {
     }
   }
 
-  // Récupérer le nom de l’entreprise
-  getEntrepriseNom(entrepriseId: number): string {
-    const entreprise = this.entreprises.find(e => e.id === entrepriseId);
-    return entreprise ? entreprise.username : 'Entreprise inconnue';
-  }
-
+  
   // Récupérer toute l’entreprise (logo, site, etc.)
-  getEntreprise(entrepriseId: number): Entreprise | undefined {
-    return this.entreprises.find(e => e.id === entrepriseId);
-  }
+ getEntreprise(entrepriseId: number): Entreprise | undefined {
+  return this.entrepriseService.getEntrepriseById(entrepriseId);
+}
+
 
   // Postuler à une offre
   postuler(offre: Offre): void {

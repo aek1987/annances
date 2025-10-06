@@ -1,13 +1,19 @@
 <div class="offre-container" *ngIf="offre">
   <!-- En-tête avec logo et titre -->
   <div class="entreprise-header">
-    <img *ngIf="getEntreprise(offre.entrepriseId)?.logo" 
-         [src]="getEntreprise(offre.entrepriseId)?.logo" 
+    <img *ngIf="entrprise?.logo" 
+         [src]="entrprise?.logo" 
          alt="Logo entreprise" 
          class="logo-entreprise">
     <div>
-      <h2 class="titre-offre">{{ getEntrepriseNom(offre.entrepriseId) }}</h2>
-      <p class="nom-entreprise">{{ offre.poste }}</p>
+      <h2 class="titre-offre">{{ entrprise?.username }}</h2>
+       <p class="nom-entreprise">secteur {{ entrprise?.secteur }}</p>
+       <p class="nom-entreprise">
+  🌐 <a [href]="entrprise?.site" target="_blank" rel="noopener noreferrer">
+    {{ entrprise?.site }}
+  </a>
+</p>
+
     </div>
   </div>
  <!-- Description du poste -->
@@ -15,6 +21,8 @@
     <h3>{{offre.poste}}</h3>
    
   </div>
+
+
   <!-- Tags d’infos principales -->
   <div class="tags">
     <span class="tag"><i class="fas fa-map-marker-alt"></i> {{ offre.localisation }}</span>
@@ -25,10 +33,20 @@
   </div>
 
   <p>{{ offre.description }}</p>
+   <!-- Missions principales -->
+  <div class="section missions" *ngIf="offre.missions?.length">
+    <h3> Missions principales</h3>
+    <ul>
+      <li *ngFor="let mission of offre.missions">
+        <i class="fas fa-check-circle mission-icon"></i>
+        {{ mission }}
+      </li>
+    </ul>
+  </div>
 
  <!-- Compétences requises -->
 <div class="section" *ngIf="offre.competences?.length">
-  <h3>🛠 Compétences requises</h3>
+  <h3> Compétences requises</h3>
   <div class="badges">
     <span class="badge" *ngFor="let comp of offre.competences ?? []">
       {{ comp }}
@@ -38,7 +56,7 @@
 
 <!-- Langues -->
 <div class="section" *ngIf="offre.langues?.length">
-  <h3>🌍 Langues demandées</h3>
+  <h3> Langues demandées</h3>
   <ul>
     <li *ngFor="let lang of offre.langues ?? []">
       {{ lang }}
@@ -48,7 +66,7 @@
 
 <!-- Avantages -->
 <div class="section" *ngIf="offre.avantages?.length">
-  <h3>🎁 Avantages proposés</h3>
+  <h3> Avantages proposés</h3>
   <ul>
    
       ✔ {{offre.avantages }}

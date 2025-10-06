@@ -9,6 +9,12 @@ private offres: Offre[] = [
     entrepriseId: 101,
     poste: 'Développeur Angular',
     description: 'Développement d’applications Angular 16 avec intégration REST et gestion des états.',
+    missions: [
+      'Développer et maintenir des applications Angular 16',
+      'Intégrer des API REST et gérer les états de l’application',
+      'Collaborer avec l’équipe backend pour assurer la cohérence des fonctionnalités',
+      'Participer aux revues de code et aux tests unitaires'
+    ],
     localisation: 'Paris',
     salaire: 40000,
     contrat: 'CDI',
@@ -27,6 +33,12 @@ private offres: Offre[] = [
     entrepriseId: 101,
     poste: 'Data Analyst',
     description: 'Analyse et visualisation des données financières pour prise de décision.',
+    missions: [
+      'Collecter et analyser les données financières',
+      'Créer des tableaux de bord et rapports Power BI/Excel',
+      'Identifier les tendances et recommander des actions',
+      'Collaborer avec les équipes finance et marketing'
+    ],
     localisation: 'Lyon',
     salaire: 35000,
     contrat: 'CDD',
@@ -45,6 +57,12 @@ private offres: Offre[] = [
     entrepriseId: 101,
     poste: 'Développeur Java',
     description: 'Développement backend avec Spring Boot, intégration API et tests unitaires.',
+    missions: [
+      'Développer et maintenir des applications backend avec Spring Boot',
+      'Intégrer et sécuriser des API REST',
+      'Écrire des tests unitaires et fonctionnels',
+      'Participer aux revues de code et à la documentation technique'
+    ],
     localisation: 'Remote',
     salaire: 42000,
     contrat: 'Remote',
@@ -60,9 +78,15 @@ private offres: Offre[] = [
   },
   {
     id: 4,
-    entrepriseId: 101,
+    entrepriseId: 102,
     poste: 'UX/UI Designer',
     description: 'Conception et prototypage d’interfaces web et mobile.',
+    missions: [
+      'Concevoir des maquettes et prototypes interactifs',
+      'Collaborer avec les équipes produit et développement',
+      'Effectuer des tests utilisateurs et recueillir des retours',
+      'Maintenir une cohérence visuelle sur tous les supports'
+    ],
     localisation: 'Marseille',
     salaire: 38000,
     contrat: 'CDI',
@@ -78,9 +102,15 @@ private offres: Offre[] = [
   },
   {
     id: 5,
-    entrepriseId: 1101,
+    entrepriseId: 102,
     poste: 'Chef de projet IT',
     description: 'Gestion de projets informatiques, coordination des équipes et planning.',
+    missions: [
+      'Planifier et suivre les projets IT',
+      'Coordonner les équipes techniques et métiers',
+      'Assurer le respect des délais et budgets',
+      'Gérer les risques et rédiger les rapports de projet'
+    ],
     localisation: 'Toulouse',
     salaire: 50000,
     contrat: 'CDI',
@@ -96,9 +126,15 @@ private offres: Offre[] = [
   },
   {
     id: 6,
-    entrepriseId:101,
+    entrepriseId: 102,
     poste: 'Consultant Cloud',
     description: 'Implémentation et optimisation des solutions cloud AWS/Azure.',
+    missions: [
+      'Déployer et configurer des solutions cloud AWS/Azure',
+      'Optimiser les performances et la sécurité',
+      'Automatiser les processus avec DevOps et Docker',
+      'Conseiller les clients sur les meilleures pratiques cloud'
+    ],
     localisation: 'Remote',
     salaire: 45000,
     contrat: 'Freelance',
@@ -114,9 +150,15 @@ private offres: Offre[] = [
   },
   {
     id: 7,
-    entrepriseId: 101,
+    entrepriseId: 103,
     poste: 'Marketing Digital',
     description: 'Gestion des campagnes marketing, SEO/SEA et analyse des KPI.',
+    missions: [
+      'Planifier et exécuter des campagnes marketing',
+      'Optimiser le référencement SEO/SEA',
+      'Analyser les KPI et produire des rapports',
+      'Gérer les réseaux sociaux et la publicité en ligne'
+    ],
     localisation: 'Bordeaux',
     salaire: 32000,
     contrat: 'Stage',
@@ -131,6 +173,7 @@ private offres: Offre[] = [
     favori: false
   }
 ];
+
 
   
 
