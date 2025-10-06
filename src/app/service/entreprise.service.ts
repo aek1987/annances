@@ -20,7 +20,7 @@ export class EntrepriseService {
     site: 'https://www.techcorp.com'
   },
   {
-    id: 101,
+    id: 102,
     username: 'Foodly Group', 
     email: 'jobs@foodly.com',
     status: 'active',
@@ -31,7 +31,7 @@ export class EntrepriseService {
     site: 'https://www.foodly.com'
   },
   {
-    id: 102,
+    id: 103,
     username: 'GreenTech Solutions', 
     email: 'contact@greentech.com',
     status: 'active',
@@ -42,7 +42,7 @@ export class EntrepriseService {
     site: 'https://www.greentech.com'
   },
   {
-    id: 103, 
+    id: 104, 
     username: 'MediCare', 
     email: 'recrutement@medicare.com',
     status: 'active', 
@@ -61,7 +61,7 @@ export class EntrepriseService {
   getEntrepriseConnectee(): Entreprise | null {
     const account = this.authService.getUser();
     if (!account || account.role !== 'entreprise') return null;
-
+      console.log('go  navigateur to getUser():', account);
     // Cherche l’entreprise correspondante
     const entreprise = this.entreprises.find(e => e.id === account.refId);
     return entreprise || null;

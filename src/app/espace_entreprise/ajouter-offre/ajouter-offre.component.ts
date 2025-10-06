@@ -1,8 +1,11 @@
 // src/app/components/ajouter-offre/ajouter-offre.component.ts
 import { Component } from '@angular/core';
+import { Entreprise } from 'src/app/modeles/entreprise';
 import { Offre } from 'src/app/modeles/offres';
 import { AuthService } from 'src/app/service/auth.service';
+import { EntrepriseService } from 'src/app/service/entreprise.service';
 import { OffresService } from 'src/app/service/offres.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -24,6 +27,7 @@ newOffre: Offre = {
     langues: [],
     avantages: ''
   };
+  entreprise: Entreprise | null=null;
  postesInformatique: string[] = [
   "Développeur Angular",
   "Développeur Java",
@@ -34,20 +38,27 @@ newOffre: Offre = {
   "Analyste Sécurité",
   "Chef de Projet IT"
 ];
-
-
-
   constructor(
-    private authService: AuthService,
+    private entrepriseService: EntrepriseService,
     private offreService: OffresService
   ) {}
-
+ ngOnInit(): void {
+    this.loadEntreprise();
+  }
+  loadEntreprise() {
+    this.entreprise = this.entrepriseService.getEntrepriseConnectee();
+   if(this.entreprise?.status==="desactive"){
+     Swal.fire('⚠️ Entreprise désactivée', ' vous ne pouver pas postuler Veillez contacter l administrateure de  plateforme  ', 'warning');
+    
+    }
+     
+  }
  ajouterOffre() {
-    const user = this.authService.getUser();
+    
+    if (this.entreprise && this.entreprise?.status==="active") {
 
-    if (user && user.role === 'entreprise') {
       // Lier l’offre à l’entreprise connectée
-      this.newOffre.entrepriseId = user.refId;
+      this.newOffre.entrepriseId = this.entreprise.id;
       this.newOffre.datePublication = new Date();
 
       // Ajouter l’offre via le service
@@ -67,7 +78,7 @@ newOffre: Offre = {
         datePublication: new Date()
       };
     } else {
-      alert('❌ Vous devez être une entreprise pour publier une offre.');
+      alert('❌ Vous devez être une entreprise  active pour publier une offre.');
     }
   }
 
