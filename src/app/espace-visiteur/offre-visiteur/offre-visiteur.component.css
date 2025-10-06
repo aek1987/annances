@@ -1,11 +1,9 @@
 /* 🔹 Contenu principal */
-.main-content {
-  flex: 1;
-  padding: 20px;
-  margin: 0;               /* supprime les espaces autour */
-  margin-left: 260px;      /* largeur sidebar si elle est à gauche */
+.content-offres-liste {
+  padding: 0px;
+  background-color: #f9fafb;
+  min-height: 100vh;
 }
-
 /* 🔹 Message d'accueil visiteur collé sous la navbar */
 .welcome-visitor {
   margin-top: 0;           /* pas d’espace en haut */
@@ -85,8 +83,7 @@
   flex-direction: column;
     height: 100%;  /* occupe toute la hauteur */
   background: #fff;
-  flex-direction: column;   /* contenu en colonne */
- 
+  flex-direction: column;   /* contenu en colonne */ 
   border-radius: 10px;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -148,4 +145,79 @@
 
 .actions button:last-child:hover {
   background-color: #e0a800;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: 'Segoe UI', sans-serif;
+  width: 200px;
+}
+
+.dropdown-btn {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: box-shadow 0.2s;
+}
+
+.dropdown-btn:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.badge {
+  background-color: #007bff;
+  color: white;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
+.arrow {
+  border: solid #333;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 4px;
+  transform: rotate(45deg);
+  transition: transform 0.3s;
+}
+
+.arrow.up {
+  transform: rotate(-135deg);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  z-index: 1;
+  margin-top: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 10px;
+}
+
+.dropdown.open .dropdown-content {
+  display: block;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.checkbox-label input {
+  margin-right: 8px;
+  accent-color: #007bff; /* couleur de la case cochée */
 }

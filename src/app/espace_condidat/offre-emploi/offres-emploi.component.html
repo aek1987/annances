@@ -13,19 +13,56 @@
     </div>
 
     <!-- 🎯 Filtres -->
-    <div class="filters">
-      <select [(ngModel)]="selectedContract" (change)="applyFilters()">
-        <option value="">Type de contrat</option>
-        <option value="CDI">CDI</option>
-        <option value="CDD">CDD</option>
-        <option value="Stage">Stage</option>
-        <option value="Remote">Télétravail</option>
-      </select>
+       <div class="filters">
+    <div class="dropdown" [class.open]="isDropdownOpen">
+    <button class="dropdown-btn" (click)="toggleDropdown()"> contrat
+    <span *ngIf="selectedContracts.length" class="badge">{{ selectedContracts.length }}</span>
+    <i class="arrow" [class.up]="isDropdownOpen"></i>
+     </button>
 
-      <select [(ngModel)]="selectedSector" (change)="applyFilters()">
-        <option value="">Secteur</option>
-        <option *ngFor="let secteur of sectors" [value]="secteur">{{ secteur }}</option>
-      </select>
+  <div class="dropdown-content">
+    <label *ngFor="let contract of contracts" class="checkbox-label">
+      <input type="checkbox" [value]="contract" (change)="onCheckboxChange($event)">
+      {{ contract }}
+    </label>
+  </div>
+
+
+      </div>
+
+
+   <div class="dropdown" [class.open]="isSectorDropdownOpen">
+  <button class="dropdown-btn" (click)="toggleSectorDropdown()">
+    Secteur
+    <span *ngIf="selectedSectors.length" class="badge">{{ selectedSectors.length }}</span>
+    <i class="arrow" [class.up]="isSectorDropdownOpen"></i>
+  </button>
+
+  <div class="dropdown-content">
+    <label *ngFor="let secteur of sectors" class="checkbox-label">
+      <input type="checkbox" [value]="secteur" (change)="onSectorCheckboxChange($event)">
+      {{ secteur }}
+    </label>
+  </div>
+  </div>
+<div class="dropdown" [class.open]="isRemoteDropdownOpen">
+  <button class="dropdown-btn" (click)="toggleRemoteDropdown()">
+    Télétravail
+    <span *ngIf="selectedRemote.length" class="badge">{{ selectedRemote.length }}</span>
+    <i class="arrow" [class.up]="isRemoteDropdownOpen"></i>
+  </button>
+
+  <div class="dropdown-content">
+    <label class="checkbox-label" *ngFor="let option of remoteOptions">
+      <input type="checkbox" [value]="option" (change)="onRemoteCheckboxChange($event)">
+      {{ option }}
+    </label>
+  </div>
+
+
+
+</div>
+
     </div>
 
     <!-- 📄 Liste des offres -->

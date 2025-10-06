@@ -4,7 +4,6 @@ import { Account } from 'src/app/modeles/accounts';
 import { Candidature } from 'src/app/modeles/candidature';
 import { Entreprise } from 'src/app/modeles/entreprise';
 import { Offre } from 'src/app/modeles/offres';
-import { AuthService } from 'src/app/service/auth.service';
 import { CandidatureService } from 'src/app/service/candidature.service';
 import { EntrepriseService } from 'src/app/service/entreprise.service';
 import { OffresService } from 'src/app/service/offres.service';
@@ -30,8 +29,7 @@ entreprise: Entreprise | null=null;
     this.loadEntreprise();
     // ✅ Charger les offres de cette entreprise
     if (this.entreprise) { this.offres = this.offresService.getOffresByEntreprise(this.entreprise.id);
-      this.nbOffres = this.offres.length;
-   
+      this.nbOffres = this.offres.length;  
    
     // 🔹 Récupérer les candidatures associées à ces offres
       this.candidatures = this.offres.flatMap(offre =>
@@ -55,5 +53,6 @@ testNavigation(route: string) {
 }
   loadEntreprise() {
     this.entreprise = this.entrepriseService.getEntrepriseConnectee();
+     
   }
 }

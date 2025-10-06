@@ -1,11 +1,6 @@
 
 
-.main-content {
-  flex: 1;             /* prend tout l'espace restant */
-  padding: 20px;
-  margin-left: 0; 
-  margin-top: 0;       /* ← aucun espace entre sidebar et contenu */
-}
+
 .layout-container {
   display: flex;
   min-height: 100vh;
@@ -17,4 +12,10 @@
   background-color: #f8f9fa;  /* couleur plus neutre */
   padding: 20px;
   border-right: 1px solid #ddd; /* ligne de séparation */
+}
+.main-content {
+  flex: 1;
+  padding: 20px;
+  margin: 0;               /* supprime les espaces autour */
+  margin-left: 260px;      /* largeur sidebar si elle est à gauche */
 }

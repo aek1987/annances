@@ -7,11 +7,11 @@ import { EntrepriseService } from 'src/app/service/entreprise.service';
 import { OffresService } from 'src/app/service/offres.service';
 
 @Component({
-  selector: 'app-offre-detail',
-  templateUrl: './offre-detail.component.html',
-  styleUrls: ['./offre-detail.component.css']
+  selector: 'app-offre-detail-visiteur',
+  templateUrl: './offre-detail-visiteur.component.html',
+  styleUrls: ['./offre-detail-visiteur.component.css']
 })
-export class OffreDetailComponent implements OnInit {
+export class OffreDetailVisiteurComponent implements OnInit {
   @Input() offre?: Offre;
   
   offresSimilaires: Offre[] = [];
