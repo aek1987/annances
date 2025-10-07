@@ -1,12 +1,12 @@
-<div class="candidat-card">
-  <!-- Photo + Nom -->
-  <div class="text-center">
+<div class="candidat-card" >
+    
+  <div class="text-center"   >
     <img [src]="candidat?.photo || 'assets/user.png'" alt="Photo de candidat" class="candidat-photo">
    <!-- <h2>{{ candidat?.username }}</h2>-->
     <p class="text-muted">{{ candidat?.username }} - {{ candidat?.email }}</p>
-
+    <button *ngIf="!editMode" class="btn btn-primary" (click)="toggleEdit()">✏️ Modifier</button>
     <!-- Choix rapide entre 2 photos -->
-  <div class="photo-options">
+  <div class="photo-options" *ngIf="editMode">
     <img src="assets/homme.png" class="option-photo" (click)="changerPhoto('assets/homme.png')">
     <img src="assets/femme.png" class="option-photo" (click)="changerPhoto('assets/femme.png')">
   </div>
@@ -18,7 +18,7 @@
 <div class="progress-container">
   <label>Complétude du profil :</label>
   <div class="progress-bar">
- <!-- - <div class="progress-fill" [style.width.%]="progression"></div>-->
+ <div class="progress-fill" [style.width.%]="progression"></div>
   </div>
   <p>{{ progression }} %</p>
 </div>
@@ -147,15 +147,12 @@
 </div>
 
   <!-- Actions -->
-  <div class="text-center mt-3">
-    <button *ngIf="!editMode" class="btn btn-primary" (click)="toggleEdit()">✏️ Modifier</button>
-    <button class="btn btn-outline-dark retour-btn" (click)="retour()">
-  ⬅ Retour aux offres
-</button>
+  <div class="text-center mt-3">     
 
     <div *ngIf="editMode">
       <button class="btn btn-success" (click)="savecandidat()">💾 Sauvegarder</button>
       <button class="btn btn-secondary" (click)="toggleEdit()">❌ Annuler</button>
+      <button class="btn btn-outline-dark retour-btn" (click)="retour()"> ⬅ Retour aux offres</button>
     </div>
   </div>
 </div>

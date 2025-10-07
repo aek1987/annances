@@ -34,14 +34,14 @@ export class ProfilComponent {
 loadCandidat() {
   this.candidat = this.candidatService.getCandidatConnecte();
 
-/*
+
 if (this.candidat) {
    const progression = this.progression;     
     this.candidat.status = this.candidatService.getStatus(this.candidat);
     console.log("Progression calculée :", progression+" status :",  this.candidat.status);
    
    
-  }*/
+  }
  
 }
 

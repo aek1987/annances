@@ -42,9 +42,27 @@ export class SidebarComponent {
 loadCandidat() {
   this.candidat = this.candidatService.getCandidatConnecte();
   console.log("condidat info"+ this.candidat);
-  if (this.candidat) {
-    if (!this.candidat.competences) this.candidat.competences = [];
-    if (!this.candidat.experiences) this.candidat.experiences = [];
+  
+  
+ if (this.candidat) {
+   const progression = this.progression;     
+    this.candidat.status = this.candidatService.getStatus(this.candidat);
+    console.log("Progression calculée :", progression+" status :",  this.candidat.status);
+   
+   
   }
+
+
+
 }
+
+get progression(): number {
+  if (!this.candidat) return 0;
+  return this.candidatService.getProgression(this.candidat);
+}
+
+
+
+
+
 }
