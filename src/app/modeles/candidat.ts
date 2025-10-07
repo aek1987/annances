@@ -19,5 +19,6 @@ export interface Candidat {
   adresse?: string; 
   formations: Formation[];
   langues?: string[]; 
+  progression?: number; // 🔹 Ajouté ici
 
 }

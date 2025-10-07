@@ -58,7 +58,7 @@ getCandidatConnecte(): Candidat | null {
       photo:"assets/homme.png", // 🔴 par défaut
       cv:"vide", 
       competences: [],
-      experiences: [], formations: []
+      experiences: [], formations: [],progression: 0 
     };
 
     this.candidats.push(newCandidat);
@@ -78,6 +78,8 @@ updatePhoto(refId: number, newPhoto: string) {
 
  // Vérifie la complétude du profil et calcule la progression
 getProgression(candidat: Candidat): number {
+  
+   
   let steps = 0;
   let completed = 0;
 
@@ -118,7 +120,7 @@ canPostuler(refId: number): boolean {
 
  
 getStatus(candidat: Candidat): 'active' | 'desactive' |'en_attente_validation'|'incomplet'|'pret' {
-  const progression = this.getProgression(candidat);
+  candidat.progression = this.getProgression(candidat);  
  
 // 🚀 Cas spécial : si déjà validé par l’admin, on ne touche pas
   if (candidat.status === 'active') {
@@ -126,13 +128,13 @@ getStatus(candidat: Candidat): 'active' | 'desactive' |'en_attente_validation'|'
   }
 
   switch (true) {
-    case (progression < 50):
+    case ( candidat.progression < 50):
       return 'incomplet';   // Trop peu d'infos
 
-    case (progression >= 50 && progression < 80):
+    case ( candidat.progression >= 50 &&  candidat.progression < 80):
       return 'pret';     // Profil assez rempli
 
-    case (progression >= 80):
+    case ( candidat.progression >= 80):
       return 'en_attente_validation'; // Attente admin
 
     default:
@@ -141,7 +143,7 @@ getStatus(candidat: Candidat): 'active' | 'desactive' |'en_attente_validation'|'
 
 }
 updateCandidatState(candidat: Candidat) {
-
+  candidat.progression = this.getProgression(candidat); 
   const index = this.candidats.findIndex(c => c.refId === candidat.refId);
   if (index !== -1) {
     this.candidats[index] = candidat;

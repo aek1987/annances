@@ -39,10 +39,10 @@ voirDetail(c: Candidat) {
 fermerModal() {
   this.selectedCandidat = null;
 }
-// ✅ Calcule le pourcentage de progression du profil
+/*✅ Calcule le pourcentage de progression du profil
   getProgression(candidat: Candidat): number {
     return this.candidatsService.getProgression(candidat);
-  }
+  }*/
 
 }
 

@@ -20,7 +20,7 @@
         <td>{{ c.username }}</td>
         <td>{{ c.email }}</td>
         <td>{{ c.status }}</td>
-        <td>{{ getProgression(c) }}%</td>
+        <td>{{ c.progression }}%</td>
       <td>
   <button class="btn btn-success btn-sm" (click)="changerStatut(c, true)">Accepter</button>
   <button class="btn btn-danger btn-sm" (click)="changerStatut(c, false)">Refuser</button>
