@@ -5,6 +5,9 @@ import { Entreprise } from 'src/app/modeles/entreprise';
 
 import { EntrepriseService } from 'src/app/service/entreprise.service';
 import { OffresService } from 'src/app/service/offres.service';
+import { Candidat } from 'src/app/modeles/candidat';
+import { CandidatService } from 'src/app/service/candidate.service';
+import { CandidatureService } from 'src/app/service/candidature.service';
 
 @Component({
   selector: 'app-offre-detail',
@@ -16,9 +19,10 @@ export class OffreDetailComponent implements OnInit {
   
   offresSimilaires: Offre[] = [];
   entrprise:Entreprise | undefined;
+  candidatConnecte: Candidat | null = null;
   constructor(
     private offreService: OffresService,
-    private entrepriseService: EntrepriseService,
+    private entrepriseService: EntrepriseService, private candidatService: CandidatService,private candidature: CandidatureService,
     private route: ActivatedRoute
   ) {}
 
@@ -50,8 +54,24 @@ export class OffreDetailComponent implements OnInit {
 
   // Postuler à une offre
   postuler(offre: Offre): void {
-    alert(`Votre candidature a été envoyée pour le poste : ${offre.poste}`);
-    // ici tu peux appeler un service backend pour sauvegarder la candidature
+  this.candidatConnecte = this.candidatService.getCandidatConnecte();
+    if(!(this.candidatConnecte!.status==='active')) {
+    alert(`votre status doit etre active pour postuler : ${offre.poste}`);
+    }else { 
+      
+      alert(`Votre candidature a été envoyée pour le poste : ${offre.poste}`);
+  
+   const candidature = this.candidature.addCandidature(
+    offre.id,
+    this.candidatConnecte!.refId 
+  );
+
+  // Change le statut de l’offre
+  offre.status = 'postulé';
+  
+  
+  }
+   
   }
 
   // Ajouter / Retirer des favoris

@@ -1,6 +1,24 @@
 <div class="offers-wrap">
-  <h3 class="section-title">📌 Mes offres publiées</h3>
+ 
+    <!-- 🔍 Filtres -->
+  <div class="filters">
+    <input
+      type="text"
+      [(ngModel)]="searchPoste"
+      placeholder="Rechercher un poste..."
+      class="filter-input"
+    />
+    <select [(ngModel)]="tri" (change)="trierOffres()" class="filter-select">
+      <option value="">Trier par...</option>
+      <option value="poste">Poste (A → Z)</option>
+      <option value="date">Date (plus récentes)</option>
+    </select>
+    <button class="btn-search" (click)="filtrerOffres()">
+    🔎 Rechercher
+  </button>
+  </div>
 
+  <h3 class="section-title">📌 Mes offres publiées</h3>
   <div *ngIf="offres.length === 0" class="empty">
     Vous n'avez publié aucune offre pour le moment.
   </div>

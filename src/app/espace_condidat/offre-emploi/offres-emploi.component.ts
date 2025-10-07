@@ -53,7 +53,7 @@ entrepise: Entreprise  | undefined
 newSkill: string = '';
 offres: Offre[] = [];
   constructor(private offreService: OffresService,private entrepriseService :EntrepriseService ,  private candidatService: CandidatService,
- private candidature: CandidatureService
+ 
 
   ) {}
   
@@ -170,26 +170,7 @@ saveProfile() {
 }
 
 
-  // ✅ Postuler
-  postuler(offre: Offre) {
-  
-    if (!this.candidatConnecte) {
-    alert('Vous devez être connecté pour postuler.');
-    return;
-  }
-
-  // Appelle le service pour créer la candidature
-  const candidature = this.candidature.addCandidature(
-    offre.id,
-    this.candidatConnecte.refId 
-  );
-
-  // Change le statut de l’offre
-  offre.status = 'postulé';
-
-  // Confirmation
-  alert(`✅ Vous avez postulé à : ${offre.poste}\nCandidature ID : ${candidature.id}`);
-  }
+ 
 
   // ⭐ Favoris
   toggleFavori(offre: Offre) {

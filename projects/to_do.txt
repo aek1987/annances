@@ -38,8 +38,8 @@ Sauvegarde des offres (favoris)
 
 epcase de entreprise 
 ********************************************
+filtre mes offres 
 
-on ne peut pas ajouter un offre si le status n'est pas active 
 agouter logon 
 la gard espace entre prise
  parameter aucun
