@@ -10,7 +10,7 @@ export interface Candidat {
   username: string;
   email?: string;
   fonction?: string;
-  status: 'active' | 'desactive' |'en_attente_validation'|'incomplet'|'complet';
+  status: 'active' | 'desactive' |'en_attente_validation'|'incomplet'|'pret';
   phone?: string; 
   bio?: string;
   experiences: Experience[];

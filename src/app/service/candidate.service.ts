@@ -15,7 +15,7 @@ export class CandidatService {
     { refId: 4, username: 'Youssef Haddad', email: 'amina.cv@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Développeur Angular', phone: '0554-555-666' ,  competences:[],experiences:[],formations:[],cv:""},
     { refId: 5, username: 'Nadia Rahmani', email: 'youssef.talent@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Chef de projet IT', phone: '0555-777-888',  competences:[],experiences:[],formations:[] ,cv:""},
     { refId: 6, username: 'nekaa aek', email: 'nekaa.profil@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Full Stack Developer', phone: '0556-000-111' ,  competences:[],experiences:[],formations:[],cv:""},
-    { refId: 7, username: 'candidat aek', email: 'candidat@gmail.com',  status: 'active',photo: 'assets/user.png', fonction: 'Développeur', phone: '0557-222-333',  competences:[],experiences:[] ,formations:[],cv:""}
+    { refId: 7, username: 'candidat aek', email: 'candidat@gmail.com',  status: 'desactive',photo: 'assets/user.png', fonction: 'Développeur', phone: '0557-222-333',  competences:[],experiences:[] ,formations:[],cv:""}
   ];
 
   constructor(private authService :AuthService) { }
@@ -106,21 +106,8 @@ getProgression(candidat: Candidat): number {
   return Math.round((completed / steps) * 100);
 }
 
-// Active / désactive le compte selon la progression
-checkAndActivateCandidat(refId: number): void {
- /* const candidat = this.candidats.find(c => c.refId === refId);
-  if (!candidat) return;
 
-  const progression = this.getProgression(candidat);
 
-  if (progression >= 80) { // seuil = 80% complété
-    candidat.status = 'active';
-    console.log("✅ Candidat activé :", candidat);
-  } else {
-    candidat.status = 'desactive';
-    console.warn(`⚠️ Profil incomplet (${progression}%), candidat reste désactivé :`, candidat);
-  }*/
-}
 
 
 // Vérifie si le candidat peut postuler
@@ -130,20 +117,20 @@ canPostuler(refId: number): boolean {
 }
 
  
-getStatus(candidat: Candidat): 'active' | 'desactive' |'en_attente_validation'|'incomplet'|'complet' {
+getStatus(candidat: Candidat): 'active' | 'desactive' |'en_attente_validation'|'incomplet'|'pret' {
   const progression = this.getProgression(candidat);
- //alert(" mete jour de candidat : status"+candidat.status+" prog "+progression)
+ 
 // 🚀 Cas spécial : si déjà validé par l’admin, on ne touche pas
- /* if (candidat.status === 'active') {
+  if (candidat.status === 'active') {
     return 'active';
-  }*/
+  }
 
   switch (true) {
     case (progression < 50):
       return 'incomplet';   // Trop peu d'infos
 
     case (progression >= 50 && progression < 80):
-      return 'complet';     // Profil assez rempli
+      return 'pret';     // Profil assez rempli
 
     case (progression >= 80):
       return 'en_attente_validation'; // Attente admin
@@ -154,10 +141,12 @@ getStatus(candidat: Candidat): 'active' | 'desactive' |'en_attente_validation'|'
 
 }
 updateCandidatState(candidat: Candidat) {
+
   const index = this.candidats.findIndex(c => c.refId === candidat.refId);
   if (index !== -1) {
     this.candidats[index] = candidat;
   }
+ 
 }
 
 

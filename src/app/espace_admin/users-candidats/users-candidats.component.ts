@@ -9,9 +9,8 @@ import { CandidatService } from 'src/app/service/candidate.service';
   styleUrls: ['./users-candidats.component.css']
 })
 export class UsersCandidatsComponent implements OnInit {
-  candidats: Candidat[] = [];
-  //candidat: Candidat | null = null;
-
+  candidats: Candidat[] = [];  
+  selectedCandidat: Candidat | null = null;
   constructor(private candidatsService: CandidatService) {}
 
   ngOnInit(): void {
@@ -33,14 +32,17 @@ changerStatut(candidat: Candidat, accepte: boolean) {
   this.candidatsService.updateCandidatState(candidat);
 }
 
-selectedCandidat: Candidat | null = null;
+
 voirDetail(c: Candidat) {
   this.selectedCandidat = c;
 }
-
 fermerModal() {
   this.selectedCandidat = null;
 }
+// ✅ Calcule le pourcentage de progression du profil
+  getProgression(candidat: Candidat): number {
+    return this.candidatsService.getProgression(candidat);
+  }
 
 }
 

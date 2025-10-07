@@ -21,18 +21,19 @@
  <div class="progress-fill" [style.width.%]="progression"></div>
   </div>
   <p>{{ progression }} %</p>
+  <p>status: {{ candidat?.status }} </p>
 </div>
 
 <p *ngIf="candidat?.status === 'incomplet'" class="status-inactive">
   ⚠️ Votre profil est incomplet. Veuillez ajouter plus d’informations.
 </p>
 
-<p *ngIf="candidat?.status === 'complet'" class="status-pending">
+<p *ngIf="candidat?.status === 'pret'" class="status-pending">
   ✅ Votre profil est presque prêt. Complétez toutes les informations.
 </p>
 
 <p *ngIf="candidat?.status === 'en_attente_validation'" class="status-pending">
-  ⏳ Votre profil est complet. Il sera actif après validation de l'administrateur.
+  ⏳ Votre profil est prêt. Il deviendra actif après la vérification de l’administrateur..
 </p>
 
 <p *ngIf="candidat?.status === 'active'" class="status-active">

@@ -47,18 +47,42 @@
   font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
+  border: 1px solid transparent;
 }
 
+/* ✅ Actif */
 .status-badge.active {
   background-color: #d4f8e8;
   color: #1e7d4d;
-  border: 1px solid #1e7d4d;
+  border-color: #1e7d4d;
 }
 
-.status-badge.inactive {
-  background-color: #ffe5e5;
+/* ❌ Désactivé */
+.status-badge.desactive {
+  background-color: #fbe9e9;
   color: #a71d2a;
-  border: 1px solid #a71d2a;
+  border-color: #a71d2a;
+}
+
+/* ⏳ En attente de validation */
+.status-badge.en_attente_validation {
+  background-color: #fff6cc;
+  color: #a67c00;
+  border-color: #a67c00;
+}
+
+/* ⚠️ Incomplet */
+.status-badge.incomplet {
+  background-color: #ffe6b3;
+  color: #cc7a00;
+  border-color: #cc7a00;
+}
+
+/* 🟩 Complet */
+.status-badge.complet {
+  background-color: #e0f2ff;
+  color: #0066cc;
+  border-color: #0066cc;
 }
 
 

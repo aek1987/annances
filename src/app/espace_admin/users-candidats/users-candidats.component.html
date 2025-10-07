@@ -11,6 +11,7 @@
         <th>Nom</th>
         <th>Email</th>
         <th>Statut</th>
+        <th>Complétude  profil %</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -19,6 +20,7 @@
         <td>{{ c.username }}</td>
         <td>{{ c.email }}</td>
         <td>{{ c.status }}</td>
+        <td>{{ getProgression(c) }}%</td>
       <td>
   <button class="btn btn-success btn-sm" (click)="changerStatut(c, true)">Accepter</button>
   <button class="btn btn-danger btn-sm" (click)="changerStatut(c, false)">Refuser</button>

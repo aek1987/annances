@@ -11,14 +11,17 @@
 
   <!-- Status avec badge -->
   <h4>
-    <span 
-      class="status-badge" 
-      [ngClass]="{
-        'active': candidat?.status === 'active',
-        'inactive': candidat?.status === 'desactive'
-      }">
-      {{ candidat?.status || 'nouveau compte' }}
-    </span>
+  <span 
+  class="status-badge" 
+  [ngClass]="{
+    'active': candidat?.status === 'active',
+    'desactive': candidat?.status === 'desactive',
+    'en attente validation': candidat?.status === 'en_attente_validation',
+    'incomplet': candidat?.status === 'incomplet',
+    'complet': candidat?.status === 'pret'
+  }">
+  {{ candidat?.status || 'nouveau compte' }}
+</span>
   </h4>
 </div>
 
