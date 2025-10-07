@@ -17,9 +17,11 @@ import { OffresService } from 'src/app/service/offres.service';
   styleUrls: ['./candidatures.component.css']
 })
 export class CandidaturesComponent implements OnInit {
- candidatConnecte: Candidat | null = null;
+  candidatConnecte: Candidat | null = null;
   candidatures: Candidature[] = [];
   etapes = ['en attente', 'analyse', 'acceptée', 'refusée', 'finalisé'];
+  
+  filtreStatut: string = '';
  constructor(  private candidatService: CandidatService,private offresService:OffresService,
  private candidature: CandidatureService,  private entrepriseService: EntrepriseService,
 
@@ -30,6 +32,7 @@ export class CandidaturesComponent implements OnInit {
  if (this.candidatConnecte) {
       // Récupérer toutes les candidatures du candidat
       this.candidatures = this.candidature.getCandidaturesByCandidat(this.candidatConnecte.refId)
+    
     }
    
   }
@@ -61,5 +64,13 @@ export class CandidaturesComponent implements OnInit {
   getEntreprise(entrepriseId: number): Entreprise | undefined {
    return this.entrepriseService.getEntrepriseById(entrepriseId);
  }
- 
+  filtrerCandidatures() {
+    const texte = this.filtreStatut.toLowerCase().trim();
+
+   // this.offresFiltrees = this.candidatures.filter(offre =>
+      //offre.entrepriseNom.toLowerCase().includes(texte) ||
+     // offre.secteur.toLowerCase().includes(texte) ||
+     // offre.poste.toLowerCase().includes(texte)
+  //  );
+  }
 }

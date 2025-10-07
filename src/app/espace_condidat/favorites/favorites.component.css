@@ -2,6 +2,7 @@
   max-width: 800px;
   margin: 20px auto; /* ✅ Centre le contenu */
   padding: 20px;
+  margin-left: 0;
   text-align: center; /* ✅ Centre le texte */
 }
 

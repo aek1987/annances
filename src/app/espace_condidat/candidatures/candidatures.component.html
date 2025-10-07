@@ -1,4 +1,14 @@
 <div class="page-container">
+  <div class="filters">
+  <select [(ngModel)]="filtreStatut" (change)="filtrerCandidatures()">
+    <option value="">Tous les statuts</option>
+    <option>En attente</option>
+    <option>En entretien</option>
+    <option>Acceptée</option>
+    <option>Refusée</option>
+  </select>
+</div>
+
   <h2>📄 Mes candidatures</h2>
 
   <div *ngIf="candidatures.length === 0" class="empty-state">
@@ -16,6 +26,14 @@
         </div>
         <span class="statut" [ngClass]="c.statut.toLowerCase()">{{ c.statut }}</span>
       </div>
+    
+ <!--      <div class="entreprise-info">
+  <img [src]="getEntreprise(getOffre(c.id)?.entrepriseId)?.logo || 'assets/company.png'" class="entreprise-logo">
+  <div>
+    <p class="entreprise-nom">{{ getEntreprise(getOffre(c.id)?.entrepriseId)?.username }}</p>
+    <p class="entreprise-secteur">{{ getEntreprise(getOffre(c.id)?.entrepriseId)?.secteur }}</p>
+  </div>
+</div>
 
       <!-- Timeline -->
       <div class="timeline">
@@ -25,19 +43,23 @@
           <span class="circle">{{ i + 1 }}</span>
           <span class="label">{{ etape }}</span>
         </div>
+        
       </div>
 
-      <!-- Infos complémentaires -->
-      <div class="candidature-body">
-        <p><b>Date :</b> {{ c.dateCandidature | date:'mediumDate' }}</p>
-        <p *ngIf="getOffre(c.id)?.localisation"><b>Localisation :</b> {{ getOffre(c.id)?.localisation }}</p>
-        <p *ngIf="getOffre(c.id)?.contrat"><b>Contrat :</b> {{ getOffre(c.id)?.contrat }}</p>
-        <p *ngIf="c.message"><b>Message :</b> {{ c.message }}</p>
-      </div>
+     <!-- Infos complémentaires -->
+<div class="candidature-body">
+  <div class="info-row">
+    <p><b>Date :</b> {{ c.dateCandidature | date:'mediumDate' }}</p>
+    <p *ngIf="getOffre(c.id)?.localisation"><b>Localisation :</b> {{ getOffre(c.id)?.localisation }}</p>
+    <p *ngIf="getOffre(c.id)?.contrat"><b>Contrat :</b> {{ getOffre(c.id)?.contrat }}</p>
+    <p *ngIf="c.message"><b>Message :</b> {{ c.message }}</p>
+  </div>
+</div>
+
 
       <!-- Actions -->
       <div class="actions">
-        <button class="btn btn-view" (click)="voirDetails(c)">👁 Voir détails</button>
+        <button class="btn btn-view"  [routerLink]="['/candidat/offre', c.id]"(click)="voirDetails(c)">👁 Voir détails</button>
         <button class="btn btn-cancel" (click)="annulerCandidature(c.id)">❌ Annuler</button>
       </div>
     </div>

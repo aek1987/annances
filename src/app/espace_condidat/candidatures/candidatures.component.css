@@ -1,6 +1,6 @@
 .page-container {
   max-width: 900px;
-  margin: auto;
+  margin-left: 0;
   padding: 20px;
   font-family: Arial, sans-serif;
 }
@@ -93,10 +93,28 @@
 }
 
 /* Infos candidature */
-.candidature-body p {
-  margin: 5px 0;
-  font-size: 0.9rem;
+.candidature-body {
+  margin-top: 10px;
 }
+
+.info-row {
+  display: flex;
+  flex-wrap: wrap; /* permet de passer à la ligne si l’écran est petit */
+  gap: 20px; /* espace entre les éléments */
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.info-row p {
+  margin: 0;
+  color: #34495e;
+  white-space: nowrap; /* empêche la coupure des mots */
+}
+
+.info-row b {
+  color: #2c3e50;
+}
+
 
 /* Boutons actions */
 .actions {

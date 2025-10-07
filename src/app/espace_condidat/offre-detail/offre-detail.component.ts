@@ -76,9 +76,19 @@ export class OffreDetailComponent implements OnInit {
 
   // Ajouter / Retirer des favoris
   toggleFavori(offre: Offre): void {
+    this.candidatConnecte = this.candidatService.getCandidatConnecte();
     offre.favori = !offre.favori;
     if (offre.favori) {
       alert(`Offre "${offre.poste}" ajoutée à vos favoris ⭐`);
+
+ const candidature = this.candidature.addCandidature(
+    offre.id,
+    this.candidatConnecte!.refId 
+  );
+
+  // Change le statut de l’offre
+  //offre.status = 'favorie';
+
     } else {
       alert(`Offre "${offre.poste}" retirée de vos favoris ❌`);
     }
