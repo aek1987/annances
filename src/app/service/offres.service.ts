@@ -184,7 +184,7 @@ private offres: Offre[] = [
     return this.offres;
   }
 
-  // ✅ Récupérer une offre par ID id de offre 
+  // ✅ Récupérer une offre par ID
   getOffreById(id: number): Offre | undefined {
     return this.offres.find(o => o.id === id);
   }
@@ -195,10 +195,14 @@ private offres: Offre[] = [
   }
 
   // ✅ Ajouter une offre
-  addOffre(newoffre:Offre): Offre [] {
-  
-    this.offres.push(newoffre);  return this.offres
-    
+  addOffre(offre: Omit<Offre, 'id' | 'datePublication'>): Offre {
+    const newOffre: Offre = {
+      ...offre,
+      id: this.nextId++,
+      datePublication: new Date()
+    };
+    this.offres.push(newOffre);
+    return newOffre;
   }
 
   // ✅ Modifier une offre

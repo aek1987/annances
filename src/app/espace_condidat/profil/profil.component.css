@@ -108,3 +108,28 @@ h2 {
   color: #fff;
   cursor: default;
 }
+
+
+/**********************/
+.status-container {
+  margin-top: 0px;
+  font-family: "Poppins", sans-serif;
+}
+
+.status-message p {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-active {
+  color: #4caf50; /* vert */
+}
+
+.status-pending {
+  color: #ffb300; /* jaune orangé */
+}
+
+.status-inactive {
+  color: #e53935; /* rouge */
+}

@@ -67,9 +67,12 @@ if (this.candidat) {
     //  this.candidat!.formations = infos.formations || this.candidat!.competences;
     
 
-      alert('✅ CV analysé avec succès ! Informations ajoutées.');
-    //  this.updateProgression();
-    } catch (error) {
+    
+       if (this.candidat) {  this.candidat.status = this.candidatService.getStatus(this.candidat);
+         alert('✅ CV analysé avec succès ! Informations ajoutées.');  
+            }
+   
+        }    catch (error) {
       console.error('Erreur lecture CV :', error);
       alert('❌ Erreur lors de l’analyse du CV.');
     }

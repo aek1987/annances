@@ -22,34 +22,21 @@ creation de compte et recuperaton de mot pass par gmail
 
 espace candidat 
 ****************************
+upload cv si le candiat est active problem
 modificationd e filte
-detail de l'effre info entrerise
-🔔 Notifications menu
+Notifications fonction
 cree un alert emploi
 Upload photo de profil (au lieu de choisir homme/femme).
 verification de remplisage de profil
-Validation du profil avant de postuler
-les info  de offre actualise
-les info de mon candidature
-Upload du CV directement (PDF).
-alert d'emploi aucu  idee
-support et aide aucun iddee
+
 Sauvegarde des offres (favoris)
 
 epcase de entreprise 
 ********************************************
 filtre mes offres 
-
 agouter logon 
 la gard espace entre prise
- parameter aucun
-Fonctionnalités supplémentaires
 abonement 
-
 Étoiles pour noter ses compétences ⭐⭐⭐⭐☆.
-
-Téléchargement du CV en PDF.
-
 Partage du profil (générer un lien public).
-
 Progression du profil : ex. 70% complété → encourage l’utilisateur à remplir plu

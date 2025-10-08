@@ -21,28 +21,32 @@
  <div class="progress-fill" [style.width.%]="progression"></div>
   </div>
   <p>{{ progression }} %</p>
-  <p>status: {{ candidat?.status }} </p>
+
+  <div class="status-line">
+  <strong>Status :</strong>
+
+  <span *ngIf="candidat?.status === 'incomplet'" class="status-inactive">
+    🔴 Incomplet — Votre profil est incomplet. Veuillez ajouter plus d’informations.
+  </span>
+
+  <span *ngIf="candidat?.status === 'pret'" class="status-pending">
+    🟡 Prêt — Votre profil est presque prêt. Complétez toutes les informations.
+  </span>
+
+  <span *ngIf="candidat?.status === 'en_attente_validation'" class="status-pending">
+    🕓 En attente de validation — Votre profil est prêt et sera actif après vérification.
+  </span>
+
+  <span *ngIf="candidat?.status === 'active'" class="status-active">
+    🟢 Actif — Votre profil est actif et visible par les entreprises.
+  </span>
+
+  <span *ngIf="candidat?.status === 'desactive'" class="status-inactive">
+    ⚫ Désactivé — Votre compte est désactivé, veuillez mettre à jour vos informations.
+  </span>
+</div>
 </div>
 
-<p *ngIf="candidat?.status === 'incomplet'" class="status-inactive">
-  ⚠️ Votre profil est incomplet. Veuillez ajouter plus d’informations.
-</p>
-
-<p *ngIf="candidat?.status === 'pret'" class="status-pending">
-  ✅ Votre profil est presque prêt. Complétez toutes les informations.
-</p>
-
-<p *ngIf="candidat?.status === 'en_attente_validation'" class="status-pending">
-  ⏳ Votre profil est prêt. Il deviendra actif après la vérification de l’administrateur..
-</p>
-
-<p *ngIf="candidat?.status === 'active'" class="status-active">
-  🎉 Votre profil est actif et visible par les entreprises.
-</p>
-
-<p *ngIf="candidat?.status === 'desactive'" class="status-inactive">
-  🚫 Votre compte est désactivé,  Veuillez ajouter plus d’informations
-</p>
 
 
 
@@ -58,7 +62,7 @@
 
  <div class="section">
   <h4>Informations personnelles</h4>
-  <p><b>Téléphone :</b> {{ candidat?.phone }} , Adresse : {{ candidat?.adresse }}</p>
+  <p><b>Téléphone :</b> {{ candidat?.phone }} , Adresse : {{ candidat?.adresse }}  cv : {{ candidat?.cv }}</p>
   
 </div>
 
