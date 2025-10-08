@@ -1,20 +1,25 @@
 
 
 
-
-
     <!-- 🔎 Recherche avancée -->
     <div class="search-bar">
       <input type="text" placeholder="Mots-clés" [(ngModel)]="searchTerm">
       <input type="text" placeholder="Localisation" [(ngModel)]="searchLocation">
       <input type="number" placeholder="Salaire minimum" [(ngModel)]="searchSalary">
       <input type="text" placeholder="Expérience" [(ngModel)]="searchExperience">
-      <button (click)="applyFilters()">Rechercher</button>
-    </div>
+     <button class="btn-search" (click)="applyFilters()">
+  <fa-icon [icon]="faSearch" class="icon-white"></fa-icon>
+  <span>Rechercher</span>
+</button>
+
+   
+      </div>
+     
 
     <!-- 🎯 Filtres -->
        <div class="filters">
-    <div class="dropdown" [class.open]="isDropdownOpen">
+
+      <div class="dropdown" [class.open]="isDropdownOpen">
     <button class="dropdown-btn" (click)="toggleDropdown()"> contrat
     <span *ngIf="selectedContracts.length" class="badge">{{ selectedContracts.length }}</span>
     <i class="arrow" [class.up]="isDropdownOpen"></i>
@@ -30,8 +35,7 @@
 
       </div>
 
-
-   <div class="dropdown" [class.open]="isSectorDropdownOpen">
+      <div class="dropdown" [class.open]="isSectorDropdownOpen">
   <button class="dropdown-btn" (click)="toggleSectorDropdown()">
     Secteur
     <span *ngIf="selectedSectors.length" class="badge">{{ selectedSectors.length }}</span>
@@ -44,24 +48,34 @@
       {{ secteur }}
     </label>
   </div>
-  </div>
-<div class="dropdown" [class.open]="isRemoteDropdownOpen">
-  <button class="dropdown-btn" (click)="toggleRemoteDropdown()">
-    Télétravail
-    <span *ngIf="selectedRemote.length" class="badge">{{ selectedRemote.length }}</span>
-    <i class="arrow" [class.up]="isRemoteDropdownOpen"></i>
-  </button>
+      </div>
+      <div class="dropdown" [class.open]="isRemoteDropdownOpen">
+       <button class="dropdown-btn" (click)="toggleRemoteDropdown()">
+       Télétravail
+      <span *ngIf="selectedRemote.length" class="badge">{{ selectedRemote.length }}</span>
+      <i class="arrow" [class.up]="isRemoteDropdownOpen"></i>
+       </button>
 
-  <div class="dropdown-content">
-    <label class="checkbox-label" *ngFor="let option of remoteOptions">
+       <div class="dropdown-content">
+       <label class="checkbox-label" *ngFor="let option of remoteOptions">
       <input type="checkbox" [value]="option" (change)="onRemoteCheckboxChange($event)">
-      {{ option }}
-    </label>
+       {{ option }}
+       </label>
   </div>
 
+ 
 
-
+       </div>
+ <!-- Bouton créer alerte juste en dessous -->
+    <div class="create-alert-container">
+  <button class="create-alert-btn" (click)="creerAlerte()">
+   <fa-icon [icon]="faBell" class="icon-orange"></fa-icon>
+   
+    <span>Créer une alerte</span>
+  </button>
 </div>
+
+
 
     </div>
 
@@ -90,11 +104,5 @@
       </div>
     </div>
 
-    <!-- 📩 Alerte email -->
-    <div class="alertes">
-      <h4>S’abonner aux alertes</h4>
-      <input type="email" placeholder="Votre email" [(ngModel)]="alertEmail">
-      <button (click)="subscribeAlert()">S’abonner</button>
-    </div>
- 
+   
 

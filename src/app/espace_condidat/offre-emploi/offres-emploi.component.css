@@ -112,40 +112,7 @@
   background-color: #e0a800;
 }
 
-/* 📩 Section alertes */
-.alertes {
-  margin-top: 30px;
-  padding: 20px;
-  background: #f8f9fa;
-  border-radius: 10px;
-  text-align: center;
-}
 
-.alertes h4 {
-  margin-bottom: 15px;
-}
-
-.alertes input {
-  padding: 10px;
-  width: 250px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-}
-
-.alertes button {
-  padding: 10px 15px;
-  background: #007bff;
-  border: none;
-  border-radius: 6px;
-  color: #fff;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.alertes button:hover {
-  background: #0056b3;
-}
 .layout {
   display: flex;
   min-height: 100vh;
@@ -370,4 +337,64 @@
 .checkbox-label input {
   margin-right: 8px;
   accent-color: #007bff;
+}
+
+
+/***************************/
+
+.create-alert-btn {
+  background: linear-gradient(135deg, #007bff, #00b4d8);
+  color: white;
+  border: none;
+  border-radius: 20px;       /* arrondi un peu moins grand */
+  padding: 6px 12px;         /* plus compact */
+  font-size: 12px;            /* texte plus petit */
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;                   /* espace icône - texte réduit */
+  box-shadow: 0 2px 8px rgba(0,123,255,0.3);
+  transition: all 0.3s ease;
+}
+
+.create-alert-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,123,255,0.5);
+  background: linear-gradient(135deg, #0056b3, #007bff);
+}
+
+.create-alert-btn i {
+  font-size: 14px;            /* icône un peu plus petite */
+}
+/* Icône orange */
+.icon-orange {
+  color: orange;
+  font-size: 18px; /* taille icône */
+}
+
+/********************/
+.btn-search {
+  background: linear-gradient(135deg, #007bff, #00b4d8);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* espace entre icône et texte */
+  transition: 0.3s;
+}
+
+.btn-search:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #0056b3, #007bff);
+}
+
+.icon-white {
+  color: white;
+  font-size: 16px;
 }

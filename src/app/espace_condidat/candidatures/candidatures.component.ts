@@ -22,6 +22,9 @@ export class CandidaturesComponent implements OnInit {
   etapes = ['en attente', 'analyse', 'acceptée', 'refusée', 'finalisé'];
   
   filtreStatut: string = '';
+
+  offresMap = new Map<number, Offre>();
+entreprisesMap = new Map<number, Entreprise>();
  constructor(  private candidatService: CandidatService,private offresService:OffresService,
  private candidature: CandidatureService,  private entrepriseService: EntrepriseService,
 
@@ -32,6 +35,18 @@ export class CandidaturesComponent implements OnInit {
  if (this.candidatConnecte) {
       // Récupérer toutes les candidatures du candidat
       this.candidatures = this.candidature.getCandidaturesByCandidat(this.candidatConnecte.refId)
+    
+      this.candidatures.forEach(c => {
+      const offre = this.offresService.getOffreById(c.offreId);
+      if (offre) {
+        this.offresMap.set(c.id, offre);
+
+        const entreprise = this.entrepriseService.getEntrepriseById(offre.entrepriseId);
+        if (entreprise) {
+          this.entreprisesMap.set(c.id, entreprise);
+        }
+      }
+    });
     
     }
    
@@ -52,16 +67,11 @@ export class CandidaturesComponent implements OnInit {
   }
 
   getOffre(offreId: number): Offre | undefined {
-  return this.offresService.getOffreById(offreId);
-  }
-/*
-  getOffreTitre(offreId: number): string {
-   ///nst offre = this.getOffre(offreId);
-   //eturn offre ? offre.titre : 'Offre supprimée';
-  }*/
+  return this.offresService.getOffreById(offreId);  }
 
   // Récupérer toute l’entreprise (logo, site, etc.)
   getEntreprise(entrepriseId: number): Entreprise | undefined {
+
    return this.entrepriseService.getEntrepriseById(entrepriseId);
  }
   filtrerCandidatures() {
@@ -73,4 +83,12 @@ export class CandidaturesComponent implements OnInit {
      // offre.poste.toLowerCase().includes(texte)
   //  );
   }
+
+  getOffreByCandidature(id: number): Offre | undefined {
+  return this.offresMap.get(id);
+}
+
+getEntrepriseByCandidature(id: number): Entreprise | undefined {
+  return this.entreprisesMap.get(id);
+}
 }

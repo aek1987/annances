@@ -19,21 +19,14 @@
     <div *ngFor="let c of candidatures" class="candidature-card">
       
       <!-- En-tête -->
-      <div class="candidature-header">
-        <div class="title">
-          <h3>{{getOffre(c.id)?.poste || 'Titre Offre' }}</h3>
-       <!--  <p class="entreprise">{{ getEntreprise(getOffre(c.id)?.entrepriseId)?.username || 'Entreprise' }}</p>-->
-        </div>
-        <span class="statut" [ngClass]="c.statut.toLowerCase()">{{ c.statut }}</span>
-      </div>
+    <!-- En-tête -->
+<div class="candidature-header">
+  <div class="title">
+    <h3>{{ getOffreByCandidature(c.id)?.poste || 'Titre Offre' }}</h3>   
+  </div>  
+     </div>
     
- <!--      <div class="entreprise-info">
-  <img [src]="getEntreprise(getOffre(c.id)?.entrepriseId)?.logo || 'assets/company.png'" class="entreprise-logo">
-  <div>
-    <p class="entreprise-nom">{{ getEntreprise(getOffre(c.id)?.entrepriseId)?.username }}</p>
-    <p class="entreprise-secteur">{{ getEntreprise(getOffre(c.id)?.entrepriseId)?.secteur }}</p>
-  </div>
-</div>
+
 
       <!-- Timeline -->
       <div class="timeline">
@@ -53,6 +46,10 @@
     <p *ngIf="getOffre(c.id)?.localisation"><b>Localisation :</b> {{ getOffre(c.id)?.localisation }}</p>
     <p *ngIf="getOffre(c.id)?.contrat"><b>Contrat :</b> {{ getOffre(c.id)?.contrat }}</p>
     <p *ngIf="c.message"><b>Message :</b> {{ c.message }}</p>
+    
+    <div  class="info-row" *ngIf="getEntrepriseByCandidature(c.id) as entreprise">     
+       <p>entreprise :{{ entreprise.username }}</p>     
+    </div> 
   </div>
 </div>
 

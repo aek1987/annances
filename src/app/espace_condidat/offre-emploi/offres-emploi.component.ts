@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
+import { faBell, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Candidat } from "src/app/modeles/candidat";
 import { Entreprise } from "src/app/modeles/entreprise";
 import { Offre } from "src/app/modeles/offres";
-import { AuthService } from "src/app/service/auth.service";
+import { AlerteEmploiService } from "src/app/service/alerte-emploi.service";
+
 import { CandidatService } from "src/app/service/candidate.service";
-import { CandidatureService } from "src/app/service/candidature.service";
 import { EntrepriseService } from "src/app/service/entreprise.service";
 import { OffresService } from "src/app/service/offres.service";
 
@@ -25,8 +26,7 @@ export class OffresEmploiComponent implements OnInit {
   searchSalary: number | null = null;
   searchExperience: string = '';
   // 🎯 Filtres
-  selectedContract: string = '';
- 
+  selectedContract: string = ''; 
   selectedSector: string = '';
   sectors: string[] = ['Informatique', 'Finance', 'Santé', 'Éducation'];
   // 📩 Alerte email
@@ -37,6 +37,7 @@ export class OffresEmploiComponent implements OnInit {
   activeTab: 'offres' | 'profil' = 'offres';
  candidatConnecte: Candidat | null = null;
 contracts: string[] = ['CDI', 'CDD', 'Stage', 'freelance'];
+faBell = faBell;faSearch = faSearch;
 // Profil
 profil = {
   nom: '',
@@ -53,9 +54,7 @@ entrepise: Entreprise  | undefined
 newSkill: string = '';
 offres: Offre[] = [];
   constructor(private offreService: OffresService,private entrepriseService :EntrepriseService ,  private candidatService: CandidatService,
- 
-
-  ) {}
+   private alerteEmploiService :AlerteEmploiService   ) {}
   
   ngOnInit(): void {
     // 🔥 Appel du service pour charger les offres
@@ -193,5 +192,27 @@ saveProfile() {
     return entrepise;
   
     }
+    creerAlerte() {
+  if (!this.searchTerm && !this.searchLocation) {
+    alert("❗ Veuillez entrer un mot-clé ou une localisation avant de créer une alerte.");
+    return;
+  }
+
+  const alerte = {
+    id: Date.now(),
+    motCle: this.searchTerm || 'Tous les postes',
+    lieu: this.searchLocation || 'Partout',
+    frequence: 'hebdomadaire',
+    active: true,
+    dateCreation: new Date()
+  };
+
+  // Appel au service
+  //this.alerteEmploiService.addAlerte(alerte);
+
+  // Confirmation visuelle
+  alert(`✅ Alerte créée pour "${alerte.motCle}" à "${alerte.lieu}"`);
+}
+
   
 }
