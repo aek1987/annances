@@ -62,50 +62,54 @@ export class CvParserService {
   }
 
   // 🔹 Extraction des formations
- private extraireFormations(texte: string): Formation[] {
-  const section = texte.match(/(🎓\s*)?Formations?(?:[\s\S]*?)(?=🧳|Expérience|Compétence|Langue|$)/i);
+private extraireExperiences(texte: string): Experience[] {
+  const section = texte.match(/Experience professionnelle\s*:\s*([\s\S]*?)(?=Formation|Compétences|Langues|$)/i);
   if (!section) return [];
 
-  const lignes = section[0]
-    .split(/\n|•|-/)
-    .map(l => l.trim())
-    .filter(l => l.length > 0 && !/formation/i.test(l));
+  const lignes = section[1].split('\n').map(l => l.trim()).filter(Boolean);
+  const experiences: Experience[] = [];
 
-  const formations: Formation[] = [];
-  lignes.forEach(ligne => {
-    // Exemple : "2017 - 2020 Licence Informatique - Université de Mostaganem"
-    const match = ligne.match(/(\d{4}).*?(Licence|Master|Ingénieur|BTS|Doctorat|Certificat|Diplôme).*?(Université|École|Institut)?\s*(.*)?/i);
+  let i = 0;
+  while (i < lignes.length) {
+    const ligne = lignes[i];
+    // Exemple : "1. Developpeur Full-Stack - ABC Tech, Alger"
+    const match = ligne.match(/\d*\.?\s*(.+?)\s*-\s*(.+)/);
     if (match) {
-      const annee = match[1] || '';
-      const diplome = match[2] || 'Formation';
-      const ecole = match[4] || 'Établissement inconnu';
+      const poste = match[1].trim();
+      const entreprise = match[2].trim();
+      let duree = '';
+      // Vérifie si la prochaine ligne contient la période
+      if (lignes[i+1] && /\d{4}/.test(lignes[i+1])) {
+        duree = lignes[i+1].trim();
+        i++;
+      }
+      experiences.push({ poste, entreprise, duree });
+    }
+    i++;
+  }
+
+  return experiences;
+}
+
+private extraireFormations(texte: string): Formation[] {
+  const section = texte.match(/Formation\s*:\s*([\s\S]*?)(?=Experience|Compétences|Langues|$)/i);
+  if (!section) return [];
+
+  const lignes = section[1].split('\n').map(l => l.trim()).filter(Boolean);
+  const formations: Formation[] = [];
+
+  lignes.forEach(ligne => {
+    // Exemple : "- Licence en Informatique - Universite de Technologie, Alger, 2022"
+    const match = ligne.match(/(Licence|Master|Ingénieur|BTS|Doctorat|Certificat|Diplôme).*?-?\s*(.*?)(?:,?\s*(\d{4}))?$/i);
+    if (match) {
+      const diplome = match[1].trim();
+      const ecole = match[2] ? match[2].trim() : '';
+      const annee = match[3] ? match[3].trim() : '';
       formations.push({ diplome, ecole, annee });
     }
   });
 
   return formations;
-}
-
-private extraireExperiences(texte: string): Experience[] {
-  const section = texte.match(/(🧳\s*)?Expériences?(?:[\s\S]*?)(?=🎓|Formation|Compétence|Langue|$)/i);
-  if (!section) return [];
-
-  const lignes = section[0].split(/\n|•|-/).map(l => l.trim()).filter(Boolean);
-  const experiences: Experience[] = [];
-
-  for (let i = 0; i < lignes.length; i++) {
-    const line = lignes[i];
-    if (/(Développeur|Engineer|Technicien|Manager|Chef|Consultant|Architecte|DevOps)/i.test(line)) {
-      const exp: Experience = {
-        poste: line,
-        entreprise: lignes[i + 1] || '',
-        duree: lignes[i + 2] || ''
-      };
-      experiences.push(exp);
-    }
-  }
-
-  return experiences;
 }
 
 
