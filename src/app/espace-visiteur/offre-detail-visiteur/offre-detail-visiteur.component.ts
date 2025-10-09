@@ -56,12 +56,12 @@ export class OffreDetailVisiteurComponent implements OnInit {
 
   // Ajouter / Retirer des favoris
   toggleFavori(offre: Offre): void {
-    offre.favori = !offre.favori;
+/*offre.favori = !offre.favori;
     if (offre.favori) {
       alert(`Offre "${offre.poste}" ajoutée à vos favoris ⭐`);
     } else {
       alert(`Offre "${offre.poste}" retirée de vos favoris ❌`);
-    }
+    }*/
     // tu peux aussi sauvegarder ça dans localStorage ou un backend
   }
 }

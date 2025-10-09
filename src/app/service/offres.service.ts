@@ -25,8 +25,8 @@ private offres: Offre[] = [
     competences: ['Angular', 'TypeScript', 'RxJS', 'REST API'],
     langues: ['Français', 'Anglais'],
     avantages: 'Tickets restaurant, Mutuelle, Flexibilité',
-    status: undefined,
-    favori: false
+    status: undefined
+    
   },
   {
     id: 2,
@@ -49,8 +49,8 @@ private offres: Offre[] = [
     competences: ['SQL', 'Excel', 'Power BI', 'Python'],
     langues: ['Français'],
     avantages: 'Tickets restaurant, Transport remboursé',
-    status: undefined,
-    favori: false
+    status: undefined
+
   },
   {
     id: 3,
@@ -73,8 +73,8 @@ private offres: Offre[] = [
     competences: ['Java', 'Spring Boot', 'JPA', 'JUnit'],
     langues: ['Anglais'],
     avantages: 'Télétravail 100%, Formations, Mutuelle',
-    status: undefined,
-    favori: false
+    status: undefined
+  
   },
   {
     id: 4,
@@ -97,8 +97,8 @@ private offres: Offre[] = [
     competences: ['Figma', 'Adobe XD', 'Design Thinking'],
     langues: ['Français', 'Anglais'],
     avantages: 'Flexibilité, Tickets restaurant, Formations',
-    status: undefined,
-    favori: false
+    status: undefined
+
   },
   {
     id: 5,
@@ -121,8 +121,8 @@ private offres: Offre[] = [
     competences: ['Gestion de projet', 'Agile', 'Scrum', 'Communication'],
     langues: ['Français', 'Anglais'],
     avantages: 'Mutuelle, Bonus, Tickets restaurant',
-    status: undefined,
-    favori: false
+    status: undefined
+  
   },
   {
     id: 6,
@@ -145,8 +145,8 @@ private offres: Offre[] = [
     competences: ['AWS', 'Azure', 'DevOps', 'Docker'],
     langues: ['Anglais'],
     avantages: 'Télétravail, Horaires flexibles',
-    status: undefined,
-    favori: false
+    status: undefined
+   
   },
   {
     id: 7,
@@ -169,8 +169,8 @@ private offres: Offre[] = [
     competences: ['SEO', 'Google Ads', 'Social Media', 'Analytics'],
     langues: ['Français'],
     avantages: 'Stage rémunéré, Tickets restaurant',
-    status: undefined,
-    favori: false
+    status: undefined
+   
   }
 ];
 

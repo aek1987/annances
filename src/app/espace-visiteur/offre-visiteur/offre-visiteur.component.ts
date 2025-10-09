@@ -152,7 +152,7 @@ applyFilters() {
 
   // ⭐ Favoris
   toggleFavori(offre: Offre) {
-    offre.favori = !offre.favori;
+   // offre.favori = !offre.favori;
   }
 
   

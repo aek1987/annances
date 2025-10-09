@@ -97,7 +97,7 @@ get candidatSafe(): Candidat {
     photo: '../../assets/user.png',
     competences: [],
     experiences: [],
-    formations: [],
+    formations: [],favoris: [],
     cv: ''
   };
 }

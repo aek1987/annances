@@ -20,5 +20,6 @@ export interface Candidat {
   formations: Formation[];
   langues?: string[]; 
   progression?: number; // 🔹 Ajouté ici
+   favoris?: number[];
 
 }

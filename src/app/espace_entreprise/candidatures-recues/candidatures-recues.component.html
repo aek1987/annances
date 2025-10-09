@@ -1,38 +1,100 @@
-<div class="card p-3">
-  <h3>👥 Candidatures reçues</h3>
+<div class="candidatures-container">
+  <h2 class="page-title">📂 Candidatures reçues</h2>
+  <p class="subtitle">
+    Liste des candidats ayant postulé à vos offres d’emploi
+  </p>
 
-  <div *ngIf="candidatures.length === 0" class="empty">
-    Aucune candidature reçue pour cette offre.
+  <!-- ✅ Filtre par offre -->
+ <div class="filter-bar">
+  <h3>🔍 Filtrer les candidatures</h3>
+
+  <div class="filters-grid">
+    <!-- 🏷️ Filtrer par offre -->
+    <div>
+      <label for="offre">Offre :</label>
+      <select id="offre" [(ngModel)]="filtre.offre" (change)="appliquerFiltres()">
+        <option value="">Toutes les offres</option>
+        <option *ngFor="let offre of offres" [value]="offre.id">{{ offre.poste }}</option>
+      </select>
+    </div>
+
+    <!-- 📅 Filtrer par statut -->
+    <div>
+      <label for="statut">Statut :</label>
+      <select id="statut" [(ngModel)]="filtre.statut" (change)="appliquerFiltres()">
+        <option value="">Tous</option>
+        <option value="en attente">🟡 En attente</option>
+        <option value="accepté">🟢 Accepté</option>
+        <option value="refusé">🔴 Refusé</option>
+      </select>
+    </div>
+
+    <!-- 🧑‍💻 Filtrer par compétence -->
+    <div>
+      <label for="competence">Compétence :</label>
+      <input id="competence" type="text" placeholder="ex: Angular, Java"
+             [(ngModel)]="filtre.competence" (input)="appliquerFiltres()">
+    </div>
+
+    <!-- 🗓️ Filtrer par date -->
+    <div>
+      <label for="date">Depuis le :</label>
+      <input id="date" type="date" [(ngModel)]="filtre.date" (change)="appliquerFiltres()">
+    </div>
+
+    <!-- 🔠 Rechercher par nom -->
+    <div>
+      <label for="nom">Candidat :</label>
+      <input id="nom" type="text" placeholder="Nom du candidat"
+             [(ngModel)]="filtre.nom" (input)="appliquerFiltres()">
+    </div>
   </div>
-
-  <ul *ngIf="candidatures.length > 0" class="list">
-    <li *ngFor="let c of candidatures">
-      <p><b>Candidat ID:</b> {{ c.candidatId }}</p>
-      <p><b>Date :</b> {{ c.dateCandidature | date:'dd/MM/yyyy' }}</p>
-     <!-- <p><b>Status :</b> {{ c.status }}</p>-->
-      <p *ngIf="c.message"><b>Message :</b> {{ c.message }}</p>
-
-      <div class="actions">
-        <button (click)="changerStatus(c.id, 'accepté')">✅ Accepter</button>
-        <button (click)="changerStatus(c.id, 'refusé')">❌ Refuser</button>
-      </div>
-    </li>
-  </ul>
 </div>
 
 
+  <!-- 🧱 Tableau des candidatures -->
+  <table class="table-candidatures">
+    <thead>
+      <tr>
+        <th>Offre</th>
+        <th>Candidat</th>
+        <th>Compétences principales</th>
+        <th>Date de candidature</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
 
-<div *ngFor="let item of offresCandidatures" class="offre-section">
-  <h2>{{ item.offre.poste }} ({{ item.candidatures.length }} candidatures)</h2>
-  <div *ngIf="item.candidatures.length > 0; else aucune">
-    <ul>
-      <li *ngFor="let c of item.candidatures">
-        Candidat ID: {{ c.candidatId }} | Statut: {{ c.statut }} | Date: {{ c.dateCandidature | date:'short' }}
-        <p *ngIf="c.message">Message: {{ c.message }}</p>
-      </li>
-    </ul>
+    <tbody>
+      <tr *ngFor="let c of candidaturesFiltrees">
+        <td>{{ getOffreNom(c.offreId) }}</td>
+        <td>{{ getCandidatNom(c.candidatId) }}</td>
+        <td>{{ getCandidatCompetences(c.candidatId) }}</td>
+        <td>{{ c.dateCandidature | date:'dd/MM/yyyy' }}</td>
+
+        <td>
+         <!---  <span class="statut"
+                [ngClass]="{
+                 'en-attente': c.statut === 'en attente',
+                     'accepte': c.statut === 'accepté',
+                  'refuse': c.statut === 'refusé'-
+                }"
+            {{ c.statut | titlecase }}
+          </span>-->
+        </td>
+
+        <td class="actions">
+          <button class="btn-view" (click)="voirCV(c)">👁️ Voir CV</button>
+          <button class="btn-accept" (click)="changerStatut(c, 'accepté')">✅ Accepter</button>
+          <button class="btn-refuse" (click)="changerStatut(c, 'refusé')">❌ Refuser</button>
+        <!----  <button class="btn-contact" *ngIf="c.statut === 'accepté'">✉️ Contacter</button>
+          <button class="btn-recontact" *ngIf="c.statut === 'refus'">🔁 Recontacter</button>-->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="candidaturesFiltrees.length === 0" class="empty">
+    Aucune candidature trouvée pour cette offre.
   </div>
-  <ng-template #aucune>
-    <p>Aucune candidature pour cette offre.</p>
-  </ng-template>
 </div>

@@ -8,7 +8,8 @@ import { AlerteEmploiService } from "src/app/service/alerte-emploi.service";
 import { CandidatService } from "src/app/service/candidate.service";
 import { EntrepriseService } from "src/app/service/entreprise.service";
 import { OffresService } from "src/app/service/offres.service";
-
+import { faStar as faSolidStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faRegularStar } from '@fortawesome/free-regular-svg-icons';
 
 interface Candidature {
   offre: string;
@@ -38,21 +39,18 @@ export class OffresEmploiComponent implements OnInit {
  candidatConnecte: Candidat | null = null;
 contracts: string[] = ['CDI', 'CDD', 'Stage', 'freelance'];
 faBell = faBell;faSearch = faSearch;
+faSolidStar = faSolidStar;  faRegularStar =faRegularStar;
 // Profil
-profil = {
-  nom: '',
-  email: '',
-  telephone: '',
-  experience: '',
-  competences: [] as string[],
-  cv: ''
-};
+profil = {  nom: '',  email: '',  telephone: '',  experience: '',  competences: [] as string[],  cv: ''};
 
 // 🔹 Suivi des candidatures
 candidatures: Candidature[] = [];
 entrepise: Entreprise  | undefined
 newSkill: string = '';
 offres: Offre[] = [];
+
+
+
   constructor(private offreService: OffresService,private entrepriseService :EntrepriseService ,  private candidatService: CandidatService,
    private alerteEmploiService :AlerteEmploiService   ) {}
   
@@ -173,7 +171,7 @@ saveProfile() {
 
   // ⭐ Favoris
   toggleFavori(offre: Offre) {
-    offre.favori = !offre.favori;
+    //offre.offre = !offre.favori;
   }
 
   // 📩 Abonnement alertes
@@ -214,5 +212,6 @@ saveProfile() {
   alert(`✅ Alerte créée pour "${alerte.motCle}" à "${alerte.lieu}"`);
 }
 
-  
+
+ 
 }

@@ -1,0 +1,127 @@
+.candidatures-container {
+  padding: 2rem;
+  background: #f9fafb;
+}
+
+.page-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+.filter-bar {
+  margin-bottom: 1rem;
+}
+
+.table-candidatures {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.table-candidatures th,
+.table-candidatures td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.table-candidatures th {
+  background: #f1f3f5;
+  font-weight: bold;
+}
+
+.statut {
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.en-attente {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.accepte {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.refuse {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.actions button {
+  margin-right: 5px;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.btn-view {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-accept {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-refuse {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-contact {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-recontact {
+  background-color: #ffc107;
+  color: black;
+}
+
+.empty {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #888;
+}
+/*****************************************/
+.filter-bar {
+  background: #f1f3f5;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.filter-bar label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.filter-bar select,
+.filter-bar input {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}

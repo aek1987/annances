@@ -82,6 +82,15 @@
     <!-- 📄 Liste des offres -->
     <div class="offres-list">
       <div class="offre-card" *ngFor="let offre of filteredOffres">
+
+        <!-- ⭐ Icône Favori en haut à droite -->
+       <div class="favori-icon" (click)="toggleFavori(offre)">
+      <fa-icon
+     [icon]="candidatConnecte?.favoris ? faSolidStar : faRegularStar"
+        [ngClass]="candidatConnecte?.favoris ? 'favori-actif' : 'favori-inactif'">
+      </fa-icon>
+    </div>
+
         <div class="offre-header">
       <h3>{{ offre.poste }}</h3>
       <a class="details-link" [routerLink]="['/candidat/offre', offre.id]">Détails</a>

@@ -77,8 +77,8 @@ export class OffreDetailComponent implements OnInit {
   // Ajouter / Retirer des favoris
   toggleFavori(offre: Offre): void {
     this.candidatConnecte = this.candidatService.getCandidatConnecte();
-    offre.favori = !offre.favori;
-    if (offre.favori) {
+ //   offre.favori = !offre.favori;
+ /*   if (offre.favori) {
       alert(`Offre "${offre.poste}" ajoutée à vos favoris ⭐`);
 
  const candidature = this.candidature.addCandidature(
@@ -91,7 +91,7 @@ export class OffreDetailComponent implements OnInit {
 
     } else {
       alert(`Offre "${offre.poste}" retirée de vos favoris ❌`);
-    }
+    }*/
     // tu peux aussi sauvegarder ça dans localStorage ou un backend
   }
 }

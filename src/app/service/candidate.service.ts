@@ -58,7 +58,7 @@ getCandidatConnecte(): Candidat | null {
       photo:"assets/homme.png", // 🔴 par défaut
       cv:"vide", 
       competences: [],
-      experiences: [], formations: [],progression: 0 
+      experiences: [], formations: [],progression: 0 ,favoris:[]
     };
 
     this.candidats.push(newCandidat);
@@ -149,6 +149,44 @@ updateCandidatState(candidat: Candidat) {
     this.candidats[index] = candidat;
   }
  
+}
+// ================================
+// 🟡 GESTION DES FAVORIS
+// ================================
+
+// Ajouter ou retirer une offre des favoris
+toggleFavori(offreId: number): void {
+  const candidat = this.getCandidatConnecte();
+  if (!candidat) return;
+
+  if (!candidat.favoris) candidat.favoris = [];
+
+  const index = candidat.favoris.indexOf(offreId);
+  if (index === -1) {
+    // ✅ Ajouter le favori
+    candidat.favoris.push(offreId);
+    console.log(`⭐ Offre ${offreId} ajoutée aux favoris de ${candidat.username}`);
+  } else {
+    // ❌ Supprimer le favori
+    candidat.favoris.splice(index, 1);
+    console.log(`❌ Offre ${offreId} retirée des favoris de ${candidat.username}`);
+  }
+
+  // 🔄 Mettre à jour la liste dans le tableau
+  this.updateCandidatState(candidat);
+}
+
+// Vérifie si une offre est favorite
+isFavori(offreId: number): boolean {
+  const candidat = this.getCandidatConnecte();
+  if (!candidat || !candidat.favoris) return false;
+  return candidat.favoris.includes(offreId);
+}
+
+// Récupère toutes les offres favorites du candidat
+getFavoris(): number[] {
+  const candidat = this.getCandidatConnecte();
+  return candidat?.favoris || [];
 }
 
 
