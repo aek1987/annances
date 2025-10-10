@@ -399,7 +399,7 @@
   font-size: 16px;
 }
 /********************/
-/* ⭐ Icône favori */
+
 /* ⭐ Icône favori */
 .favori-icon {
   position: absolute;
@@ -418,4 +418,16 @@
   color: #ccc;
   font-size: 22px;
   transition: color 0.3s ease;
+}
+.favori-icon:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.favori-actif:hover {
+  color: orange;
+}
+
+.favori-inactif:hover {
+  color: #888;
 }

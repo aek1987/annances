@@ -171,7 +171,18 @@ saveProfile() {
 
   // ⭐ Favoris
   toggleFavori(offre: Offre) {
-    //offre.offre = !offre.favori;
+
+
+ 
+    this.candidatService.toggleFavori(offre.id )
+
+  }
+ 
+  estFavori(offreid: number):boolean
+  
+  {
+    return this.candidatService.isFavori(offreid );
+
   }
 
   // 📩 Abonnement alertes

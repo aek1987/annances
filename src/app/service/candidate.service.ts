@@ -156,9 +156,9 @@ updateCandidatState(candidat: Candidat) {
 
 // Ajouter ou retirer une offre des favoris
 toggleFavori(offreId: number): void {
+
   const candidat = this.getCandidatConnecte();
   if (!candidat) return;
-
   if (!candidat.favoris) candidat.favoris = [];
 
   const index = candidat.favoris.indexOf(offreId);
