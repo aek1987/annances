@@ -1,0 +1,32 @@
+<div class="candidatures-container" *ngIf="candidatures.length > 0; else noCandidature">
+  <h3>📄 Candidatures reçues : {{ candidatures.length }}</h3>
+
+  <div class="candidature-card" *ngFor="let c of candidatures">
+    <div class="info">
+      <p><b>ID candidat :</b> {{ c.candidatId }}</p>
+      <p><b>Date :</b> {{ c.dateCandidature | date:'mediumDate' }}</p>
+      <p><b>Message :</b> {{ c.message || 'Aucun message' }}</p>
+      <p><b>Statut :</b> 
+        <span [ngClass]="c.statut">{{ c.statut }}</span>
+      </p>
+      <p *ngIf="c.luParEntreprise" class="vue">👀 Vue</p>
+    </div>
+
+    <div class="actions">
+      <button (click)="marquerCommeLue(c)" [disabled]="c.luParEntreprise">
+        <fa-icon [icon]="faEye"></fa-icon> Marquer comme lue
+      </button>
+      <button (click)="changerStatut(c, 'acceptée')" [disabled]="c.statut === 'acceptée'">
+        <fa-icon [icon]="faCheck"></fa-icon> Accepter
+      </button>
+      <button (click)="changerStatut(c, 'refusée')" [disabled]="c.statut === 'refusée'">
+        <fa-icon [icon]="faTimes"></fa-icon> Refuser
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #noCandidature>
+  <p>Aucune candidature trouvée pour cette offre :. {{offreId}}</p>
+</ng-template>
+

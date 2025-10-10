@@ -42,6 +42,7 @@ import { StagesComponent } from './partenaire/stages/stages.component';
 import { ProfilComponentEntreprise } from './espace_entreprise/profil-entreprise/profi-entreprise.component';
 import { DetailEntrepriseComponent } from './espace_admin/detail-entreprise/detail-entreprise.component';
 import { OffreDetailVisiteurComponent } from './espace-visiteur/offre-detail-visiteur/offre-detail-visiteur.component';
+import { CandidaturesOffreComponent } from './espace_entreprise/candidatures-offre/candidatures-offre.component';
 
 
 
@@ -123,6 +124,7 @@ const routes: Routes = [
       { path: 'mes-offres', component: MesOffresComponent },
       { path: 'ajouter-offre', component: AjouterOffreComponent },
       { path: 'candidatures', component: CandidaturesRecuesComponent },
+      { path: 'offre-candidatures/:id', component: CandidaturesOffreComponent },
       { path: 'profil', component: ProfilComponentEntreprise  },
       { path: 'settings', component: EtrepriseSettingComponent },
       { path: 'abonnement', component: AbonneeComponent },

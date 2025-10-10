@@ -41,7 +41,7 @@
         <div class="date">Publié le {{ offre.datePublication | date:'dd/MM/yyyy' }}</div>
 
         <div class="actions">
-          <button class="btn small" (click)="voirCandidatures(offre)">👥 Candidatures</button>
+          <button class="btn small" [routerLink]="['/entreprise/offre-candidatures', offre.id]">👥 Candidatures</button>
           <button class="btn small edit" (click)="editOffre(offre)">✏️ Modifier</button>
           <button class="btn small danger" (click)="deleteOffre(offre)">🗑️ Supprimer</button>
         </div>

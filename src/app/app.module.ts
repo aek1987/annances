@@ -70,6 +70,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
 import { OffreDetailVisiteurComponent } from './espace-visiteur/offre-detail-visiteur/offre-detail-visiteur.component';
+import { CandidaturesOffreComponent } from './espace_entreprise/candidatures-offre/candidatures-offre.component';
 
 
 
@@ -133,7 +134,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EntrepriseDashboardComponent,
     CandidatDetailComponent,
     ProfilComponentEntreprise,
-    DetailEntrepriseComponent
+    DetailEntrepriseComponent,
+    CandidaturesOffreComponent
    
   
    

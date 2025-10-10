@@ -33,6 +33,7 @@ filteredOffres: Offre[] = [];
 
    voirCandidatures(offre: Offre): void {
     console.log('Voir candidatures pour offre:', offre);
+   // offre-candidatures
     // TODO: router vers /entreprise/candidatures/:offreId
   }
 
