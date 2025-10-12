@@ -59,11 +59,11 @@ isLoading = true;
     // 🔥 Appel du service pour charger les offres
    this.offreService.getAllOffres().subscribe({
   next: (data) => {
-    setTimeout(() => {
+  
       this.offres = data;
       this.filteredOffres = [...this.offres];
       this.isLoading = false;
-    }, 100); // délai visuel de 500 ms
+    // délai visuel de 500 ms
   },
   error: (err) => {
     console.error('Erreur lors du chargement des offres', err);
