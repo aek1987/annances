@@ -12,7 +12,7 @@
   <span>Rechercher</span>
 </button>
 
-   
+ 
       </div>
      
 
@@ -78,9 +78,13 @@
 
 
     </div>
-
+<!-- 🌀 Spinner de chargement -->
+<div *ngIf="isLoading" class="loading-overlay">
+  <div class="spinner"></div>
+  <p>Chargement des offres...</p>
+</div>
     <!-- 📄 Liste des offres -->
-    <div class="offres-list">
+    <div *ngIf="!isLoading" class="offres-list">
       <div class="offre-card" *ngFor="let offre of filteredOffres">
 
         <!-- ⭐ Icône Favori en haut à droite -->

@@ -1,8 +1,11 @@
 // src/app/service/offre.service.ts
 import { Injectable } from '@angular/core';
 import { Offre } from '../modeles/offres';
-
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' }) export class OffresService {
+
 private offres: Offre[] = [
   {
     id: 1,
@@ -173,17 +176,17 @@ private offres: Offre[] = [
    
   }
 ];
-
-
-  
-
-  private nextId = 3;
+ private nextId = 3;
+ private apiUrl = `${environment.apiUrl}/api/offres`;   
+ 
+constructor(private http: HttpClient) {}
+ 
 
   // ✅ Récupérer toutes les offres
-  getAllOffres(): Offre[] {
-    return this.offres;
-  }
+  getAllOffres():Observable<Offre[]> {
+    return this.http.get<Offre[]>(this.apiUrl);}
 
+ 
   // ✅ Récupérer une offre par ID
   getOffreById(id: number): Offre | undefined {
     return this.offres.find(o => o.id === id);

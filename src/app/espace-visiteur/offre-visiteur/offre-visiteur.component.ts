@@ -36,6 +36,7 @@ candidatures: Candidature[] = [];
 entrepise: Entreprise  | undefined
 newSkill: string = '';
 offres: Offre[] = [];
+isLoading = true;
   constructor(private offreService: OffresService,private entrepriseService :EntrepriseService ,  
  private candidature: CandidatureService
 
@@ -43,10 +44,22 @@ offres: Offre[] = [];
   
   ngOnInit(): void {
     // 🔥 Appel du service pour charger les offres
-    this.offres = this.offreService.getAllOffres();
-    this.filteredOffres = this.offres;   
-   // this.candidatConnecte = this.candidatService.getCandidatConnecte();
-   // console.log("condidat name  "+this.candidatConnecte?.username +" id= "+this.candidatConnecte?.refId);
+     this.isLoading = true;
+    // 🔥 Appel du service pour charger les offres
+   this.offreService.getAllOffres().subscribe({
+  next: (data) => {
+    setTimeout(() => {
+      this.offres = data;
+      this.filteredOffres = [...this.offres];
+      this.isLoading = false;
+    }, 100); // délai visuel de 500 ms
+  },
+  error: (err) => {
+    console.error('Erreur lors du chargement des offres', err);
+    this.isLoading = false;
+  }
+});  
+  
   }
 selectedContracts: string[] = [];
 isDropdownOpen = false;

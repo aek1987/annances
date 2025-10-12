@@ -32,7 +32,14 @@ filteredOffres: Offre[] = [];
 
   loadOffres() {
     
-      this.offres = this.offreService.getAllOffres();
+     this.offreService.getAllOffres().subscribe({
+      next: (data) => {
+        this.offres = data; // ✅ ici on affecte les données réelles
+      },
+      error: (err) => {
+        console.error('Erreur lors du chargement des offres', err);
+      }
+    });
     
   }
 
