@@ -27,21 +27,22 @@ export class OffreDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Charger toutes les entreprises
-  
-
+      
     // Vérifier si on récupère une offre par ID depuis l’URL
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       const offreId = Number(id);
-      this.offre = this.offreService.getOffreById(offreId);
+     this.offreService.getOffreById(offreId).subscribe({
+      next: (data) => this.offre = data,
+      error: (err) => console.error('Erreur lors du chargement de l’offre :', err)
+    });
+      
       if(this.offre)
       this.entrprise= this.getEntreprise(this.offre.entrepriseId);
-
-      // Charger les offres similaires
-      if (this.offre) {
+       
+      console.log("offre",this.offre)
      //   this.offresSimilaires = this.offreService.getOffresSimilaires(this.offre);
-      }
+      
     }
   }
 

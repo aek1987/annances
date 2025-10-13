@@ -63,7 +63,7 @@ isLoading = true;
       this.offres = data;
       this.filteredOffres = [...this.offres];
       this.isLoading = false;
-    // délai visuel de 500 ms
+       console.log('chargement des offres',  this.offres);
   },
   error: (err) => {
     console.error('Erreur lors du chargement des offres', err);

@@ -7,7 +7,7 @@ import { CandidatService } from 'src/app/service/candidate.service';
 import { CandidatureService } from 'src/app/service/candidature.service';
 import { EntrepriseService } from 'src/app/service/entreprise.service';
 import { OffresService } from 'src/app/service/offres.service';
-
+import { Observable } from 'rxjs';
 
 
 
@@ -29,28 +29,46 @@ entreprisesMap = new Map<number, Entreprise>();
  private candidature: CandidatureService,  private entrepriseService: EntrepriseService,
 
   ) {}
-  ngOnInit(): void {
-        this.candidatConnecte = this.candidatService.getCandidatConnecte();
-    console.log("condidat name  "+this.candidatConnecte?.username +" id= "+this.candidatConnecte?.refId);
- if (this.candidatConnecte) {
-      // Récupérer toutes les candidatures du candidat
-      this.candidatures = this.candidature.getCandidaturesByCandidat(this.candidatConnecte.refId)
-    
-      this.candidatures.forEach(c => {
-      const offre = this.offresService.getOffreById(c.offreId);
-      if (offre) {
-        this.offresMap.set(c.id, offre);
+ngOnInit(): void {
+  this.candidatConnecte = this.candidatService.getCandidatConnecte();
+  console.log(
+    "Candidat connecté : " +
+      this.candidatConnecte?.username +
+      " (id=" +
+      this.candidatConnecte?.refId +
+      ")"
+  );
 
-        const entreprise = this.entrepriseService.getEntrepriseById(offre.entrepriseId);
-        if (entreprise) {
-          this.entreprisesMap.set(c.id, entreprise);
-        }
-      }
+  if (this.candidatConnecte) {
+    // Récupération de toutes les candidatures du candidat
+    this.candidatures = this.candidature.getCandidaturesByCandidat(
+      this.candidatConnecte.refId
+    );
+
+    // Pour chaque candidature, récupérer l’offre et l’entreprise associées
+    this.candidatures.forEach((c) => {
+      this.offresService.getOffreById(c.offreId).subscribe({
+        next: (offre) => {
+          if (offre) {
+            // Stocker l’offre
+            this.offresMap.set(c.id, offre);
+
+            // Charger l’entreprise associée
+         const entreprise = this.entrepriseService.getEntrepriseById(offre.entrepriseId);
+if (entreprise) {
+  this.entreprisesMap.set(c.id, entreprise);
+}
+
+          }
+        },
+        error: (err) =>
+          console.error(`Erreur lors du chargement de l’offre ${c.offreId}`, err),
+      });
     });
-    
-    }
-   
   }
+}
+
+
   
   
   // Retourne l’index de l’étape actuelle
@@ -66,8 +84,10 @@ entreprisesMap = new Map<number, Entreprise>();
    //lert(`Détails candidature : ${candidature.poste} chez ${candidature.entreprise}`);
   }
 
-  getOffre(offreId: number): Offre | undefined {
-  return this.offresService.getOffreById(offreId);  }
+  getOffre(offreId: number): Observable<Offre> {
+  return this.offresService.getOffreById(offreId);
+}
+
 
   // Récupérer toute l’entreprise (logo, site, etc.)
   getEntreprise(entrepriseId: number): Entreprise | undefined {
