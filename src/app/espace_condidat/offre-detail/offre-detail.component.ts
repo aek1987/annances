@@ -32,7 +32,6 @@ export class OffreDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       const offreId = Number(id);
-<<<<<<< HEAD
       this.offreService.getOffreById2(offreId).subscribe({
       next: (data: Offre) => {
         this.offre = data;      
@@ -41,13 +40,6 @@ export class OffreDetailComponent implements OnInit {
         console.error('Erreur lors du chargement de l\'offre', err);       
       }
     });
-=======
-     this.offreService.getOffreById(offreId).subscribe({
-      next: (data) => this.offre = data,
-      error: (err) => console.error('Erreur lors du chargement de l’offre :', err)
-    });
-      
->>>>>>> 7bdd7b827176d7b38f3e59e0660d7d77a76412f2
       if(this.offre)
       this.entrprise= this.getEntreprise(this.offre.entrepriseId);
        
