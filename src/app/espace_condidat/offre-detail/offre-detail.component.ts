@@ -34,7 +34,14 @@ export class OffreDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       const offreId = Number(id);
-      this.offre = this.offreService.getOffreById(offreId);
+      this.offreService.getOffreById2(offreId).subscribe({
+      next: (data: Offre) => {
+        this.offre = data;      
+      },
+      error: (err) => {
+        console.error('Erreur lors du chargement de l\'offre', err);       
+      }
+    });
       if(this.offre)
       this.entrprise= this.getEntreprise(this.offre.entrepriseId);
 

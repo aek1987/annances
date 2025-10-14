@@ -178,7 +178,7 @@ private offres: Offre[] = [
 ];
  private nextId = 3;
  private apiUrl = `${environment.apiUrl}/api/offres`;   
- 
+
 constructor(private http: HttpClient) {}
  
 
@@ -190,6 +190,10 @@ constructor(private http: HttpClient) {}
   // ✅ Récupérer une offre par ID
   getOffreById(id: number): Offre | undefined {
     return this.offres.find(o => o.id === id);
+  }
+   // ✅ Récupérer une offre par ID depuis le backend
+  getOffreById2(id: number): Observable<Offre> {
+    return this.http.get<Offre>(`${this.apiUrl}/${id}`);
   }
 
   // ✅ Récupérer les offres d’une entreprise
