@@ -186,10 +186,10 @@ constructor(private http: HttpClient) {}
   getAllOffres():Observable<Offre[]> {
     return this.http.get<Offre[]>(this.apiUrl);}
 
- 
-  // ✅ Récupérer une offre par ID
-  getOffreById(id: number): Offre | undefined {
-    return this.offres.find(o => o.id === id);
+   
+// ✅ Récupérer une offre par ID depuis le backend
+  getOffreById(id: number): Observable<Offre> {
+    return this.http.get<Offre>(`${this.apiUrl}/${id}`);
   }
    // ✅ Récupérer une offre par ID depuis le backend
   getOffreById2(id: number): Observable<Offre> {

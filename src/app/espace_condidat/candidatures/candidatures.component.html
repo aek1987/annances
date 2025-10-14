@@ -43,8 +43,12 @@
 <div class="candidature-body">
   <div class="info-row">
     <p><b>Date :</b> {{ c.dateCandidature | date:'mediumDate' }}</p>
-    <p *ngIf="getOffre(c.id)?.localisation"><b>Localisation :</b> {{ getOffre(c.id)?.localisation }}</p>
-    <p *ngIf="getOffre(c.id)?.contrat"><b>Contrat :</b> {{ getOffre(c.id)?.contrat }}</p>
+   <p *ngIf="getOffre(c.id) | async as offre">
+  <b>Localisation :</b> {{ offre.localisation }}
+</p>
+<p *ngIf="getOffre(c.id) | async as offre">
+  <b>Contrat :</b> {{ offre.contrat }}
+</p>
     <p *ngIf="c.message"><b>Message :</b> {{ c.message }}</p>
     
     <div  class="info-row" *ngIf="getEntrepriseByCandidature(c.id) as entreprise">     
