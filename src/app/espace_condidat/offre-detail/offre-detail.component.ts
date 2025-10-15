@@ -18,7 +18,8 @@ export class OffreDetailComponent implements OnInit {
   @Input() offre?: Offre;
   
   offresSimilaires: Offre[] = [];
-  entrprise:Entreprise | undefined;
+ entreprise: Entreprise |undefined; // Note le "?"
+
   candidatConnecte: Candidat | null = null;
   constructor(
     private offreService: OffresService,
@@ -34,14 +35,16 @@ export class OffreDetailComponent implements OnInit {
       const offreId = Number(id);
       this.offreService.getOffreById2(offreId).subscribe({
       next: (data: Offre) => {
-        this.offre = data;      
+        this.offre = data;  
+        
+          if(this.offre)
+     this.getEntreprise(this.offre.entrepriseId);
       },
       error: (err) => {
         console.error('Erreur lors du chargement de l\'offre', err);       
       }
     });
-      if(this.offre)
-      this.entrprise= this.getEntreprise(this.offre.entrepriseId);
+    
        
       console.log("offre",this.offre)
      //   this.offresSimilaires = this.offreService.getOffresSimilaires(this.offre);
@@ -51,9 +54,19 @@ export class OffreDetailComponent implements OnInit {
 
   
   // Récupérer toute l’entreprise (logo, site, etc.)
- getEntreprise(entrepriseId: number): Entreprise | undefined {
-  return this.entrepriseService.getEntrepriseById(entrepriseId);
+ getEntreprise(entrepriseId: number): void {
+  this.entrepriseService.getEntrepriseById2(entrepriseId).subscribe({
+    next: (data: Entreprise) => {
+      this.entreprise = data;   
+      console.log('Entreprise récupérée :', this.entreprise);
+    },
+    error: (err) => {
+      console.error('Erreur lors du chargement de l\'entreprise', err);       
+    }
+  });
 }
+
+
 
 
   // Postuler à une offre

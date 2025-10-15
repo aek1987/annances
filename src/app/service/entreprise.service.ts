@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Entreprise } from '../modeles/entreprise';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -54,8 +57,8 @@ export class EntrepriseService {
   }
 ];
 
-
-  constructor(private authService: AuthService) {}
+private apiUrl = `${environment.apiUrl}/api/entreprises`;
+  constructor(private authService: AuthService,private http: HttpClient) {}
 
   // 🔹 Retourne l’entreprise connectée (via AuthService)
   getEntrepriseConnectee(): Entreprise | null {
@@ -77,7 +80,10 @@ export class EntrepriseService {
   getEntrepriseById(id: number): Entreprise | undefined {
     return this.entreprises.find(e => e.id === id);
   }
-
+  // ✅ Recherche par ID
+  getEntrepriseById2(id: number): Observable<Entreprise>   {
+     return this.http.get<Entreprise>(`${this.apiUrl}/${id}`);
+  }
   // ✅ Recherche par nom ou secteur
   searchEntreprise(query: string): Entreprise[] {
     return this.entreprises.filter(e =>
