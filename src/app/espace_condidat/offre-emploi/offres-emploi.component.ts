@@ -52,7 +52,7 @@ offres: Offre[] = [];
 
 isLoading = true;
   constructor(private offreService: OffresService,private entrepriseService :EntrepriseService ,  private candidatService: CandidatService,
-   private alerteEmploiService :AlerteEmploiService   ) {}
+    ) {}
       
   ngOnInit(): void {
     this.isLoading = true;
