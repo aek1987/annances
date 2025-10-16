@@ -1,27 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Alerte } from '../modeles/alerte';
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlerteEmploiService {
+  private apiUrl = 'http://localhost:8080/api/alertes';
 
-  private alertes: Alerte[] = [];
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
-
-  addAlerte(alerte: Alerte) {
-    this.alertes.push(alerte);
-    console.log('✅ Nouvelle alerte enregistrée :', alerte);
+  addAlerte(alerte: Alerte): Observable<Alerte> {
+    return this.http.post<Alerte>(this.apiUrl, alerte);
   }
 
-  getAlertes(): Alerte[] {
-    return this.alertes;
+  getAlertes(): Observable<Alerte[]> {
+    return this.http.get<Alerte[]>(this.apiUrl);
   }
 
-  // (optionnel) Simuler l'envoi d'un email
-  envoyerAlerteEmail(alerte: Alerte, offre: any) {
-//    console.log(`📩 Email envoyé à ${alerte.email} pour l'offre : ${offre.poste}`);
+  getAlerteById(id: number): Observable<Alerte> {
+    return this.http.get<Alerte>(`${this.apiUrl}/${id}`);
+  }
+
+  deleteAlerte(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  toggleAlerte(alerte: Alerte): Observable<Alerte> {
+    const updated = { ...alerte, active: !alerte.active };
+    return this.http.put<Alerte>(`${this.apiUrl}/${alerte.id}`, updated);
   }
 }

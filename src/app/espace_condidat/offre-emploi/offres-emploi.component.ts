@@ -10,6 +10,7 @@ import { EntrepriseService } from "src/app/service/entreprise.service";
 import { OffresService } from "src/app/service/offres.service";
 import { faStar as faSolidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faRegularStar } from '@fortawesome/free-regular-svg-icons';
+import { Alerte } from "src/app/modeles/alerte";
 
 interface Candidature {
   offre: string;
@@ -51,7 +52,10 @@ offres: Offre[] = [];
 
 
 isLoading = true;
-  constructor(private offreService: OffresService,private entrepriseService :EntrepriseService ,  private candidatService: CandidatService,
+  constructor(private offreService: OffresService,
+    private entrepriseService :EntrepriseService ,     
+     private candidatService: CandidatService,
+     private alerteEmploiService :AlerteEmploiService 
     ) {}
       
   ngOnInit(): void {
@@ -215,26 +219,44 @@ saveProfile() {
     return entrepise;
   
     }
-    creerAlerte() {
-  if (!this.searchTerm && !this.searchLocation) {
-    alert("❗ Veuillez entrer un mot-clé ou une localisation avant de créer une alerte.");
+creerAlerte() {
+  // Vérifie qu’au moins un critère de recherche est présent
+  if (
+    !this.searchTerm &&
+    !this.searchLocation &&
+    this.selectedContracts.length === 0 &&
+    this.selectedSectors.length === 0 &&
+    this.selectedRemote.length === 0
+  ) {
+    alert("❗ Veuillez entrer au moins un critère ou un filtre avant de créer une alerte.");
     return;
   }
 
-  const alerte = {
+ const alerte: Alerte = {
     id: Date.now(),
     motCle: this.searchTerm || 'Tous les postes',
     lieu: this.searchLocation || 'Partout',
+    contrats: this.selectedContracts,
+    secteurs: this.selectedSectors,
+    teletravail: this.selectedRemote,
     frequence: 'hebdomadaire',
     active: true,
-    dateCreation: new Date()
+    dateCreation: new Date(),
+    email: this.alertEmail
   };
 
-  // Appel au service
-  //this.alerteEmploiService.addAlerte(alerte);
-
-  // Confirmation visuelle
-  alert(`✅ Alerte créée pour "${alerte.motCle}" à "${alerte.lieu}"`);
+  // ✅ Enregistrer l’alerte via le service
+  this.alerteEmploiService.addAlerte(alerte).subscribe({
+    next: () => {
+      alert(`✅ Alerte créée avec succès pour "${alerte.motCle}" (${alerte.lieu})`);
+      // Optionnel : rediriger vers la page des alertes
+      // this.router.navigate(['/alertes']);
+    },
+    error: (err) => {
+      console.error('Erreur lors de la création de l’alerte :', err);
+      alert('❌ Une erreur est survenue lors de la création de l’alerte.');
+    }
+  });
 }
 
 

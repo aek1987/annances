@@ -202,7 +202,7 @@ constructor(private http: HttpClient) {}
   }
 
   // ✅ Ajouter une offre
-  addOffre(offre: Omit<Offre, 'id' | 'datePublication'>): Offre {
+ addOffre(offre: Omit<Offre, 'id' | 'datePublication'>): Offre {
     const newOffre: Offre = {
       ...offre,
       id: this.nextId++,
@@ -212,24 +212,17 @@ constructor(private http: HttpClient) {}
     return newOffre;
   }
 
-  // ✅ Modifier une offre
-  updateOffre(id: number, updated: Partial<Offre>): boolean {
-    const index = this.offres.findIndex(o => o.id === id);
-    if (index !== -1) {
-      this.offres[index] = { ...this.offres[index], ...updated };
-      return true;
-    }
-    return false;
+
+
+ // ✅ Modifier une offre
+  updateOffre(id: number, offre: Partial<Offre>): Observable<Offre> {
+    return this.http.put<Offre>(`${this.apiUrl}/${id}`, offre);
   }
+  
 
   // ✅ Supprimer une offre
-  deleteOffre(id: number): boolean {
-    const index = this.offres.findIndex(o => o.id === id);
-    if (index !== -1) {
-      this.offres.splice(index, 1);
-      return true;
-    }
-    return false;
+  deleteOffre(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
 
