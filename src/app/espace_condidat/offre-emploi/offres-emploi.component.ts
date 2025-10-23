@@ -50,7 +50,7 @@ entrepise: Entreprise  | undefined
 newSkill: string = '';
 offres: Offre[] = [];
 currentPage = 1;
-itemsPerPage = 5; // nombre d'offres par page
+itemsPerPage = 12; // nombre d'offres par page
 totalPages = 1;
 
 isLoading = true;
@@ -184,6 +184,8 @@ saveProfile() {
       remoteMatch
     );
   });
+   this.totalPages = Math.ceil(this.filteredOffres.length / this.itemsPerPage);
+  this.currentPage = 1; // reset pag
 }
 
 

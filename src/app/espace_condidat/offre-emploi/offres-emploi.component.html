@@ -85,7 +85,7 @@
 </div>
     <!-- 📄 Liste des offres -->
     <div *ngIf="!isLoading" class="offres-list">
-      <div class="offre-card" *ngFor="let offre of filteredOffres">
+      <div class="offre-card" *ngFor="let offre of pagedOffres">
 
         <!-- ⭐ Icône Favori en haut à droite -->
       <div class="favori-icon" (click)="toggleFavori(offre)">
@@ -109,7 +109,9 @@
     
       </div>
 
-      <!-- Pagination -->
+ 
+    </div>
+     <!-- Pagination -->
 <div class="pagination">
   <button (click)="prevPage()" [disabled]="currentPage === 1">Précédent</button>
 
@@ -120,7 +122,5 @@
   </button>
 
   <button (click)="nextPage()" [disabled]="currentPage === totalPages">Suivant</button>
-    </div>
-
    
 
