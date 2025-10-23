@@ -19,12 +19,12 @@
       <input type="text" placeholder="Mots-clés" [(ngModel)]="searchTerm">
       <input type="text" placeholder="Localisation" [(ngModel)]="searchLocation">
       <input type="number" placeholder="Salaire minimum" [(ngModel)]="searchSalary">
-      <input type="text" placeholder="Expérience" [(ngModel)]="searchExperience">
       <button (click)="applyFilters()">Rechercher</button>
     </div>
 
     <!-- 🎯 Filtres -->
     <div class="filters">
+   <!-- 🎯 contrat -->
     <div class="dropdown" [class.open]="isDropdownOpen">
     <button class="dropdown-btn" (click)="toggleDropdown()"> contrat
     <span *ngIf="selectedContracts.length" class="badge">{{ selectedContracts.length }}</span>
@@ -41,7 +41,7 @@
 
       </div>
 
-
+  <!-- 🎯 Secteur -->
    <div class="dropdown" [class.open]="isSectorDropdownOpen">
   <button class="dropdown-btn" (click)="toggleSectorDropdown()">
     Secteur
@@ -56,6 +56,7 @@
     </label>
   </div>
   </div>
+  <!-- 🎯 Télétravail -->
 <div class="dropdown" [class.open]="isRemoteDropdownOpen">
   <button class="dropdown-btn" (click)="toggleRemoteDropdown()">
     Télétravail
@@ -73,7 +74,25 @@
 
 
 </div>
+ <!-- 🧠 Expérience -->
+  <div class="dropdown" [class.open]="isExperienceDropdownOpen">
+    <button class="dropdown-btn" (click)="toggleExperienceDropdown()">
+      Expérience
+      <span *ngIf="selectedExperiences.length" class="badge">{{ selectedExperiences.length }}</span>
+      <i class="arrow" [class.up]="isExperienceDropdownOpen"></i>
+    </button>
 
+    <div class="dropdown-content">
+      <label *ngFor="let experience of experiences" class="checkbox-label">
+        <input
+          type="checkbox"
+          [value]="experience"
+          (change)="onCheckboxChange2($event)"
+          [checked]="selectedExperiences.includes(experience)">
+        {{ experience }}
+      </label>
+    </div>
+  </div>
     </div>
 
     <!-- 📄 Liste des offres -->

@@ -106,16 +106,20 @@
         <p><b>Contrat :</b> {{ offre.contrat }}</p>
         <p>{{ offre.description }}</p>     
         
-   <!--    <div class="actions">       
-          
-          <button (click)="postuler(offre)">
-            {{ offre.status ? offre.status : 'Postuler' }}
-          </button>
-          <button (click)="toggleFavori(offre)">
-            {{ offre.favori ? '★ Retirer Favori' : '☆ Ajouter Favori' }}
-          </button>
-        </div>     -->    
+    
       </div>
+
+      <!-- Pagination -->
+<div class="pagination">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">Précédent</button>
+
+  <button *ngFor="let page of [].constructor(totalPages); let i = index"
+          (click)="goToPage(i + 1)"
+          [class.active]="currentPage === i + 1">
+    {{ i + 1 }}
+  </button>
+
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Suivant</button>
     </div>
 
    

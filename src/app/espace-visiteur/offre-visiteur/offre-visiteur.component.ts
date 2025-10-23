@@ -17,7 +17,7 @@ export class OffreVisiteurComponent implements OnInit {
   searchTerm: string = '';
   searchLocation: string = '';
   searchSalary: number | null = null;
-  searchExperience: string = '';
+ 
   // 🎯 Filtres
   selectedContract: string = '';
  
@@ -37,6 +37,9 @@ entrepise: Entreprise  | undefined
 newSkill: string = '';
 offres: Offre[] = [];
 isLoading = true;
+experiences = ['Débutant', '1-2 ans', '3-5 ans', '6-10 ans', '10+ ans'];
+selectedExperiences: string[] = [];
+isExperienceDropdownOpen = false;
   constructor(private offreService: OffresService,private entrepriseService :EntrepriseService ,  
  private candidature: CandidatureService
 
@@ -167,8 +170,24 @@ applyFilters() {
   toggleFavori(offre: Offre) {
    // offre.favori = !offre.favori;
   }
+toggleExperienceDropdown() {
+    this.isExperienceDropdownOpen = !this.isExperienceDropdownOpen;
+  }
+   // ✅ Gestion des cases à cocher
+  onCheckboxChange2(event: any) {
+    const value = event.target.value;
+    const checked = event.target.checked;
 
-  
+    const map = {
+      contract: this.selectedContracts,
+      sector: this.selectedSectors,
+      remote: this.selectedRemote,
+      experience: this.selectedExperiences
+    };
+
+    this.applyFilters();
+  }
+
   getentreprise    (entrepriseId :number) : Entreprise  | undefined
   {
   const entrepise = this.entrepriseService.getEntrepriseById(entrepriseId);
@@ -181,5 +200,6 @@ gotodetail(offre :Offre){
 //this.router.navigate(['/offre-detail', offre.id]);
 console.log("offree selectione par visiteur "+offre.id);
 }
+
 }
 

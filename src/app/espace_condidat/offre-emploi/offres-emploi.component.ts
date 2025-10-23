@@ -49,7 +49,9 @@ candidatures: Candidature[] = [];
 entrepise: Entreprise  | undefined
 newSkill: string = '';
 offres: Offre[] = [];
-
+currentPage = 1;
+itemsPerPage = 5; // nombre d'offres par page
+totalPages = 1;
 
 isLoading = true;
   constructor(private offreService: OffresService,
@@ -258,6 +260,23 @@ creerAlerte() {
     }
   });
 }
+// Pagination
+  get pagedOffres(): Offre[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredOffres.slice(start, start + this.itemsPerPage);
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) this.currentPage++;
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) this.currentPage--;
+  }
+
+  goToPage(page: number) {
+    if (page >= 1 && page <= this.totalPages) this.currentPage = page;
+  }
 
 
  
