@@ -187,14 +187,15 @@ constructor(private http: HttpClient) {}
   getAllOffres():Observable<Offre[]> {
     return this.http.get<Offre[]>(this.apiUrl);}
     
- getOffresPaged(page: number = 0, size: number = 5, sortBy: string = 'id'): Observable<Page<Offre>> {
-    let params = new HttpParams()
-      .set('page', page.toString())
-      .set('size', size.toString())
-      .set('sortBy', sortBy);
+ getOffresPaged(page: number = 0, size: number = 5, sortBy: string = 'datePublication', sortDir: string = 'desc'): Observable<Page<Offre>> {
+  let params = new HttpParams()
+    .set('page', page.toString())
+    .set('size', size.toString())
+    .set('sortBy', sortBy)
+    .set('sortDir', sortDir);
 
-    return this.http.get<Page<Offre>>(`${this.apiUrl}/paged`, { params });
-  }
+  return this.http.get<Page<Offre>>(`${this.apiUrl}/paged`, { params });
+}
    
 // ✅ Récupérer une offre par ID depuis le backend
   getOffreById(id: number): Observable<Offre> {
