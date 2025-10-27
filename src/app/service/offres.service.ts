@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Offre } from '../modeles/offres';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Page } from '../modeles/page';
 @Injectable({ providedIn: 'root' }) export class OffresService {
 
 private offres: Offre[] = [
@@ -185,7 +186,15 @@ constructor(private http: HttpClient) {}
   // ✅ Récupérer toutes les offres
   getAllOffres():Observable<Offre[]> {
     return this.http.get<Offre[]>(this.apiUrl);}
+    
+ getOffresPaged(page: number = 0, size: number = 5, sortBy: string = 'id'): Observable<Page<Offre>> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString())
+      .set('sortBy', sortBy);
 
+    return this.http.get<Page<Offre>>(`${this.apiUrl}/paged`, { params });
+  }
    
 // ✅ Récupérer une offre par ID depuis le backend
   getOffreById(id: number): Observable<Offre> {

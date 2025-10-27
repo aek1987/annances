@@ -11,6 +11,7 @@ import { OffresService } from "src/app/service/offres.service";
 import { faStar as faSolidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faRegularStar } from '@fortawesome/free-regular-svg-icons';
 import { Alerte } from "src/app/modeles/alerte";
+import { Page } from "src/app/modeles/page";
 
 interface Candidature {
   offre: string;
@@ -50,9 +51,11 @@ entrepise: Entreprise  | undefined
 newSkill: string = '';
 offres: Offre[] = [];
 currentPage = 1;
-itemsPerPage = 12; // nombre d'offres par page
-totalPages = 1;
+size = 6 // nombre d'offres par page
+totalPages = 10;
+page: number = 0;
 
+ 
 isLoading = true;
   constructor(private offreService: OffresService,
     private entrepriseService :EntrepriseService ,     
@@ -63,24 +66,30 @@ isLoading = true;
   ngOnInit(): void {
     this.isLoading = true;
     // 🔥 Appel du service pour charger les offres
-   this.offreService.getAllOffres().subscribe({
-  next: (data) => {
-  
-      this.offres = data;
-      this.filteredOffres = [...this.offres];
-      this.isLoading = false;
-       console.log('chargement des offres',  this.offres);
-  },
-  error: (err) => {
-    console.error('Erreur lors du chargement des offres', err);
-    this.isLoading = false;
-  }
-});
+ this.loadOffres();
+
 
     
    this.candidatConnecte = this.candidatService.getCandidatConnecte();
     console.log("condidat name  "+this.candidatConnecte?.username +" id= "+this.candidatConnecte?.refId);
   }
+
+ loadOffres(page: number = 0) {
+  this.offreService.getOffresPaged(page, this.size).subscribe({
+    next: (data: Page<Offre>) => {
+      this.offres = data.content;
+      this.totalPages = data.totalPages;
+      this.currentPage = data.number + 1; // data.number est 0-based
+      this.isLoading = false;
+      this.filteredOffres=this.offres;
+      console.log("premier offre recuperer =",data)
+    },
+    error: (err) => {
+      console.error(err);
+      this.isLoading = false;
+    }
+  });
+}
 
 selectedContracts: string[] = [];
 isDropdownOpen = false;
@@ -184,7 +193,7 @@ saveProfile() {
       remoteMatch
     );
   });
-   this.totalPages = Math.ceil(this.filteredOffres.length / this.itemsPerPage);
+   this.totalPages = Math.ceil(this.filteredOffres.length / this.size);
   this.currentPage = 1; // reset pag
 }
 
@@ -264,17 +273,23 @@ creerAlerte() {
 }
 // Pagination
   get pagedOffres(): Offre[] {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    return this.filteredOffres.slice(start, start + this.itemsPerPage);
+    const start = (this.currentPage - 1) * this.size;
+    return this.filteredOffres.slice(start, start + this.size);
   }
 
-  nextPage() {
-    if (this.currentPage < this.totalPages) this.currentPage++;
+ nextPage() {
+  if (this.currentPage < this.totalPages) {
+    this.page++; // page côté serveur, 0-based
+    this.loadOffres(this.page);
   }
+}
 
-  prevPage() {
-    if (this.currentPage > 1) this.currentPage--;
+prevPage() {
+  if (this.currentPage > 1) {
+    this.page--;
+    this.loadOffres(this.page);
   }
+}
 
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) this.currentPage = page;
