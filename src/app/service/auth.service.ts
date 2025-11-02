@@ -87,32 +87,26 @@ public setSession(token: string, user: string, role: string): void {
     const user = this.getUser();
     return user?.role === 'admin';
   }
-register(user: User): Account | null {
-   console.log(" creation nouveau compte utilisateur ");
-  // Vérifie si l'email existe déjà dans le tableau accounts
+register(user: User): Observable<Account | null> {
+  console.log("Création nouveau compte utilisateur");
+
   const exists = this.accounts.find(acc => acc.email === user.email);
   if (exists) {
-     console.log(" utilisateur déjà existant"+exists);
-    return null; // utilisateur déjà existant
-
+    console.log("Utilisateur déjà existant", exists);
+    return of(null); // RxJS observable
   }
 
-  // Crée un nouvel Account à partir du User
   const newAccount: Account = {
     email: user.email,
     password: user.password,
     username: user.username,
-    role: user.role || 'candidat', // par défaut 'candidat' si pas précisé
-    refId: this.accounts.length + 1 // génère un nouvel ID simple
+    role: user.role || 'candidat',
+    refId: this.accounts.length + 1
   };
 
-  // Ajoute le nouvel utilisateur au tableau accounts
- 
   this.accounts.push(newAccount);
-   
-   
 
-  return newAccount; // inscription réussie
+  return of(newAccount); // RxJS observable
 }
 
 
