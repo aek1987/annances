@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Account } from '../modeles/accounts';
 import { User } from '../modeles/user';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 
 
@@ -33,33 +36,36 @@ private accounts: Account[] = [
  
   private currentUserSubject = new BehaviorSubject<Account | null>(this.getUser());
   currentUser$: Observable<Account | null> = this.currentUserSubject.asObservable();
-
-  constructor( ) 
+ private apiUrl = `${environment.apiUrl}/api/auth`;
+  constructor(private http: HttpClient ) 
   {
    
   }
 
-  login(credentials: { email: string; password: string }): Observable<any> {
-    const account = this.accounts.find(
-      acc => acc.email === credentials.email && acc.password === credentials.password
+/**
+   * Connexion utilisateur (login)
+   */
+
+
+login(credentials: { email: string; password: string }): Observable<any> {
+  return this.http.post<{ token: string, user: string, role: string }>(`${this.apiUrl}/login`, credentials)
+    .pipe(
+      tap(response => {
+        if (response?.token && response?.user) {
+          console.log("log: ", response);
+          this.setSession(response.token, response.user, response.role);
+        }
+      })
     );
+}
 
-    if (account) {
-      // Stocke l'utilisateur complet + token
+public setSession(token: string, user: string, role: string): void {
+  localStorage.setItem('authToken', token);
+ localStorage.setItem('user', JSON.stringify({ email: user, role }));
+  localStorage.setItem('roles', JSON.stringify(role));
+}
 
-      this.setSession('fake-token', account);
-      return of({ token: 'fake-token', user: account });
-    } else {
-      return of({ token: null, user: { role: 'standard' }});
-    }
-  }
 
-  // 🔹 Nouvelle version de setSession
-  setSession(token: string, user: Account) {
-    localStorage.setItem('authToken', token);
-    localStorage.setItem('user', JSON.stringify(user));
-    this.currentUserSubject.next(user); // 🔔 notifie Navbar + Sidebar
-  }
 
   logout() {
     localStorage.removeItem('user');

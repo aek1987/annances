@@ -28,12 +28,14 @@
   background-color: #0056b3;
 }
 
-/* 🎯 Filtres */
 .filters {
   display: flex;
+  flex-wrap: wrap;
   gap: 15px;
   margin-bottom: 20px;
-  flex-wrap: wrap;
+  margin-left: 30px; /* 👈 petit décalage vers la droite */
+  justify-content: flex-start; /* 👈 aligne à gauche */
+  align-items: center;
 }
 
 .filters select {
@@ -42,6 +44,7 @@
   border: 1px solid #ccc;
   min-width: 180px;
 }
+
 
 /* 📄 Liste des offres */
 .offres-list {

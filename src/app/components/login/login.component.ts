@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../service/auth.service'; // Service d'authentification
+import { AuthService } from '../../service/auth.service'; // Service d'authentification
 import { Router } from '@angular/router';
-import { AlertService } from '../service/alerte-service.service';
-import { AuthgService } from '../service/google/authg.service';
+import { AlertService } from '../../service/alerte-service.service';
+import { AuthgService } from '../../service/google/authg.service';
 
 
 @Component({
@@ -24,13 +24,13 @@ errorMessage: string = '';
   this.authService.login(this.loginData).subscribe({
     next: (response: any) => {
       // Le backend devrait renvoyer { token, role }
-      const { token, role } = response;
-     console.log("role=== "+response.user.role);
+     const { token, user, role } = response;
+     console.log("reponse=== ",response);
     
-     this.authService.setSession(token, response.user); // 👈 délégué au service
+     this.authService.setSession(token, response.user, response.roles); // 👈 délégué au service
 
    // 👉 Redirection en fonction du rôle
-     switch (response.user.role) {
+     switch (response.roles) {
   case 'entreprise':
     this.router.navigate(['/entreprise']);
     break;

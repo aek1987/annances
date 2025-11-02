@@ -53,10 +53,21 @@ offres: Offre[] = [];
 currentPage = 1;
 size = 6 // nombre d'offres par page
 totalPages = 10;
-page: number = 0;
-
- 
+page: number = 0; 
 isLoading = true;
+
+isExperienceDropdownOpen = false;
+experiences = ['Débutant', '1-2 ans', '3-5 ans', '6-10 ans', '10+ ans'];
+selectedExperiences: string[] = [];
+
+isSalaireDropdownOpen = false;
+salaires: string[] = ["Moins de 1 000 €",
+  "1 000 € - 2 000 €",
+  "2 000 € - 3 000 €",
+  "3 000 € - 5 000 €",
+  "Plus de 5 000 €"];
+selectedSalaires: string[] = [];
+
   constructor(private offreService: OffresService,
     private entrepriseService :EntrepriseService ,     
      private candidatService: CandidatService,
@@ -295,6 +306,36 @@ prevPage() {
     if (page >= 1 && page <= this.totalPages) this.currentPage = page;
   }
 
+toggleExperienceDropdown() {
+    this.isExperienceDropdownOpen = !this.isExperienceDropdownOpen;
+  }
+  toggleSalaireDropdown() {
+  this.isSalaireDropdownOpen = !this.isSalaireDropdownOpen;
+}
 
+onCheckboxChangeSalaire(event: Event) {
+  const checkbox = event.target as HTMLInputElement;
+  const value = checkbox.value;
+
+  if (checkbox.checked) {
+    this.selectedSalaires.push(value);
+  } else {
+    this.selectedSalaires = this.selectedSalaires.filter(s => s !== value);
+  }
+}
+   // ✅ Gestion des cases à cocher
+  onCheckboxChange2(event: any) {
+    const value = event.target.value;
+    const checked = event.target.checked;
+
+    const map = {
+      contract: this.selectedContracts,
+      sector: this.selectedSectors,
+      remote: this.selectedRemote,
+      experience: this.selectedExperiences
+    };
+
+    this.applyFilters();
+  }
  
 }

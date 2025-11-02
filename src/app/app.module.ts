@@ -8,8 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 
 import { NavbarComponent } from './components/navbar/navbar.component';  // Import FormsModule
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './login/login.component';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
 import { DeliveryFormComponent } from './delivery-form/delivery-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -71,6 +71,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
 import { OffreDetailVisiteurComponent } from './espace-visiteur/offre-detail-visiteur/offre-detail-visiteur.component';
 import { CandidaturesOffreComponent } from './espace_entreprise/candidatures-offre/candidatures-offre.component';
+import { AuthInterceptor } from './interceptors/interceptor';
 
 
 
@@ -165,7 +166,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   
   ],
  
-  providers: [ { provide: LOCALE_ID, useValue: 'fr-FR' }],
+  providers: [ { provide: LOCALE_ID, useValue: 'fr-FR' } , 
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

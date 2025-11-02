@@ -187,7 +187,7 @@ constructor(private http: HttpClient) {}
   getAllOffres():Observable<Offre[]> {
     return this.http.get<Offre[]>(this.apiUrl);}
     
- getOffresPaged(page: number = 0, size: number = 5, sortBy: string = 'datePublication', sortDir: string = 'desc'): Observable<Page<Offre>> {
+ getOffresPaged(page: number = 0, size: number = 12, sortBy: string = 'datePublication', sortDir: string = 'desc'): Observable<Page<Offre>> {
   let params = new HttpParams()
     .set('page', page.toString())
     .set('size', size.toString())

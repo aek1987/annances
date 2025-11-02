@@ -1,126 +1,145 @@
+<!-- 📄 Contenu principal -->
+<main class="content-offres-liste">
+  <!-- 👋 Message d'accueil pour visiteur -->
+  <div class="welcome-visitor">
+    <h2>Bienvenue sur notre plateforme 🎉</h2>
+    <p>
+      Consultez des milliers d’offres d’emploi et trouvez votre prochain défi
+      professionnel.<br />
+      👉 <a routerLink="/register">Créez un compte</a> pour postuler directement
+      et sauvegarder vos annonces préférées !
+    </p>
+  </div>
 
+  <!-- 🔎 Recherche avancée -->
+  <div class="search-bar">
+    <input type="text" placeholder="Mots-clés" [(ngModel)]="searchTerm" />
+    <input
+      type="text"
+      placeholder="Localisation"
+      [(ngModel)]="searchLocation"
+    />
+    <input
+      type="number"
+      placeholder="Salaire minimum"
+      [(ngModel)]="searchSalary"
+    />
+    <button (click)="applyFilters()">Rechercher</button>
+  </div>
 
-
-  <!-- 📄 Contenu principal -->
-  <main class="content-offres-liste">
-
-
-    <!-- 👋 Message d'accueil pour visiteur -->
-    <div  class="welcome-visitor">
-      <h2>Bienvenue sur notre plateforme 🎉</h2>
-      <p>
-        Consultez des milliers d’offres d’emploi et trouvez votre prochain défi professionnel.<br>
-        👉 <a routerLink="/register">Créez un compte</a> pour postuler directement et sauvegarder vos annonces préférées !
-      </p>
-    </div>
-    
-    <!-- 🔎 Recherche avancée -->
-    <div class="search-bar">
-      <input type="text" placeholder="Mots-clés" [(ngModel)]="searchTerm">
-      <input type="text" placeholder="Localisation" [(ngModel)]="searchLocation">
-      <input type="number" placeholder="Salaire minimum" [(ngModel)]="searchSalary">
-      <button (click)="applyFilters()">Rechercher</button>
-    </div>
-
-    <!-- 🎯 Filtres -->
-    <div class="filters">
-   <!-- 🎯 contrat -->
+  <!-- 🎯 Filtres -->
+  <div class="filters">
+    <!-- 🎯 contrat -->
     <div class="dropdown" [class.open]="isDropdownOpen">
-    <button class="dropdown-btn" (click)="toggleDropdown()"> contrat
-    <span *ngIf="selectedContracts.length" class="badge">{{ selectedContracts.length }}</span>
-    <i class="arrow" [class.up]="isDropdownOpen"></i>
-     </button>
+      <button class="dropdown-btn" (click)="toggleDropdown()">
+        contrat
+        <span *ngIf="selectedContracts.length" class="badge">{{
+          selectedContracts.length
+        }}</span>
+        <i class="arrow" [class.up]="isDropdownOpen"></i>
+      </button>
 
-  <div class="dropdown-content">
-    <label *ngFor="let contract of contracts" class="checkbox-label">
-      <input type="checkbox" [value]="contract" (change)="onCheckboxChange($event)">
-      {{ contract }}
-    </label>
+      <div class="dropdown-content">
+        <label *ngFor="let contract of contracts" class="checkbox-label">
+          <input
+            type="checkbox"
+            [value]="contract"
+            (change)="onCheckboxChange($event)"
+          />
+          {{ contract }}
+        </label>
+      </div>
+    </div>
+
+    <!-- 🎯 Secteur -->
+    <div class="dropdown" [class.open]="isSectorDropdownOpen">
+      <button class="dropdown-btn" (click)="toggleSectorDropdown()">
+        Secteur
+        <span *ngIf="selectedSectors.length" class="badge">{{
+          selectedSectors.length
+        }}</span>
+        <i class="arrow" [class.up]="isSectorDropdownOpen"></i>
+      </button>
+
+      <div class="dropdown-content">
+        <label *ngFor="let secteur of sectors" class="checkbox-label">
+          <input
+            type="checkbox"
+            [value]="secteur"
+            (change)="onSectorCheckboxChange($event)"
+          />
+          {{ secteur }}
+        </label>
+      </div>
+    </div>
+    <!-- 🎯 Télétravail -->
+    <div class="dropdown" [class.open]="isRemoteDropdownOpen">
+      <button class="dropdown-btn" (click)="toggleRemoteDropdown()">
+        Télétravail
+        <span *ngIf="selectedRemote.length" class="badge">{{
+          selectedRemote.length
+        }}</span>
+        <i class="arrow" [class.up]="isRemoteDropdownOpen"></i>
+      </button>
+
+      <div class="dropdown-content">
+        <label class="checkbox-label" *ngFor="let option of remoteOptions">
+          <input
+            type="checkbox"
+            [value]="option"
+            (change)="onRemoteCheckboxChange($event)"
+          />
+          {{ option }}
+        </label>
+      </div>
+    </div>
+    <!-- 🧠 Expérience -->
+    <div class="dropdown" [class.open]="isExperienceDropdownOpen">
+      <button class="dropdown-btn" (click)="toggleExperienceDropdown()">
+        Expérience
+        <span *ngIf="selectedExperiences.length" class="badge">{{
+          selectedExperiences.length
+        }}</span>
+        <i class="arrow" [class.up]="isExperienceDropdownOpen"></i>
+      </button>
+
+      <div class="dropdown-content">
+        <label *ngFor="let experience of experiences" class="checkbox-label">
+          <input
+            type="checkbox"
+            [value]="experience"
+            (change)="onCheckboxChange2($event)"
+            [checked]="selectedExperiences.includes(experience)"
+          />
+          {{ experience }}
+        </label>
+      </div>
+    </div>
   </div>
 
-
+  <!-- 📄 Liste des offres -->
+  <div class="offres-list">
+    <div class="offre-card" *ngFor="let offre of filteredOffres">
+      <div class="offre-header">
+        <h3>{{ offre.poste }}</h3>
+        <a class="details-link" [routerLink]="['/visiteur/offre', offre.id]"
+          >Détails</a
+        >
       </div>
 
-  <!-- 🎯 Secteur -->
-   <div class="dropdown" [class.open]="isSectorDropdownOpen">
-  <button class="dropdown-btn" (click)="toggleSectorDropdown()">
-    Secteur
-    <span *ngIf="selectedSectors.length" class="badge">{{ selectedSectors.length }}</span>
-    <i class="arrow" [class.up]="isSectorDropdownOpen"></i>
-  </button>
-
-  <div class="dropdown-content">
-    <label *ngFor="let secteur of sectors" class="checkbox-label">
-      <input type="checkbox" [value]="secteur" (change)="onSectorCheckboxChange($event)">
-      {{ secteur }}
-    </label>
-  </div>
-  </div>
-  <!-- 🎯 Télétravail -->
-<div class="dropdown" [class.open]="isRemoteDropdownOpen">
-  <button class="dropdown-btn" (click)="toggleRemoteDropdown()">
-    Télétravail
-    <span *ngIf="selectedRemote.length" class="badge">{{ selectedRemote.length }}</span>
-    <i class="arrow" [class.up]="isRemoteDropdownOpen"></i>
-  </button>
-
-  <div class="dropdown-content">
-    <label class="checkbox-label" *ngFor="let option of remoteOptions">
-      <input type="checkbox" [value]="option" (change)="onRemoteCheckboxChange($event)">
-      {{ option }}
-    </label>
-  </div>
-
-
-
-</div>
- <!-- 🧠 Expérience -->
-  <div class="dropdown" [class.open]="isExperienceDropdownOpen">
-    <button class="dropdown-btn" (click)="toggleExperienceDropdown()">
-      Expérience
-      <span *ngIf="selectedExperiences.length" class="badge">{{ selectedExperiences.length }}</span>
-      <i class="arrow" [class.up]="isExperienceDropdownOpen"></i>
-    </button>
-
-    <div class="dropdown-content">
-      <label *ngFor="let experience of experiences" class="checkbox-label">
-        <input
-          type="checkbox"
-          [value]="experience"
-          (change)="onCheckboxChange2($event)"
-          [checked]="selectedExperiences.includes(experience)">
-        {{ experience }}
-      </label>
-    </div>
-  </div>
-    </div>
-
-    <!-- 📄 Liste des offres -->
-    <div class="offres-list">
-      <div class="offre-card" *ngFor="let offre of filteredOffres">
-        <div class="offre-header">
-      <h3>{{ offre.poste }}</h3>
-      <a class="details-link" [routerLink]="['/visiteur/offre', offre.id]">Détails</a>
-        </div>
-       
-        <p><b>Lieu :</b> {{ offre.localisation }}</p>
-        <p class="salaire-line">
+      <p><b>Lieu :</b> {{ offre.localisation }}</p>
+      <p class="salaire-line">
         <span><b>Salaire :</b></span>
-        <span>{{ offre.salaire | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
-        </p>
-      
- 
-        <p><b>Contrat :</b> {{ offre.contrat }}</p>
-        <p><b>Secteur :</b> {{ getentreprise(offre.entrepriseId)?.secteur }}</p>
-        <p>{{ offre.description }}</p>     
-        
-        <div class="actions">       
-          
-        
-        </div>        
-      </div>
+        <span>{{
+          offre.salaire | currency : "EUR" : "symbol" : "1.0-0" : "fr-FR"
+        }}</span>
+      </p>
+
+      <p><b>Contrat :</b> {{ offre.contrat }}</p>
+      <p><b>Secteur :</b> {{ getentreprise(offre.entrepriseId)?.secteur }}</p>
+      <p>{{ offre.description }}</p>
+
+      <div class="actions"></div>
     </div>
-
-  
-  </main>
-
+  </div>
+</main>

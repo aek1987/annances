@@ -37,8 +37,7 @@ loadCandidat() {
 if (this.candidat) {
    //const progression = this.progression;     
     this.candidat.status = this.candidatService.getStatus(this.candidat);
-  //  console.log("Progression calculée :", progression+" status :",  this.candidat.status);
-   
+  
    
   }
  
@@ -119,8 +118,6 @@ get candidatSafe(): Candidat {
     alert('✅ Profil mis à jour avec succès');
   }
 }
-
-
   addCompetence(newSkill: string) {
   if (this.candidat) {
     this.candidat.competences.push(newSkill);
@@ -161,7 +158,7 @@ addFormation() {
   }
 }
 
-// ❌ Supprimer une formation par index
+//  Supprimer une formation par index
 removeFormation(index: number) {
   if (this.candidat && this.candidat.formations) {  // ✅ Vérifie que candidat existe
     this.candidat.formations.splice(index, 1);

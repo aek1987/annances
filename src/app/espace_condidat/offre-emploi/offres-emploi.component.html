@@ -1,126 +1,179 @@
-
-
-
-    <!-- 🔎 Recherche avancée -->
-    <div class="search-bar">
-      <input type="text" placeholder="Mots-clés" [(ngModel)]="searchTerm">
-      <input type="text" placeholder="Localisation" [(ngModel)]="searchLocation">
-      <input type="number" placeholder="Salaire minimum" [(ngModel)]="searchSalary">
-      <input type="text" placeholder="Expérience" [(ngModel)]="searchExperience">
-     <button class="btn-search" (click)="applyFilters()">
-  <fa-icon [icon]="faSearch" class="icon-white"></fa-icon>
-  <span>Rechercher</span>
-</button>
-
+<!-- 🔎 Recherche avancée -->
+<div class="search-bar">
+  <input type="text" placeholder="Mots-clés" [(ngModel)]="searchTerm" />
+  <input type="text" placeholder="Localisation" [(ngModel)]="searchLocation" />
  
-      </div>
-     
-
-    <!-- 🎯 Filtres -->
-       <div class="filters">
-
-      <div class="dropdown" [class.open]="isDropdownOpen">
-    <button class="dropdown-btn" (click)="toggleDropdown()"> contrat
-    <span *ngIf="selectedContracts.length" class="badge">{{ selectedContracts.length }}</span>
-    <i class="arrow" [class.up]="isDropdownOpen"></i>
-     </button>
-
-  <div class="dropdown-content">
-    <label *ngFor="let contract of contracts" class="checkbox-label">
-      <input type="checkbox" [value]="contract" (change)="onCheckboxChange($event)">
-      {{ contract }}
-    </label>
-  </div>
-
-
-      </div>
-
-      <div class="dropdown" [class.open]="isSectorDropdownOpen">
-  <button class="dropdown-btn" (click)="toggleSectorDropdown()">
-    Secteur
-    <span *ngIf="selectedSectors.length" class="badge">{{ selectedSectors.length }}</span>
-    <i class="arrow" [class.up]="isSectorDropdownOpen"></i>
-  </button>
-
-  <div class="dropdown-content">
-    <label *ngFor="let secteur of sectors" class="checkbox-label">
-      <input type="checkbox" [value]="secteur" (change)="onSectorCheckboxChange($event)">
-      {{ secteur }}
-    </label>
-  </div>
-      </div>
-      <div class="dropdown" [class.open]="isRemoteDropdownOpen">
-       <button class="dropdown-btn" (click)="toggleRemoteDropdown()">
-       Télétravail
-      <span *ngIf="selectedRemote.length" class="badge">{{ selectedRemote.length }}</span>
-      <i class="arrow" [class.up]="isRemoteDropdownOpen"></i>
-       </button>
-
-       <div class="dropdown-content">
-       <label class="checkbox-label" *ngFor="let option of remoteOptions">
-      <input type="checkbox" [value]="option" (change)="onRemoteCheckboxChange($event)">
-       {{ option }}
-       </label>
-  </div>
-
  
-
-       </div>
- <!-- Bouton créer alerte juste en dessous -->
-    <div class="create-alert-container">
-  <button class="create-alert-btn" (click)="creerAlerte()">
-   <fa-icon [icon]="faBell" class="icon-orange"></fa-icon>
-   
-    <span>Créer une alerte</span>
+  <button class="btn-search" (click)="applyFilters()">
+    <fa-icon [icon]="faSearch" class="icon-white"></fa-icon>
+    <span>Rechercher</span>
   </button>
 </div>
 
+<!-- 🎯 Filtres -->
+<div class="filters">
+  <div class="dropdown" [class.open]="isDropdownOpen">
+    <button class="dropdown-btn" (click)="toggleDropdown()">
+      contrat
+      <span *ngIf="selectedContracts.length" class="badge">{{
+        selectedContracts.length
+      }}</span>
+      <i class="arrow" [class.up]="isDropdownOpen"></i>
+    </button>
 
-
+    <div class="dropdown-content">
+      <label *ngFor="let contract of contracts" class="checkbox-label">
+        <input
+          type="checkbox"
+          [value]="contract"
+          (change)="onCheckboxChange($event)"
+        />
+        {{ contract }}
+      </label>
     </div>
+  </div>
+
+  <div class="dropdown" [class.open]="isSectorDropdownOpen">
+    <button class="dropdown-btn" (click)="toggleSectorDropdown()">
+      Secteur
+      <span *ngIf="selectedSectors.length" class="badge">{{
+        selectedSectors.length
+      }}</span>
+      <i class="arrow" [class.up]="isSectorDropdownOpen"></i>
+    </button>
+
+    <div class="dropdown-content">
+      <label *ngFor="let secteur of sectors" class="checkbox-label">
+        <input
+          type="checkbox"
+          [value]="secteur"
+          (change)="onSectorCheckboxChange($event)"
+        />
+        {{ secteur }}
+      </label>
+    </div>
+  </div>
+  <div class="dropdown" [class.open]="isRemoteDropdownOpen">
+    <button class="dropdown-btn" (click)="toggleRemoteDropdown()">
+      Télétravail
+      <span *ngIf="selectedRemote.length" class="badge">{{
+        selectedRemote.length
+      }}</span>
+      <i class="arrow" [class.up]="isRemoteDropdownOpen"></i>
+    </button>
+
+    <div class="dropdown-content">
+      <label class="checkbox-label" *ngFor="let option of remoteOptions">
+        <input
+          type="checkbox"
+          [value]="option"
+          (change)="onRemoteCheckboxChange($event)"
+        />
+        {{ option }}
+      </label>
+    </div>
+  </div>
+
+  <!-- 🧠 Expérience -->
+    <div class="dropdown" [class.open]="isExperienceDropdownOpen">
+      <button class="dropdown-btn" (click)="toggleExperienceDropdown()">
+        Expérience
+        <span *ngIf="selectedExperiences.length" class="badge">{{
+          selectedExperiences.length
+        }}</span>
+        <i class="arrow" [class.up]="isExperienceDropdownOpen"></i>
+      </button>
+
+      <div class="dropdown-content">
+        <label *ngFor="let experience of experiences" class="checkbox-label">
+          <input
+            type="checkbox"
+            [value]="experience"
+            (change)="onCheckboxChange2($event)"
+            [checked]="selectedExperiences.includes(experience)"
+          />
+          {{ experience }}
+        </label>
+      </div>
+    </div>
+    <!-- 💰 Salaire -->
+<div class="dropdown" [class.open]="isSalaireDropdownOpen">
+  <button class="dropdown-btn" (click)="toggleSalaireDropdown()">
+    Salaire
+    <span *ngIf="selectedSalaires.length" class="badge">
+      {{ selectedSalaires.length }}
+    </span>
+    <i class="arrow" [class.up]="isSalaireDropdownOpen"></i>
+  </button>
+
+  <div class="dropdown-content">
+    <label *ngFor="let salaire of salaires" class="checkbox-label">
+      <input
+        type="checkbox"
+        [value]="salaire"
+        (change)="onCheckboxChangeSalaire($event)"
+        [checked]="selectedSalaires.includes(salaire)"
+      />
+      {{ salaire }}
+    </label>
+  </div>
+</div>
+
+  <!-- Bouton créer alerte juste en dessous -->
+  <div class="create-alert-container">
+    <button class="create-alert-btn" (click)="creerAlerte()">
+      <fa-icon [icon]="faBell" class="icon-orange"></fa-icon>
+
+      <span>Créer une alerte</span>
+    </button>
+  </div>
+</div>
 <!-- 🌀 Spinner de chargement -->
 <div *ngIf="isLoading" class="loading-overlay">
   <div class="spinner"></div>
   <p>Chargement des offres...</p>
 </div>
-    <!-- 📄 Liste des offres -->
-    <div *ngIf="!isLoading" class="offres-list">
-      <div class="offre-card" *ngFor="let offre of pagedOffres">
-
-        <!-- ⭐ Icône Favori en haut à droite -->
-      <div class="favori-icon" (click)="toggleFavori(offre)">
-  <fa-icon
-    [icon]="estFavori(offre.id) ? faSolidStar : faRegularStar"
-    [ngClass]="estFavori(offre.id) ? 'favori-actif' : 'favori-inactif'">
-  </fa-icon>
-</div>
-
-
-        <div class="offre-header">
-      <h3>{{ offre.poste }}</h3>
-      <a class="details-link" [routerLink]="['/candidat/offre', offre.id]">Détails</a>
-        </div>
-        <p><b>Entreprise :</b> {{ getEntrepriseNom(offre.entrepriseId) }}</p>
-        <p><b>Lieu :</b> {{ offre.localisation }}</p>
-        <p><b>Salaire :</b> {{ offre.salaire | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</p>
-        <p><b>Contrat :</b> {{ offre.contrat }}</p>
-        <p>{{ offre.description }}</p>     
-        
-    
-      </div>
-
- 
+<!-- 📄 Liste des offres -->
+<div *ngIf="!isLoading" class="offres-list">
+  <div class="offre-card" *ngFor="let offre of pagedOffres">
+    <!-- ⭐ Icône Favori en haut à droite -->
+    <div class="favori-icon" (click)="toggleFavori(offre)">
+      <fa-icon
+        [icon]="estFavori(offre.id) ? faSolidStar : faRegularStar"
+        [ngClass]="estFavori(offre.id) ? 'favori-actif' : 'favori-inactif'"
+      >
+      </fa-icon>
     </div>
-     <!-- Pagination -->
+
+    <div class="offre-header">
+      <h3>{{ offre.poste }}</h3>
+      <a class="details-link" [routerLink]="['/candidat/offre', offre.id]"
+        >Détails</a
+      >
+    </div>
+    <p><b>Entreprise :</b> {{ getEntrepriseNom(offre.entrepriseId) }}</p>
+    <p><b>Lieu :</b> {{ offre.localisation }}</p>
+    <p>
+      <b>Salaire :</b>
+      {{ offre.salaire | currency : "EUR" : "symbol" : "1.0-0" : "fr-FR" }}
+    </p>
+    <p><b>Contrat :</b> {{ offre.contrat }}</p>
+    <p>{{ offre.description }}</p>
+  </div>
+</div>
+<!-- Pagination -->
 <div class="pagination">
   <button (click)="prevPage()" [disabled]="currentPage === 1">Précédent</button>
 
-  <button *ngFor="let page of [].constructor(totalPages); let i = index"
-          (click)="goToPage(i + 1)"
-          [class.active]="currentPage === i + 1">
+  <button
+    *ngFor="let page of [].constructor(totalPages); let i = index"
+    (click)="goToPage(i + 1)"
+    [class.active]="currentPage === i + 1"
+  >
     {{ i + 1 }}
   </button>
 
-  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Suivant</button>
-   
-
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+    Suivant
+  </button>
+</div>
