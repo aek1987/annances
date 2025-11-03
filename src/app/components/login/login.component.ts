@@ -18,43 +18,42 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private authServiceg: AuthgService,private router: Router,public  alertService :AlertService) {}
 errorMessage: string = '';
-  onSubmit() {
+onSubmit() {
   this.errorMessage = ''; // reset erreur avant chaque tentative
-
   this.authService.login(this.loginData).subscribe({
     next: (response: any) => {
-      // Le backend devrait renvoyer { token, role }
-     const { token, user, role } = response;
-     console.log("reponse=== ",response);
-    
-     this.authService.setSession(token, response.user, response.roles); // 👈 délégué au service
+      // Le backend renvoie { token, email, username, role, ... }
+      const { token, email, role, username } = response;
 
-   // 👉 Redirection en fonction du rôle
-     switch (response.roles) {
-  case 'entreprise':
-    this.router.navigate(['/entreprise']);
-    break;
-  case 'candidat':
-    console.log("success username "+response.user.username);
-    this.router.navigate(['/candidat']); 
-    break;
-     case 'standard': // le login est echoué   
-    console.log("Login Failed");
-    this.alertService.error('Invalid email or password', 'Login Failed'); 
-    this.router.navigate(['/greet']);
-    break;
-     case 'admin':
-    this.router.navigate(['/admin']);
-    break;
-  default:
-    this.router.navigate(['/']); // fallback, page d’accueil par ex.
-    break;
-}
+      console.log("Réponse login : role=", role, "username=", username);
 
-   
+      // Stocker les informations de session avec le username
+      this.authService.setSession(response);
 
-      // Exemple avec SweetAlert
-      // Swal.fire('✅ Connexion réussie', `Bienvenue ${this.loginData.email}`, 'success');
+      // 👉 Redirection en fonction du rôle
+      switch (role) {
+        case 'entreprise':
+          this.router.navigate(['/entreprise']);
+          break;
+
+        case 'candidat':
+          this.router.navigate(['/candidat']);
+          break;
+
+        case 'admin':
+          this.router.navigate(['/admin']);
+          break;
+
+        default:
+          // si login échoué ou rôle inconnu
+          console.log("Login Failed ou rôle inconnu");
+          this.alertService.error('Email ou mot de passe incorrect', 'Login Failed');
+          this.router.navigate(['/greet']);
+          break;
+      }
+
+      // Exemple avec SweetAlert (optionnel)
+      // Swal.fire('✅ Connexion réussie', `Bienvenue ${username}`, 'success');
     },
     error: (error) => {
       console.error('❌ Échec de connexion', error);
@@ -72,6 +71,7 @@ errorMessage: string = '';
     }
   });
 }
+
  loginWithGoogle() {
     this.authServiceg.loginWithGoogle()
       .then(res => console.log('Utilisateur connecté avec Google:', res.user))

@@ -12,7 +12,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-
+/*
 private accounts: Account[] = [
   // 👤 Candidats
   { email: 'ali.candidat@gmail.com', password: '123',username: 'Sara Bensalem', role: 'candidat', refId: 1 },
@@ -31,38 +31,41 @@ private accounts: Account[] = [
 
   // 👑 Admin
   { email: 'admin@gmail.com', password: 'admin',username: 'admin', role: 'admin', refId: 0 }
-];
+];*/
 // 🔔 BehaviorSubject pour suivre l’utilisateur connecté
  
   private currentUserSubject = new BehaviorSubject<Account | null>(this.getUser());
   currentUser$: Observable<Account | null> = this.currentUserSubject.asObservable();
  private apiUrl = `${environment.apiUrl}/api/auth`;
+ //private apiUrl = `localhost:8080/auth/register`;
   constructor(private http: HttpClient ) 
   {
    
   }
-
 /**
    * Connexion utilisateur (login)
    */
 
-
 login(credentials: { email: string; password: string }): Observable<any> {
-  return this.http.post<{ token: string, user: string, role: string }>(`${this.apiUrl}/login`, credentials)
+  return this.http.post<any>(`${this.apiUrl}/login`, credentials)
     .pipe(
       tap(response => {
-        if (response?.token && response?.user) {
-          console.log("log: ", response);
-          this.setSession(response.token, response.user, response.role);
+        if (response?.token) {
+          console.log("✅ Login réussi :", response);
+          this.setSession(response);
         }
       })
     );
 }
 
-public setSession(token: string, user: string, role: string): void {
+// Modifier setSession pour recevoir le response complet
+public setSession(response: any): void {
+  const { token, email, role, username } = response;
   localStorage.setItem('authToken', token);
- localStorage.setItem('user', JSON.stringify({ email: user, role }));
-  localStorage.setItem('roles', JSON.stringify(role));
+  localStorage.setItem('user', JSON.stringify({ email, role, username }));
+  this.currentUserSubject.next({ email, role, username } as Account);
+
+ ;
 }
 
 
@@ -87,27 +90,13 @@ public setSession(token: string, user: string, role: string): void {
     const user = this.getUser();
     return user?.role === 'admin';
   }
-register(user: User): Observable<Account | null> {
-  console.log("Création nouveau compte utilisateur");
-
-  const exists = this.accounts.find(acc => acc.email === user.email);
-  if (exists) {
-    console.log("Utilisateur déjà existant", exists);
-    return of(null); // RxJS observable
+ /**
+   * ✅ Enregistrement utilisateur (inscription)
+   */
+  register(user: User): Observable<any> {
+    console.log('Création d’un nouveau compte utilisateur...');
+    return this.http.post(`${this.apiUrl}/register`, user);
   }
-
-  const newAccount: Account = {
-    email: user.email,
-    password: user.password,
-    username: user.username,
-    role: user.role || 'candidat',
-    refId: this.accounts.length + 1
-  };
-
-  this.accounts.push(newAccount);
-
-  return of(newAccount); // RxJS observable
-}
 
 
 }

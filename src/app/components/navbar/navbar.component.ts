@@ -16,18 +16,12 @@ import { faHandshake, faBuilding, faUsers, faBriefcase, faGraduationCap, faFileC
 export class NavbarComponent implements OnInit{
   isAuthenticated: boolean = false;
   faShoppingCart = faShoppingCart;  
-  faReceipt = faReceipt;
-  faUser = faUser;
-  faGlobe = faGlobe;
-  faHome = faHome;
-  faStar = faStar;
-  CountItem :number=0;
+  faReceipt = faReceipt;  faUser = faUser;  faGlobe = faGlobe;  faHome = faHome;  faStar = faStar;  
+  faMapMarkerAlt = faMapMarkerAlt;  faMap = faMap;  faPhone = faPhone;
   faSearch = faSearch;  // Icône de recherche
+  CountItem :number=0;
   isSearchVisible: boolean = false;  // Variable pour afficher ou masquer l'input
-  searchQuery: string = '';  // Contient la recherche en cours
-  faMapMarkerAlt = faMapMarkerAlt;
-  faMap = faMap;
-  faPhone = faPhone; 
+  searchQuery: string = '';  // Contient la recherche en cours 
   currentUser: Account | null = null;
   faBell = faBell;
   notificationCount = 0;
