@@ -33,11 +33,13 @@ export class OffreDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       const offreId = Number(id);
-      this.offreService.getOffreById2(offreId).subscribe({
+      
+      this.offreService.getOffreById(offreId).subscribe({
       next: (data: Offre) => {
         this.offre = data;  
-        
-          if(this.offre)
+        console.error('offreId==== ', offreId,"offre ",this.offre); 
+
+     if(this.offre)            
      this.getEntreprise(this.offre.entrepriseId);
       },
       error: (err) => {
@@ -45,8 +47,8 @@ export class OffreDetailComponent implements OnInit {
       }
     });
     
-       
-      console.log("offre",this.offre)
+    
+    
      //   this.offresSimilaires = this.offreService.getOffresSimilaires(this.offre);
       
     }

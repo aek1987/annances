@@ -27,12 +27,7 @@ export class ProfilComponent {
   {}  
  
    ngOnInit() {
-    this.loadCandidat();
-  }
-  
-  // 🔹 Charge le candidat connecté depuis le service
-loadCandidat() {
-  this.candidat = this.candidatService.getCandidatConnecte();
+ this.candidat = this.candidatService.getCandidatConnecte();
 
 if (this.candidat) {
    //const progression = this.progression;     
@@ -40,8 +35,8 @@ if (this.candidat) {
   
    
   }
- 
-}
+  }
+  
 
  // ✅ Gestion des fichiers PDF CV
   async onCvUpload(event: any) {

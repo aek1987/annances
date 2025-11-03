@@ -197,12 +197,9 @@ constructor(private http: HttpClient) {}
   return this.http.get<Page<Offre>>(`${this.apiUrl}/paged`, { params });
 }
    
-// ✅ Récupérer une offre par ID depuis le backend
-  getOffreById(id: number): Observable<Offre> {
-    return this.http.get<Offre>(`${this.apiUrl}/${id}`);
-  }
+
    // ✅ Récupérer une offre par ID depuis le backend
-  getOffreById2(id: number): Observable<Offre> {
+  getOffreById(id: number): Observable<Offre> {
     return this.http.get<Offre>(`${this.apiUrl}/${id}`);
   }
 

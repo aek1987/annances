@@ -78,8 +78,6 @@ selectedSalaires: string[] = [];
     this.isLoading = true;
     // 🔥 Appel du service pour charger les offres
  this.loadOffres();
-
-
     
    this.candidatConnecte = this.candidatService.getCandidatConnecte();
     console.log("condidat name  "+this.candidatConnecte?.username +" id= "+this.candidatConnecte?.refId);
@@ -93,7 +91,7 @@ selectedSalaires: string[] = [];
       this.currentPage = data.number + 1; // data.number est 0-based
       this.isLoading = false;
       this.filteredOffres=this.offres;
-      console.log("premier offre recuperer =",data)
+      console.log("page  offres recuperer =",data)
     },
     error: (err) => {
       console.error(err);
