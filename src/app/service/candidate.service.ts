@@ -2,11 +2,15 @@
 import { Injectable } from '@angular/core';
 import { Candidat } from '../modeles/candidat';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
+import { catchError, map, Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CandidatService {
+private apiUrl = `${environment.apiUrl}/api/candidats`;
 
   private candidats: Candidat[] = [
     { refId: 1, username: 'Sara Bensalem', email: 'ali.candidat@gmail.com', status: 'desactive'  ,photo: '../../assets/user.png', fonction: 'Développeur Java', phone: '0550-123-456', competences: ['Java', 'Spring Boot'], bio: 'Passionnée de dev web', experiences: [{ poste: 'Dev Java', entreprise: 'Capgemini', duree: '2 ans' }],formations:[],cv:"" },
@@ -18,18 +22,20 @@ export class CandidatService {
     { refId: 7, username: 'candidat aek', email: 'candidat@gmail.com',  status: 'desactive',photo: 'assets/user.png', fonction: 'Développeur', phone: '0557-222-333',  competences:[],experiences:[] ,formations:[],cv:""}
   ];
 
-  constructor(private authService :AuthService) { }
-// src/app/services/candidat.service.ts
-getCandidatConnecte(): Candidat | null {
+ constructor(private authService :AuthService,private http: HttpClient) { }
 
+getCandidatConnecte(): Observable<Candidat | null> {
   const account = this.authService.getUser();
-  if (!account || account.role !== 'candidat') return null;
 
-  // Cherche le candidat correspondant dans la liste
-  const candidat = this.candidats.find(c => c.refId === account.refId);
-  
-  return candidat || null;
+  if (!account || account.role !== 'candidat') {
+    return of(null);
+  }
+
+  return this.http.get<Candidat>(`${this.apiUrl}/ref/${account.refId}`).pipe(
+    catchError(() => of(null))
+  );
 }
+
 
   // ✅ Retourne la liste complète des candidats
   getCandidats(): Candidat[] {
@@ -154,39 +160,44 @@ updateCandidatState(candidat: Candidat) {
 // 🟡 GESTION DES FAVORIS
 // ================================
 
-// Ajouter ou retirer une offre des favoris
+// ================================
+// 🟡 GESTION DES FAVORIS (corrigée)
+// ================================
+
 toggleFavori(offreId: number): void {
+  this.getCandidatConnecte().subscribe(candidat => {
+    if (!candidat) return;
 
-  const candidat = this.getCandidatConnecte();
-  if (!candidat) return;
-  if (!candidat.favoris) candidat.favoris = [];
+    if (!candidat.favoris) candidat.favoris = [];
 
-  const index = candidat.favoris.indexOf(offreId);
-  if (index === -1) {
-    // ✅ Ajouter le favori
-    candidat.favoris.push(offreId);
-    console.log(`⭐ Offre ${offreId} ajoutée aux favoris de ${candidat.username}`);
-  } else {
-    // ❌ Supprimer le favori
-    candidat.favoris.splice(index, 1);
-    console.log(`❌ Offre ${offreId} retirée des favoris de ${candidat.username}`);
-  }
+    const index = candidat.favoris.indexOf(offreId);
+    if (index === -1) {
+      // ✅ Ajouter le favori
+      candidat.favoris.push(offreId);
+      console.log(`⭐ Offre ${offreId} ajoutée aux favoris de ${candidat.username}`);
+    } else {
+      // ❌ Supprimer le favori
+      candidat.favoris.splice(index, 1);
+      console.log(`❌ Offre ${offreId} retirée des favoris de ${candidat.username}`);
+    }
 
-  // 🔄 Mettre à jour la liste dans le tableau
-  this.updateCandidatState(candidat);
+    // 🔄 Met à jour l'état du candidat localement
+    this.updateCandidatState(candidat);
+  });
 }
 
 // Vérifie si une offre est favorite
-isFavori(offreId: number): boolean {
-  const candidat = this.getCandidatConnecte();
-  if (!candidat || !candidat.favoris) return false;
-  return candidat.favoris.includes(offreId);
+isFavori(offreId: number): Observable<boolean> {
+  return this.getCandidatConnecte().pipe(
+    map(candidat => !!candidat?.favoris?.includes(offreId))
+  );
 }
 
-// Récupère toutes les offres favorites du candidat
-getFavoris(): number[] {
-  const candidat = this.getCandidatConnecte();
-  return candidat?.favoris || [];
+// Récupère toutes les offres favorites
+getFavoris(): Observable<number[]> {
+  return this.getCandidatConnecte().pipe(
+    map(candidat => candidat?.favoris || [])
+  );
 }
 
 

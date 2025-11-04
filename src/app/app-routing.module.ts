@@ -43,6 +43,7 @@ import { ProfilComponentEntreprise } from './espace_entreprise/profil-entreprise
 import { DetailEntrepriseComponent } from './espace_admin/detail-entreprise/detail-entreprise.component';
 import { OffreDetailVisiteurComponent } from './espace-visiteur/offre-detail-visiteur/offre-detail-visiteur.component';
 import { CandidaturesOffreComponent } from './espace_entreprise/candidatures-offre/candidatures-offre.component';
+import { offreResolver } from './service/offre-resolver';
 
 
 
@@ -71,7 +72,7 @@ const routes: Routes = [
   path: 'visiteur',
   component: LayoutVisteurComponent,
   children: [
-    { path: '', component: OffreVisiteurComponent }, // par défaut
+    { path: '', component: OffreVisiteurComponent ,  resolve: { offresData: offreResolver } }, // par défaut
     { path: 'aide-support', component: AideSupportComponent },
     { path: 'success-stories', component: SuccessStoriesComponent },
     { path: 'offre/:id', component: OffreDetailVisiteurComponent }
@@ -84,7 +85,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
-      { path: 'offres-emploi', component: OffresEmploiComponent },
+      { path: 'offres-emploi', component: OffresEmploiComponent , resolve: { offresData: offreResolver }},
       { path: 'favorites', component: FavoritesComponent },
       { path: 'settings', component: ProfilComponent },
       { path: 'alerts', component: AlertsComponent },

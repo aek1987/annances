@@ -27,7 +27,10 @@ export class ProfilComponent {
   {}  
  
    ngOnInit() {
- this.candidat = this.candidatService.getCandidatConnecte();
+ this.candidatService.getCandidatConnecte().subscribe(candidat => {
+    this.candidat = candidat;
+    console.log('👤 Candidat connecté :', candidat);
+  });
 
 if (this.candidat) {
    //const progression = this.progression;     

@@ -37,7 +37,7 @@ export class OffreDetailComponent implements OnInit {
       this.offreService.getOffreById(offreId).subscribe({
       next: (data: Offre) => {
         this.offre = data;  
-        console.error('offreId==== ', offreId,"offre ",this.offre); 
+        console.error('offreId==== ', offreId, "offre ",this.offre); 
 
      if(this.offre)            
      this.getEntreprise(this.offre.entrepriseId);
@@ -73,7 +73,10 @@ export class OffreDetailComponent implements OnInit {
 
   // Postuler à une offre
   postuler(offre: Offre): void {
-  this.candidatConnecte = this.candidatService.getCandidatConnecte();
+this.candidatService.getCandidatConnecte().subscribe(candidat => {
+    this.candidatConnecte = candidat;
+    console.log('👤 Candidat connecté :', candidat);
+  });
     if(!(this.candidatConnecte!.status==='active')) {
     alert(`votre status doit etre active pour postuler : ${offre.poste}`);
     }else { 
@@ -95,7 +98,11 @@ export class OffreDetailComponent implements OnInit {
 
   // Ajouter / Retirer des favoris
   toggleFavori(offre: Offre): void {
-    this.candidatConnecte = this.candidatService.getCandidatConnecte();
+    this.candidatService.getCandidatConnecte().subscribe(candidat => {
+    this.candidatConnecte = candidat;
+    console.log('👤 Candidat connecté :', candidat);
+  });
+ 
  //   offre.favori = !offre.favori;
  /*   if (offre.favori) {
       alert(`Offre "${offre.poste}" ajoutée à vos favoris ⭐`);

@@ -30,15 +30,11 @@ entreprisesMap = new Map<number, Entreprise>();
 
   ) {}
 ngOnInit(): void {
-  this.candidatConnecte = this.candidatService.getCandidatConnecte();
-  console.log(
-    "Candidat connecté : " +
-      this.candidatConnecte?.username +
-      " (id=" +
-      this.candidatConnecte?.refId +
-      ")"
-  );
-
+  this.candidatService.getCandidatConnecte().subscribe(candidat => {
+    this.candidatConnecte = candidat;
+    console.log('👤 Candidat connecté :', candidat);
+  });
+ 
   if (this.candidatConnecte) {
     // Récupération de toutes les candidatures du candidat
     this.candidatures = this.candidature.getCandidaturesByCandidat(

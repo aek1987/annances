@@ -1,179 +1,191 @@
-import { Component, OnInit } from '@angular/core';
-import { Candidat } from 'src/app/modeles/candidat';
-import { Candidature } from 'src/app/modeles/candidature';
-import { Entreprise } from 'src/app/modeles/entreprise';
-import { Offre } from 'src/app/modeles/offres';
-import { CandidatureService } from 'src/app/service/candidature.service';
-import { EntrepriseService } from 'src/app/service/entreprise.service';
-import { OffresService } from 'src/app/service/offres.service';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { Candidat } from "src/app/modeles/candidat";
+import { Candidature } from "src/app/modeles/candidature";
+import { Entreprise } from "src/app/modeles/entreprise";
+import { Offre } from "src/app/modeles/offres";
+import { CandidatureService } from "src/app/service/candidature.service";
+import { EntrepriseService } from "src/app/service/entreprise.service";
+import { OffresService } from "src/app/service/offres.service";
 
 @Component({
-  selector: 'app-offre-visiteur',
-  templateUrl: './offre-visiteur.component.html',
-  styleUrls: ['./offre-visiteur.component.css']
+  selector: "app-offre-visiteur",
+  templateUrl: "./offre-visiteur.component.html",
+  styleUrls: ["./offre-visiteur.component.css"],
 })
 export class OffreVisiteurComponent implements OnInit {
   // 🔎 Champs recherche
-  searchTerm: string = '';
-  searchLocation: string = '';
+  searchTerm: string = "";
+  searchLocation: string = "";
   searchSalary: number | null = null;
- 
   // 🎯 Filtres
-  selectedContract: string = '';
- 
-  selectedSector: string = '';
-  sectors: string[] = ['Informatique', 'Finance', 'Santé', 'Éducation','Energie','Finance', 'Marketing'];
+  selectedContract: string = "";
+  selectedSector: string = "";
+  sectors: string[] = ["Informatique", "Finance",    "Santé",    "Éducation",    "Energie",    "Finance",    "Marketing",  ];
   // 📩 Alerte email
-  alertEmail: string = '';
+  alertEmail: string = "";
   // 📂 Données d’exemple
   filteredOffres: Offre[] = [];
-// Pour gérer les onglets
-  activeTab: 'offres' | 'profil' = 'offres';
- candidatConnecte: Candidat | null = null;
-contracts: string[] = ['CDI', 'CDD', 'Stage', 'freelance'];
-// 🔹 Suivi des candidatures
-candidatures: Candidature[] = [];
-entrepise: Entreprise  | undefined
-newSkill: string = '';
-offres: Offre[] = [];
-isLoading = true;
-experiences = ['Débutant', '1-2 ans', '3-5 ans', '6-10 ans', '10+ ans'];
-selectedExperiences: string[] = [];
-isExperienceDropdownOpen = false;
-  constructor(private offreService: OffresService,private entrepriseService :EntrepriseService ,  
- private candidature: CandidatureService
+  // Pour gérer les onglets
+  activeTab: "offres" | "profil" = "offres";
+  candidatConnecte: Candidat | null = null;
+  contracts: string[] = ["CDI", "CDD", "Stage", "freelance"];
+  // 🔹 Suivi des candidatures
+  candidatures: Candidature[] = [];
+  entrepise: Entreprise | undefined;
+  newSkill: string = "";
+   isLoading = true;
+  currentPage: number = 0;
+  totalPages: number = 0;
+  experiences = ["Débutant", "1-2 ans", "3-5 ans", "6-10 ans", "10+ ans"];
+  selectedExperiences: string[] = [];
+  isExperienceDropdownOpen = false;
+  selectedContracts: string[] = [];
+  isDropdownOpen = false;
 
+  constructor(
+    private offreService: OffresService,
+    private entrepriseService: EntrepriseService,
+    private candidature: CandidatureService,
+    private route: ActivatedRoute
   ) {}
-  
+
   ngOnInit(): void {
-    // 🔥 Appel du service pour charger les offres
-     this.isLoading = true;
-    // 🔥 Appel du service pour charger les offres
-   this.offreService.getAllOffres().subscribe({
-  next: (data) => {
-    setTimeout(() => {
-      this.offres = data;
-      this.filteredOffres = [...this.offres];
-      this.isLoading = false;
-    }, 100); // délai visuel de 500 ms
-  },
-  error: (err) => {
-    console.error('Erreur lors du chargement des offres', err);
-    this.isLoading = false;
+    this.isLoading = true;
+    const data = this.route.snapshot.data['offresData'];
+    this.filteredOffres = data.content;
+    this.currentPage = data.number;
+     this.totalPages = data.totalPages;
+    console.log(' Offres préchargées via resolver :', this.filteredOffres);
   }
-});  
-  
+
+/*  loadOffres(page: number = 0): void {
+    this.offreService
+      .getOffresPaged(page, 12, "datePublication", "desc")
+      .subscribe({
+        next: (data) => {
+          console.log("✅ Offres reçues :", data);
+          this.offres = data.content;
+          this.currentPage = data.number;
+          this.totalPages = data.totalPages;
+        },
+        error: (err) => {
+          console.error("❌ Erreur de chargement des offres :", err);
+        },
+      });
+  }*/
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
-selectedContracts: string[] = [];
-isDropdownOpen = false;
 
-toggleDropdown() {
-  this.isDropdownOpen = !this.isDropdownOpen;
-}
-
-onCheckboxChange(event: any) {
-  const value = event.target.value;
-  if (event.target.checked) {
-    this.selectedContracts.push(value);
-  } else {
-    this.selectedContracts = this.selectedContracts.filter(c => c !== value);
+  onCheckboxChange(event: any) {
+    const value = event.target.value;
+    if (event.target.checked) {
+      this.selectedContracts.push(value);
+    } else {
+      this.selectedContracts = this.selectedContracts.filter(
+        (c) => c !== value
+      );
+    }
+    this.applyFilters();
   }
-  this.applyFilters();
-}
 
+  selectedSectors: string[] = [];
+  isSectorDropdownOpen = false;
 
-selectedSectors: string[] = [];
-isSectorDropdownOpen = false;
-
-toggleSectorDropdown() {
-  this.isSectorDropdownOpen = !this.isSectorDropdownOpen;
-}
-
-onSectorCheckboxChange(event: any) {
-  const value = event.target.value;
-  if (event.target.checked) {
-    this.selectedSectors.push(value);
-  } else {
-    this.selectedSectors = this.selectedSectors.filter(s => s !== value);
+  toggleSectorDropdown() {
+    this.isSectorDropdownOpen = !this.isSectorDropdownOpen;
   }
-  this.applyFilters();
-}
-// Télétravail
-remoteOptions: string[] = ['Présentiel', 'Télétravail partiel', '100% Télétravail'];
-selectedRemote: string[] = [];
-isRemoteDropdownOpen = false;
 
-toggleRemoteDropdown() {
-  this.isRemoteDropdownOpen = !this.isRemoteDropdownOpen;
-}
-
-onRemoteCheckboxChange(event: any) {
-  const value = event.target.value;
-  if (event.target.checked) {
-    this.selectedRemote.push(value);
-  } else {
-    this.selectedRemote = this.selectedRemote.filter(r => r !== value);
+  onSectorCheckboxChange(event: any) {
+    const value = event.target.value;
+    if (event.target.checked) {
+      this.selectedSectors.push(value);
+    } else {
+      this.selectedSectors = this.selectedSectors.filter((s) => s !== value);
+    }
+    this.applyFilters();
   }
-  this.applyFilters();
-}
+  // Télétravail
+  remoteOptions: string[] = [
+    "Présentiel",
+    "Télétravail partiel",
+    "100% Télétravail",
+  ];
+  selectedRemote: string[] = [];
+  isRemoteDropdownOpen = false;
 
+  toggleRemoteDropdown() {
+    this.isRemoteDropdownOpen = !this.isRemoteDropdownOpen;
+  }
 
+  onRemoteCheckboxChange(event: any) {
+    const value = event.target.value;
+    if (event.target.checked) {
+      this.selectedRemote.push(value);
+    } else {
+      this.selectedRemote = this.selectedRemote.filter((r) => r !== value);
+    }
+    this.applyFilters();
+  }
 
+  applyFilters() {
+    this.filteredOffres.filter((offre) => {
+      const entreprise = this.getentreprise(offre.entrepriseId);
 
+      const contratMatch =
+        this.selectedContracts.length === 0 ||
+        this.selectedContracts.includes(offre.contrat!);
+      const secteurMatch =
+        this.selectedSectors.length === 0 ||
+        (entreprise && this.selectedSectors.includes(entreprise.secteur));
+      const remoteMatch =
+        this.selectedRemote.length === 0 ||
+        (offre.teletravail && this.selectedRemote.includes(offre.teletravail));
 
-
-
-
-
-
-
-
-applyFilters() {
-  this.filteredOffres = this.offres.filter(offre => {
-    const entreprise = this.getentreprise(offre.entrepriseId);
-
-    const contratMatch = this.selectedContracts.length === 0 || this.selectedContracts.includes(offre.contrat!);
-    const secteurMatch = this.selectedSectors.length === 0 || (entreprise && this.selectedSectors.includes(entreprise.secteur));
-    const remoteMatch = this.selectedRemote.length === 0 || (offre.teletravail && this.selectedRemote.includes(offre.teletravail));
-
-    return (
-      (!this.searchTerm || offre.poste.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
-      (!this.searchLocation || offre.localisation.toLowerCase().includes(this.searchLocation.toLowerCase())) &&
-      (!this.searchSalary || offre.salaire >= this.searchSalary) &&
-      contratMatch &&
-      secteurMatch &&
-      remoteMatch
-    );
-  });
-}
-
+      return (
+        (!this.searchTerm ||
+          offre.poste.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
+        (!this.searchLocation ||
+          offre.localisation
+            .toLowerCase()
+            .includes(this.searchLocation.toLowerCase())) &&
+        (!this.searchSalary || offre.salaire >= this.searchSalary) &&
+        contratMatch &&
+        secteurMatch &&
+        remoteMatch
+      );
+    });
+  }
 
   // ✅ Postuler
   postuler(offre: Offre) {
-   if (!this.candidatConnecte) {
-    alert('Vous devez être connecté pour postuler.');
-    return;
-  }
+    if (!this.candidatConnecte) {
+      alert("Vous devez être connecté pour postuler.");
+      return;
+    }
 
-  // Appelle le service pour créer la candidature
-  const candidature = this.candidature.addCandidature(
-    offre.id,
-    this.candidatConnecte.refId,
-    "Je suis très intéressé par cette offre." // message de candidature
-  );
+    // Appelle le service pour créer la candidature
+    const candidature = this.candidature.addCandidature(
+      offre.id,
+      this.candidatConnecte.refId,
+      "Je suis très intéressé par cette offre." // message de candidature
+    );
 
-   // Confirmation
-  alert(`✅ Vous avez postulé à : ${offre.poste}\nCandidature ID : ${candidature.id}`);
+    // Confirmation
+    alert(
+      `✅ Vous avez postulé à : ${offre.poste}\nCandidature ID : ${candidature.id}`
+    );
   }
 
   // ⭐ Favoris
   toggleFavori(offre: Offre) {
-   // offre.favori = !offre.favori;
+    // offre.favori = !offre.favori;
   }
-toggleExperienceDropdown() {
+  toggleExperienceDropdown() {
     this.isExperienceDropdownOpen = !this.isExperienceDropdownOpen;
   }
-   // ✅ Gestion des cases à cocher
+  // ✅ Gestion des cases à cocher
   onCheckboxChange2(event: any) {
     const value = event.target.value;
     const checked = event.target.checked;
@@ -182,24 +194,19 @@ toggleExperienceDropdown() {
       contract: this.selectedContracts,
       sector: this.selectedSectors,
       remote: this.selectedRemote,
-      experience: this.selectedExperiences
+      experience: this.selectedExperiences,
     };
 
     this.applyFilters();
   }
 
-  getentreprise    (entrepriseId :number) : Entreprise  | undefined
-  {
-  const entrepise = this.entrepriseService.getEntrepriseById(entrepriseId);
-  
-  return entrepise;
+  getentreprise(entrepriseId: number): Entreprise | undefined {
+    const entrepise = this.entrepriseService.getEntrepriseById(entrepriseId);
 
+    return entrepise;
   }
-gotodetail(offre :Offre){
-
-//this.router.navigate(['/offre-detail', offre.id]);
-console.log("offree selectione par visiteur "+offre.id);
+  gotodetail(offre: Offre) {
+    //this.router.navigate(['/offre-detail', offre.id]);
+    console.log("offree selectione par visiteur " + offre.id);
+  }
 }
-
-}
-

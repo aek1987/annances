@@ -135,7 +135,7 @@
 </div>
 <!-- 📄 Liste des offres -->
 <div *ngIf="!isLoading" class="offres-list">
-  <div class="offre-card" *ngFor="let offre of pagedOffres">
+  <div class="offre-card" *ngFor="let offre of filteredOffres">
     <!-- ⭐ Icône Favori en haut à droite -->
     <div class="favori-icon" (click)="toggleFavori(offre)">
       <fa-icon

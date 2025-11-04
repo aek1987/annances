@@ -12,6 +12,7 @@ import { faStar as faSolidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faRegularStar } from '@fortawesome/free-regular-svg-icons';
 import { Alerte } from "src/app/modeles/alerte";
 import { Page } from "src/app/modeles/page";
+import { ActivatedRoute } from "@angular/router";
 
 interface Candidature {
   offre: string;
@@ -61,25 +62,30 @@ experiences = ['Débutant', '1-2 ans', '3-5 ans', '6-10 ans', '10+ ans'];
 selectedExperiences: string[] = [];
 
 isSalaireDropdownOpen = false;
-salaires: string[] = ["Moins de 1 000 €",
-  "1 000 € - 2 000 €",
-  "2 000 € - 3 000 €",
-  "3 000 € - 5 000 €",
-  "Plus de 5 000 €"];
+salaires: string[] = ["Moins de 1 000 €",  "1 000 € - 2 000 €",  "2 000 € - 3 000 €",  "3 000 € - 5 000 €",  "Plus de 5 000 €"];
 selectedSalaires: string[] = [];
 
-  constructor(private offreService: OffresService,
+ constructor(private offreService: OffresService,
     private entrepriseService :EntrepriseService ,     
      private candidatService: CandidatService,
-     private alerteEmploiService :AlerteEmploiService 
+     private alerteEmploiService :AlerteEmploiService ,
+     private route: ActivatedRoute
     ) {}
       
   ngOnInit(): void {
-    this.isLoading = true;
-    // 🔥 Appel du service pour charger les offres
- this.loadOffres();
+    this.isLoading = false;
+  
+     const data = this.route.snapshot.data['offresData'];
+    this.filteredOffres = data.content;
+    this.currentPage = data.number;
+    this.totalPages = data.totalPages;
+    console.log(' Offres préchargées via resolver :', this.filteredOffres);
     
-   this.candidatConnecte = this.candidatService.getCandidatConnecte();
+  this.candidatService.getCandidatConnecte().subscribe(candidat => {
+    this.candidatConnecte = candidat;
+    console.log('👤 Candidat connecté :', candidat);
+  });
+ 
     console.log("condidat name  "+this.candidatConnecte?.username +" id= "+this.candidatConnecte?.refId);
   }
 
@@ -221,7 +227,7 @@ saveProfile() {
   estFavori(offreid: number):boolean
   
   {
-    return this.candidatService.isFavori(offreid );
+    return  true  // this.candidatService.isFavori(offreid );
 
   }
 

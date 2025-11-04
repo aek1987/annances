@@ -46,7 +46,12 @@ constructor(private authService: AuthService,private candidatService :CandidatSe
   goToAnnonces() {
 
     this.currentUser = this.authService.getUser();
-    this.candidat = this.candidatService.getCandidatConnecte();
+    //this.candidat = this.candidatService.getCandidatConnecte();
+    this.candidatService.getCandidatConnecte().subscribe(candidat => {
+    this.candidat = candidat;
+    console.log('👤 Candidat connecté :', candidat);
+  });
+ 
 
     if (!this.currentUser) {
       // Aucun utilisateur connecté → visiteur

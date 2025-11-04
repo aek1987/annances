@@ -35,11 +35,11 @@ export class SidebarVisiteurComponent {
   
   ngOnInit() {
   this.currentUser = this.authService.getUser();
-  this.loadCandidat();
+  //this.loadCandidat();
   }
 
    // 🔹 Charge le candidat connecté depuis le service
-loadCandidat() {
+/*loadCandidat() {
   this.candidat = this.candidatService.getCandidatConnecte();
  
  
@@ -51,5 +51,5 @@ loadCandidat() {
   } else {  
      console.log("⚠️ Aucun candidat trouvé !");
     }
-}
+}*/
 }
