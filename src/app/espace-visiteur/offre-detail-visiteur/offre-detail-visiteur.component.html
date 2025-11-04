@@ -1,16 +1,16 @@
 <div class="offre-container" *ngIf="offre">
   <!-- En-tête avec logo et titre -->
   <div class="entreprise-header">
-    <img *ngIf="entrprise?.logo" 
-         [src]="entrprise?.logo" 
+    <img *ngIf="entreprise?.logo" 
+         [src]="entreprise?.logo" 
          alt="Logo entreprise" 
          class="logo-entreprise">
     <div>
-      <h2 class="titre-offre">{{ entrprise?.username }}</h2>
-       <p class="nom-entreprise">secteur {{ entrprise?.secteur }}</p>
+      <h2 class="titre-offre">{{ entreprise?.username }}</h2>
+       <p class="nom-entreprise">secteur {{ entreprise?.secteur }}</p>
        <p class="nom-entreprise">
-  🌐 <a [href]="entrprise?.site" target="_blank" rel="noopener noreferrer">
-    {{ entrprise?.site }}
+  🌐 <a [href]="entreprise?.site" target="_blank" rel="noopener noreferrer">
+    {{ entreprise?.site }}
   </a>
 </p>
 
@@ -75,11 +75,13 @@
 </div>
 
   <!-- Lien vers entreprise -->
-  <div class="section" *ngIf="getEntreprise(offre.entrepriseId)?.site">
-    🌐 <a [href]="getEntreprise(offre.entrepriseId)?.site" target="_blank">
-      Visiter le site de l’entreprise
-    </a>
-  </div>
+<div class="section" *ngIf="entreprise?.site">
+  🌐 <a [href]="entreprise?.site" target="_blank">
+    Visiter le site de l’entreprise
+  </a>
+</div>
+
+ 
 
   <!-- Actions -->
   <div class="actions">

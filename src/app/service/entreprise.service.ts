@@ -57,7 +57,9 @@ export class EntrepriseService {
   }
 ];
 
+//private apiUrl = `http://localhost:8080/api/entreprises`;
 private apiUrl = `${environment.apiUrl}/api/entreprises`;
+  
   constructor(private authService: AuthService,private http: HttpClient) {}
 
   // 🔹 Retourne l’entreprise connectée (via AuthService)

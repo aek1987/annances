@@ -31,7 +31,7 @@ getCandidatConnecte(): Observable<Candidat | null> {
     return of(null);
   }
 
-  return this.http.get<Candidat>(`${this.apiUrl}/ref/${account.refId}`).pipe(
+  return this.http.get<Candidat>(`${this.apiUrl}/${account.email}`).pipe(
     catchError(() => of(null))
   );
 }
