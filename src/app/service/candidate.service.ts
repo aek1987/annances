@@ -10,8 +10,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CandidatService {
-private apiUrl = `${environment.apiUrl}/api/candidats`;
-
+//private apiUrl = `${environment.apiUrl}/api/candidats`;
+private apiUrl = `http://localhost:8080/api/candidats`;
   private candidats: Candidat[] = [
     { refId: 1, username: 'Sara Bensalem', email: 'ali.candidat@gmail.com', status: 'desactive'  ,photo: '../../assets/user.png', fonction: 'Développeur Java', phone: '0550-123-456', competences: ['Java', 'Spring Boot'], bio: 'Passionnée de dev web', experiences: [{ poste: 'Dev Java', entreprise: 'Capgemini', duree: '2 ans' }],formations:[],cv:"" },
     { refId: 2, username: 'Mohamed Lamine', email: 'sara.candidat@gmail.com', status: 'active', photo: '../../assets/user.png', fonction: 'Ingénieur Data', phone: '0551-987-654', competences: ['Python', 'SQL'], bio: 'Spécialiste data', experiences: [{ poste: 'Data Analyst', entreprise: 'Sopra Steria', duree: '1 an' }],formations:[] ,cv:""},
@@ -31,7 +31,7 @@ getCandidatConnecte(): Observable<Candidat | null> {
     return of(null);
   }
 
-  return this.http.get<Candidat>(`${this.apiUrl}/${account.email}`).pipe(
+  return this.http.get<Candidat>(`${this.apiUrl}/by-email/${account.email}`).pipe(
     catchError(() => of(null))
   );
 }

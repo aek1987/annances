@@ -18,6 +18,7 @@ export interface Offre {
    avantages?: string;
   dateLimite?: Date;
   candidaturesCount?: number;
+  
+
+
 }
-
-

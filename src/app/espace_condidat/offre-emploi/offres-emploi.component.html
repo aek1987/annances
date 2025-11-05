@@ -151,7 +151,7 @@
         >Détails</a
       >
     </div>
-    <p><b>Entreprise :</b> {{ getEntrepriseNom(offre.entrepriseId) }}</p>
+   <p><b>Entreprise :</b>  {{ entreprisesMap.get(offre.entrepriseId)?.username || 'Entreprise inconnue' }}</p>
     <p><b>Lieu :</b> {{ offre.localisation }}</p>
     <p>
       <b>Salaire :</b>

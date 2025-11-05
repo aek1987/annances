@@ -24,13 +24,24 @@ export class DetailEntrepriseComponent {
   }
 
   // 🔹 Charge l’entreprise connectée depuis le service
-  loadEntreprise(id: number) {
-    this.entreprise = this.entrepriseService.getEntrepriseById(id);
-    if (!this.entreprise) {
-      console.warn('⚠️ Aucune entreprise trouvée avec cet ID.');
-      this.router.navigate(['/admin/entreprises']); // Redirection si id invalide
+ loadEntreprise(id: number) {
+  this.entrepriseService.getEntrepriseById(id).subscribe({
+    next: (data) => {
+      if (data) {
+        this.entreprise = data;
+        console.log('✅ Entreprise chargée :', this.entreprise);
+      } else {
+        console.warn('⚠️ Aucune entreprise trouvée.');
+        this.router.navigate(['/admin/entreprises']);
+      }
+    },
+    error: (err) => {
+      console.error('❌ Erreur lors du chargement de l’entreprise :', err);
+      this.router.navigate(['/admin/entreprises']);
     }
-  }
+  });
+}
+
 
   editMode = false;
 

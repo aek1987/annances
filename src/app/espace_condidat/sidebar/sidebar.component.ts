@@ -42,7 +42,7 @@ export class SidebarComponent {
 loadCandidat() {
   this.candidatService.getCandidatConnecte().subscribe(candidat => {
     this.candidat = candidat;
-    console.log('👤 Candidat connecté :', candidat);
+    console.log('👤 Candidat connecté  slider:', candidat);
   });
   console.log("condidat info"+ this.candidat);
   

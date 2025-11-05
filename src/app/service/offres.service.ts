@@ -178,7 +178,10 @@ private offres: Offre[] = [
   }
 ];
  private nextId = 3;
- private apiUrl = `${environment.apiUrl}/api/offres`;   
+ //private apiUrl = `${environment.apiUrl}/api/offres`;   
+private apiUrl = `http://localhost:8080/api/offres`;  
+
+
 
 constructor(private http: HttpClient) {}
  

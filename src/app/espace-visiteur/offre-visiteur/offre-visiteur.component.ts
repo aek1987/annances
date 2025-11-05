@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
 import { Candidat } from "src/app/modeles/candidat";
 import { Candidature } from "src/app/modeles/candidature";
 import { Entreprise } from "src/app/modeles/entreprise";
@@ -42,6 +43,7 @@ export class OffreVisiteurComponent implements OnInit {
   isExperienceDropdownOpen = false;
   selectedContracts: string[] = [];
   isDropdownOpen = false;
+  entreprisesMap: Map<number, Entreprise> = new Map();
 
   constructor(
     private offreService: OffresService,
@@ -57,6 +59,20 @@ export class OffreVisiteurComponent implements OnInit {
     this.currentPage = data.number;
      this.totalPages = data.totalPages;
     console.log(' Offres préchargées via resolver :', this.filteredOffres);
+    // Charger les entreprises pour chaque offre
+  this.filteredOffres.forEach(offre => {
+    if (offre.entrepriseId && !this.entreprisesMap.has(offre.entrepriseId)) {
+      this.entrepriseService.getEntrepriseById(offre.entrepriseId).subscribe({
+        next: (entreprise) => {
+          this.entreprisesMap.set(offre.entrepriseId, entreprise);
+        },
+        error: (err) => {
+          console.error(`Erreur chargement entreprise ${offre.entrepriseId}`, err);
+        }
+      });
+    }
+  });
+
   }
 
 /*  loadOffres(page: number = 0): void {
@@ -129,34 +145,36 @@ export class OffreVisiteurComponent implements OnInit {
     this.applyFilters();
   }
 
-  applyFilters() {
-    this.filteredOffres.filter((offre) => {
-      const entreprise = this.getentreprise(offre.entrepriseId);
+ applyFilters() {
+ /* this.filteredOffres.filter((offre) => {
+    const entreprise = this.getEntreprise[offre.entrepriseId];
 
-      const contratMatch =
-        this.selectedContracts.length === 0 ||
-        this.selectedContracts.includes(offre.contrat!);
-      const secteurMatch =
-        this.selectedSectors.length === 0 ||
-        (entreprise && this.selectedSectors.includes(entreprise.secteur));
-      const remoteMatch =
-        this.selectedRemote.length === 0 ||
-        (offre.teletravail && this.selectedRemote.includes(offre.teletravail));
+    const contratMatch =
+      this.selectedContracts.length === 0 ||
+      this.selectedContracts.includes(offre.contrat!);
 
-      return (
-        (!this.searchTerm ||
-          offre.poste.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
-        (!this.searchLocation ||
-          offre.localisation
-            .toLowerCase()
-            .includes(this.searchLocation.toLowerCase())) &&
-        (!this.searchSalary || offre.salaire >= this.searchSalary) &&
-        contratMatch &&
-        secteurMatch &&
-        remoteMatch
-      );
-    });
-  }
+    const secteurMatch =
+      this.selectedSectors.length === 0 ||
+      (entreprise && this.selectedSectors.includes(entreprise.secteur));
+
+    const remoteMatch =
+      this.selectedRemote.length === 0 ||
+      (offre.teletravail && this.selectedRemote.includes(offre.teletravail));
+
+    return (
+      (!this.searchTerm ||
+        offre.poste.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
+      (!this.searchLocation ||
+        offre.localisation
+          .toLowerCase()
+          .includes(this.searchLocation.toLowerCase())) &&
+      (!this.searchSalary || offre.salaire >= this.searchSalary) &&
+      contratMatch &&
+      secteurMatch &&
+      remoteMatch
+    );
+  });*/
+}
 
   // ✅ Postuler
   postuler(offre: Offre) {
@@ -200,11 +218,10 @@ export class OffreVisiteurComponent implements OnInit {
     this.applyFilters();
   }
 
-  getentreprise(entrepriseId: number): Entreprise | undefined {
-    const entrepise = this.entrepriseService.getEntrepriseById(entrepriseId);
+ getEntreprise(entrepriseId: number): Observable<Entreprise> {
+  return this.entrepriseService.getEntrepriseById(entrepriseId);
+}
 
-    return entrepise;
-  }
   gotodetail(offre: Offre) {
     //this.router.navigate(['/offre-detail', offre.id]);
     console.log("offree selectione par visiteur " + offre.id);

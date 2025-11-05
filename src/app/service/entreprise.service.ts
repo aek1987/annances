@@ -57,8 +57,8 @@ export class EntrepriseService {
   }
 ];
 
-//private apiUrl = `http://localhost:8080/api/entreprises`;
-private apiUrl = `${environment.apiUrl}/api/entreprises`;
+private apiUrl = `http://localhost:8080/api/entreprises`;
+//private apiUrl = `${environment.apiUrl}/api/entreprises`;
   
   constructor(private authService: AuthService,private http: HttpClient) {}
 
@@ -79,8 +79,8 @@ private apiUrl = `${environment.apiUrl}/api/entreprises`;
   }
 
   // ✅ Recherche par ID
-  getEntrepriseById(id: number): Entreprise | undefined {
-    return this.entreprises.find(e => e.id === id);
+  getEntrepriseById(id: number): Observable<Entreprise> {
+     return this.http.get<Entreprise>(`${this.apiUrl}/${id}`);
   }
   // ✅ Recherche par ID
   getEntrepriseById2(id: number): Observable<Entreprise>   {
@@ -110,22 +110,13 @@ private apiUrl = `${environment.apiUrl}/api/entreprises`;
     return newEntreprise;
   }
    // ✅ Active une entreprise
-  activerEntreprise(id: number): boolean {
-    const entreprise = this.getEntrepriseById(id);
-    if (entreprise) {
-      entreprise.status = 'active';
-      return true;
-    }
-    return false;
-  }
+activerEntreprise(id: number): Observable<Entreprise> {
+  return this.http.put<Entreprise>(`${this.apiUrl}/${id}/activer`, {});
+}
 
-  // ✅ Désactive une entreprise
-  desactiverEntreprise(id: number): boolean {
-    const entreprise = this.getEntrepriseById(id);
-    if (entreprise) {
-      entreprise.status = 'desactive';
-      return true;
-    }
-    return false;
-  }
+
+desactiverEntreprise(id: number): Observable<Entreprise> {
+  return this.http.put<Entreprise>(`${this.apiUrl}/${id}/desactiver`, {});
+}
+
 }
