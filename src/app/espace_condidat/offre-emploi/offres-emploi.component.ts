@@ -148,32 +148,27 @@ export class OffresEmploiComponent implements OnInit {
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
-  onCheckboxChange(event: any) {
-    const value = event.target.value;
-    if (event.target.checked) {
-      this.selectedContracts.push(value);
-    } else {
-      this.selectedContracts = this.selectedContracts.filter(
-        (c) => c !== value
-      );
-    }
-    this.applyFilters();
+  // ✅ Gestion des cases à cocher
+ onCheckboxChange(event: any) {
+  const value = event.target.value;
+  if (event.target.checked) {
+    this.selectedContracts.push(value);
+  } else {
+    this.selectedContracts = this.selectedContracts.filter(c => c !== value);
   }
+  this.applyFilters(); // <-- appel API à chaque changement
+}
+
   onSectorCheckboxChange(event: any) {
-    const value = event.target.value;
-    if (event.target.checked) {
-      this.selectedSectors.push(value);
-    } else {
-      this.selectedSectors = this.selectedSectors.filter((s) => s !== value);
-    }
-    this.applyFilters();
+     const value = event.target.value;
+  if (event.target.checked) {
+    this.selectedContracts.push(value);
+  } else {
+    this.selectedContracts = this.selectedContracts.filter(c => c !== value);
   }
-  toggleSectorDropdown() {
-    this.isSectorDropdownOpen = !this.isSectorDropdownOpen;
+  this.applyFilters(); // <-- appel API à chaque changement
   }
-  toggleRemoteDropdown() {
-    this.isRemoteDropdownOpen = !this.isRemoteDropdownOpen;
-  }
+ 
   onRemoteCheckboxChange(event: any) {
     const value = event.target.value;
     if (event.target.checked) {
@@ -183,7 +178,22 @@ export class OffresEmploiComponent implements OnInit {
     }
     this.applyFilters();
   }
+  onCheckboxChangeSalaire(event: Event) {
+    const checkbox = event.target as HTMLInputElement;
+    const value = checkbox.value;
 
+    if (checkbox.checked) {
+      this.selectedSalaires.push(value);
+    } else {
+      this.selectedSalaires = this.selectedSalaires.filter((s) => s !== value);
+    }
+  } 
+  toggleSectorDropdown() {
+    this.isSectorDropdownOpen = !this.isSectorDropdownOpen;
+  }
+  toggleRemoteDropdown() {
+    this.isRemoteDropdownOpen = !this.isRemoteDropdownOpen;
+  }
 
  getEntreprise(entrepriseId: number): void {
     this.entrepriseService.getEntrepriseById(entrepriseId).subscribe({
@@ -196,6 +206,7 @@ export class OffresEmploiComponent implements OnInit {
       }
     });
   }
+// 🔹 Mettre à jour le profil
   addSkill() {
     if (this.newSkill.trim()) {
       this.profil.competences.push(this.newSkill.trim());
@@ -216,45 +227,12 @@ export class OffresEmploiComponent implements OnInit {
     alert("Profil sauvegardé avec succès ✅");
     console.log(this.profil);
   }
-  // 🔹 Mettre à jour le profil
+  
   updateProfil() {
     alert(`Profil mis à jour : ${this.profil.nom}, ${this.profil.email}`);
     // Ici tu pourrais enregistrer en backend via API
   }
 
-  // 🔎 Appliquer les filtres
-  applyFilters() {
-/*    this.filteredOffres = this.offres.filter((offre) => {
-      const entreprise = this.getEntreprise(offre.entrepriseId);
-
-
-      
-      const contratMatch =
-        this.selectedContracts.length === 0 ||
-        this.selectedContracts.includes(offre.contrat!);
-      const secteurMatch =
-        this.selectedSectors.length === 0 ||
-        (entreprise && this.selectedSectors.includes(entreprise.secteur));
-      const remoteMatch =
-        this.selectedRemote.length === 0 ||
-        (offre.teletravail && this.selectedRemote.includes(offre.teletravail));
-
-      return (
-        (!this.searchTerm ||
-          offre.poste.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
-        (!this.searchLocation ||
-          offre.localisation
-            .toLowerCase()
-            .includes(this.searchLocation.toLowerCase())) &&
-        (!this.searchSalary || offre.salaire >= this.searchSalary) &&
-        contratMatch &&
-        secteurMatch &&
-        remoteMatch
-      );
-    });
-    this.totalPages = Math.ceil(this.filteredOffres.length / this.size);
-    this.currentPage = 1; // reset pag*/
-  }
 
   // ⭐ Favoris
   toggleFavori(offre: Offre) {
@@ -331,48 +309,59 @@ export class OffresEmploiComponent implements OnInit {
     this.isSalaireDropdownOpen = !this.isSalaireDropdownOpen;
   }
 
-  onCheckboxChangeSalaire(event: Event) {
-    const checkbox = event.target as HTMLInputElement;
-    const value = checkbox.value;
-
-    if (checkbox.checked) {
-      this.selectedSalaires.push(value);
-    } else {
-      this.selectedSalaires = this.selectedSalaires.filter((s) => s !== value);
-    }
-  }
-  // ✅ Gestion des cases à cocher
-  onCheckboxChange2(event: any) {
-    const value = event.target.value;
-    const checked = event.target.checked;
-
-    const map = {
-      contract: this.selectedContracts,
-      sector: this.selectedSectors,
-      remote: this.selectedRemote,
-      experience: this.selectedExperiences,
-    };
-
-    this.applyFilters();
-  }
 
 
    nextPage() {
     if (this.currentPage < this.totalPages) {
       this.page++; // page côté serveur, 0-based
-     // this.loadOffres(this.page);
+     this.loadOffres(this.page);
     }
   }
 
   prevPage() {
     if (this.currentPage > 1) {
       this.page--;
-    //  this.loadOffres(this.page);
+     this.loadOffres(this.page);
     }
   }
 
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) this.currentPage = page;
   }
+applyFilters() {
+  this.isLoading = true;
+
+  this.offreService.getOffresFiltered(
+    0, // première page
+    this.size,
+    this.searchTerm,
+    this.searchLocation,
+    this.selectedContracts,
+    this.selectedSectors,
+    this.selectedRemote,
+    this.selectedExperiences,
+    this.selectedSalaires
+  ).subscribe({
+    next: (data) => {
+      this.filteredOffres = data.content;
+      this.totalPages = data.totalPages;
+      this.currentPage = 1;
+      this.isLoading = false;
+
+      // Charger les entreprises pour chaque offre
+      this.filteredOffres.forEach(offre => {
+        if (offre.entrepriseId && !this.entreprisesMap.has(offre.entrepriseId)) {
+          this.entrepriseService.getEntrepriseById(offre.entrepriseId).subscribe({
+            next: (entreprise) => this.entreprisesMap.set(offre.entrepriseId, entreprise)
+          });
+        }
+      });
+    },
+    error: (err) => {
+      console.error(err);
+      this.isLoading = false;
+    }
+  });
+}
 
 }

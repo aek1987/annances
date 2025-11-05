@@ -37,7 +37,7 @@ private accounts: Account[] = [
   private currentUserSubject = new BehaviorSubject<Account | null>(this.getUser());
   currentUser$: Observable<Account | null> = this.currentUserSubject.asObservable();
  private apiUrl = `${environment.apiUrl}/api/auth`;
- //private apiUrl = `localhost:8080/auth/register`;
+
   constructor(private http: HttpClient ) 
   {
    

@@ -42,8 +42,7 @@ export class DetailEntrepriseComponent {
   });
 }
 
-
-  editMode = false;
+editMode = false;
 
 toggleEdit() {
   this.editMode = !this.editMode;

@@ -178,8 +178,8 @@ private offres: Offre[] = [
   }
 ];
  private nextId = 3;
- //private apiUrl = `${environment.apiUrl}/api/offres`;   
-private apiUrl = `http://localhost:8080/api/offres`;  
+ private apiUrl = `${environment.apiUrl}/api/offres`;   
+ 
 
 
 
@@ -234,6 +234,31 @@ constructor(private http: HttpClient) {}
   deleteOffre(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+getOffresFiltered(
+  page: number = 0,
+  size: number = 12,
+  searchTerm?: string,
+  location?: string,
+  contrats?: string[],
+  secteurs?: string[],
+  teletravail?: string[],
+  experience?: string[],
+  salaires?: string[]
+): Observable<Page<Offre>> {
+  let params = new HttpParams()
+    .set('page', page.toString())
+    .set('size', size.toString());
+
+  if (searchTerm) params = params.set('motCle', searchTerm);
+  if (location) params = params.set('lieu', location);
+  if (contrats && contrats.length) params = params.set('contrats', contrats.join(','));
+  if (secteurs && secteurs.length) params = params.set('secteurs', secteurs.join(','));
+  if (teletravail && teletravail.length) params = params.set('teletravail', teletravail.join(','));
+  if (experience && experience.length) params = params.set('experience', experience.join(','));
+  if (salaires && salaires.length) params = params.set('salaires', salaires.join(','));
+
+  return this.http.get<Page<Offre>>(`${this.apiUrl}/paged`, { params });
+}
 
 
 }

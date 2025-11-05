@@ -44,6 +44,8 @@ export class OffreVisiteurComponent implements OnInit {
   selectedContracts: string[] = [];
   isDropdownOpen = false;
   entreprisesMap: Map<number, Entreprise> = new Map();
+  size = 6;
+  selectedSalaires: string[] = [];
 
   constructor(
     private offreService: OffresService,
@@ -75,13 +77,13 @@ export class OffreVisiteurComponent implements OnInit {
 
   }
 
-/*  loadOffres(page: number = 0): void {
+ loadOffres(page: number = 0): void {
     this.offreService
       .getOffresPaged(page, 12, "datePublication", "desc")
       .subscribe({
         next: (data) => {
           console.log("✅ Offres reçues :", data);
-          this.offres = data.content;
+          this.filteredOffres = data.content;
           this.currentPage = data.number;
           this.totalPages = data.totalPages;
         },
@@ -89,7 +91,7 @@ export class OffreVisiteurComponent implements OnInit {
           console.error("❌ Erreur de chargement des offres :", err);
         },
       });
-  }*/
+  }
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
@@ -144,36 +146,76 @@ export class OffreVisiteurComponent implements OnInit {
     }
     this.applyFilters();
   }
+applyFilters() {
+  this.filteredOffres.filter((offre) => {
+    const entreprise = this.entreprisesMap.get(offre.entrepriseId);
 
- applyFilters() {
- /* this.filteredOffres.filter((offre) => {
-    const entreprise = this.getEntreprise[offre.entrepriseId];
-
+    // 🔹 Filtre par contrat
     const contratMatch =
       this.selectedContracts.length === 0 ||
-      this.selectedContracts.includes(offre.contrat!);
+      (offre.contrat && this.selectedContracts.includes(offre.contrat));
 
+    // 🔹 Filtre par secteur
     const secteurMatch =
       this.selectedSectors.length === 0 ||
       (entreprise && this.selectedSectors.includes(entreprise.secteur));
 
+    // 🔹 Filtre par télétravail
     const remoteMatch =
       this.selectedRemote.length === 0 ||
       (offre.teletravail && this.selectedRemote.includes(offre.teletravail));
 
+    // 🔹 Filtre par expérience (si tu veux utiliser niveauExperience)
+    const experienceMatch =
+      this.selectedExperiences.length === 0 ||
+      (offre.niveauExperience &&
+        this.selectedExperiences.includes(offre.niveauExperience));
+
+    // 🔹 Filtre par salaire
+    const salaireMatch =
+      this.selectedSalaires.length === 0 ||
+      this.selectedSalaires.some((range) => {
+        switch (range) {
+          case "Moins de 1 000 €":
+            return offre.salaire < 1000;
+          case "1 000 € - 2 000 €":
+            return offre.salaire >= 1000 && offre.salaire <= 2000;
+          case "2 000 € - 3 000 €":
+            return offre.salaire >= 2000 && offre.salaire <= 3000;
+          case "3 000 € - 5 000 €":
+            return offre.salaire >= 3000 && offre.salaire <= 5000;
+          case "Plus de 5 000 €":
+            return offre.salaire > 5000;
+          default:
+            return true;
+        }
+      });
+
+    // 🔹 Filtre par mots-clés et localisation
+    const searchTermMatch =
+      !this.searchTerm ||
+      offre.poste.toLowerCase().includes(this.searchTerm.toLowerCase());
+
+    const locationMatch =
+      !this.searchLocation ||
+      offre.localisation
+        .toLowerCase()
+        .includes(this.searchLocation.toLowerCase());
+
     return (
-      (!this.searchTerm ||
-        offre.poste.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
-      (!this.searchLocation ||
-        offre.localisation
-          .toLowerCase()
-          .includes(this.searchLocation.toLowerCase())) &&
-      (!this.searchSalary || offre.salaire >= this.searchSalary) &&
       contratMatch &&
       secteurMatch &&
-      remoteMatch
+      remoteMatch &&
+      experienceMatch &&
+      salaireMatch &&
+      searchTermMatch &&
+      locationMatch
     );
-  });*/
+  });
+
+  // 🔹 Mise à jour pagination
+  this.totalPages = Math.ceil(this.filteredOffres.length / this.size);
+  this.currentPage = 1;
 }
 
   // ✅ Postuler

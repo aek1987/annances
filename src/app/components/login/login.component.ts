@@ -19,7 +19,9 @@ export class LoginComponent {
   constructor(private authService: AuthService, private authServiceg: AuthgService,private router: Router,public  alertService :AlertService) {}
 errorMessage: string = '';
 onSubmit() {
-  this.errorMessage = ''; // reset erreur avant chaque tentative
+  this.errorMessage = '';
+  console.log('Tentative de login debut.');
+  // reset erreur avant chaque tentative
   this.authService.login(this.loginData).subscribe({
     next: (response: any) => {
       // Le backend renvoie { token, email, username, role, ... }
