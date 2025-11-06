@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CartComponent } from './cart/cart.component';
-import { ProductComponent } from './product/product.component';
+
 import { LoginComponent } from './components/login/login.component';
 import { DeliveryFormComponent } from './delivery-form/delivery-form.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
+
 import { AdminGuard } from './admin.guard';
 import { GreetingComponent } from './greeting/greeting.component';
 import { AnnanceEmploiComponent } from './annance-emploi/annance-emploi.component';
@@ -50,8 +50,7 @@ import { offreResolver } from './service/offre-resolver';
 const routes: Routes = [
   // Partie admin
   
-   { path: 'products', component: ProductComponent },
-  { path: 'product/:id', component: ProductDetailComponent }, 
+ 
   
  // ... autres routes existantes
   { path: 'entreprises-recrutent', component: EntreprisesRecrutentComponent },

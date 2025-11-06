@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GreetingComponent } from './greeting/greeting.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProductComponent } from './product/product.component';
+
 
 import { NavbarComponent } from './components/navbar/navbar.component';  // Import FormsModule
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
@@ -15,7 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CarouselComponent } from './carousel/carousel.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
+
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -88,12 +88,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     GreetingComponent,
     RegistersComponent,
     LoginComponent,
-    ProductComponent,
+ 
     CartComponent,   
     NavbarComponent,
     DeliveryFormComponent,
     CarouselComponent,  
-    ProductDetailComponent,
+   
     ThousandSeparatorPipe,   
     AnnanceEmploiComponent,
     ProfilComponent,

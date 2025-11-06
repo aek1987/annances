@@ -23,50 +23,6 @@
     </p>
   </div>
 
-  <!-- Mode édition -->
-  <form *ngIf="editMode" (ngSubmit)="saveEntreprise()" class="edit-form">
-    <div>
-      <label>Nom :</label>
-      <input [(ngModel)]="entreprise.username" name="username" required />
-    </div>
-
-    <div>
-      <label>Email :</label>
-      <input [(ngModel)]="entreprise.email" name="email" type="email" required />
-    </div>
-
-    <div>
-      <label>Téléphone :</label>
-      <input [(ngModel)]="entreprise.phone" name="phone" />
-    </div>
-
-    <div>
-      <label>Secteur :</label>
-      <input [(ngModel)]="entreprise.secteur" name="secteur" />
-    </div>
-
-    <div>
-      <label>Description :</label>
-      <textarea [(ngModel)]="entreprise.description" name="description"></textarea>
-    </div>
-
-    <div>
-      <label>Site web :</label>
-      <input [(ngModel)]="entreprise.site" name="site" type="url" />
-    </div>
-
-    <div>
-      <label>Status :</label>
-      <select [(ngModel)]="entreprise.status" name="status">
-        <option value="active">Active</option>
-        <option value="desactive">Désactivée</option>
-      </select>
-    </div>
-
-    <div class="form-actions">
-      <button type="submit" class="btn-save">💾 Sauvegarder</button>
-      <button type="button" class="btn-cancel" (click)="toggleEdit()">❌ Annuler</button>
-    </div>
-  </form>
+ 
 </div>
 
