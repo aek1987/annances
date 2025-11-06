@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { catchError, map, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Offre } from '../modeles/offres';
 
 @Injectable({
   providedIn: 'root'
@@ -164,27 +165,21 @@ updateCandidatState(candidat: Candidat) {
 // 🟡 GESTION DES FAVORIS (corrigée)
 // ================================
 
-toggleFavori(offreId: number): void {
-  this.getCandidatConnecte().subscribe(candidat => {
-    if (!candidat) return;
 
-    if (!candidat.favoris) candidat.favoris = [];
 
-    const index = candidat.favoris.indexOf(offreId);
-    if (index === -1) {
-      // ✅ Ajouter le favori
-      candidat.favoris.push(offreId);
-      console.log(`⭐ Offre ${offreId} ajoutée aux favoris de ${candidat.username}`);
-    } else {
-      // ❌ Supprimer le favori
-      candidat.favoris.splice(index, 1);
-      console.log(`❌ Offre ${offreId} retirée des favoris de ${candidat.username}`);
-    }
 
-    // 🔄 Met à jour l'état du candidat localement
-    this.updateCandidatState(candidat);
-  });
+getFavoris(candidatId: number): Observable<Offre[]> {
+  return this.http.get<Offre[]>(`${this.apiUrl}/${candidatId}/favoris`);
 }
+
+addFavori(candidatId: number, offreId: number): Observable<void> {
+  return this.http.post<void>(`${this.apiUrl}/${candidatId}/favoris/${offreId}`, {});
+}
+
+removeFavori(candidatId: number, offreId: number): Observable<void> {
+  return this.http.delete<void>(`${this.apiUrl}/${candidatId}/favoris/${offreId}`);
+}
+
 
 // Vérifie si une offre est favorite
 isFavori(offreId: number): Observable<boolean> {
@@ -193,12 +188,7 @@ isFavori(offreId: number): Observable<boolean> {
   );
 }
 
-// Récupère toutes les offres favorites
-getFavoris(): Observable<number[]> {
-  return this.getCandidatConnecte().pipe(
-    map(candidat => candidat?.favoris || [])
-  );
-}
+
 
 
 }

@@ -2,8 +2,7 @@
 <div class="search-bar">
   <input type="text" placeholder="Mots-clés" [(ngModel)]="searchTerm" />
   <input type="text" placeholder="Localisation" [(ngModel)]="searchLocation" />
- 
- 
+
   <button class="btn-search" (click)="applyFilters()">
     <fa-icon [icon]="faSearch" class="icon-white"></fa-icon>
     <span>Rechercher</span>
@@ -75,49 +74,49 @@
   </div>
 
   <!-- 🧠 Expérience -->
-    <div class="dropdown" [class.open]="isExperienceDropdownOpen">
-      <button class="dropdown-btn" (click)="toggleExperienceDropdown()">
-        Expérience
-        <span *ngIf="selectedExperiences.length" class="badge">{{
-          selectedExperiences.length
-        }}</span>
-        <i class="arrow" [class.up]="isExperienceDropdownOpen"></i>
-      </button>
+  <div class="dropdown" [class.open]="isExperienceDropdownOpen">
+    <button class="dropdown-btn" (click)="toggleExperienceDropdown()">
+      Expérience
+      <span *ngIf="selectedExperiences.length" class="badge">{{
+        selectedExperiences.length
+      }}</span>
+      <i class="arrow" [class.up]="isExperienceDropdownOpen"></i>
+    </button>
 
-      <div class="dropdown-content">
-        <label *ngFor="let experience of experiences" class="checkbox-label">
-          <input
-            type="checkbox"
-            [value]="experience"
-            (change)="onCheckboxChange($event)"
-            [checked]="selectedExperiences.includes(experience)"
-          />
-          {{ experience }}
-        </label>
-      </div>
+    <div class="dropdown-content">
+      <label *ngFor="let experience of experiences" class="checkbox-label">
+        <input
+          type="checkbox"
+          [value]="experience"
+          (change)="onCheckboxChange($event)"
+          [checked]="selectedExperiences.includes(experience)"
+        />
+        {{ experience }}
+      </label>
     </div>
-    <!-- 💰 Salaire -->
-<div class="dropdown" [class.open]="isSalaireDropdownOpen">
-  <button class="dropdown-btn" (click)="toggleSalaireDropdown()">
-    Salaire
-    <span *ngIf="selectedSalaires.length" class="badge">
-      {{ selectedSalaires.length }}
-    </span>
-    <i class="arrow" [class.up]="isSalaireDropdownOpen"></i>
-  </button>
-
-  <div class="dropdown-content">
-    <label *ngFor="let salaire of salaires" class="checkbox-label">
-      <input
-        type="checkbox"
-        [value]="salaire"
-        (change)="onCheckboxChangeSalaire($event)"
-        [checked]="selectedSalaires.includes(salaire)"
-      />
-      {{ salaire }}
-    </label>
   </div>
-</div>
+  <!-- 💰 Salaire -->
+  <div class="dropdown" [class.open]="isSalaireDropdownOpen">
+    <button class="dropdown-btn" (click)="toggleSalaireDropdown()">
+      Salaire
+      <span *ngIf="selectedSalaires.length" class="badge">
+        {{ selectedSalaires.length }}
+      </span>
+      <i class="arrow" [class.up]="isSalaireDropdownOpen"></i>
+    </button>
+
+    <div class="dropdown-content">
+      <label *ngFor="let salaire of salaires" class="checkbox-label">
+        <input
+          type="checkbox"
+          [value]="salaire"
+          (change)="onCheckboxChangeSalaire($event)"
+          [checked]="selectedSalaires.includes(salaire)"
+        />
+        {{ salaire }}
+      </label>
+    </div>
+  </div>
 
   <!-- Bouton créer alerte juste en dessous -->
   <div class="create-alert-container">
@@ -136,22 +135,28 @@
 <!-- 📄 Liste des offres -->
 <div *ngIf="!isLoading" class="offres-list">
   <div class="offre-card" *ngFor="let offre of filteredOffres">
-    <!-- ⭐ Icône Favori en haut à droite -->
-    <div class="favori-icon" (click)="toggleFavori(offre)">
-      <fa-icon
-        [icon]="estFavori(offre.id) ? faSolidStar : faRegularStar"
-        [ngClass]="estFavori(offre.id) ? 'favori-actif' : 'favori-inactif'"
-      >
-      </fa-icon>
-    </div>
-
     <div class="offre-header">
       <h3>{{ offre.poste }}</h3>
-      <a class="details-link" [routerLink]="['/candidat/offre', offre.id]"
-        >Détails</a
-      >
+      <div class="actions">
+        <div class="favori-icon" (click)="addFavoris(offre)">
+          <fa-icon
+            [icon]="estFavori(offre.id) ? faSolidStar : faRegularStar"
+            [ngClass]="estFavori(offre.id) ? 'favori-actif' : 'favori-inactif'"
+          >
+          </fa-icon>
+        </div>
+        <a class="details-link" [routerLink]="['/candidat/offre', offre.id]"
+          >Détails</a
+        >
+      </div>
     </div>
-   <p><b>Entreprise :</b>  {{ entreprisesMap.get(offre.entrepriseId)?.username || 'Entreprise inconnue' }}</p>
+    <p>
+      <b>Entreprise :</b>
+      {{
+        entreprisesMap.get(offre.entrepriseId)?.username ||
+          "Entreprise inconnue"
+      }}
+    </p>
     <p><b>Lieu :</b> {{ offre.localisation }}</p>
     <p>
       <b>Salaire :</b>

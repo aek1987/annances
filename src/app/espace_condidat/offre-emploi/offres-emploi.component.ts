@@ -235,9 +235,28 @@ export class OffresEmploiComponent implements OnInit {
 
 
   // ⭐ Favoris
-  toggleFavori(offre: Offre) {
-    this.candidatService.toggleFavori(offre.id);
-  }
+addFavoris(offre: Offre) {
+  this.candidatService.getCandidatConnecte().subscribe(candidat => {
+    if (!candidat) return;
+
+    const favoris = candidat.favoris || [];
+    const isFavori = favoris.includes(offre.id);
+
+    if (isFavori) {
+      // ❌ Supprimer le favori
+      this.candidatService.removeFavori(candidat.refId, offre.id).subscribe(() => {
+        console.log(`Offre ${offre.id} supprimée des favoris`);
+        // mettre à jour l’état local si besoin
+      });
+    } else {
+      // ✅ Ajouter le favori
+      this.candidatService.addFavori(candidat.refId, offre.id).subscribe(() => {
+        console.log(`Offre ${offre.id} ajoutée aux favoris`);
+        // mettre à jour l’état local si besoin
+      });
+    }
+  });
+}
 
   estFavori(offreid: number): boolean {
     return true; // this.candidatService.isFavori(offreid );

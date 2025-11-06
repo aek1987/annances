@@ -147,31 +147,6 @@
 
 
 
-.offre-card {
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.offre-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.details-link {
-  font-size: 0.9rem;
-  color: #3b82f6;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.details-link:hover {
-  text-decoration: underline;
-}
 
 
 
@@ -402,14 +377,45 @@
   font-size: 16px;
 }
 /********************/
+.offre-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.offre-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.details-link {
+  font-size: 0.9rem;
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.details-link:hover {
+  text-decoration: underline;
+}
+
+/* Conteneur pour l’étoile + lien détails */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* espace entre étoile et lien */
+}
 /* ⭐ Icône favori */
 .favori-icon {
   position: absolute;
   top: 10px;
-  right: 10px;
+  margin-left: 6px;
   cursor: pointer;
 }
+
 
 .favori-actif {
   color: gold;
@@ -468,19 +474,6 @@
   100% { transform: rotate(360deg); }
 }
 
-/* 🎯 Style des cartes d’offres */
-.offre-card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 16px;
-  margin: 12px 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-}
-
-.offre-card:hover {
-  transform: translateY(-5px);
-}
 
 
 /***************/
