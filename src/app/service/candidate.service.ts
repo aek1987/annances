@@ -31,7 +31,6 @@ getCandidatConnecte(): Observable<Candidat | null> {
   if (!account || account.role !== 'candidat') {
     return of(null);
   }
-
   return this.http.get<Candidat>(`${this.apiUrl}/by-email/${account.email}`).pipe(
     catchError(() => of(null))
   );

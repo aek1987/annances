@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CartComponent } from './cart/cart.component';
+
 
 import { LoginComponent } from './components/login/login.component';
-import { DeliveryFormComponent } from './delivery-form/delivery-form.component';
+
 
 import { AdminGuard } from './admin.guard';
 import { GreetingComponent } from './greeting/greeting.component';
@@ -61,9 +61,9 @@ const routes: Routes = [
   // Partie publique
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistersComponent },
-  { path: 'delivery', component: DeliveryFormComponent },
+
  
-  { path: 'cart', component: CartComponent },
+ 
   { path: 'greet', component: GreetingComponent },
   { path: 'annance-emploi', component: AnnanceEmploiComponent },
 

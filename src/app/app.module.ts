@@ -5,23 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GreetingComponent } from './greeting/greeting.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
 import { NavbarComponent } from './components/navbar/navbar.component';  // Import FormsModule
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
-import { DeliveryFormComponent } from './delivery-form/delivery-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CarouselComponent } from './carousel/carousel.component';
-
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ThousandSeparatorPipe } from './pipe/thousand-separator.pipe';
-
-import { CartComponent } from './cart/cart.component';
 import { AnnanceEmploiComponent } from './annance-emploi/annance-emploi.component';
 import { ProfilComponent } from './espace_condidat/profil/profil.component';
 import { SidebarComponent } from './espace_condidat/sidebar/sidebar.component';
@@ -59,13 +53,10 @@ import { DevenirPartenaireComponent } from './partenaire/devenir-partenaire/deve
 import { NosPartenairesComponent } from './partenaire/nos-partenaires/nos-partenaires.component';
 import { StagesComponent } from './partenaire/stages/stages.component';
 import { EntrepriseDashboardComponent } from './espace_entreprise/dashboard/entreprise-dashboard.component';
-
 import localeFr from '@angular/common/locales/fr';
 import { CandidatDetailComponent } from './espace_admin/candidat-detail/candidat-detail.component';
 import { ProfilComponentEntreprise } from './espace_entreprise/profil-entreprise/profi-entreprise.component';
 import { DetailEntrepriseComponent } from './espace_admin/detail-entreprise/detail-entreprise.component';
-
-
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
@@ -89,9 +80,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegistersComponent,
     LoginComponent,
  
-    CartComponent,   
+  
     NavbarComponent,
-    DeliveryFormComponent,
+
     CarouselComponent,  
    
     ThousandSeparatorPipe,   

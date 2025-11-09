@@ -29,44 +29,46 @@ export class CandidaturesComponent implements OnInit {
     private candidature: CandidatureService,
     private entrepriseService: EntrepriseService
   ) {}
-  ngOnInit(): void {
-    this.candidatService.getCandidatConnecte().subscribe((candidat) => {
-      this.candidatConnecte = candidat;
-      console.log("👤 Candidat connecté :", candidat);
-    });
+ngOnInit(): void {
+  this.candidatService.getCandidatConnecte().subscribe((candidat) => {
+    this.candidatConnecte = candidat;
+    console.log("👤 Candidat connecté :", candidat);
 
-    if (this.candidatConnecte) {
-      // Récupération de toutes les candidatures du candidat
-      this.candidatures = this.candidature.getCandidaturesByCandidat(
-        this.candidatConnecte.refId
-      );
+    // Maintenant que le candidat est chargé, on récupère ses candidatures
+    this.candidature.getCandidaturesByCandidat(this.candidatConnecte!.refId)
+      .subscribe((candidatures) => {
+        this.candidatures = candidatures;
 
-      // Pour chaque candidature, récupérer l’offre et l’entreprise associées
-      this.candidatures.forEach((c) => {
-        this.offresService.getOffreById(c.offreId).subscribe({
-          next: (offre) => {
-            if (offre) {
-              // Stocker l’offre
-              this.offresMap.set(c.id, offre);
+        // Pour chaque candidature, récupérer l’offre et l’entreprise associées
+        this.candidatures.forEach((c) => {
+          this.offresService.getOffreById(c.offreId).subscribe({
+            next: (offre) => {
+              if (offre) {
+                this.offresMap.set(c.id, offre);
 
-              // Charger l’entreprise associée
-              const entreprise = this.entrepriseService.getEntrepriseById(
-                offre.entrepriseId
-              );
-              if (entreprise) {
-             //   this.entreprisesMap.set(c.id, entreprise);
+                // Charger l’entreprise associée
+                this.entrepriseService.getEntrepriseById(offre.entrepriseId)
+                  .subscribe({
+                    next: (entreprise) => {
+                      if (entreprise) {
+                        this.entreprisesMap.set(c.id, entreprise);
+                      }
+                    },
+                    error: (err) =>
+                      console.error(
+                        `Erreur lors du chargement de l’entreprise ${offre.entrepriseId}`,
+                        err
+                      ),
+                  });
               }
-            }
-          },
-          error: (err) =>
-            console.error(
-              `Erreur lors du chargement de l’offre ${c.offreId}`,
-              err
-            ),
+            },
+            error: (err) =>
+              console.error(`Erreur lors du chargement de l’offre ${c.offreId}`, err),
+          });
         });
       });
-    }
-  }
+  });
+}
 
   // Retourne l’index de l’étape actuelle
   getEtapeIndex(statut: string): number {

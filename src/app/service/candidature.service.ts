@@ -1,46 +1,50 @@
 import { Injectable } from '@angular/core';
 import { Candidature } from '../modeles/candidature';
 import { Offre } from '../modeles/offres';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CandidatureService {
+ 
   private candidatures: Candidature[] = [
     { id: 1, offreId: 1, candidatId: 1, dateCandidature: new Date(), statut: 'en attente' },
     { id: 2, offreId: 2, candidatId: 2, dateCandidature: new Date(), statut: 'acceptée' }
   ];
 
-  private nextId = 3;
 
+private apiUrl =  `${environment.apiUrl}/api/candidatures`;
+
+constructor(private http: HttpClient) {}
   // ✅ Récupérer toutes les candidatures
   getAllCandidatures(): Candidature[] {
     return this.candidatures;
   }
 
-  // ✅ Récupérer les candidatures d’un candidat
-  getCandidaturesByCandidat(candidatId: number): Candidature[] {
-    return this.candidatures.filter(c => c.candidatId === candidatId);
+  // ✅ Récupérer les candidatures d’un candidat depuis le backend
+  getCandidaturesByCandidat(candidatId: number): Observable<Candidature[]> {
+    return this.http.get<Candidature[]>(`${this.apiUrl}/${candidatId}`);
   }
-
   // ✅ Récupérer les candidatures d’une offre
   getCandidaturesByOffre(offreId: number): Candidature[] {
     
     return this.candidatures.filter(c => c.offreId === offreId);
   }
 
-  // ✅ Postuler à une offre
-  addCandidature(offreId: number, candidatId: number, message?: string): Candidature {
-    const newCandidature: Candidature = {
-      id: this.nextId++,
-      offreId,
-      candidatId,
-      dateCandidature: new Date(),
-      statut: 'en attente',
-      message
-    };
-    this.candidatures.push(newCandidature);
-    return newCandidature;
+  addCandidature(offreId: number, candidatId: number, message?: string): Observable<Candidature> {
+    const params = new HttpParams()
+      .set('offreId', offreId)
+      .set('candidatId', candidatId)
+      .set('message', message || '');
+
+    return this.http.post<Candidature>(`${this.apiUrl}/add`, null, { params });
+  }
+
+  getAll(): Observable<Candidature[]> {
+    return this.http.get<Candidature[]>(this.apiUrl);
   }
 
   // ✅ Mettre à jour le statut (acceptée/refusée)

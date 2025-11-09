@@ -232,10 +232,6 @@ applyFilters() {
       "Je suis très intéressé par cette offre." // message de candidature
     );
 
-    // Confirmation
-    alert(
-      `✅ Vous avez postulé à : ${offre.poste}\nCandidature ID : ${candidature.id}`
-    );
   }
 
   // ⭐ Favoris
