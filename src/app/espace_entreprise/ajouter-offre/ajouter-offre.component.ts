@@ -27,7 +27,7 @@ newOffre: Offre = {
     langues: [],
     avantages: ''
   };
-  entreprise: Entreprise | null=null;
+ entreprise: Entreprise | null=null;
  postesInformatique: string[] = [
   "Développeur Angular",
   "Développeur Java",
@@ -45,42 +45,60 @@ newOffre: Offre = {
  ngOnInit(): void {
     this.loadEntreprise();
   }
-  loadEntreprise() {
-    this.entreprise = this.entrepriseService.getEntrepriseConnectee();
-   if(this.entreprise?.status==="desactive"){
-     Swal.fire('⚠️ Entreprise désactivée', ' vous ne pouver pas postuler Veillez contacter l administrateure de  plateforme  ', 'warning');
-    
+loadEntreprise() {
+  this.entrepriseService.getEntrepriseConnectee().subscribe({
+    next: (entreprise) => {
+      this.entreprise = entreprise;
+      if (this.entreprise?.status === "desactive") {
+        Swal.fire(
+          '⚠️ Entreprise désactivée',
+          'Vous ne pouvez pas postuler. Veuillez contacter l’administrateur de la plateforme.',
+          'warning'
+        );
+      }
+    },
+    error: (err) => {
+      console.error('Erreur lors du chargement de l’entreprise :', err);
+      Swal.fire('❌ Erreur', 'Impossible de récupérer l’entreprise.', 'error');
     }
-     
+  });
+}
+ajouterOffre() {
+  if (this.entreprise && this.entreprise?.status === "active") {
+    // ✅ Lier l’offre à l’entreprise connectée
+    this.newOffre.entrepriseId = this.entreprise.id;
+    this.newOffre.datePublication = new Date();
+ console.log("newOffre a ajouter",this.newOffre);
+    // ✅ Envoyer la requête POST vers le backend
+    this.offreService.addOffre(this.newOffre).subscribe({
+      next: (response) => {
+       
+      console.log(" reponse newOffre a ",response);
+        alert('✅ Offre ajoutée avec succès !');
+
+        // ✅ Réinitialiser le formulaire après succès
+        this.newOffre = {
+          id: 0,
+          entrepriseId: 0,
+          poste: '',
+          description: '',
+          localisation: '',
+          salaire: 0,
+          contrat: 'CDI',
+          datePublication: new Date()
+        };
+      },
+      error: (err) => {
+        console.error('❌ Erreur lors de l’ajout de l’offre :', err);
+        alert('❌ Une erreur est survenue lors de l’ajout de l’offre.');
+      }
+    });
+
+  } else {
+    alert('❌ Vous devez être une entreprise active pour publier une offre.');
   }
- ajouterOffre() {
-    
-    if (this.entreprise && this.entreprise?.status==="active") {
+}
 
-      // Lier l’offre à l’entreprise connectée
-      this.newOffre.entrepriseId = this.entreprise.id;
-      this.newOffre.datePublication = new Date();
-
-      // Ajouter l’offre via le service
-      this.offreService.addOffre(this.newOffre);
-
-      alert('✅ Offre ajoutée avec succès !');
-
-      // Réinitialiser le formulaire
-      this.newOffre = {
-        id: 0,
-        entrepriseId: 0,
-        poste: '',
-        description: '',
-        localisation: '',
-        salaire: 0,
-        contrat: 'CDI',
-        datePublication: new Date()
-      };
-    } else {
-      alert('❌ Vous devez être une entreprise  active pour publier une offre.');
-    }
-  }
 
  
 

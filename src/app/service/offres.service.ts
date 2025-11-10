@@ -201,10 +201,7 @@ constructor(private http: HttpClient) {}
 }
    
 
-   // ✅ Récupérer une offre par ID depuis le backend
-  getOffreById(id: number): Observable<Offre> {
-    return this.http.get<Offre>(`${this.apiUrl}/${id}`);
-  }
+
 
   // ✅ Récupérer les offres d’une entreprise
   getOffresByEntreprise(entrepriseId: number): Offre[] {
@@ -212,28 +209,30 @@ constructor(private http: HttpClient) {}
   }
 
   // ✅ Ajouter une offre
- addOffre(offre: Omit<Offre, 'id' | 'datePublication'>): Offre {
-    const newOffre: Offre = {
+     // ✅ Récupérer une offre par ID depuis le backend
+  getOffreById(id: number): Observable<Offre> {
+    return this.http.get<Offre>(`${this.apiUrl}/${id}`);
+  }
+  // ✅ Créer une nouvelle offre
+  addOffre(offre: Omit<Offre, 'id' | 'datePublication'>): Observable<Offre> {
+    const newOffre = {
       ...offre,
-      id: this.nextId++,
-      datePublication: new Date()
+      datePublication: new Date() 
     };
-    this.offres.push(newOffre);
-    return newOffre;
+   
+    return this.http.post<Offre>(this.apiUrl, newOffre);
   }
 
-
-
- // ✅ Modifier une offre
-  updateOffre(id: number, offre: Partial<Offre>): Observable<Offre> {
-    return this.http.put<Offre>(`${this.apiUrl}/${id}`, offre);
+  // ✅ Mettre à jour une offre
+  updateOffre(offre: Offre): Observable<Offre> {
+    return this.http.put<Offre>(`${this.apiUrl}/${offre.id}`, offre);
   }
-  
 
   // ✅ Supprimer une offre
   deleteOffre(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
 getOffresFiltered(
   page: number = 0,
   size: number = 12,

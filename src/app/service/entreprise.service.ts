@@ -3,7 +3,7 @@ import { Entreprise } from '../modeles/entreprise';
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -63,14 +63,17 @@ private apiUrl = `${environment.apiUrl}/api/entreprises`;
   constructor(private authService: AuthService,private http: HttpClient) {}
 
   // 🔹 Retourne l’entreprise connectée (via AuthService)
-  getEntrepriseConnectee(): Entreprise | null {
-    const account = this.authService.getUser();
-    if (!account || account.role !== 'entreprise') return null;
-      console.log('go  navigateur to getUser():', account);
-    // Cherche l’entreprise correspondante
-    const entreprise = this.entreprises.find(e => e.id === account.refId);
-    return entreprise || null;
+getEntrepriseConnectee(): Observable<Entreprise | null> {
+  const account = this.authService.getUser();
+  if (!account || account.role !== 'entreprise') {
+    return of(null); // ok maintenant
   }
+ return this.http.get<Entreprise>(`${this.apiUrl}/by-email/${account.email}`).pipe(
+    catchError(() => of(null))
+  );
+}
+
+
 
   // ✅ Liste complète
   getEntreprises(): Entreprise[] {

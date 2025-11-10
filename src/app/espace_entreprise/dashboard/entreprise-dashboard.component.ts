@@ -7,6 +7,7 @@ import { Offre } from 'src/app/modeles/offres';
 import { CandidatureService } from 'src/app/service/candidature.service';
 import { EntrepriseService } from 'src/app/service/entreprise.service';
 import { OffresService } from 'src/app/service/offres.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,11 +28,11 @@ entreprise: Entreprise | null=null;
 
   ngOnInit(): void {
     this.loadEntreprise();
+
     // ✅ Charger les offres de cette entreprise
     if (this.entreprise) { this.offres = this.offresService.getOffresByEntreprise(this.entreprise.id);
       this.nbOffres = this.offres.length;  
-   
-    // 🔹 Récupérer les candidatures associées à ces offres
+       // 🔹 Récupérer les candidatures associées à ces offres
       this.candidatures = this.offres.flatMap(offre =>
         this.candidatureService.getCandidaturesByOffre(offre.id)
       );
@@ -42,6 +43,26 @@ entreprise: Entreprise | null=null;
       this.nbRetenus = this.candidatures.filter(c => c.statut === 'acceptée').length;
     }
   }
+
+   loadEntreprise() {
+   this.entrepriseService.getEntrepriseConnectee().subscribe({
+     next: (entreprise) => {
+       this.entreprise = entreprise;
+       
+       if (this.entreprise?.status === "desactive") {
+         Swal.fire(
+           '⚠️ Entreprise désactivée',
+           'Vous ne pouvez pas postuler. Veuillez contacter l’administrateur de la plateforme.',
+           'warning'
+         );
+       }
+     },
+     error: (err) => {
+       console.error('Erreur lors du chargement de l’entreprise :', err);
+       Swal.fire('❌ Erreur', 'Impossible de récupérer l’entreprise.', 'error');
+     }
+   });
+ }
 // Dans votre composant
 testNavigation(route: string) {
   console.log('Tentative de navigation vers:', route);
@@ -51,8 +72,5 @@ testNavigation(route: string) {
     console.error('Erreur de navigation:', error);
   });
 }
-  loadEntreprise() {
-    this.entreprise = this.entrepriseService.getEntrepriseConnectee();
-     
-  }
+
 }
