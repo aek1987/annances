@@ -43,7 +43,9 @@ import { ProfilComponentEntreprise } from './espace_entreprise/profil-entreprise
 import { DetailEntrepriseComponent } from './espace_admin/detail-entreprise/detail-entreprise.component';
 import { OffreDetailVisiteurComponent } from './espace-visiteur/offre-detail-visiteur/offre-detail-visiteur.component';
 import { CandidaturesOffreComponent } from './espace_entreprise/candidatures-offre/candidatures-offre.component';
-import { offreResolver } from './service/offre-resolver';
+import { offreResolver } from './resolver/offre-resolver';
+import { CandidaturesResolver } from './resolver/candidatures.resolver';
+
 
 
 
@@ -81,14 +83,14 @@ const routes: Routes = [
   {
     path: 'candidat',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
+ //   canActivate: [AuthGuard],
+  //  canActivateChild: [AuthGuard],
     children: [
       { path: 'offres-emploi', component: OffresEmploiComponent , resolve: { offresData: offreResolver }},
       { path: 'favorites', component: FavoritesComponent },
       { path: 'settings', component: ProfilComponent },
       { path: 'alerts', component: AlertsComponent },
-      { path: 'mes-candidatures', component: CandidaturesComponent },
+      { path: 'mes-candidatures', component: CandidaturesComponent , resolve: { candidatures: CandidaturesResolver }},
       {path: 'offre/:id',  component: OffreDetailComponent },
       { path: '', redirectTo: 'offres-emploi', pathMatch: 'full' },
     ]
@@ -98,8 +100,8 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayoutComponent,
-   // canActivate: [AuthGuard],
-  //  canActivateChild: [AuthGuard],
+   canActivate: [AuthGuard],
+   canActivateChild: [AuthGuard],
     children: [
       { path: 'users/candidats', component: UsersCandidatsComponent },
       { path: 'users/entreprises', component: UsersEntreprisesComponent },

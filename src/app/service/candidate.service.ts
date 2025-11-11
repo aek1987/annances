@@ -180,12 +180,17 @@ removeFavori(candidatId: number, offreId: number): Observable<void> {
 }
 
 
-// Vérifie si une offre est favorite
-isFavori(offreId: number): Observable<boolean> {
-  return this.getCandidatConnecte().pipe(
-    map(candidat => !!candidat?.favoris?.includes(offreId))
-  );
+// Service Angular pour vérifier un favori
+isFavori(candidatId: number, offreId: number): Observable<boolean> {
+  return this.http.get<boolean>(`${this.apiUrl}/${candidatId}/favoris/${offreId}/isFavorite`)
+    .pipe(
+      catchError(err => {
+        console.error('Erreur vérification favori', err);
+        return of(false); // Retourne false si erreur
+      })
+    );
 }
+
 
 
 

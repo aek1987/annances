@@ -140,11 +140,12 @@
       <div class="actions">
         <div class="favori-icon" (click)="addFavoris(offre)">
           <fa-icon
-            [icon]="estFavori(offre.id) ? faSolidStar : faRegularStar"
-            [ngClass]="estFavori(offre.id) ? 'favori-actif' : 'favori-inactif'"
+            [icon]="favorisMap[offre.id] ? faSolidStar : faRegularStar"
+            [ngClass]="favorisMap[offre.id] ? 'favori-actif' : 'favori-inactif'"
           >
           </fa-icon>
         </div>
+
         <a class="details-link" [routerLink]="['/candidat/offre', offre.id]"
           >Détails</a
         >

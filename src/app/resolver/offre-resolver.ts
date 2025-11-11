@@ -3,7 +3,7 @@ import { Page } from '../modeles/page';
 import { Offre } from '../modeles/offres';
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
-import { OffresService } from './offres.service';
+import { OffresService } from '../service/offres.service';
 
 
 

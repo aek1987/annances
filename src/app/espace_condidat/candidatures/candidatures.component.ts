@@ -7,7 +7,8 @@ import { CandidatService } from "src/app/service/candidate.service";
 import { CandidatureService } from "src/app/service/candidature.service";
 import { EntrepriseService } from "src/app/service/entreprise.service";
 import { OffresService } from "src/app/service/offres.service";
-import { Observable } from "rxjs";
+import { forkJoin, map, Observable, switchMap } from "rxjs";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-candidatures",
@@ -24,15 +25,26 @@ export class CandidaturesComponent implements OnInit {
   entreprise?: Entreprise;
 
   constructor(
+        private route: ActivatedRoute,
     private candidatService: CandidatService,
     private offresService: OffresService,
     private candidature: CandidatureService,
     private entrepriseService: EntrepriseService
+
   ) {}
 ngOnInit(): void {
-  this.candidatService.getCandidatConnecte().subscribe((candidat) => {
-    this.candidatConnecte = candidat;
-    console.log("👤 Candidat connecté :", candidat);
+
+
+  const data = this.route.snapshot.data['candidatures'];
+  this.candidatConnecte = data.candidat;
+  this.candidatures = data.candidatures;
+
+  console.log('✅ Candidat connecté :', this.candidatConnecte);
+  console.log('✅ Candidatures préchargées :', this.candidatures);
+
+/*  this.candidatService.getCandidatConnecte().subscribe((candidat) => {
+   this.candidatConnecte = candidat;
+  
 
     // Maintenant que le candidat est chargé, on récupère ses candidatures
     this.candidature.getCandidaturesByCandidat(this.candidatConnecte!.refId)
@@ -67,8 +79,13 @@ ngOnInit(): void {
           });
         });
       });
-  });
+  });*/
+
+  
 }
+
+
+
 
   // Retourne l’index de l’étape actuelle
   getEtapeIndex(statut: string): number {
