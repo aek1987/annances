@@ -25,7 +25,7 @@ constructor(private http: HttpClient) {}
   }
 
   // ✅ Récupérer les candidatures d’un candidat depuis le backend
-  getCandidaturesByCandidat(candidatId: number): Observable<Candidature[]> {
+  getCandidaturesByCandidat0(candidatId: number): Observable<Candidature[]> {
     return this.http.get<Candidature[]>(`${this.apiUrl}/${candidatId}`);
   }
   // ✅ Récupérer les candidatures d’une offre
@@ -77,6 +77,9 @@ getCandidaturesByEntreprise(entrepriseId: number, offres: Offre[]): { offre: Off
     offre,
     candidatures: this.getCandidaturesByOffre(offre.id)
   }));
+}
+getCandidaturesByCandidatPaginated(refId: number, page = 0, size = 5): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/candidat/ref/${refId}?page=${page}&size=${size}`);
 }
 
 }
