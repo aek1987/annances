@@ -1,6 +1,5 @@
 export const environment = {
   production: false,
-   //apiUrl: 'https://jobsbackend-xecu.onrender.com' ,
   apiUrl:'http://localhost:8080',
   firebase: {
     apiKey: "AIzaSyDrK4cFCVgvKG8q6cjGyY_m4dvSEvMSWdg",
