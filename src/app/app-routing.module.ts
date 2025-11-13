@@ -12,7 +12,7 @@ import { ProfilComponent } from './espace_condidat/profil/profil.component';
 import { LayoutComponent } from './espace_condidat/layout/layout.component';
 import { FavoritesComponent } from './espace_condidat/favorites/favorites.component';
 import { AuthGuard } from './guards/auth.guard';
-import { AlertsComponent } from './espace_condidat/alerts/alerts.component';
+import { MesAlertesComponent } from './espace_condidat/alerts/mes-alertes.component';
 import { CandidaturesComponent } from './espace_condidat/candidatures/candidatures.component';
 import { AdminLayoutComponent } from './espace_admin/admin-layout/admin-layout.component';
 import { UsersCandidatsComponent } from './espace_admin/users-candidats/users-candidats.component';
@@ -89,7 +89,7 @@ const routes: Routes = [
       { path: 'offres-emploi', component: OffresEmploiComponent , resolve: { offresData: offreResolver }},
       { path: 'favorites', component: FavoritesComponent },
       { path: 'settings', component: ProfilComponent },
-      { path: 'alerts', component: AlertsComponent },
+      { path: 'alerts', component: MesAlertesComponent },
       { path: 'mes-candidatures', component: CandidaturesComponent , resolve: { candidatures: CandidaturesResolver }},
       {path: 'offre/:id',  component: OffreDetailComponent },
       { path: '', redirectTo: 'offres-emploi', pathMatch: 'full' },

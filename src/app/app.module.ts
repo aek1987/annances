@@ -22,7 +22,6 @@ import { SidebarComponent } from './espace_condidat/sidebar/sidebar.component';
 import { LayoutComponent } from './espace_condidat/layout/layout.component';
 import { FavoritesComponent } from './espace_condidat/favorites/favorites.component';
 import { CandidaturesComponent } from './espace_condidat/candidatures/candidatures.component';
-import { AlertsComponent } from './espace_condidat/alerts/alerts.component';
 import { DashboardComponent } from './espace_admin/dashboard/dashboard.component';
 import { UsersCandidatsComponent } from './espace_admin/users-candidats/users-candidats.component';
 import { UsersEntreprisesComponent } from './espace_admin/users-entreprises/users-entreprises.component';
@@ -63,6 +62,7 @@ import { environment } from '../environments/environment';
 import { OffreDetailVisiteurComponent } from './espace-visiteur/offre-detail-visiteur/offre-detail-visiteur.component';
 import { CandidaturesOffreComponent } from './espace_entreprise/candidatures-offre/candidatures-offre.component';
 import { AuthInterceptor } from './interceptors/interceptor';
+import { MesAlertesComponent } from './espace_condidat/alerts/mes-alertes.component';
 
 
 
@@ -78,13 +78,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     GreetingComponent,
     RegistersComponent,
-    LoginComponent,
- 
-  
+    LoginComponent,  
     NavbarComponent,
-
-    CarouselComponent,  
-   
+    CarouselComponent,     
     ThousandSeparatorPipe,   
     AnnanceEmploiComponent,
     ProfilComponent,
@@ -92,7 +88,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LayoutComponent,
     FavoritesComponent,
     CandidaturesComponent,
-    AlertsComponent,
+    MesAlertesComponent,
     UsersCandidatsComponent,
     UsersEntreprisesComponent,
     OffresAdminComponent,

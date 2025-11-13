@@ -14,11 +14,9 @@ import { Alerte } from "src/app/modeles/alerte";
 import { Page } from "src/app/modeles/page";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
+import { Candidature } from "src/app/modeles/candidature";
 
-interface Candidature {
-  offre: string;
-  status: string;
-}
+
 @Component({
   selector: "app-offres-emploi",
   templateUrl: "./offres-emploi.component.html",
@@ -322,22 +320,22 @@ addFavoris(offre: Offre) {
       frequence: "hebdomadaire",
       active: true,
       dateCreation: new Date(),
-      email: this.alertEmail,
+      email:  this.candidatConnecte!.email,
     };
-
+  
     // ✅ Enregistrer l’alerte via le service
-    this.alerteEmploiService.addAlerte(alerte).subscribe({
+   this.alerteEmploiService.addAlerte(alerte).subscribe({
       next: () => {
-        alert(
-          `✅ Alerte créée avec succès pour "${alerte.motCle}" (${alerte.lieu})`
-        );
-        // Optionnel : rediriger vers la page des alertes
-        // this.router.navigate(['/alertes']);
+        alert('Alerte créée avec succès !');
+      //  this.loadAlertes();
       },
-      error: (err) => {
-        console.error("Erreur lors de la création de l’alerte :", err);
-        alert("❌ Une erreur est survenue lors de la création de l’alerte.");
-      },
+      error: err => {
+        if (err.status === 400) {
+          alert(err.error); // Message du backend : "Nombre maximal d'alertes atteint"
+        } else {
+          console.error('Erreur création alerte:', err);
+        }
+      }
     });
   }
   // Pagination
