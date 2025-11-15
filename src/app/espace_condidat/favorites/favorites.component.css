@@ -1,73 +1,44 @@
-.favorites-page {
+.favorites-container {
   max-width: 800px;
-  margin: 20px auto; /* ✅ Centre le contenu */
-  padding: 20px;
-  margin-left: 0;
-  text-align: center; /* ✅ Centre le texte */
+  margin: 0 auto;
+  padding: 1rem;
 }
 
-.favorites-page h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
+.favorite-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* ✅ Message si aucune offre */
-.no-favorites {
-  padding: 15px;
-  background: #f8f9fa;
-  border: 1px dashed #ccc;
-  border-radius: 8px;
-  color: #666;
-  font-style: italic;
+.job-info h3 {
+  margin: 0;
 }
 
-/* ✅ Liste des offres */
-.favorites-list {
+.job-actions {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-top: 20px;
+  align-items: flex-end;
 }
 
-/* ✅ Style d’une offre */
-.favorite-item {
-  background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  text-align: left;
-}
-
-.favorite-item h3 {
-  margin: 0;
-  font-size: 18px;
-  color: #007bff;
-}
-
-.favorite-item p {
-  margin: 5px 0;
-  color: #555;
-}
-
-.favorite-item small {
-  display: block;
-  margin-bottom: 10px;
-  color: #999;
-}
-
-/* ✅ Bouton supprimer */
-.btn-remove {
-  background: #dc3545;
-  color: white;
+.remove-btn {
+  background-color: #ff4d4d;
   border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: white;
   cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s ease;
+  margin-bottom: 0.5rem;
 }
 
-.btn-remove:hover {
-  background: #b02a37;
+.remove-btn:hover {
+  background-color: #e60000;
+}
+
+.favorite-indicator {
+  color: red;
+  font-weight: bold;
 }

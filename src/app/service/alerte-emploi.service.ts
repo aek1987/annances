@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AlerteEmploiService {
+  updateAlerte(alerte: Alerte) {
+    throw new Error('Method not implemented.');
+  }
   private apiUrl = 'http://localhost:8080/api/alertes';
 
   constructor(private http: HttpClient) {}

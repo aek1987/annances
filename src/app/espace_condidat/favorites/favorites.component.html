@@ -1,18 +1,27 @@
-<div class="favorites-page">
-  <h2>⭐ Mes offres favorites</h2>
+<div class="favorites-container">
+  <h2>Mes offres favorites</h2>
 
-  <!-- ✅ Message si aucune offre -->
-  <div class="no-favorites" *ngIf="favoriteJobs.length === 0">
-    <p>Vous n'avez aucune offre sauvegardée pour le moment.</p>
+  <div *ngIf="favoriteJobs.length === 0">
+    <p>Aucune offre favorite pour le moment.</p>
   </div>
 
-  <!-- ✅ Liste des offres sauvegardées -->
-  <div class="favorites-list" *ngIf="favoriteJobs.length > 0">
-    <div *ngFor="let job of favoriteJobs" class="favorite-item">
-      <h3>{{ job.title }}</h3>
-      <p>{{ job.company }} - {{ job.location }}</p>
-      <small>Ajouté le {{ job.dateSaved }}</small>
-      <button class="btn-remove" (click)="removeFavorite(job.id)">❌ Supprimer</button>
+  <div *ngFor="let job of favoriteJobs" class="favorite-card">
+    <div class="job-info">
+      <h3>{{ job.poste }}</h3>
+      <p><strong>Entreprise:</strong> {{ job.entrepriseId }}</p>
+      <p><strong>Lieu:</strong> {{ job.localisation }}</p>
+      <p><strong>Date enregistrée:</strong> {{ job.datePublication| date:'longDate' }}</p>
+    </div>
+
+    <div class="job-actions">
+      <button (click)="removeFavorite(job.id)" class="remove-btn">
+        ❌ Supprimer
+      </button>
+
+      <!-- Si tu veux afficher un indicateur de favori -->
+      <span class="favorite-indicator" *ngIf="isFavori(job.id) | async">
+        ❤️ Favori
+      </span>
     </div>
   </div>
 </div>
