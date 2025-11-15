@@ -4,7 +4,6 @@ import { Candidat } from "src/app/modeles/candidat";
 import { Entreprise } from "src/app/modeles/entreprise";
 import { Offre } from "src/app/modeles/offres";
 import { AlerteEmploiService } from "src/app/service/alerte-emploi.service";
-
 import { CandidatService } from "src/app/service/candidate.service";
 import { EntrepriseService } from "src/app/service/entreprise.service";
 import { OffresService } from "src/app/service/offres.service";
@@ -370,7 +369,6 @@ addFavoris(offre: Offre) {
   }
   applyFilters() {
     this.isLoading = true;
-
     this.offreService
       .getOffresFiltered(
         0, // première page
@@ -389,6 +387,30 @@ addFavoris(offre: Offre) {
           this.totalPages = data.totalPages;
           this.currentPage = 1;
           this.isLoading = false;
+
+// 🔥 Recharger les favoris après filtrage
+// 🔥 Recharger les favoris après filtrage
+if (this.candidatConnecte?.refId) {
+  this.filteredOffres.forEach((offre) => {
+    if (offre.id != null) {
+      this.candidatService.isFavori(this.candidatConnecte!.refId, offre.id).subscribe({
+        next: (isFav) => {
+          console.log(
+            `⭐ Offre ${offre.id} → Favori = ${isFav ? "OUI" : "NON"}`
+          );
+          this.favorisMap[offre.id!] = isFav;
+        },
+        error: (err) => {
+          console.log(`❌ Erreur vérification favori pour offre ${offre.id}`, err);
+          this.favorisMap[offre.id!] = false;
+        }
+      });
+    }
+  });
+}
+
+
+
 
           // Charger les entreprises pour chaque offre
           this.filteredOffres.forEach((offre) => {
@@ -411,4 +433,10 @@ addFavoris(offre: Offre) {
         },
       });
   }
+
+
+
+
+
+
 }

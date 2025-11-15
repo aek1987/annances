@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Account } from 'src/app/modeles/accounts';
 import { User } from 'src/app/modeles/user';
 import { AlertService } from 'src/app/service/alerte-service.service';
 import { AuthService } from 'src/app/service/auth.service';
@@ -16,10 +17,10 @@ export class RegistersComponent  {
   username: '',
   email: '',
   password: '',
-  phone: '',
-  fonction: '',
-  role: 'entreprise',
-  photo: '../../assets/user.png'
+  phone: '', 
+  role: 'candidat',
+  refId:null
+  
 };
 message: string = '';
 
@@ -46,12 +47,12 @@ onSubmit() {
         this.toastr.error('Cet email existe déjà ❌', 'Erreur');
         return;
       }
-
+       const account = newAccount.compte; 
       // Créer automatiquement le candidat ou l'entreprise
       if (this.user.role === 'candidat') {
-        this.candidatService.createEmptyCandidat(newAccount.refId, this.user.username, this.user.email);
+        this.candidatService.createEmptyCandidat(account.refId, this.user.username, this.user.email);
       } else if (this.user.role === 'entreprise') {
-        this.entrepriseService.createEmptyEntreprise(newAccount.refId, this.user.username, this.user.email);
+        this.entrepriseService.createEmptyEntreprise(account.refId, this.user.username, this.user.email);
       }
 
       this.toastr.success(this.user.role + ' compte créé avec succès ✅', 'Inscription réussie');

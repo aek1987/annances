@@ -3,7 +3,7 @@ export interface User {
   email: string;
   password: string;
   phone: string;
-  fonction: string;
   role?: 'candidat' | 'entreprise' | 'admin';
-  photo: string
+  refId:number |null
+ 
 }

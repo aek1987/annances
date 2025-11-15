@@ -48,7 +48,7 @@ constructor(private authService: AuthService,private candidatService :CandidatSe
     this.currentUser = this.authService.getUser();   
     this.candidatService.getCandidatConnecte().subscribe(candidat => {
     this.candidat = candidat;
-    console.log('👤 Candidat connecté :', candidat);
+    console.log('👤 Candidat connecté  from greeting:', candidat);
   });
  
 
