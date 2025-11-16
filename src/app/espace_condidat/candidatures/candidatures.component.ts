@@ -24,68 +24,70 @@ export class CandidaturesComponent implements OnInit {
   entreprisesMap = new Map<number, Entreprise>();
   entreprise?: Entreprise;
 
-  constructor(
-        private route: ActivatedRoute,
-    private candidatService: CandidatService,
-    private offresService: OffresService,
-    private candidature: CandidatureService,
-    private entrepriseService: EntrepriseService
+  currentPage = 1;
+  totalPages = 0;
+  size = 8; // nombre d’éléments par page
 
-  ) {}
-ngOnInit(): void {
+  constructor(    private route: ActivatedRoute,    private candidatService: CandidatService,
+    private offresService: OffresService,    private candidature: CandidatureService,
+    private entrepriseService: EntrepriseService ) {}
+  ngOnInit(): void {
+    const data = this.route.snapshot.data["candidatures"];
+    this.candidatConnecte = data.candidat;
+    // pagination initiale
+    this.currentPage = data.currentPage + 1;
+    this.totalPages = data.totalPages;
+    this.candidatures = data.candidatures;
+    console.log("🔹 Page initiale :", this.currentPage);
+    console.log("🔹 Total pages :", this.totalPages);
+    // Charger les offres + entreprises
+    this.chargerDetails();
+  }
+  loadCandidatures(page: number = 0) {
+    if (!this.candidatConnecte) return;
 
+    this.candidature
+      .getCandidaturesByCandidatPaginated(
+        this.candidatConnecte.refId,
+        page,
+        this.size
+      )
+      .subscribe({
+        next: (res) => {
+          this.candidatures = res.content;
+          this.currentPage = res.currentPage + 1; // backend → 0-based
+          this.totalPages = res.totalPages;
 
-  const data = this.route.snapshot.data['candidatures'];
-  this.candidatConnecte = data.candidat;
-  this.candidatures = data.candidatures;
+          console.log("📄 Page reçue :", res);
 
-  console.log('✅ Candidat connecté :', this.candidatConnecte);
-  console.log('✅ Candidatures préchargées :', this.candidatures);
-
-/*  this.candidatService.getCandidatConnecte().subscribe((candidat) => {
-   this.candidatConnecte = candidat;
-  
-
-    // Maintenant que le candidat est chargé, on récupère ses candidatures
-    this.candidature.getCandidaturesByCandidat(this.candidatConnecte!.refId)
-      .subscribe((candidatures) => {
-        this.candidatures = candidatures;
-
-        // Pour chaque candidature, récupérer l’offre et l’entreprise associées
-        this.candidatures.forEach((c) => {
-          this.offresService.getOffreById(c.offreId).subscribe({
-            next: (offre) => {
-              if (offre) {
-                this.offresMap.set(c.id, offre);
-
-                // Charger l’entreprise associée
-                this.entrepriseService.getEntrepriseById(offre.entrepriseId)
-                  .subscribe({
-                    next: (entreprise) => {
-                      if (entreprise) {
-                        this.entreprisesMap.set(c.id, entreprise);
-                      }
-                    },
-                    error: (err) =>
-                      console.error(
-                        `Erreur lors du chargement de l’entreprise ${offre.entrepriseId}`,
-                        err
-                      ),
-                  });
-              }
-            },
-            error: (err) =>
-              console.error(`Erreur lors du chargement de l’offre ${c.offreId}`, err),
-          });
-        });
+          this.chargerDetails();
+        },
+        error: (err) => console.error(err),
       });
-  });*/
+  }
 
-  
-}
+  chargerDetails() {
+    const observables = this.candidatures.map((c) =>
+      this.offresService.getOffreById(c.offreId).pipe(
+        switchMap((offre) => {
+          this.offresMap.set(c.id, offre);
 
+          return this.entrepriseService
+            .getEntrepriseById(offre.entrepriseId)
+            .pipe(
+              map((entreprise) => {
+                this.entreprisesMap.set(c.id, entreprise);
+              })
+            );
+        })
+      )
+    );
 
-
+    forkJoin(observables).subscribe({
+      next: () => console.log("✔ Tous les détails chargés"),
+      error: (err) => console.error("❌ Erreur détails :", err),
+    });
+  }
 
   // Retourne l’index de l’étape actuelle
   getEtapeIndex(statut: string): number {
@@ -136,4 +138,24 @@ ngOnInit(): void {
   getEntrepriseByCandidature(id: number): Entreprise | undefined {
     return this.entreprisesMap.get(id);
   }
+
+
+  nextPage() {
+  if (this.currentPage < this.totalPages) {
+    this.loadCandidatures(this.currentPage); // page suivante (0-based)
+  }
+}
+
+prevPage() {
+  if (this.currentPage > 1) {
+    this.loadCandidatures(this.currentPage - 2); // page précédente (0-based)
+  }
+}
+
+goToPage(p: number) {
+  if (p >= 1 && p <= this.totalPages) {
+    this.loadCandidatures(p - 1); // 1-based → 0-based
+  }
+}
+
 }

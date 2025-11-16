@@ -78,7 +78,7 @@ getCandidaturesByEntreprise(entrepriseId: number, offres: Offre[]): { offre: Off
     candidatures: this.getCandidaturesByOffre(offre.id)
   }));
 }
-getCandidaturesByCandidatPaginated(refId: number, page = 0, size = 5): Observable<any> {
+getCandidaturesByCandidatPaginated(refId: number, page = 0, size = 8): Observable<any> {
   return this.http.get<any>(`${this.apiUrl}/candidat/ref/${refId}?page=${page}&size=${size}`);
 }
 

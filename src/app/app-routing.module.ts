@@ -50,7 +50,7 @@ import { CandidaturesResolver } from './resolver/candidatures.resolver';
 
 
 const routes: Routes = [
-  // Partie admin
+
   
  
   
@@ -83,8 +83,8 @@ const routes: Routes = [
   {
     path: 'candidat',
     component: LayoutComponent,
- //   canActivate: [AuthGuard],
-  //  canActivateChild: [AuthGuard],
+   canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     children: [
       { path: 'offres-emploi', component: OffresEmploiComponent , resolve: { offresData: offreResolver }},
       { path: 'favorites', component: FavoritesComponent },
@@ -100,8 +100,8 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayoutComponent,
-   canActivate: [AuthGuard],
-   canActivateChild: [AuthGuard],
+//   canActivate: [AuthGuard],
+//   canActivateChild: [AuthGuard],
     children: [
       { path: 'users/candidats', component: UsersCandidatsComponent },
       { path: 'users/entreprises', component: UsersEntreprisesComponent },

@@ -9,5 +9,5 @@ import { OffresService } from '../service/offres.service';
 
 export const offreResolver: ResolveFn<Page<Offre>> = () => {
   const offreService = inject(OffresService);
-  return offreService.getOffresPaged(0, 12, 'datePublication', 'desc');
+  return offreService.getOffresPaged(0, 10, 'datePublication', 'desc');
 };

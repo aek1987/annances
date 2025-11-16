@@ -59,7 +59,7 @@ export class OffresEmploiComponent implements OnInit {
   newSkill: string = "";
   offres: Offre[] = [];
   currentPage = 1;
-  size = 6; // nombre d'offres par page
+  size = 10; // nombre d'offres par page
   totalPages = 10;
   page: number = 0;
   isLoading = true;
@@ -146,22 +146,27 @@ export class OffresEmploiComponent implements OnInit {
   });
 }
 
-  loadOffres(page: number = 0) {
-    this.offreService.getOffresPaged(page, this.size).subscribe({
-      next: (data: Page<Offre>) => {
-        this.offres = data.content;
-        this.totalPages = data.totalPages;
-        this.currentPage = data.number + 1; // data.number est 0-based
-        this.isLoading = false;
-        this.filteredOffres = this.offres;
-        console.log("page  offres recuperer =", data);
-      },
-      error: (err) => {
-        console.error(err);
-        this.isLoading = false;
-      },
-    });
-  }
+loadOffres(page: number = 0) {
+  this.isLoading = true;
+
+  this.offreService.getOffresPaged(page, this.size).subscribe({
+    next: (data: Page<Offre>) => {
+      this.offres = data.content;
+      this.totalPages = data.totalPages;
+
+      this.page = data.number;           // backend index
+      this.currentPage = data.number + 1; // UI index
+
+      this.filteredOffres = this.offres;
+      this.isLoading = false;
+    },
+    error: (err) => {
+      console.error(err);
+      this.isLoading = false;
+    }
+  });
+}
+
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
@@ -350,23 +355,27 @@ addFavoris(offre: Offre) {
     this.isSalaireDropdownOpen = !this.isSalaireDropdownOpen;
   }
 
-  nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.page++; // page côté serveur, 0-based
-      this.loadOffres(this.page);
-    }
+nextPage() {
+  if (this.page < this.totalPages - 1) {
+    this.page++;              // Backend
+    this.loadOffres(this.page);
   }
+}
 
-  prevPage() {
-    if (this.currentPage > 1) {
-      this.page--;
-      this.loadOffres(this.page);
-    }
+prevPage() {
+  if (this.page > 0) {
+    this.page--;
+    this.loadOffres(this.page);
   }
+}
 
-  goToPage(page: number) {
-    if (page >= 1 && page <= this.totalPages) this.currentPage = page;
+goToPage(page: number) {
+  if (page >= 1 && page <= this.totalPages) {
+    this.page = page - 1;     // UI -> Backend
+    this.loadOffres(this.page);
   }
+}
+
   applyFilters() {
     this.isLoading = true;
     this.offreService
