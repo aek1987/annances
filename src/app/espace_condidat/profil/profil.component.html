@@ -88,6 +88,7 @@
     </div>
   </div>
 <!-- 🧳 Expériences -->
+<!-- 🧳 Expériences -->
 <div class="section">
   <h4>🧳 Expériences professionnelles</h4>
 
@@ -98,18 +99,33 @@
         <span class="entreprise">chez {{ e.entreprise }}</span>
         <span class="duree">({{ e.duree }})</span>
       </div>
-
       <span *ngIf="editMode" class="delete-btn" (click)="removeExperience(i)">❌</span>
     </li>
   </ul>
 
-  <div *ngIf="editMode" class="edit-section mt-2">
-    <input class="form-control mb-1" [(ngModel)]="newExperience.poste" placeholder="Poste occupé">
-    <input class="form-control mb-1" [(ngModel)]="newExperience.entreprise" placeholder="Nom de l'entreprise">
-    <input class="form-control mb-1" [(ngModel)]="newExperience.duree" placeholder="Durée (ex : 2020 - 2023)">
-    <button class="btn btn-sm btn-success w-100" (click)="addExperience(newExperience)">+ Ajouter une expérience</button>
+  <!-- Formulaire dynamique -->
+  <div *ngIf="editMode">
+    <div *ngFor="let exp of experienceForms; let idx = index" class="edit-section mt-2 p-3 border rounded bg-light">
+      <input class="form-control mb-2" [(ngModel)]="exp.poste" placeholder="Poste occupé">
+      <input class="form-control mb-2" [(ngModel)]="exp.entreprise" placeholder="Nom de l'entreprise">
+      <input class="form-control mb-2" [(ngModel)]="exp.duree" placeholder="Durée (ex : 2020 - 2023)">
+
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-success btn-sm" (click)="saveExperience(idx)">
+          💾 Sauvegarder
+        </button>
+        <button class="btn btn-outline-danger btn-sm" (click)="removeFormExperience(idx)">
+          ❌ Annuler
+        </button>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-sm mt-2 w-100" (click)="addExperienceForm()">
+      + Ajouter une expérience
+    </button>
   </div>
 </div>
+
 
 <!-- 🎓 Formations -->
 <div class="section mt-4">
@@ -122,16 +138,30 @@
         <span class="ecole">{{ f.ecole }}</span>
         <span class="annee">({{ f.annee }})</span>
       </div>
-
       <span *ngIf="editMode" class="delete-btn" (click)="removeFormation(i)">❌</span>
     </li>
   </ul>
 
-  <div *ngIf="editMode" class="edit-section mt-2">
-    <input class="form-control mb-1" [(ngModel)]="newFormation.diplome" placeholder="Diplôme ou certificat">
-    <input class="form-control mb-1" [(ngModel)]="newFormation.ecole" placeholder="Établissement / École">
-    <input class="form-control mb-1" [(ngModel)]="newFormation.annee" placeholder="Année ou période">
-    <button class="btn btn-sm btn-success w-100" (click)="addFormation()">+ Ajouter une formation</button>
+  <!-- Formulaire dynamique -->
+  <div *ngIf="editMode">
+    <div *ngFor="let form of formationForms; let idx = index" class="edit-section mt-2 p-3 border rounded bg-light">
+      <input class="form-control mb-2" [(ngModel)]="form.diplome" placeholder="Diplôme ou certificat">
+      <input class="form-control mb-2" [(ngModel)]="form.ecole" placeholder="Établissement / École">
+      <input class="form-control mb-2" [(ngModel)]="form.annee" placeholder="Année ou période">
+
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-success btn-sm" (click)="saveFormation(idx)">
+          💾 Sauvegarder
+        </button>
+        <button class="btn btn-outline-danger btn-sm" (click)="removeFormFormation(idx)">
+          ❌ Annuler
+        </button>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-sm mt-2 w-100" (click)="addFormationForm()">
+      + Ajouter une formation
+    </button>
   </div>
 </div>
 

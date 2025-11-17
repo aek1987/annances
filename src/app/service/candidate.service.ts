@@ -125,37 +125,36 @@ canPostuler(refId: number): boolean {
 }
 
  
-getStatus(candidat: Candidat): 'active' | 'desactive' |'en_attente_validation'|'incomplet'|'pret' {
-  candidat.progression = this.getProgression(candidat);  
- 
-// 🚀 Cas spécial : si déjà validé par l’admin, on ne touche pas
-  if (candidat.status === 'active') {
-    return 'active';
-  }
+getStatus(candidat: Candidat): 'active' | 'desactive' | 'en_attente_validation'|'incomplet'|'pret' {
+  candidat.progression = this.getProgression(candidat);
+
+  if (!candidat.progression) return 'desactive';
 
   switch (true) {
-    case ( candidat.progression < 50):
-      return 'incomplet';   // Trop peu d'infos
+    case candidat.progression < 50:
+      return 'incomplet';
 
-    case ( candidat.progression >= 50 &&  candidat.progression < 80):
-      return 'pret';     // Profil assez rempli
+    case candidat.progression < 80:
+      return 'pret';
 
-    case ( candidat.progression >= 80):
-      return 'en_attente_validation'; // Attente admin
+    case candidat.progression >= 80:
+      return 'en_attente_validation';
 
     default:
-      return 'desactive';   // fallback
+      return 'desactive';
   }
+}
 
+updateCandidat(candidat: Candidat) {  
+  return this.http.put<Candidat>( `${this.apiUrl}/${candidat.refId}`, candidat );
 }
+
 updateCandidatState(candidat: Candidat) {
-  candidat.progression = this.getProgression(candidat); 
-  const index = this.candidats.findIndex(c => c.refId === candidat.refId);
-  if (index !== -1) {
-    this.candidats[index] = candidat;
-  }
  
+  localStorage.setItem("candidat", JSON.stringify(candidat));
 }
+
+
 // ================================
 // 🟡 GESTION DES FAVORIS
 // ================================

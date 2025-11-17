@@ -52,7 +52,7 @@ constructor(private authService: AuthService,private candidatService :CandidatSe
   });
  
 
-    if (!this.currentUser) {
+    if (!this.currentUser ||   this.candidat== null ){
       // Aucun utilisateur connecté → visiteur
       this.router.navigate(['/visiteur']);
       return;
