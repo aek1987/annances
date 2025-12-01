@@ -183,17 +183,18 @@ loadOffres(page: number = 0) {
     this.applyFilters(); // <-- appel API à chaque changement
   }
 
-  onSectorCheckboxChange(event: any) {
+ onSectorCheckboxChange(event: any) {
     const value = event.target.value;
     if (event.target.checked) {
-      this.selectedContracts.push(value);
+      this.selectedSectors.push(value); // ✔️ mettre dans selectedSectors
     } else {
-      this.selectedContracts = this.selectedContracts.filter(
-        (c) => c !== value
+      this.selectedSectors = this.selectedSectors.filter(
+        (s) => s !== value
       );
     }
-    this.applyFilters(); // <-- appel API à chaque changement
-  }
+    this.applyFilters();
+}
+
 
   onRemoteCheckboxChange(event: any) {
     const value = event.target.value;
@@ -213,6 +214,7 @@ loadOffres(page: number = 0) {
     } else {
       this.selectedSalaires = this.selectedSalaires.filter((s) => s !== value);
     }
+      this.applyFilters();
   }
   toggleSectorDropdown() {
     this.isSectorDropdownOpen = !this.isSectorDropdownOpen;
@@ -376,10 +378,12 @@ goToPage(page: number) {
   }
 }
 
-  applyFilters() {
+ applyFilters() {
+    this.closeAllDropdowns();
     this.isLoading = true;
-    this.offreService
-      .getOffresFiltered(
+     // 🔹 Affichage des filtres dans la console
+
+    this.offreService.getOffresFiltered(
         0, // première page
         this.size,
         this.searchTerm,
@@ -389,8 +393,7 @@ goToPage(page: number) {
         this.selectedRemote,
         this.selectedExperiences,
         this.selectedSalaires
-      )
-      .subscribe({
+      ) .subscribe({
         next: (data) => {
           this.filteredOffres = data.content;
           this.totalPages = data.totalPages;
@@ -398,14 +401,14 @@ goToPage(page: number) {
           this.isLoading = false;
 
 // 🔥 Recharger les favoris après filtrage
-// 🔥 Recharger les favoris après filtrage
+
 if (this.candidatConnecte?.refId) {
   this.filteredOffres.forEach((offre) => {
     if (offre.id != null) {
       this.candidatService.isFavori(this.candidatConnecte!.refId, offre.id).subscribe({
         next: (isFav) => {
           console.log(
-            `⭐ Offre ${offre.id} → Favori = ${isFav ? "OUI" : "NON"}`
+        //    `⭐ Offre ${offre.id} → Favori = ${isFav ? "OUI" : "NON"}`
           );
           this.favorisMap[offre.id!] = isFav;
         },
@@ -444,6 +447,13 @@ if (this.candidatConnecte?.refId) {
   }
 
 
+closeAllDropdowns() {
+  this.isDropdownOpen = false;
+  this.isSectorDropdownOpen = false;
+  this.isRemoteDropdownOpen = false;
+  this.isExperienceDropdownOpen = false;
+  this.isSalaireDropdownOpen = false;
+}
 
 
 

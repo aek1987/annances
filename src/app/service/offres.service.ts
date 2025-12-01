@@ -256,6 +256,9 @@ getOffresFiltered(
   if (experience && experience.length) params = params.set('experience', experience.join(','));
   if (salaires && salaires.length) params = params.set('salaires', salaires.join(','));
 
+    // 🔹 Affichage des paramètres envoyés
+  console.log("📨 Paramètres envoyés au backend :", params.toString());
+
   return this.http.get<Page<Offre>>(`${this.apiUrl}/paged`, { params });
 }
 

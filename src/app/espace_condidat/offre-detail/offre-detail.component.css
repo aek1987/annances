@@ -1,34 +1,62 @@
 .offre-container {
   background: #fff;
   padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   margin-top: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+   border-radius: 12px;           /* Coins arrondis */
+  border: 1px solid #e0e0e0;     /* Bordure légère */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Ombre douce */
+}
+
+.offre-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
 }
 
 .entreprise-header {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
+  margin-bottom: 15px;
 }
 
 .logo-entreprise {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
-  border-radius: 8px;
-  border: 1px solid #eee;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.3s;
+}
+
+.logo-entreprise:hover {
+  transform: scale(1.1);
 }
 
 .titre-offre {
   margin: 0;
-  font-size: 1.5rem;
-  color: #333;
+  font-size: 1.6rem;
+  color: #111827;
+  font-weight: 600;
 }
 
 .nom-entreprise {
-  color: #666;
+  color: #4b5563;
   font-style: italic;
+  font-size: 0.95rem;
+}
+
+.nom-entreprise a {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nom-entreprise a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
 }
 
 .tags {
@@ -40,10 +68,14 @@
 
 .tag {
   background: #f1f5f9;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 6px 14px;
+  border-radius: 12px;
   font-size: 0.9rem;
   color: #333;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.3s, color 0.3s;
 }
 
 .tag.deadline {
@@ -56,6 +88,16 @@
   margin: 20px 0;
 }
 
+.missions ul,
+.section ul {
+  padding-left: 20px;
+}
+
+.mission-icon {
+  color: #16a34a;
+  margin-right: 8px;
+}
+
 .badges {
   display: flex;
   flex-wrap: wrap;
@@ -65,44 +107,69 @@
 .badge {
   background: #e0f2fe;
   color: #0369a1;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 500;
+  transition: transform 0.3s, background 0.3s;
+  cursor: default;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+  background: #bae6fd;
 }
 
 .actions {
   display: flex;
   gap: 15px;
-  margin-top: 20px;
+  margin-top: 25px;
+}
+
+.btn-postuler,
+.btn-favori {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .btn-postuler {
-  flex: 1;
-  padding: 12px;
   background: #16a34a;
-  border: none;
   color: #fff;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
 }
 
 .btn-postuler:hover {
   background: #15803d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
 }
 
 .btn-favori {
-  flex: 1;
-  padding: 12px;
   background: #facc15;
-  border: none;
-  color: #000;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
+  color: #111;
 }
 
 .btn-favori:hover {
   background: #eab308;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .entreprise-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .logo-entreprise {
+    width: 60px;
+    height: 60px;
+  }
+  .titre-offre {
+    font-size: 1.3rem;
+  }
 }
