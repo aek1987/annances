@@ -381,6 +381,15 @@ goToPage(page: number) {
  applyFilters() {
     this.closeAllDropdowns();
     this.isLoading = true;
+let salaireMin: number | undefined;
+let salaireMax: number | undefined;
+if (this.selectedSalaires?.length) {
+  const range = this.getSalaireRange(this.selectedSalaires[0]); // 🔥 1 choix
+  salaireMin = range.min;
+  salaireMax = range.max;
+}
+
+
      // 🔹 Affichage des filtres dans la console
 
     this.offreService.getOffresFiltered(
@@ -392,7 +401,7 @@ goToPage(page: number) {
         this.selectedSectors,
         this.selectedRemote,
         this.selectedExperiences,
-        this.selectedSalaires
+     //   this.selectedSalaires
       ) .subscribe({
         next: (data) => {
           this.filteredOffres = data.content;
@@ -400,6 +409,7 @@ goToPage(page: number) {
           this.currentPage = 1;
           this.isLoading = false;
 
+   console.log('✅ Offres filtrées:', this.filteredOffres);
 // 🔥 Recharger les favoris après filtrage
 
 if (this.candidatConnecte?.refId) {
@@ -407,9 +417,7 @@ if (this.candidatConnecte?.refId) {
     if (offre.id != null) {
       this.candidatService.isFavori(this.candidatConnecte!.refId, offre.id).subscribe({
         next: (isFav) => {
-          console.log(
-        //    `⭐ Offre ${offre.id} → Favori = ${isFav ? "OUI" : "NON"}`
-          );
+       
           this.favorisMap[offre.id!] = isFav;
         },
         error: (err) => {
@@ -456,6 +464,27 @@ closeAllDropdowns() {
 }
 
 
+getSalaireRange(selected: string): { min?: number; max?: number } {
+  switch (selected) {
+    case 'Moins de 1 000 €':
+      return { max: 1000 };
+
+    case '1 000 € - 2 000 €':
+      return { min: 1000, max: 2000 };
+
+    case '2 000 € - 3 000 €':
+      return { min: 2000, max: 3000 };
+
+    case '3 000 € - 5 000 €':
+      return { min: 3000, max: 5000 };
+
+    case 'Plus de 5 000 €':
+      return { min: 5000 };
+
+    default:
+      return {};
+  }
+}
 
 
 }

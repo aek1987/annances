@@ -242,24 +242,38 @@ getOffresFiltered(
   secteurs?: string[],
   teletravail?: string[],
   experience?: string[],
-  salaires?: string[]
+  salaireMin?: number,
+  salaireMax?: number
 ): Observable<Page<Offre>> {
   let params = new HttpParams()
     .set('page', page.toString())
     .set('size', size.toString());
 
+    
+
   if (searchTerm) params = params.set('motCle', searchTerm);
   if (location) params = params.set('lieu', location);
-  if (contrats && contrats.length) params = params.set('contrats', contrats.join(','));
-  if (secteurs && secteurs.length) params = params.set('secteurs', secteurs.join(','));
+  if (contrats && contrats.length) params = params.set('contrat', contrats.join(','));
+  if (secteurs && secteurs.length) params = params.set('secteur', secteurs.join(','));
   if (teletravail && teletravail.length) params = params.set('teletravail', teletravail.join(','));
   if (experience && experience.length) params = params.set('experience', experience.join(','));
-  if (salaires && salaires.length) params = params.set('salaires', salaires.join(','));
+ // if (salaires && salaires.length) params = params.set('salaireMin', salaires.join(','));
+
+
+
+// ✅ ICI EXACTEMENT
+  if (salaireMin !== undefined) {
+    params = params.set('salaireMin', salaireMin.toString());
+  }
+
+  if (salaireMax !== undefined) {
+    params = params.set('salaireMax', salaireMax.toString());
+  }
 
     // 🔹 Affichage des paramètres envoyés
   console.log("📨 Paramètres envoyés au backend :", params.toString());
 
-  return this.http.get<Page<Offre>>(`${this.apiUrl}/paged`, { params });
+  return this.http.get<Page<Offre>>(`${this.apiUrl}/filter`, { params });
 }
 
 

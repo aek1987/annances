@@ -38,9 +38,10 @@ getCandidatConnecte(): Observable<Candidat | null> {
 
 
   // ✅ Retourne la liste complète des candidats
-  getCandidats(): Candidat[] {
-    return this.candidats;
-  }
+getCandidats(): Observable<Candidat[]> {
+  return this.http.get<Candidat[]>(this.apiUrl);
+}
+
 
   // ✅ Retourne un candidat par refId
   getCandidatById(refId: number): Candidat | undefined {

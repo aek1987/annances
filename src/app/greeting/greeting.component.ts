@@ -43,39 +43,43 @@ constructor(private authService: AuthService,private candidatService :CandidatSe
       break;
   }
   }
-  goToAnnonces() {
+ goToAnnonces() {
+  this.currentUser = this.authService.getUser();
 
-    this.currentUser = this.authService.getUser();   
-    this.candidatService.getCandidatConnecte().subscribe(candidat => {
-    this.candidat = candidat;
-    console.log('👤 Candidat connecté  from greeting:', candidat);
-  });
- 
+  if (!this.currentUser) {
+    // Aucun utilisateur connecté → visiteur
+    this.router.navigate(['/visiteur']);
+    return;
+  }
 
-    if (!this.currentUser ||   this.candidat== null ){
-      // Aucun utilisateur connecté → visiteur
+  switch (this.currentUser.role) {
+    case 'admin':
+      this.router.navigate(['/admin']);
+      break;
+
+    case 'entreprise':
+      this.router.navigate(['/entreprise']);
+      break;
+
+    case 'candidat':
+      // Vérifier que le candidat existe côté backend
+      this.candidatService.getCandidatConnecte().subscribe(candidat => {
+        this.candidat = candidat;
+        console.log('👤 Candidat connecté from greeting:', candidat);
+
+        if (!this.candidat) {
+          // Si pas trouvé → visiteur
+          this.router.navigate(['/visiteur']);
+        } else {
+          this.router.navigate(['/candidat']);
+        }
+      });
+      break;
+
+    default:
       this.router.navigate(['/visiteur']);
-      return;
-    }
-
-    switch (this.currentUser.role) {
-      case 'candidat':
-        this.router.navigate(['/candidat']);
-        break;
-
-      case 'entreprise':
-        this.router.navigate(['/entreprise']);
-        break;
-
-      case 'admin':
-        this.router.navigate(['/admin']);
-        break;
-
-      default:
-        // rôle inconnu → visiteur
-        this.router.navigate(['/visiteur']);
-        break;
-    }
-
+      break;
+  }
 }
+
 }

@@ -14,7 +14,14 @@ export class UsersCandidatsComponent implements OnInit {
   constructor(private candidatsService: CandidatService) {}
 
   ngOnInit(): void {
-    this.candidats = this.candidatsService.getCandidats();
+    this.candidatsService.getCandidats().subscribe({
+    next: (data) => {
+      this.candidats = data;
+    },
+    error: (err) => {
+      console.error('Erreur chargement candidats', err);
+    }
+  });
   }
 
 changerStatut(candidat: Candidat, accepte: boolean) {

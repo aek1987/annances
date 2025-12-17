@@ -16,7 +16,10 @@ export class LoginComponent {
     password: ''
   };
 
-  constructor(private authService: AuthService, private authServiceg: AuthgService,private router: Router,public  alertService :AlertService) {}
+  constructor(private authService: AuthService, 
+    private authServiceg: AuthgService,private router: Router,
+    public  alertService :AlertService,
+     private toastr: AlertService,) {}
 errorMessage: string = '';
 onSubmit() {
   this.errorMessage = '';
@@ -57,17 +60,21 @@ onSubmit() {
       // Exemple avec SweetAlert (optionnel)
       // Swal.fire('✅ Connexion réussie', `Bienvenue ${username}`, 'success');
     },
-    error: (error) => {
+  error: (error: any) => {
       console.error('❌ Échec de connexion', error);
 
       if (error.status === 401) {
         this.errorMessage = 'Email ou mot de passe incorrect.';
+        this.toastr.error('Email ou mot de passe incorrect ❌', 'Connexion échouée');
       } else if (error.status === 0) {
         this.errorMessage = 'Serveur injoignable. Vérifiez votre connexion.';
+        this.toastr.error('Serveur injoignable 🚫', 'Erreur réseau');
       } else {
         this.errorMessage = 'Une erreur inattendue est survenue.';
+        this.toastr.error('Erreur inattendue ❌', 'Erreur');
       }
     },
+
     complete: () => {
       console.log('Tentative de login terminée.');
     }

@@ -25,6 +25,7 @@ export class ProfilComponent {
   // Formations
   formationForms: Formation[] = [];
   experienceForms: any[] = [];
+  selectedFileName: string = '';
   constructor(
     private router: Router,
     private candidatService: CandidatService,
@@ -139,14 +140,26 @@ if (this.candidat) {
   }
 
   addCompetence(newSkill: string) {
-    if (this.candidat) {
-      this.candidat.competences.push(newSkill);
-    }
+   
+   if (!newSkill || !newSkill.trim()) {
+    // Champ vide ou uniquement des espaces
+    alert("Veuillez saisir une compétence valide !");
+    return;
   }
 
-  removeCompetence(index: number) {
-    //  this.candidat.competences.splice(index, 1);
+  if (this.candidat) {
+    this.candidat.competences.push(newSkill.trim());
+    this.newCompetence = ''; // Réinitialiser le champ
   }
+  }
+
+ removeCompetence(index: number) {
+  if (this.candidat && this.candidat.competences && index > -1 && index < this.candidat.competences.length) {
+    // Supprimer la compétence à l'index donné
+    this.candidat.competences.splice(index, 1);
+  }
+}
+
 
   addExperience(newExp: Experience) {
     if (this.candidat) {

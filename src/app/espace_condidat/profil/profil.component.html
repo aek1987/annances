@@ -1,194 +1,345 @@
-<div class="candidat-card" >
-    
-  <div class="text-center"   >
-    <img [src]="candidat?.photo || 'assets/user.png'" alt="Photo de candidat" class="candidat-photo">
-   <!-- <h2>{{ candidat?.username }}</h2>-->
-    <p class="text-muted">{{ candidat?.username }} - {{ candidat?.email }}</p>
-    <button *ngIf="!editMode" class="btn btn-primary" (click)="toggleEdit()">✏️ Modifier</button>
-    <!-- Choix rapide entre 2 photos -->
-  <div class="photo-options" *ngIf="editMode">
-    <img src="assets/homme.png" class="option-photo" (click)="changerPhoto('assets/homme.png')">
-    <img src="assets/femme.png" class="option-photo" (click)="changerPhoto('assets/femme.png')">
-  </div>
-  </div>
-  
-
-
-<!-- Afficher progression -->
-<div class="progress-container">
-  <label>Complétude du profil :</label>
-  <div class="progress-bar">
- <div class="progress-fill" [style.width.%]="progression"></div>
-  </div>
-  <p>{{ progression }} %</p>
-
-  <div class="status-line">
-  <strong>Status :</strong>
-
-  <span *ngIf="candidat?.status === 'incomplet'" class="status-inactive">
-    🔴 Incomplet — Votre profil est incomplet. Veuillez ajouter plus d’informations.
-  </span>
-
-  <span *ngIf="candidat?.status === 'pret'" class="status-pending">
-    🟡 Prêt — Votre profil est presque prêt. Complétez toutes les informations.
-  </span>
-
-  <span *ngIf="candidat?.status === 'en_attente_validation'" class="status-pending">
-    🕓 En attente de validation — Votre profil est prêt et sera actif après vérification.
-  </span>
-
-  <span *ngIf="candidat?.status === 'active'" class="status-active">
-    🟢 Actif — Votre profil est actif et visible par les entreprises.
-  </span>
-
-  <span *ngIf="candidat?.status === 'desactive'" class="status-inactive">
-    ⚫ Désactivé — Votre compte est désactivé, veuillez mettre à jour vos informations.
-  </span>
-</div>
-</div>
-
-
-
-
- <!-- Afficher le CV si dispo -->
-  <p *ngIf="candidatSafe.cv">
-    <a [href]="candidatSafe.cv" target="_blank">📄 Voir mon CV</a>
-  </p>
-
-  <!-- Upload si en mode édition -->
-  <div *ngIf="editMode">
-    <input type="file" class="form-control" accept="application/pdf" (change)="onCvUpload($event)">
-  </div>
-
- <div class="section">
-  <h4>Informations personnelles</h4>
-  <p><b>Téléphone :</b> {{ candidat?.phone }} , Adresse : {{ candidat?.adresse }}  cv : {{ candidat?.cv }}</p>
-  
-</div>
-
-  <!-- Bio -->
-<div class="section" *ngIf="candidat">
-  <h4>A propos de vous</h4>
-  <p *ngIf="!editMode">{{ candidat.bio }}</p>
-  <textarea *ngIf="editMode" [(ngModel)]="candidat.bio" class="form-control"></textarea>
-</div>
-
-
-  <!-- Compétences -->
-  <div class="section">
-    <h4>Compétences</h4>
-    <div class="skills">
-      <span *ngFor="let c of candidat?.competences; let i = index" class="badge bg-primary m-1">
-        {{ c }} <span *ngIf="editMode" (click)="removeCompetence(i)" style="cursor:pointer">❌</span>
-      </span>
-    </div>
-    <div *ngIf="editMode" class="mt-2">
-      <input class="form-control" [(ngModel)]="newCompetence" placeholder="Ajouter une compétence">
-      <button class="btn btn-sm btn-success mt-1" (click)="addCompetence(newCompetence)">+ Ajouter</button>
-    </div>
-  </div>
-<!-- 🧳 Expériences -->
-<!-- 🧳 Expériences -->
-<div class="section">
-  <h4>🧳 Expériences professionnelles</h4>
-
-  <ul class="experience-list">
-    <li *ngFor="let e of candidat?.experiences; let i = index" class="experience-item">
-      <div>
-        <b class="poste">{{ e.poste }}</b>
-        <span class="entreprise">chez {{ e.entreprise }}</span>
-        <span class="duree">({{ e.duree }})</span>
+<div class="candidat-card">
+  <div class="row align-items-center mb-3">
+   <div class="row align-items-start mb-3">
+      <!-- Colonne gauche : photo -->
+      <div class="col-md-4">
+        <div class="section">
+          <img
+            [src]="candidat?.photo || 'assets/user.png'"
+            alt="Photo de candidat"
+            class="candidat-photo"
+          />
+          <!-- Choix rapide entre 2 photos si en édition -->
+          <div class="photo-options mt-2" *ngIf="editMode">
+            <img
+              src="assets/homme.png"
+              class="option-photo"
+              (click)="changerPhoto('assets/homme.png')"
+            />
+            <img
+              src="assets/femme.png"
+              class="option-photo"
+              (click)="changerPhoto('assets/femme.png')"
+            />
+          
+              <img
+              src="assets/femme.png"
+              class="option-photo"
+              (click)="changerPhoto('assets/femme.png')"
+            />
+             <img
+              src="assets/homme.png"
+              class="option-photo"
+              (click)="changerPhoto('assets/homme.png')"
+            />
+           
+          </div>
+          
+        </div>
       </div>
-      <span *ngIf="editMode" class="delete-btn" (click)="removeExperience(i)">❌</span>
-    </li>
-  </ul>
 
-  <!-- Formulaire dynamique -->
-  <div *ngIf="editMode">
-    <div *ngFor="let exp of experienceForms; let idx = index" class="edit-section mt-2 p-3 border rounded bg-light">
-      <input class="form-control mb-2" [(ngModel)]="exp.poste" placeholder="Poste occupé">
-      <input class="form-control mb-2" [(ngModel)]="exp.entreprise" placeholder="Nom de l'entreprise">
-      <input class="form-control mb-2" [(ngModel)]="exp.duree" placeholder="Durée (ex : 2020 - 2023)">
+      <!-- Colonne droite : informations personnelles -->
+      <div class="col-md-8">
+        <div class="section">
+          <h4>Informations personnelles</h4>
+          <p><b>Nom :</b> {{ candidat?.username }}</p>
+          <p><b>Email :</b> {{ candidat?.email }}</p>
+          <p><b>Téléphone :</b> {{ candidat?.phone }}</p>
+          <p><b>Adresse :</b> {{ candidat?.adresse }}</p>
+          <p *ngIf="candidat?.cv">
+            <b>CV :</b> <a [href]="candidat!.cv" target="_blank">Voir le CV</a>
+          </p>
+        </div>
+      </div>
+    </div> 
 
-      <div class="d-flex justify-content-between">
-        <button class="btn btn-success btn-sm" (click)="saveExperience(idx)">
+    <button
+      *ngIf="!editMode"
+      class="btn btn-primary mt-2"
+      (click)="toggleEdit()"
+    >
+      ✏️ Modifier
+    </button>
+
+    <!-- Afficher progression -->
+    <div class="progress-container">
+      <label>Complétude du profil :</label>
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="progression"></div>
+      </div>
+      <p>{{ progression }} %</p>
+
+      <div class="status-line">
+        <strong>Status :</strong>
+
+        <span *ngIf="candidat?.status === 'incomplet'" class="status-inactive">
+          🔴 Incomplet — Votre profil est incomplet. Veuillez ajouter plus
+          d’informations.
+        </span>
+
+        <span *ngIf="candidat?.status === 'pret'" class="status-pending">
+          🟡 Prêt — Votre profil est presque prêt. Complétez toutes les
+          informations.
+        </span>
+
+        <span
+          *ngIf="candidat?.status === 'en_attente_validation'"
+          class="status-pending"
+        >
+          🕓 En attente de validation — Votre profil est prêt et sera actif
+          après vérification.
+        </span>
+
+        <span *ngIf="candidat?.status === 'active'" class="status-active">
+          🟢 Actif — Votre profil est actif et visible par les entreprises.
+        </span>
+
+        <span *ngIf="candidat?.status === 'desactive'" class="status-inactive">
+          ⚫ Désactivé — Votre compte est désactivé, veuillez mettre à jour vos
+          informations.
+        </span>
+      </div>
+    </div>
+
+    <!-- Afficher le CV si dispo -->
+    <p *ngIf="candidatSafe.cv">
+      <a [href]="candidatSafe.cv" target="_blank">📄 Voir mon CV</a>
+    </p>
+
+    <!-- Upload si en mode édition -->
+<div *ngIf="editMode" class="mt-2">
+  <label for="cvUpload" class="btn btn-outline-primary">
+    📄 {{ selectedFileName ? selectedFileName : 'Sélectionner un fichier CV' }}
+  </label>
+  <input
+    type="file"
+    id="cvUpload"
+    class="d-none"
+    accept="application/pdf"
+    (change)="onCvUpload($event)"
+  />
+</div>
+
+    <!-- Bio -->
+    <div class="section" *ngIf="candidat">
+      <h4>A propos de vous</h4>
+      <p *ngIf="!editMode">{{ candidat.bio }}</p>
+      <textarea
+        *ngIf="editMode"
+        [(ngModel)]="candidat.bio"
+        class="form-control"
+      ></textarea>
+    </div>
+
+    <!-- Compétences -->
+    <div class="section">
+      <h4>Compétences</h4>
+      <div class="skills">
+        <span
+          *ngFor="let c of candidat?.competences; let i = index"
+          class="badge bg-primary m-1"
+        >
+          {{ c }}
+          <span
+            *ngIf="editMode"
+            (click)="removeCompetence(i)"
+            style="cursor: pointer"
+            >❌</span
+          >
+        </span>
+      </div>
+      <div *ngIf="editMode" class="mt-2 d-flex">
+        <input
+          class="form-control me-2"
+          [(ngModel)]="newCompetence"
+          placeholder="Ajouter une compétence"
+        />
+        <button
+          class="btn btn-primary btn-sm"
+          (click)="addCompetence(newCompetence)"
+        >
+          + Ajouter
+        </button>
+      </div>
+    </div>
+    <!-- 🧳 Expériences -->
+    <!-- 🧳 Expériences -->
+    <div class="section">
+      <h4>🧳 Expériences professionnelles</h4>
+
+      <ul class="experience-list">
+        <li
+          *ngFor="let e of candidat?.experiences; let i = index"
+          class="experience-item"
+        >
+          <div>
+            <b class="poste">{{ e.poste }}</b>
+            <span class="entreprise">chez {{ e.entreprise }}</span>
+            <span class="duree">({{ e.duree }})</span>
+          </div>
+          <span
+            *ngIf="editMode"
+            class="delete-btn"
+            (click)="removeExperience(i)"
+            >❌</span
+          >
+        </li>
+      </ul>
+
+      <!-- Formulaire dynamique -->
+      <div *ngIf="editMode">
+        <div
+          *ngFor="let exp of experienceForms; let idx = index"
+          class="edit-section mt-2 p-3 border rounded bg-light"
+        >
+          <input
+            class="form-control mb-2"
+            [(ngModel)]="exp.poste"
+            placeholder="Poste occupé"
+          />
+          <input
+            class="form-control mb-2"
+            [(ngModel)]="exp.entreprise"
+            placeholder="Nom de l'entreprise"
+          />
+          <input
+            class="form-control mb-2"
+            [(ngModel)]="exp.duree"
+            placeholder="Durée (ex : 2020 - 2023)"
+          />
+
+          <div class="d-flex justify-content-between">
+            <button
+              class="btn btn-success btn-sm"
+              (click)="saveExperience(idx)"
+            >
+              💾 Sauvegarder
+            </button>
+            <button
+              class="btn btn-outline-danger btn-sm"
+              (click)="removeFormExperience(idx)"
+            >
+              Annuler
+            </button>
+          </div>
+        </div>
+
+        <button
+          class="btn btn-primary btn-sm mt-2 w-200"
+          (click)="addExperienceForm()"
+        >
+          + Ajouter
+        </button>
+      </div>
+    </div>
+
+    <!-- 🎓 Formations -->
+    <div class="section mt-4">
+      <h4>🎓 Formations</h4>
+
+      <ul class="formation-list">
+        <li
+          *ngFor="let f of candidat?.formations; let i = index"
+          class="formation-item"
+        >
+          <div>
+            <b class="diplome">{{ f.diplome }}</b> —
+            <span class="ecole">{{ f.ecole }}</span>
+            <span class="annee">({{ f.annee }})</span>
+          </div>
+          <span *ngIf="editMode" class="delete-btn" (click)="removeFormation(i)"
+            >❌</span
+          >
+        </li>
+      </ul>
+
+      <!-- Formulaire dynamique -->
+      <div *ngIf="editMode">
+        <div
+          *ngFor="let form of formationForms; let idx = index"
+          class="edit-section mt-2 p-3 border rounded bg-light"
+        >
+          <input
+            class="form-control mb-2"
+            [(ngModel)]="form.diplome"
+            placeholder="Diplôme ou certificat"
+          />
+          <input
+            class="form-control mb-2"
+            [(ngModel)]="form.ecole"
+            placeholder="Établissement / École"
+          />
+          <input
+            class="form-control mb-2"
+            [(ngModel)]="form.annee"
+            placeholder="Année ou période"
+          />
+
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-success btn-sm" (click)="saveFormation(idx)">
+              💾 Sauvegarder
+            </button>
+            <button
+              class="btn btn-outline-danger btn-sm"
+              (click)="removeFormFormation(idx)"
+            >
+              Annuler
+            </button>
+          </div>
+        </div>
+
+        <button
+          class="btn btn-primary btn-sm mt-2 w-20"
+          (click)="addFormationForm()"
+        >
+          + Ajouter
+        </button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h4>Langues maîtrisées</h4>
+
+      <div class="langues">
+        <span
+          *ngFor="let l of candidat?.langues; let i = index"
+          class="badge bg-info text-dark m-1"
+        >
+          {{ l }}
+          <span
+            *ngIf="editMode"
+            (click)="removeLangue(i)"
+            style="cursor: pointer"
+            >❌</span
+          >
+        </span>
+      </div>
+
+      <div *ngIf="editMode" class="mt-2">
+        <input
+          class="form-control"
+          [(ngModel)]="newLangue"
+          placeholder="Ajouter une langue (ex: Français, Anglais)"
+        />
+        <button class="btn btn-primary btn-sm mt-2 w-20" (click)="addLangue()">
+          + Ajouter
+        </button>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="text-center mt-3">
+      <div *ngIf="editMode">
+        <button class="btn btn-success" (click)="savecandidat()">
           💾 Sauvegarder
         </button>
-        <button class="btn btn-outline-danger btn-sm" (click)="removeFormExperience(idx)">
+        <button class="btn btn-secondary" (click)="toggleEdit()">
           ❌ Annuler
         </button>
-      </div>
-    </div>
-
-    <button class="btn btn-primary btn-sm mt-2 w-100" (click)="addExperienceForm()">
-      + Ajouter une expérience
-    </button>
-  </div>
-</div>
-
-
-<!-- 🎓 Formations -->
-<div class="section mt-4">
-  <h4>🎓 Formations</h4>
-
-  <ul class="formation-list">
-    <li *ngFor="let f of candidat?.formations; let i = index" class="formation-item">
-      <div>
-        <b class="diplome">{{ f.diplome }}</b> — 
-        <span class="ecole">{{ f.ecole }}</span>
-        <span class="annee">({{ f.annee }})</span>
-      </div>
-      <span *ngIf="editMode" class="delete-btn" (click)="removeFormation(i)">❌</span>
-    </li>
-  </ul>
-
-  <!-- Formulaire dynamique -->
-  <div *ngIf="editMode">
-    <div *ngFor="let form of formationForms; let idx = index" class="edit-section mt-2 p-3 border rounded bg-light">
-      <input class="form-control mb-2" [(ngModel)]="form.diplome" placeholder="Diplôme ou certificat">
-      <input class="form-control mb-2" [(ngModel)]="form.ecole" placeholder="Établissement / École">
-      <input class="form-control mb-2" [(ngModel)]="form.annee" placeholder="Année ou période">
-
-      <div class="d-flex justify-content-between">
-        <button class="btn btn-success btn-sm" (click)="saveFormation(idx)">
-          💾 Sauvegarder
-        </button>
-        <button class="btn btn-outline-danger btn-sm" (click)="removeFormFormation(idx)">
-          ❌ Annuler
+        <button class="btn btn-outline-dark retour-btn" (click)="retour()">
+          ⬅ Retour aux offres
         </button>
       </div>
     </div>
-
-    <button class="btn btn-primary btn-sm mt-2 w-100" (click)="addFormationForm()">
-      + Ajouter une formation
-    </button>
   </div>
 </div>
-
-<div class="section">
-  <h4>Langues maîtrisées</h4>
-
-  <div class="langues">
-    <span *ngFor="let l of candidat?.langues; let i = index" class="badge bg-info text-dark m-1">
-      {{ l }}
-      <span *ngIf="editMode" (click)="removeLangue(i)" style="cursor:pointer">❌</span>
-    </span>
-  </div>
-
-  <div *ngIf="editMode" class="mt-2">
-    <input class="form-control" [(ngModel)]="newLangue" placeholder="Ajouter une langue (ex: Français, Anglais)">
-    <button class="btn btn-sm btn-success mt-1" (click)="addLangue()">+ Ajouter</button>
-  </div>
-</div>
-
-  <!-- Actions -->
-  <div class="text-center mt-3">     
-
-    <div *ngIf="editMode">
-      <button class="btn btn-success" (click)="savecandidat()">💾 Sauvegarder</button>
-      <button class="btn btn-secondary" (click)="toggleEdit()">❌ Annuler</button>
-      <button class="btn btn-outline-dark retour-btn" (click)="retour()"> ⬅ Retour aux offres</button>
-    </div>
-  </div>
-</div>
-
