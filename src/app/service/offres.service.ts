@@ -240,7 +240,7 @@ getOffresFiltered(
   location?: string,
   contrats?: string[],
   secteurs?: string[],
-  teletravail?: string[],
+  teletravail?: string,
   experience?: string[],
   salaireMin?: number,
   salaireMax?: number
@@ -255,7 +255,10 @@ getOffresFiltered(
   if (location) params = params.set('lieu', location);
   if (contrats && contrats.length) params = params.set('contrat', contrats.join(','));
   if (secteurs && secteurs.length) params = params.set('secteur', secteurs.join(','));
-  if (teletravail && teletravail.length) params = params.set('teletravail', teletravail.join(','));
+if (teletravail) {
+  params = params.set('teletravail', teletravail);
+}
+
   if (experience && experience.length) params = params.set('experience', experience.join(','));
  // if (salaires && salaires.length) params = params.set('salaireMin', salaires.join(','));
 

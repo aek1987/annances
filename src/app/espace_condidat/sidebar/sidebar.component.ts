@@ -27,7 +27,7 @@ export class SidebarComponent {
    
     cv: './../assets/exemple_cv.pdf'
   };
-   candidat: Candidat | null = null;
+  candidat: Candidat | null = null;
   currentUser: Account | null = null;
   constructor(private authService: AuthService, private translate: TranslateService,private candidatService :CandidatService) {
   

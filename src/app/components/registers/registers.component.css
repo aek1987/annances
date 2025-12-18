@@ -1,0 +1,63 @@
+.container-fluid {
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+.form-section {
+  flex: 1;
+  background-color: #f8f9fa;
+}
+
+.slider-section {
+  flex: 1;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+}
+
+.register-card {
+  width: 90%; /* Utilise 90% de la section gauche */
+ /* max-width: 500px; /* Maximum largeur */
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  margin: 0 auto; /* Centrer dans la section */
+  padding: 40px 30px; /* Plus de padding pour respirer */
+}
+
+
+.slider-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  width: 90%;
+ /* max-width: 300px;*/
+}
+
+/* Slider CSS */
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  height: 180px; /* Hauteur fixe pour le slider */
+  overflow: hidden;
+}
+
+.slider-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  background-color: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.slider-card.active {
+  opacity: 1;
+}
+

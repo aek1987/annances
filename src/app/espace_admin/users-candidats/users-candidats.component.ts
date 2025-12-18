@@ -26,18 +26,29 @@ export class UsersCandidatsComponent implements OnInit {
 
 changerStatut(candidat: Candidat, accepte: boolean) {
   if (accepte) {
-    // On marque le candidat comme validé
     candidat.status = 'active';
     alert(`✅ Candidat ${candidat.username} accepté.`);
   } else {
-    // On marque le candidat comme refusé ou désactivé
     candidat.status = 'desactive';
     alert(`🚫 Candidat ${candidat.username} refusé.`);
   }
 
-  // Si tu veux mettre à jour la liste dans ton service
-  this.candidatsService.updateCandidatState(candidat);
+  console.log("Changement de status de candidat à ", candidat);
+
+  this.candidatsService.updateStatus(candidat.refId, candidat.status).subscribe({
+    next: updatedCandidat => {
+      console.log('Status mis à jour :', updatedCandidat);
+
+      // ⚡ Met à jour l'objet dans le tableau
+      const index = this.candidats.findIndex(c => c.refId === updatedCandidat.refId);
+      if (index !== -1) {
+        this.candidats[index] = updatedCandidat; // UI Angular se rafraîchit
+      }
+    },
+    error: err => console.error('Erreur lors de la mise à jour du status', err)
+  });
 }
+
 
 
 voirDetail(c: Candidat) {

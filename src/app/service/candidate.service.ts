@@ -147,13 +147,23 @@ getStatus(candidat: Candidat): 'active' | 'desactive' | 'en_attente_validation'|
 }
 
 updateCandidat(candidat: Candidat) {  
+
   return this.http.put<Candidat>( `${this.apiUrl}/${candidat.refId}`, candidat );
+
 }
 
-updateCandidatState(candidat: Candidat) {
- 
-  localStorage.setItem("candidat", JSON.stringify(candidat));
+// Service Angular
+updateStatus(refId: number, newStatus: string) {
+  // On utilise le body JSON pour plus de propreté
+  return this.http.patch<Candidat>(
+    `${this.apiUrl}/${refId}/status`,
+    { status: newStatus }  // status envoyé dans le body JSON
+  );
 }
+
+
+
+
 
 
 // ================================

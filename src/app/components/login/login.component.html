@@ -46,7 +46,12 @@
           <button type="submit" class="btn btn-primary w-100 mb-3" [disabled]="!loginForm.valid">
             Se connecter
           </button>
-        
+        <!-- 🔹 Lien mot de passe oublié -->
+  <div class="mt-6 text-end">
+    <a routerLink="/forgot-password" class="text-decoration-none small">
+      Mot de passe oublié ?
+    </a>
+  </div>
           <!-- Bouton Inscription -->
           <a routerLink="/register" class="btn btn-outline-primary w-100 mb-2">
             Créer un compte

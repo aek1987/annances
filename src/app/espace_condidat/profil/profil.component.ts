@@ -25,7 +25,7 @@ export class ProfilComponent {
   // Formations
   formationForms: Formation[] = [];
   experienceForms: any[] = [];
-  selectedFileName: string = '';
+  selectedFileName: string = "";
   constructor(
     private router: Router,
     private candidatService: CandidatService,
@@ -34,18 +34,32 @@ export class ProfilComponent {
   ) {}
 
   ngOnInit() {
-    this.candidatService.getCandidatConnecte().subscribe((candidat) => {
-      this.candidat = candidat;
-if (this.candidat) {
-    if (!this.candidat.langues) this.candidat.langues = [];
-    if (!this.candidat.competences) this.candidat.competences = [];
-    if (!this.candidat.formations) this.candidat.formations = [];
-    if (!this.candidat.experiences) this.candidat.experiences = [];
+    // ✅ Initialisation immédiate pour éviter candidat = null
+    this.candidat = this.getEmptyCandidat();
 
-    this.candidat.status = this.candidatService.getStatus(this.candidat);
-  }
+    this.candidatService.getCandidatConnecte().subscribe({
+      next: (candidat) => {
+        if (!candidat) {
+          console.warn("⚠️ Aucun candidat reçu");
+          return;
+        }
 
-      console.log("👤  profile  :Candidat chargé  :", this.candidat);
+        this.candidat = candidat;
+
+        // ✅ Initialisation sécurisée des tableaux
+        this.candidat.langues ??= [];
+        this.candidat.competences ??= [];
+        this.candidat.formations ??= [];
+        this.candidat.experiences ??= [];
+
+        // ✅ Mise à jour du statut
+        this.candidat.status = this.candidatService.getStatus(this.candidat);
+
+        console.log("👤 Profil candidat chargé :", this.candidat);
+      },
+      error: (err) => {
+        console.error("❌ Erreur chargement candidat :", err);
+      },
     });
   }
 
@@ -122,9 +136,7 @@ if (this.candidat) {
 
     // Mettre à jour le status et progression localement
     this.candidat.status = this.candidatService.getStatus(this.candidat);
-    this.candidat.progression = this.candidatService.getProgression(
-      this.candidat
-    );
+    this.candidat.progression = this.candidatService.getProgression(  this.candidat  );
 
     this.candidatService.updateCandidat(this.candidat).subscribe({
       next: (updated) => {
@@ -140,26 +152,29 @@ if (this.candidat) {
   }
 
   addCompetence(newSkill: string) {
-   
-   if (!newSkill || !newSkill.trim()) {
-    // Champ vide ou uniquement des espaces
-    alert("Veuillez saisir une compétence valide !");
-    return;
+    if (!newSkill || !newSkill.trim()) {
+      // Champ vide ou uniquement des espaces
+      alert("Veuillez saisir une compétence valide !");
+      return;
+    }
+
+    if (this.candidat) {
+      this.candidat.competences.push(newSkill.trim());
+      this.newCompetence = ""; // Réinitialiser le champ
+    }
   }
 
-  if (this.candidat) {
-    this.candidat.competences.push(newSkill.trim());
-    this.newCompetence = ''; // Réinitialiser le champ
+  removeCompetence(index: number) {
+    if (
+      this.candidat &&
+      this.candidat.competences &&
+      index > -1 &&
+      index < this.candidat.competences.length
+    ) {
+      // Supprimer la compétence à l'index donné
+      this.candidat.competences.splice(index, 1);
+    }
   }
-  }
-
- removeCompetence(index: number) {
-  if (this.candidat && this.candidat.competences && index > -1 && index < this.candidat.competences.length) {
-    // Supprimer la compétence à l'index donné
-    this.candidat.competences.splice(index, 1);
-  }
-}
-
 
   addExperience(newExp: Experience) {
     if (this.candidat) {
@@ -197,25 +212,23 @@ if (this.candidat) {
   }
   //
 
-  
-
   get progression(): number {
     if (!this.candidat) return 0;
     return this.candidatService.getProgression(this.candidat);
   }
 
- addLangue() {
-  if (!this.newLangue.trim()) return;
-  if (!this.candidat) return;
+  addLangue() {
+    if (!this.newLangue.trim()) return;
+    if (!this.candidat) return;
 
-  this.candidat.langues!.push(this.newLangue.trim());
-  this.newLangue = "";
-}
+    this.candidat.langues!.push(this.newLangue.trim());
+    this.newLangue = "";
+  }
 
-removeLangue(index: number) {
-  if (!this.candidat) return;
-  this.candidat.langues!.splice(index, 1);
-}
+  removeLangue(index: number) {
+    if (!this.candidat) return;
+    this.candidat.langues!.splice(index, 1);
+  }
 
   // ===================== EXPÉRIENCES =====================
   addExperienceForm() {

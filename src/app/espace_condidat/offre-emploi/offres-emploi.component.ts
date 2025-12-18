@@ -87,7 +87,7 @@ export class OffresEmploiComponent implements OnInit {
     "Télétravail partiel",
     "100% Télétravail",
   ];
-  selectedRemote: string[] = [];
+  selectedRemote: string="";
   isRemoteDropdownOpen = false;
   entreprisesMap: Map<number, Entreprise> = new Map();
   favorisMap: { [offreId: number]: boolean } = {};
@@ -197,14 +197,17 @@ loadOffres(page: number = 0) {
 
 
   onRemoteCheckboxChange(event: any) {
-    const value = event.target.value;
-    if (event.target.checked) {
-      this.selectedRemote.push(value);
-    } else {
-      this.selectedRemote = this.selectedRemote.filter((r) => r !== value);
-    }
-    this.applyFilters();
+  const value = event.target.value;
+
+  if (event.target.checked) {
+    this.selectedRemote = value;   // ✅ affectation correcte
+  } else {
+    this.selectedRemote = "";
   }
+
+  this.applyFilters();
+}
+
   onCheckboxChangeSalaire(event: Event) {
     const checkbox = event.target as HTMLInputElement;
     const value = checkbox.value;

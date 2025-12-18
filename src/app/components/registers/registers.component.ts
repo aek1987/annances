@@ -65,6 +65,35 @@ onSubmit() {
   });
 }
 
+slides = [
+    {
+      title: "🚀 Postes récents",
+      description: "Accédez aux offres les plus récentes adaptées à vos compétences."
+    },
+    {
+      title: "💡 Conseils personnalisés",
+      description: "Obtenez des recommandations et astuces pour booster votre carrière."
+    },
+    {
+      title: "🔒 Sécurité et confidentialité",
+      description: "Vos informations sont protégées et restent confidentielles."
+    },
+    {
+      title: "📈 Opportunités pour entreprises",
+      description: "Publiez vos offres et trouvez les meilleurs talents facilement."
+    },
+    {
+      title: "🤝 Mise en relation rapide",
+      description: "Candidats et entreprises se connectent rapidement pour des résultats immédiats."
+    }
+  ];
 
+  currentSlide = 0;
+
+  ngOnInit(): void {
+    setInterval(() => {
+      this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+    }, 3000); // change slide toutes les 3 secondes
+  }
 
 }
