@@ -9,7 +9,7 @@ import { catchError, Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class EntrepriseService {
-
+/*
  private entreprises: Entreprise[] = [
   { 
     id: 101, 
@@ -55,7 +55,7 @@ export class EntrepriseService {
     logo: '../../assets/company.png',
     site: 'https://www.medicare.com'
   }
-];
+]*/
 
 
 private apiUrl = `${environment.apiUrl}/api/entreprises`;
@@ -76,10 +76,10 @@ getEntrepriseConnectee(): Observable<Entreprise | null> {
 
 
   // ✅ Liste complète
-  getEntreprises(): Entreprise[] {
+  getEntreprises(): Observable<Entreprise[]> {
+  return this.http.get<Entreprise[]>(`${this.apiUrl}`);
+}
 
-    return this.entreprises;
-  }
 
   // ✅ Recherche par ID
   getEntrepriseById(id: number): Observable<Entreprise> {
@@ -90,12 +90,12 @@ getEntrepriseConnectee(): Observable<Entreprise | null> {
      return this.http.get<Entreprise>(`${this.apiUrl}/${id}`);
   }
   // ✅ Recherche par nom ou secteur
-  searchEntreprise(query: string): Entreprise[] {
+ /* searchEntreprise(query: string): Entreprise[] {
     return this.entreprises.filter(e =>
       e.username.toLowerCase().includes(query.toLowerCase()) ||
       e.secteur?.toLowerCase().includes(query.toLowerCase())
     );
-  }
+  }*/
 
   createEmptyEntreprise(refId: number, name: string, email: string): Entreprise {
   const newEntreprise: Entreprise = {
@@ -109,7 +109,7 @@ getEntrepriseConnectee(): Observable<Entreprise | null> {
       status: 'desactive'   // 🔴 par défaut
     };
 
-    this.entreprises.push(newEntreprise);
+ //   this.entreprises.push(newEntreprise);
     return newEntreprise;
   }
    // ✅ Active une entreprise
@@ -121,5 +121,26 @@ activerEntreprise(id: number): Observable<Entreprise> {
 desactiverEntreprise(id: number): Observable<Entreprise> {
   return this.http.put<Entreprise>(`${this.apiUrl}/${id}/desactiver`, {});
 }
+
+
+saveEntreprise(entreprise: Entreprise): Observable<Entreprise> {
+  console.log("this entreprise", entreprise);
+  return this.http.put<Entreprise>(`${this.apiUrl}/${entreprise.id}`, entreprise);
+}
+
+
+updateStatus(id: number, status: string) {
+  return this.http.put<Entreprise>(
+    `${this.apiUrl}/${id}/status`,
+    { status }
+  );
+}
+
+
+  // ✅ UPDATE (PUT)
+  updateEntreprise(id: number, data: Partial<Entreprise>): Observable<Entreprise> {
+    console.log('PUT entreprise =>', data);
+    return this.http.put<Entreprise>(`${this.apiUrl}/${id}`, data);
+  }
 
 }

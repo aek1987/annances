@@ -34,6 +34,7 @@ changerStatut(candidat: Candidat, accepte: boolean) {
   }
 
   console.log("Changement de status de candidat à ", candidat);
+  console.log("status de candidat à ", candidat.status);
 
   this.candidatsService.updateStatus(candidat.refId, candidat.status).subscribe({
     next: updatedCandidat => {

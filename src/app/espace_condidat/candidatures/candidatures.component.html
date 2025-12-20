@@ -1,13 +1,29 @@
 <div class="page-container">
-  <div class="filters">
-  <select [(ngModel)]="filtreStatut" (change)="filtrerCandidatures()">
-    <option value="">Tous les statuts</option>
-    <option>En attente</option>
-    <option>En entretien</option>
-    <option>Acceptée</option>
-    <option>Refusée</option>
-  </select>
-</div>
+  <div class="filters-dots">
+    <span class="label">Statut :</span>
+
+    <span class="dot" [class.active]="filtreStatut === ''" (click)="setStatut('')" title="Tous"></span>
+    <span class="text">Tous</span>
+
+    <span class="dot attente" [class.active]="filtreStatut === 'En attente'" (click)="setStatut('En attente')"
+      title="En attente"></span>
+    <span class="text">En attente</span>
+
+    <span class="dot entretien" [class.active]="filtreStatut === 'En entretien'" (click)="setStatut('En entretien')"
+      title="En entretien"></span>
+    <span class="text">En entretien</span>
+
+    <span class="dot accepte" [class.active]="filtreStatut === 'Acceptée'" (click)="setStatut('Acceptée')"
+      title="Acceptée"></span>
+    <span class="text">Acceptée</span>
+
+    <span class="dot refuse" [class.active]="filtreStatut === 'Refusée'" (click)="setStatut('Refusée')"
+      title="Refusée"></span>
+    <span class="text">Refusée</span>
+  </div>
+
+
+
 
   <h2>📄 Mes candidatures</h2>
 
@@ -17,75 +33,75 @@
 
   <div class="candidature-list" *ngIf="candidatures.length > 0">
     <div *ngFor="let c of candidatures" class="candidature-card">
-      
+
       <!-- En-tête -->
-    <!-- En-tête -->
-<div class="candidature-header">
-  <div class="title">
-    <h3>{{ getOffreByCandidature(c.id)?.poste || 'Titre Offre' }}</h3>   
-  </div>  
-     </div>
-    
+      <!-- En-tête -->
+      <div class="candidature-header">
+        <div class="title">
+          <h3>{{ getOffreByCandidature(c.id)?.poste || 'Titre Offre' }}</h3>
+        </div>
+      </div>
+
 
 
       <!-- Timeline -->
       <div class="timeline">
-        <div *ngFor="let etape of etapes; let i = index" 
-             class="etape"
-             [class.active]="i <= getEtapeIndex(c.statut)">
+        <div *ngFor="let etape of etapes; let i = index" class="etape" [class.active]="i <= getEtapeIndex(c.statut)">
           <span class="circle">{{ i + 1 }}</span>
           <span class="label">{{ etape }}</span>
         </div>
-        
+
       </div>
 
-     <!-- Infos complémentaires -->
-<div class="candidature-body">
-  <div class="info-row">
-    <p><b>Date :</b> {{ c.dateCandidature | date:'mediumDate' }}</p>
-   <p *ngIf="getOffre(c.id) | async as offre">
-  <b>Localisation :</b> {{ offre.localisation }}
-</p>
-<p *ngIf="getOffre(c.id) | async as offre">
-  <b>Contrat :</b> {{ offre.contrat }}
-</p>
-    <p *ngIf="c.message"><b>Message :</b> {{ c.message }}</p>
-    
-    <div  class="info-row" *ngIf="getEntrepriseByCandidature(c.id) as entreprise">     
-       <p>entreprise :{{ entreprise.username }}</p>     
-    </div> 
-  </div>
-</div>
+      <!-- Infos complémentaires -->
+      <div class="candidature-body">
+        <div class="info-row">
+          <p *ngIf="getOffreByCandidature(c.id) as offre">
+            <b>Localisation :</b> {{ offre.localisation }}
+          </p>
+
+          <p *ngIf="getOffreByCandidature(c.id) as offre">
+            <b>Contrat :</b> {{ offre.contrat }}
+          </p>
+
+          <div *ngIf="getEntrepriseByCandidature(c.id) as entreprise">
+            <p><b>Entreprise :</b> {{ entreprise.username }}</p>
+          </div>
+
+          <p *ngIf="c.message"><b>Message :</b> {{ c.message }}</p>
+
+          
+        </div>
+      </div>
 
 
       <!-- Actions -->
       <div class="actions">
-        <button class="btn btn-view"  [routerLink]="['/candidat/offre', c.id]"(click)="voirDetails(c)">👁 Voir détails</button>
+        <button class="btn btn-view" [routerLink]="['/candidat/offre', c.id]" (click)="voirDetails(c)">👁 Voir
+          détails</button>
         <button class="btn btn-cancel" (click)="annulerCandidature(c.id)">❌ Annuler</button>
       </div>
     </div>
   </div>
 
 
-<div class="pagination-container">
+  <div class="pagination-container">
 
-  <button (click)="prevPage()" [disabled]="currentPage === 1">
-    ◀ Précédent
-  </button>
-
-  <ng-container *ngFor="let page of [].constructor(totalPages); let i = index">
-    <button 
-      (click)="goToPage(i + 1)"
-      [class.active]="currentPage === i + 1">
-      {{ i + 1 }}
+    <button (click)="prevPage()" [disabled]="currentPage === 1">
+      ◀ Précédent
     </button>
-  </ng-container>
 
-  <button (click)="nextPage()" [disabled]="currentPage === totalPages">
-    Suivant ▶
-  </button>
+    <ng-container *ngFor="let page of [].constructor(totalPages); let i = index">
+      <button (click)="goToPage(i + 1)" [class.active]="currentPage === i + 1">
+        {{ i + 1 }}
+      </button>
+    </ng-container>
 
-</div>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+      Suivant ▶
+    </button>
+
+  </div>
 
 
 

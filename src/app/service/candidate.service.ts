@@ -154,8 +154,10 @@ updateCandidat(candidat: Candidat) {
 
 // Service Angular
 updateStatus(refId: number, newStatus: string) {
+
+  console.log("status de ",newStatus)
   // On utilise le body JSON pour plus de propreté
-  return this.http.patch<Candidat>(
+  return this.http.put<Candidat>(
     `${this.apiUrl}/${refId}/status`,
     { status: newStatus }  // status envoyé dans le body JSON
   );

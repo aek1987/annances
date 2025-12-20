@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Entreprise } from 'src/app/modeles/entreprise';
 import { EntrepriseService } from 'src/app/service/entreprise.service';
@@ -9,27 +9,59 @@ import Swal from 'sweetalert2';
   templateUrl: './users-entreprises.component.html',
   styleUrls: ['./users-entreprises.component.css']
 })
-export class UsersEntreprisesComponent {
- entreprises: Entreprise[] = [];
- index=0;
+export class UsersEntreprisesComponent implements OnInit {
 
-  constructor(private entreprisesService: EntrepriseService, private router: Router) {}
+  entreprises: Entreprise[] = [];
+
+  constructor(
+    private entreprisesService: EntrepriseService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.entreprises = this.entreprisesService.getEntreprises();
+    this.loadEntreprises();
   }
- activer(id: number) {
-    this.entreprisesService.activerEntreprise(id);
-    Swal.fire('✅ Entreprise activée', '', 'success');
+
+  // 🔹 Charger les entreprises
+  loadEntreprises() {
+    this.entreprisesService.getEntreprises().subscribe({
+      next: (data) => this.entreprises = data,
+      error: (err) => console.error('Erreur chargement entreprises', err)
+    });
+  }
+
+  // 🔹 Mise à jour du status
+  updateStatus(id: number, status: 'active' | 'desactive') {
+    this.entreprisesService.updateStatus(id, status).subscribe({
+      next: (updated) => {
+        const entreprise = this.entreprises.find(e => e.id === id);
+        if (entreprise) {
+          entreprise.status = updated.status;
+        }
+
+        Swal.fire(
+          '✅ Succès',
+          `Entreprise ${status === 'active' ? 'activée' : 'desactive'}`,
+          'success'
+        );
+      },
+      error: (err) => {
+        console.error(err);
+        Swal.fire('❌ Erreur', 'Impossible de modifier le statut', 'error');
+      }
+    });
+  }
+
+  activer(id: number) {
+    this.updateStatus(id, 'active');
   }
 
   desactiver(id: number) {
-    this.entreprisesService.desactiverEntreprise(id);
-    Swal.fire('⚠️ Entreprise désactivée', '', 'warning');
+    this.updateStatus(id, 'desactive');
   }
-   // ✅ Redirection vers la page de détails
+
+  // 🔹 Voir les détails
   voirDetails(id: number) {
     this.router.navigate(['/admin/entreprises', id]);
   }
-
 }

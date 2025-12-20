@@ -49,11 +49,25 @@ toggleEdit() {
 }
 
 saveEntreprise() {
+
+
+   if (!this.entreprise!.email || !this.entreprise!.username) {
+      Swal.fire('⚠️ Erreur', 'Email et Nom sont obligatoires', 'warning');
+      return;
+    }
   if (this.entreprise) {
-  //  this.entrepriseService.updateEntreprise(this.entreprise);
-    console.log("✅ Entreprise mise à jour :", this.entreprise);
-    this.editMode = false;
+    this.entrepriseService.saveEntreprise(this.entreprise).subscribe({
+      next: (updated) => {
+        this.entreprise = updated; // Met à jour l’objet local
+        this.editMode = false;
+        console.log("✅ Entreprise mise à jour :", updated);
+      },
+      error: (err) => {
+        console.error("❌ Erreur lors de la sauvegarde :", err);
+      }
+    });
   }
 }
+
 
 }

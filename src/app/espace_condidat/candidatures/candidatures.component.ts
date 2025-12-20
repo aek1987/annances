@@ -18,7 +18,7 @@ import { ActivatedRoute } from "@angular/router";
 export class CandidaturesComponent implements OnInit {
   candidatConnecte: Candidat | null = null;
   candidatures: Candidature[] = [];
-  etapes = ["en attente", "analyse", "acceptée", "refusée", "finalisé"];
+  etapes = ["en Attente", "Analyse", "Acceptée", "Refusée", "Finalisé"];
   filtreStatut: string = "";
   offresMap = new Map<number, Offre>();
   entreprisesMap = new Map<number, Entreprise>();
@@ -38,8 +38,7 @@ export class CandidaturesComponent implements OnInit {
     this.currentPage = data.currentPage + 1;
     this.totalPages = data.totalPages;
     this.candidatures = data.candidatures;
-    console.log("🔹 Page initiale :", this.currentPage);
-    console.log("🔹 Total pages :", this.totalPages);
+    
     // Charger les offres + entreprises
     this.chargerDetails();
   }
@@ -156,6 +155,10 @@ goToPage(p: number) {
   if (p >= 1 && p <= this.totalPages) {
     this.loadCandidatures(p - 1); // 1-based → 0-based
   }
+}
+setStatut(statut: string) {
+  this.filtreStatut = statut;
+  this.filtrerCandidatures();
 }
 
 }
