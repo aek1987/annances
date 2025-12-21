@@ -76,7 +76,10 @@
       <p>{{ progression }} %</p>
 
       <div class="status-line">
-        <strong>Status :</strong>
+        <strong>Status :</strong> 
+        <span *ngIf="candidat?.status === 'active'" class="status-active">
+          🟢 Actif — Votre profil est actif et visible par les entreprises.
+        </span>
 
         <span *ngIf="candidat?.status === 'incomplet'" class="status-inactive">
           🔴 Incomplet — Votre profil est incomplet. Veuillez ajouter plus
@@ -96,9 +99,7 @@
           après vérification.
         </span>
 
-        <span *ngIf="candidat?.status === 'active'" class="status-active">
-          🟢 Actif — Votre profil est actif et visible par les entreprises.
-        </span>
+       
 
         <span *ngIf="candidat?.status === 'desactive'" class="status-inactive">
           ⚫ Désactivé — Votre compte est désactivé, veuillez mettre à jour vos

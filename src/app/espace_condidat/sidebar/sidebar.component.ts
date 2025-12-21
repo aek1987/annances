@@ -16,17 +16,7 @@ export class SidebarComponent {
   faLogout = faSignOutAlt;
 
   @Input() candidatures: any[] = [];
-   profil = {
-    photo: 'assets/homme.png', // image par défaut
-    nom: 'Jean Dupont',
-    email: 'jean.dupont@mail.com',
-    titre: 'Développeur Full Stack',
-    localisation: 'Paris, France',
-    bio: 'Passionné par le développement web et l’IA.',
-    competences: ['Angular', 'Java', 'Spring Boot'],
-   
-    cv: './../assets/exemple_cv.pdf'
-  };
+ 
   candidat: Candidat | null = null;
   currentUser: Account | null = null;
   constructor(private authService: AuthService, private translate: TranslateService,private candidatService :CandidatService) {
@@ -41,23 +31,22 @@ export class SidebarComponent {
    // 🔹 Charge le candidat connecté depuis le service
 loadCandidat() {
   this.candidatService.getCandidatConnecte().subscribe(candidat => {
+   if (!candidat) return;
     this.candidat = candidat;
-    console.log('👤 Candidat connecté  slider:', candidat);
-  });
-  console.log("condidat info"+ this.candidat);
-  
-  
- if (this.candidat) {
-   const progression = this.progression;     
+
+    console.log('👤 Candidat connecté sidebar:', candidat);
+
+    // ✅ Calcul après chargement
+    if(this.candidat.status!=="active"){
+    const progression = this.progression;
     this.candidat.status = this.candidatService.getStatus(this.candidat);
-    console.log("Progression calculée :", progression+" status :",  this.candidat.status);
-   
-   
-  }
 
-
+    console.log(      'Progression calculée :',
+      progression,      'Status :',      this.candidat.status    );}
+  });
 
 }
+
 
 get progression(): number {
   if (!this.candidat) return 0;

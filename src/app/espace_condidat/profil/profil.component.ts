@@ -42,8 +42,8 @@ export class ProfilComponent {
         if (!candidat) {
           console.warn("⚠️ Aucun candidat reçu");
           return;
-        }
-
+        } 
+       
         this.candidat = candidat;
 
         // ✅ Initialisation sécurisée des tableaux
@@ -67,6 +67,11 @@ export class ProfilComponent {
   async onCvUpload(event: any) {
     const file = event.target.files[0];
     if (!file) return;
+    if (file.type !== "application/pdf") {
+  alert("Veuillez sélectionner un fichier PDF");
+  return;
+}
+
 
     try {
       const texte = await this.pdfReader.extraireTexte(file);
@@ -135,8 +140,10 @@ export class ProfilComponent {
     if (!this.candidat) return;
 
     // Mettre à jour le status et progression localement
+   
+    if( this.candidat.status !=="active"){
     this.candidat.status = this.candidatService.getStatus(this.candidat);
-    this.candidat.progression = this.candidatService.getProgression(  this.candidat  );
+    this.candidat.progression = this.candidatService.getProgression( this.candidat  );}
 
     this.candidatService.updateCandidat(this.candidat).subscribe({
       next: (updated) => {
@@ -213,7 +220,7 @@ export class ProfilComponent {
   //
 
   get progression(): number {
-    if (!this.candidat) return 0;
+    if (!this.candidat  ) return 0;
     return this.candidatService.getProgression(this.candidat);
   }
 
