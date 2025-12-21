@@ -1,21 +1,63 @@
 <div class="page-container">
-  <h2>🔔 Mes alertes emploi</h2>
 
-  <div *ngIf="alertes.length === 0">
-    <p>Vous n'avez aucune alerte configurée.</p>
-  </div>
-
-  <div class="alert-list">
-    <div *ngFor="let a of alertes" class="alert-item">
+  <!-- Liste des alertes -->
+  <div class="alert-item" *ngFor="let a of alertes">
+    <div class="alert-content">
       <h3>{{ a.motCle }} - {{ a.lieu }}</h3>
       <p>Fréquence : {{ a.frequence }}</p>
       <p>Status : <b>{{ a.active ? 'Active ✅' : 'Désactivée ❌' }}</b></p>
-      <div class="actions">
+    </div>
+
+    <!-- Bouton config -->
+    <div class="config-wrapper">
+      <button class="config-btn" (click)="toggleConfig(a)">⚙️</button>
+      <div class="config-menu" *ngIf="a.showConfig">
+        <button (click)="editAlerte(a)">✏️ Modifier</button>
+        <button (click)="changerFrequence(a)">🔔 Fréquence</button>
         <button (click)="toggleAlerte(a)">
-          {{ a.active ? 'Désactiver' : 'Activer' }}
+          {{ a.active ? '⏸️ Mettre en pause' : '▶️ Activer' }}
         </button>
-        <button (click)="supprimerAlerte(a.id)">❌ Supprimer</button>
+        <hr />
+        <button class="danger" (click)="supprimerAlerte(a.id)">🗑️ Supprimer</button>
       </div>
+    </div>
+  </div>
+</div>
+<button (click)="ouvrirModal()">Ouvrir le modal</button>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="showModal" (click)="fermerModal0()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <h3>🔔 Mon Modal</h3>
+    <p>Contenu du modal ici...</p>
+    <button (click)="fermerModal0()">Fermer</button>
+  </div>
+</div>
+<!-- MODAL (en dehors de la boucle) -->
+<div class="modal-backdrop" *ngIf="alerteFrequence" (click)="fermerModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <h3>🔔 Fréquence des notifications</h3>
+
+    <label>
+      <input type="radio" name="freq" value="Immediate" [(ngModel)]="frequenceSelectionnee">
+      Immédiate
+    </label>
+    <label>
+      <input type="radio" name="freq" value="quotidienne" [(ngModel)]="frequenceSelectionnee">
+      Quotidienne
+    </label>
+    <label>
+      <input type="radio" name="freq" value="hebdomadaire" [(ngModel)]="frequenceSelectionnee">
+      Hebdomadaire
+    </label>
+    <label>
+      <input type="radio" name="freq" value="mensuelle" [(ngModel)]="frequenceSelectionnee">
+      Mensuelle
+    </label>
+
+    <div class="modal-actions">
+      <button (click)="confirmerFrequence()">✔ Confirmer</button>
+      <button (click)="fermerModal()">Annuler</button>
     </div>
   </div>
 </div>
