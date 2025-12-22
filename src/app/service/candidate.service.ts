@@ -130,6 +130,8 @@ getStatus(candidat: Candidat): 'active' | 'desactive' | 'en_attente_validation'|
   candidat.progression = this.getProgression(candidat);
 
   if (!candidat.progression) return 'desactive';
+  // 🔒 Si déjà actif → on ne change jamais le status
+  if (candidat.status === 'active') {    return 'active';  }
 
   switch (true) {
     case candidat.progression < 50:
