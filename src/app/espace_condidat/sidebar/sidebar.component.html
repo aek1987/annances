@@ -5,7 +5,7 @@
   <h4>Mon Profil</h4>
 
  
-  <img [src]="candidat!.photo" alt="Photo de profil" class="profil-photo">
+  <img [src]="candidat?.photo ? candidat?.photo : 'assets/user.png'" alt="Photo de profil" class="profil-photo">
  
   <h3>{{ currentUser?.username || 'PROFIL' }}</h3>
 

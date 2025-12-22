@@ -6,6 +6,7 @@ import { Formation } from "src/app/modeles/Formation";
 import { CandidatService } from "src/app/service/candidate.service";
 import { CvParserService } from "src/app/service/cv/cv-parser.service";
 import { PdfReaderService } from "src/app/service/cv/pdf-reader.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-profil",
@@ -136,27 +137,33 @@ export class ProfilComponent {
     this.router.navigate(["/offres-emploi"]);
   }
 
-  savecandidat() {
-    if (!this.candidat) return;
+savecandidat() {
+  if (!this.candidat) return;
 
-    // Mettre à jour le status et progression localement
-   
-    if( this.candidat.status !=="active"){
-    this.candidat.status = this.candidatService.getStatus(this.candidat);
-    this.candidat.progression = this.candidatService.getProgression( this.candidat  );}
+  // ✔ Progression toujours recalculée
+  this.candidat.progression =
+    this.candidatService.getProgression(this.candidat);
 
-    this.candidatService.updateCandidat(this.candidat).subscribe({
-      next: (updated) => {
-        this.candidat = updated;
-        this.editMode = false;
-        alert("✅ Profil mis à jour avec succès");
-      },
-      error: (err) => {
-        console.error(err);
-        alert("❌ Erreur lors de la mise à jour du profil");
-      },
-    });
+  // ✔ Status recalculé seulement si ≠ active
+  if (this.candidat.status !== 'active') {
+    this.candidat.status =
+      this.candidatService.getStatus(this.candidat);
   }
+
+  this.candidatService.updateCandidat(this.candidat).subscribe({
+    next: (updated) => {
+      this.candidat = updated;
+      this.editMode = false;
+     Swal.fire({  icon: 'success',  title: 'Succès',  text: 'Profil mis à jour avec succès',  confirmButtonText: 'OK'});
+
+    },
+    error: (err) => {
+      console.error(err);
+      alert("❌ Erreur lors de la mise à jour du profil");
+    },
+  });
+}
+
 
   addCompetence(newSkill: string) {
     if (!newSkill || !newSkill.trim()) {

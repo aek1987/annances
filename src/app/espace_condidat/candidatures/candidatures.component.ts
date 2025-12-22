@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { Candidat } from "src/app/modeles/candidat";
 import { Candidature } from "src/app/modeles/candidature";
 import { Entreprise } from "src/app/modeles/entreprise";
@@ -13,7 +13,8 @@ import { ActivatedRoute } from "@angular/router";
 @Component({
   selector: "app-candidatures",
   templateUrl: "./candidatures.component.html",
-  styleUrls: ["./candidatures.component.css"],
+  styleUrls: ["./candidatures.component.css"], 
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CandidaturesComponent implements OnInit {
   candidatConnecte: Candidat | null = null;
@@ -23,9 +24,16 @@ export class CandidaturesComponent implements OnInit {
   offresMap = new Map<number, Offre>();
   entreprisesMap = new Map<number, Entreprise>();
   entreprise?: Entreprise;
+loading = false;
 
   currentPage = 1;
-  totalPages = 0;
+  totalPages = 0;statuts = [
+  { label: 'Tous', value: '', css: '' },
+  { label: 'En attente', value: 'En attente', css: 'attente' },
+  { label: 'En entretien', value: 'En entretien', css: 'entretien' },
+  { label: 'Acceptée', value: 'Acceptée', css: 'accepte' },
+  { label: 'Refusée', value: 'Refusée', css: 'refuse' }
+];
   size = 8; // nombre d’éléments par page
 
   constructor(    private route: ActivatedRoute,    private candidatService: CandidatService,
@@ -42,51 +50,63 @@ export class CandidaturesComponent implements OnInit {
     // Charger les offres + entreprises
     this.chargerDetails();
   }
-  loadCandidatures(page: number = 0) {
-    if (!this.candidatConnecte) return;
+loadCandidatures(page: number = 0) {
+  if (!this.candidatConnecte) return;
 
-    this.candidature
-      .getCandidaturesByCandidatPaginated(
-        this.candidatConnecte.refId,
-        page,
-        this.size
-      )
-      .subscribe({
-        next: (res) => {
-          this.candidatures = res.content;
-          this.currentPage = res.currentPage + 1; // backend → 0-based
-          this.totalPages = res.totalPages;
+  this.loading = true;
 
-          console.log("📄 Page reçue :", res);
-
-          this.chargerDetails();
-        },
-        error: (err) => console.error(err),
-      });
-  }
-
-  chargerDetails() {
-    const observables = this.candidatures.map((c) =>
-      this.offresService.getOffreById(c.offreId).pipe(
-        switchMap((offre) => {
-          this.offresMap.set(c.id, offre);
-
-          return this.entrepriseService
-            .getEntrepriseById(offre.entrepriseId)
-            .pipe(
-              map((entreprise) => {
-                this.entreprisesMap.set(c.id, entreprise);
-              })
-            );
-        })
-      )
-    );
-
-    forkJoin(observables).subscribe({
-      next: () => console.log("✔ Tous les détails chargés"),
-      error: (err) => console.error("❌ Erreur détails :", err),
+  this.candidature
+    .getCandidaturesByCandidatPaginated(
+      this.candidatConnecte.refId,
+      page,
+      this.size
+    )
+    .subscribe({
+      next: res => {
+        this.candidatures = res.content;
+        this.currentPage = res.currentPage + 1;
+        this.totalPages = res.totalPages;
+        this.chargerDetails();
+        this.loading = false;
+      },
+      error: err => {
+        console.error(err);
+        this.loading = false;
+      }
     });
-  }
+}
+
+ chargerDetails() {
+  // 1️⃣ IDs uniques des offres
+  const offreIds = [...new Set(this.candidatures.map(c => c.offreId))];
+
+  // 2️⃣ Charger toutes les offres
+  forkJoin(
+    offreIds.map(id => this.offresService.getOffreById(id))
+  ).pipe(
+    switchMap(offres => {
+      // Stocker les offres
+      offres.forEach(o => this.offresMap.set(o.id, o));
+
+      // 3️⃣ IDs uniques des entreprises
+      const entrepriseIds = [...new Set(offres.map(o => o.entrepriseId))];
+
+      // 4️⃣ Charger toutes les entreprises
+      return forkJoin(
+        entrepriseIds.map(id =>
+          this.entrepriseService.getEntrepriseById(id)
+        )
+      );
+    })
+  ).subscribe({
+    next: entreprises => {
+      entreprises.forEach(e => this.entreprisesMap.set(e.id, e));
+      console.log('⚡ Détails chargés (optimisé)');
+    },
+    error: err => console.error('❌ Erreur chargement détails', err)
+  });
+}
+
 
   // Retourne l’index de l’étape actuelle
   getEtapeIndex(statut: string): number {
@@ -129,14 +149,17 @@ export class CandidaturesComponent implements OnInit {
     // offre.poste.toLowerCase().includes(texte)
     //  );
   }
+getOffreByCandidature(offreId: number) {
+  return this.offresMap.get(offreId);
+}
 
-  getOffreByCandidature(id: number): Offre | undefined {
-    return this.offresMap.get(id);
-  }
+getEntrepriseByCandidature(entrepriseId: number) {
+  return this.entreprisesMap.get(entrepriseId);
+}
 
-  getEntrepriseByCandidature(id: number): Entreprise | undefined {
-    return this.entreprisesMap.get(id);
-  }
+getEntrepriseByOffre(offre?: Offre) {
+  return offre ? this.entreprisesMap.get(offre.entrepriseId) : null;
+}
 
 
   nextPage() {
@@ -156,9 +179,16 @@ goToPage(p: number) {
     this.loadCandidatures(p - 1); // 1-based → 0-based
   }
 }
-setStatut(statut: string) {
-  this.filtreStatut = statut;
-  this.filtrerCandidatures();
+
+
+
+
+setStatut(value: string) {
+  this.filtreStatut = value;
+}
+
+trackById(_: number, c: Candidature) {
+  return c.id;
 }
 
 }

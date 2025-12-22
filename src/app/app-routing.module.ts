@@ -92,6 +92,7 @@ const routes: Routes = [
       { path: 'alerts', component: MesAlertesComponent },
       { path: 'mes-candidatures', component: CandidaturesComponent , resolve: { candidatures: CandidaturesResolver }},
       {path: 'offre/:id',  component: OffreDetailComponent },
+      { path: 'aide-support', component: AideSupportComponent },
       { path: '', redirectTo: 'offres-emploi', pathMatch: 'full' },
     ]
   },
