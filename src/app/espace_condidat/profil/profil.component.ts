@@ -81,7 +81,7 @@ export class ProfilComponent {
 
       // auto-remplissage partiel
       this.candidat!.username = infos.nom || this.candidat!.username;
-      this.candidat!.email = infos.email || this.candidat!.email;
+     // this.candidat!.email = infos.email || this.candidat!.email;
       this.candidat!.phone = infos.telephone || this.candidat!.phone;
       this.candidat!.adresse = infos.adresse || this.candidat!.adresse;
       this.candidat!.competences =

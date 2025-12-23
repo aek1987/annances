@@ -112,9 +112,9 @@ export class OffresEmploiComponent implements OnInit {
   this.candidatService.getCandidatConnecte().subscribe({
     next: (candidat) => {
       this.candidatConnecte = candidat;
-      console.log("👤 Candidat connecté :", candidat);
-
-      if (!candidat?.refId) {
+    
+       console.log("👤 account Candidat connecté :", this.candidatConnecte);
+      if (!this.candidatConnecte!.refId) {
         console.warn("⚠️ Aucun candidat connecté, favoris désactivés");
         return;
       }
@@ -122,7 +122,7 @@ export class OffresEmploiComponent implements OnInit {
       // Vérifier si chaque offre est un favori
       this.filteredOffres.forEach((offre) => {
         if (offre.id != null) {
-          this.candidatService.isFavori(candidat.refId!, offre.id!).subscribe({
+          this.candidatService.isFavori( this.candidatConnecte!.refId, offre.id!).subscribe({
             next: (isFav: boolean) => {
               this.favorisMap[offre.id!] = isFav;
             },

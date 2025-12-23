@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Candidat } from '../modeles/candidat';
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Offre } from '../modeles/offres';
 
@@ -27,14 +27,26 @@ private apiUrl = `${environment.apiUrl}/api/candidats`;
 
 getCandidatConnecte(): Observable<Candidat | null> {
   const account = this.authService.getUser();
+  //console.log('🔐 Account depuis authService:', account);
 
   if (!account || account.role !== 'candidat') {
+    console.warn('⛔ Accès refusé ou rôle incorrect');
     return of(null);
   }
-  return this.http.get<Candidat>(`${this.apiUrl}/by-email/${account.email}`).pipe(
-    catchError(() => of(null))
-  );
+
+ return this.http.get<Candidat>(
+  `${this.apiUrl}/search/by-email?email=${encodeURIComponent(account.email)}`
+).pipe(
+  tap(res => console.log('📡 Candidat reçu:', res)),
+  catchError(err => {
+    console.error('❌ Erreur API:', err);
+    return of(null);
+  })
+);
+
+
 }
+
 
 
   // ✅ Retourne la liste complète des candidats
