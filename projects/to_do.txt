@@ -22,14 +22,13 @@ creation de compte et recuperaton de mot pass par gmail
 
 espace candidat 
 ****************************
-upload cv si le candiat est active problem
-modificationd e filte
+filtre par salire
 Notifications fonction
-cree un alert emploi
-Upload photo de profil (au lieu de choisir homme/femme).
-verification de remplisage de profil
+poste deja postulé
+stute en attente ne focntionne pas dession offre +detaille
+verification de remplisage de profil 100
+progression
 
-Sauvegarde des offres (favoris)
 
 epcase de entreprise 
 ********************************************
