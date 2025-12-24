@@ -55,11 +55,7 @@ getCandidats(): Observable<Candidat[]> {
 }
 
 
-  // ✅ Retourne un candidat par refId
-  getCandidatById(refId: number): Candidat | undefined {
-    return this.candidats.find(c => c.refId === refId);
-  }
-
+ 
   // 🔹 Optionnel : recherche par nom ou fonction
   searchCandidat(query: string): Candidat[] {
     return this.candidats.filter(c => 
@@ -186,9 +182,6 @@ updateStatus(refId: number, newStatus: string) {
 // 🟡 GESTION DES FAVORIS
 // ================================
 
-// ================================
-// 🟡 GESTION DES FAVORIS (corrigée)
-// ================================
 
 
 
@@ -218,6 +211,8 @@ isFavori(candidatId: number, offreId: number): Observable<boolean> {
 }
 
 
+// ==== GESTION DES FAVORIS (ter)
+// ================================
 
 
 

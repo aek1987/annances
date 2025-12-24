@@ -81,7 +81,7 @@ export class ProfilComponent {
 
       // auto-remplissage partiel
       this.candidat!.username = infos.nom || this.candidat!.username;
-     // this.candidat!.email = infos.email || this.candidat!.email;
+   //   this.candidat!.email = infos.email || this.candidat!.email; 
       this.candidat!.phone = infos.telephone || this.candidat!.phone;
       this.candidat!.adresse = infos.adresse || this.candidat!.adresse;
       this.candidat!.competences =
@@ -91,7 +91,7 @@ export class ProfilComponent {
       this.candidat!.experiences =
         infos.experiences || this.candidat!.experiences;
 
-      //  this.candidat!.formations = infos.formations || this.candidat!.competences;
+     
 
       if (this.candidat) {
         this.candidat.status = this.candidatService.getStatus(this.candidat);
@@ -103,14 +103,7 @@ export class ProfilComponent {
     }
   }
 
-  extraireInfosCandidat(texte: string) {
-    // Exemple très simple (tu peux améliorer avec des regex)
-    const email = texte.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/);
-    const phone = texte.match(/\+?\d[\d\s().-]{7,}/);
-
-    console.log("📧 Email détecté :", email ? email[0] : "Aucun");
-    console.log("📞 Téléphone détecté :", phone ? phone[0] : "Aucun");
-  }
+ 
   get candidatSafe(): Candidat {
     return (
       this.candidat ?? {
