@@ -24,7 +24,7 @@ espace candidat
 ****************************
 filtre par salire
 Notifications fonction
-poste deja postulé
+poste deja postulé offre liste
 stute en attente ne focntionne pas dession offre +detaille
 verification de remplisage de profil 100
 progression

@@ -1,41 +1,54 @@
 <div class="offre-container" *ngIf="offre">
   <!-- En-tête avec logo et titre -->
   <div class="entreprise-header">
-    <img *ngIf="entreprise?.logo" 
-         [src]="entreprise?.logo" 
-         alt="Logo entreprise" 
-         class="logo-entreprise">
+    <img
+      *ngIf="entreprise?.logo"
+      [src]="entreprise?.logo"
+      alt="Logo entreprise"
+      class="logo-entreprise"
+    />
     <div>
       <h2 class="titre-offre">{{ entreprise?.username }}</h2>
-       <p class="nom-entreprise">secteur {{ entreprise?.secteur }}</p>
-       <p class="nom-entreprise">
-  🌐 <a [href]="entreprise?.site" target="_blank" rel="noopener noreferrer">
-    {{ entreprise?.site }}
-  </a>
-</p>
-
+      <p class="nom-entreprise">secteur {{ entreprise?.secteur }}</p>
+      <p class="nom-entreprise">
+        🌐
+        <a [href]="entreprise?.site" target="_blank" rel="noopener noreferrer">
+          {{ entreprise?.site }}
+        </a>
+      </p>
     </div>
   </div>
- <!-- Description du poste -->
+  <!-- Description du poste -->
   <div class="section">
-    <h3>{{offre.poste}}</h3>
-   
+    <h3>{{ offre.poste }}</h3>
   </div>
-
 
   <!-- Tags d’infos principales -->
   <div class="tags">
-    <span class="tag"><i class="fas fa-map-marker-alt"></i> {{ offre.localisation }}</span>
-    <span class="tag"><i class="fas fa-euro-sign"></i> {{ offre.salaire | currency:'EUR' }}</span>
-    <span class="tag"><i class="fas fa-briefcase"></i> {{ offre.contrat }}</span>
-    <span class="tag"><i class="fas fa-calendar-alt"></i> Publiée le {{ offre.datePublication | date:'dd/MM/yyyy' }}</span>
-    <span class="tag deadline"><i class="fas fa-hourglass-half"></i> Limite : {{ offre.dateLimite | date:'dd/MM/yyyy' }}</span>
+    <span class="tag"
+      ><i class="fas fa-map-marker-alt"></i> {{ offre.localisation }}</span
+    >
+    <span class="tag"
+      ><i class="fas fa-euro-sign"></i>
+      {{ offre.salaire | currency : "EUR" }}</span
+    >
+    <span class="tag"
+      ><i class="fas fa-briefcase"></i> {{ offre.contrat }}</span
+    >
+    <span class="tag"
+      ><i class="fas fa-calendar-alt"></i> Publiée le
+      {{ offre.datePublication | date : "dd/MM/yyyy" }}</span
+    >
+    <span class="tag deadline"
+      ><i class="fas fa-hourglass-half"></i> Limite :
+      {{ offre.dateLimite | date : "dd/MM/yyyy" }}</span
+    >
   </div>
 
   <p>{{ offre.description }}</p>
-   <!-- Missions principales -->
+  <!-- Missions principales -->
   <div class="section missions" *ngIf="offre.missions?.length">
-    <h3> Missions principales</h3>
+    <h3>Missions principales</h3>
     <ul>
       <li *ngFor="let mission of offre.missions">
         <i class="fas fa-check-circle mission-icon"></i>
@@ -44,48 +57,54 @@
     </ul>
   </div>
 
- <!-- Compétences requises -->
-<div class="section" *ngIf="offre.competences?.length">
-  <h3> Compétences requises</h3>
-  <div class="badges">
-    <span class="badge" *ngFor="let comp of offre.competences ?? []">
-      {{ comp }}
-    </span>
+  <!-- Compétences requises -->
+  <div class="section" *ngIf="offre.competences?.length">
+    <h3>Compétences requises</h3>
+    <div class="badges">
+      <span class="badge" *ngFor="let comp of offre.competences ?? []">
+        {{ comp }}
+      </span>
+    </div>
   </div>
-</div>
 
-<!-- Langues -->
-<div class="section" *ngIf="offre.langues?.length">
-  <h3> Langues demandées</h3>
-  <ul>
-    <li *ngFor="let lang of offre.langues ?? []">
-      {{ lang }}
-    </li>
-  </ul>
-</div>
+  <!-- Langues -->
+  <div class="section" *ngIf="offre.langues?.length">
+    <h3>Langues demandées</h3>
+    <ul>
+      <li *ngFor="let lang of offre.langues ?? []">
+        {{ lang }}
+      </li>
+    </ul>
+  </div>
 
-<!-- Avantages -->
-<div class="section" *ngIf="offre.avantages?.length">
-  <h3> Avantages proposés</h3>
-  <ul>
-   
-      ✔ {{offre.avantages }}
-    
-  </ul>
-</div>
+  <!-- Avantages -->
+  <div class="section" *ngIf="offre.avantages?.length">
+    <h3>Avantages proposés</h3>
+    <ul>
+      ✔
+      {{
+        offre.avantages
+      }}
+    </ul>
+  </div>
 
   <!-- Lien vers entreprise -->
   <div class="section" *ngIf="entreprise?.site">
-    🌐 <a [href]="entreprise?.site" target="_blank">
+    🌐
+    <a [href]="entreprise?.site" target="_blank">
       Visiter le site de l’entreprise
     </a>
   </div>
 
   <!-- Actions -->
   <div class="actions">
-    <button class="btn-postuler" (click)="postuler(offre)">📩 Postuler</button>
-    <button class="btn-favori" (click)="toggleFavori(offre)">☆ Sauvegarder
-     <!-- Actions  {{ offre.favori ? '★ Retirer des favoris' : '☆ Sauvegarder' }}--> 
+    <button class="btn-postuler" (click)="postuler(offre)" [disabled]="postule">
+      {{ postule ? "✅ Déjà postulé" : "📩 Postuler" }}
+    </button>
+
+    <button class="btn-favori" (click)="toggleFavori(offre)">
+      ☆ Sauvegarder
+      <!-- Actions  {{ offre.favori ? '★ Retirer des favoris' : '☆ Sauvegarder' }}-->
     </button>
   </div>
 

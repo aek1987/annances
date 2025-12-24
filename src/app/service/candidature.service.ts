@@ -82,4 +82,15 @@ getCandidaturesByCandidatPaginated(refId: number, page = 0, size = 8): Observabl
   return this.http.get<any>(`${this.apiUrl}/candidat/ref/${refId}?page=${page}&size=${size}`);
 }
 
+// Vérifie si un candidat a déjà postulé à une offre
+hasCandidatPostule(offreId: number, candidatId: number): Observable<{ postule: boolean }> {
+  const params = new HttpParams()
+    .set('offreId', offreId)
+    .set('candidatId', candidatId);
+
+  return this.http.get<{ postule: boolean }>(`${this.apiUrl}/check`, { params });
+}
+
+
+
 }
