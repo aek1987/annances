@@ -14,7 +14,7 @@ import { ActivatedRoute } from "@angular/router";
   selector: "app-candidatures",
   templateUrl: "./candidatures.component.html",
   styleUrls: ["./candidatures.component.css"], 
-  changeDetection: ChangeDetectionStrategy.OnPush
+ // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CandidaturesComponent implements OnInit {
   candidatConnecte: Candidat | null = null;
@@ -29,10 +29,10 @@ loading = false;
   currentPage = 1;
   totalPages = 0;statuts = [
   { label: 'Tous', value: '', css: '' },
-  { label: 'En attente', value: 'En attente', css: 'attente' },
+  { label: 'En attente', value: 'en_attente', css: 'attente' },
   { label: 'En entretien', value: 'En entretien', css: 'entretien' },
-  { label: 'Acceptée', value: 'Acceptée', css: 'accepte' },
-  { label: 'Refusée', value: 'Refusée', css: 'refuse' }
+  { label: 'Acceptée', value: 'acceptee', css: 'accepte' },
+  { label: 'Refusée', value: 'refusee', css: 'refuse' }
 ];
   size = 8; // nombre d’éléments par page
 
@@ -41,12 +41,13 @@ loading = false;
     private entrepriseService: EntrepriseService ) {}
   ngOnInit(): void {
     const data = this.route.snapshot.data["candidatures"];
+  
     this.candidatConnecte = data.candidat;
     // pagination initiale
     this.currentPage = data.currentPage + 1;
     this.totalPages = data.totalPages;
     this.candidatures = data.candidatures;
-    
+    console.log("candidature :",this.candidatures);
     // Charger les offres + entreprises
     this.chargerDetails();
   }
@@ -189,6 +190,10 @@ setStatut(value: string) {
 
 trackById(_: number, c: Candidature) {
   return c.id;
+}
+get candidaturesFiltrees() {
+  if (!this.filtreStatut) return this.candidatures;
+  return this.candidatures.filter(c => c.statut === this.filtreStatut);
 }
 
 }
