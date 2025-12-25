@@ -1,4 +1,4 @@
-.modal-backdrop {
+.modal-backdrop-fr {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   z-index: 9999;
 }
 
-.modal {
+.modal-fr {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;

@@ -22,7 +22,7 @@ creation de compte et recuperaton de mot pass par gmail
 
 espace candidat 
 ****************************
-filtre par salire
+filtre par salire  et ecperience 
 Notifications fonction
 poste deja postulé offre liste
 stute en attente ne focntionne pas dession offre +detaille

@@ -20,14 +20,7 @@
         <hr />
         <button class="danger" (click)="supprimerAlerte(a.id)">🗑️ Supprimer</button>
          <!-- Modal centré sur l'alerte -->
-      <app-alerte-frequence-modal
-        *ngIf="alerteSelectionnee?.id === a.id && alerteFrequence"
-        [visible]="true"
-        [frequenceActuelle]="alerteSelectionnee?.frequence || 'quotidienne'"
-        (close)="fermerModal()"
-        (confirm)="confirmerFrequence($event)">
-      </app-alerte-frequence-modal>
-      </div>
+    
     </div>
   </div>
 

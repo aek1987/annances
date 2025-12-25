@@ -65,8 +65,10 @@ export class OffresEmploiComponent implements OnInit {
   isLoading = true;
 
   isExperienceDropdownOpen = false;
-  experiences = ["Débutant", "1-2 ans", "3-5 ans", "6-10 ans", "10+ ans"];
-  selectedExperiences: string[] = [];
+  experiences = [  "Débutant",   "Intermédiaire",  "Senior",   "Expert"];
+
+selectedExperiences: string[] = [];
+
 
   isSalaireDropdownOpen = false;
   salaires: string[] = [
