@@ -51,7 +51,7 @@
 
 /* Statut couleurs */
 .statut.en-attente { background: #f0ad4e; }
-.statut.en-cours { background: #0275d8; }
+.statut.consulte { background: #0275d8; }
 .statut.acceptee { background: #5cb85c; }
 .statut.refusee { background: #d9534f; }
 .statut.finalisee { background: #6c757d; }

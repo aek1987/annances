@@ -19,7 +19,7 @@ import { ActivatedRoute } from "@angular/router";
 export class CandidaturesComponent implements OnInit {
   candidatConnecte: Candidat | null = null;
   candidatures: Candidature[] = [];
-  etapes = ["en Attente", "Analyse", "Acceptée", "Refusée", "Finalisé"];
+  etapes = ["en Attente", "Consultée", "Acceptée", "Refusée", "Finalisé"];
   filtreStatut: string = "";
   offresMap = new Map<number, Offre>();
   entreprisesMap = new Map<number, Entreprise>();
@@ -30,7 +30,7 @@ loading = false;
   totalPages = 0;statuts = [
   { label: 'Tous', value: '', css: '' },
   { label: 'En attente', value: 'en_attente', css: 'attente' },
-  { label: 'En entretien', value: 'En entretien', css: 'entretien' },
+  { label: 'Consultée', value: 'consultee', css: 'consulte' },
   { label: 'Acceptée', value: 'acceptee', css: 'accepte' },
   { label: 'Refusée', value: 'refusee', css: 'refuse' }
 ];
