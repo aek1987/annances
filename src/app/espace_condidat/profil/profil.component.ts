@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { text } from "@fortawesome/fontawesome-svg-core";
 import { Candidat } from "src/app/modeles/candidat";
 import { Experience } from "src/app/modeles/experience";
 import { Formation } from "src/app/modeles/Formation";
@@ -94,7 +95,10 @@ export class ProfilComponent {
      
 
       if (this.candidat) {
+      
+    this.candidat.cv = `assets/cv/${file.name}`; // ou juste file.name
         this.candidat.status = this.candidatService.getStatus(this.candidat);
+          
         alert("✅ CV analysé avec succès ! Informations ajoutées.");
       }
     } catch (error) {
