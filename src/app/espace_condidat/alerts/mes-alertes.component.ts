@@ -9,8 +9,8 @@ import { AlerteEmploiService } from 'src/app/service/alerte-emploi.service';
 })
 export class MesAlertesComponent implements OnInit {
   alertes: Alerte[] = [];
-  alerteFrequence?: Alerte;
-  frequenceSelectionnee: "mensuelle" | "quotidienne" | "hebdomadaire" | "Immediate" = "quotidienne";
+  alerteFrequence = false;
+  alerteSelectionnee: Alerte | null = null;
 
   constructor(private alerteService: AlerteEmploiService) {}
 
@@ -51,31 +51,26 @@ export class MesAlertesComponent implements OnInit {
   }
 
   changerFrequence(alerte: Alerte) {
-    this.closeAllConfigs();
-        alerte.showConfig = !alerte.showConfig;
-    this.alerteFrequence = alerte;
-    this.frequenceSelectionnee = alerte.frequence;
+     console.log('Alerte sélectionnée pour modifier fréquence:', alerte);
+    this.alerteSelectionnee = alerte;
+    this.alerteFrequence = true;
+    console.log('Alerte sélectionnée pour le modal :', this.alerteSelectionnee);
   }
 
-  confirmerFrequence() {
-    if (this.alerteFrequence) {
-      this.alerteFrequence.frequence = this.frequenceSelectionnee;
-      // TODO: sauvegarder via backend
-    }
-    this.fermerModal();
-  }
+ confirmerFrequence(nouvelleFrequence: "quotidienne" | "hebdomadaire" | "mensuelle" | "Immediate") {
+  if (!this.alerteSelectionnee) return;
+
+  this.alerteSelectionnee.frequence = nouvelleFrequence;
+
+  // Optionnel: appel API
+  // this.alerteService.updateFrequence(this.alerteSelectionnee.id, nouvelleFrequence)
+
+  this.fermerModal();
+}
+
 
   fermerModal() {
-    this.alerteFrequence = undefined;
-  }
-
-  showModal = false;
-
-  ouvrirModal() {
-    this.showModal = true;
-  }
-
-  fermerModal0() {
-    this.showModal = false;
+    this.alerteFrequence = false;
+    this.alerteSelectionnee = null;
   }
 }

@@ -1,0 +1,17 @@
+<div class="modal-backdrop" *ngIf="visible" (click)="fermer()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <h3>🔔 Fréquence des notifications</h3>
+<!-- Test : afficher l’alerte sélectionnée -->
+    <pre>{{ frequenceSelectionnee }}</pre>
+    <!-- Utilise le tableau typé du composant -->
+    <label *ngFor="let freq of frequences">
+      <input type="radio" name="freq" [value]="freq" [(ngModel)]="frequenceSelectionnee">
+      {{ freq }}
+    </label>
+
+    <div class="modal-actions">
+      <button (click)="confirmer()">✔ Confirmer</button>
+      <button (click)="fermer()">Annuler</button>
+    </div>
+  </div>
+</div>

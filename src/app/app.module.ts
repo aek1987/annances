@@ -63,6 +63,7 @@ import { OffreDetailVisiteurComponent } from './espace-visiteur/offre-detail-vis
 import { CandidaturesOffreComponent } from './espace_entreprise/candidatures-offre/candidatures-offre.component';
 import { AuthInterceptor } from './interceptors/interceptor';
 import { MesAlertesComponent } from './espace_condidat/alerts/mes-alertes.component';
+import { AlerteFrequenceModalComponent } from './espace_condidat/alerts/alerte-frequence-modal/alerte-frequence-modal.component';
 
 
 
@@ -123,7 +124,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CandidatDetailComponent,
     ProfilComponentEntreprise,
     DetailEntrepriseComponent,
-    CandidaturesOffreComponent
+    CandidaturesOffreComponent,
+    AlerteFrequenceModalComponent
    
   
    

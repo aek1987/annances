@@ -19,45 +19,26 @@
         </button>
         <hr />
         <button class="danger" (click)="supprimerAlerte(a.id)">🗑️ Supprimer</button>
+         <!-- Modal centré sur l'alerte -->
+      <app-alerte-frequence-modal
+        *ngIf="alerteSelectionnee?.id === a.id && alerteFrequence"
+        [visible]="true"
+        [frequenceActuelle]="alerteSelectionnee?.frequence || 'quotidienne'"
+        (close)="fermerModal()"
+        (confirm)="confirmerFrequence($event)">
+      </app-alerte-frequence-modal>
       </div>
     </div>
   </div>
-</div>
-<button (click)="ouvrirModal()">Ouvrir le modal</button>
 
-<!-- Modal -->
-<div class="modal-backdrop" *ngIf="showModal" (click)="fermerModal0()">
-  <div class="modal" (click)="$event.stopPropagation()">
-    <h3>🔔 Mon Modal</h3>
-    <p>Contenu du modal ici...</p>
-    <button (click)="fermerModal0()">Fermer</button>
-  </div>
 </div>
-<!-- MODAL (en dehors de la boucle) -->
-<div class="modal-backdrop" *ngIf="alerteFrequence" (click)="fermerModal()">
-  <div class="modal" (click)="$event.stopPropagation()">
-    <h3>🔔 Fréquence des notifications</h3>
 
-    <label>
-      <input type="radio" name="freq" value="Immediate" [(ngModel)]="frequenceSelectionnee">
-      Immédiate
-    </label>
-    <label>
-      <input type="radio" name="freq" value="quotidienne" [(ngModel)]="frequenceSelectionnee">
-      Quotidienne
-    </label>
-    <label>
-      <input type="radio" name="freq" value="hebdomadaire" [(ngModel)]="frequenceSelectionnee">
-      Hebdomadaire
-    </label>
-    <label>
-      <input type="radio" name="freq" value="mensuelle" [(ngModel)]="frequenceSelectionnee">
-      Mensuelle
-    </label>
+<!-- Composant modal réutilisable -->
+<app-alerte-frequence-modal
+  [visible]="alerteFrequence"
+  [frequenceActuelle]="alerteSelectionnee?.frequence || 'quotidienne'"
+  (close)="fermerModal()"
+  (confirm)="confirmerFrequence($event)">
+</app-alerte-frequence-modal>
 
-    <div class="modal-actions">
-      <button (click)="confirmerFrequence()">✔ Confirmer</button>
-      <button (click)="fermerModal()">Annuler</button>
-    </div>
-  </div>
-</div>
+

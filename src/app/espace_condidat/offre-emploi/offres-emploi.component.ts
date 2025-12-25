@@ -304,49 +304,56 @@ addFavoris(offre: Offre) {
       alert("Veuillez entrer un email.");
     }
   }
-  creerAlerte() {
-    // Vérifie qu’au moins un critère de recherche est présent
-    if (
-      !this.searchTerm &&
-      !this.searchLocation &&
-      this.selectedContracts.length === 0 &&
-      this.selectedSectors.length === 0 &&
-      this.selectedRemote.length === 0
-    ) {
-      alert(
-        "❗ Veuillez entrer au moins un critère ou un filtre avant de créer une alerte."
-      );
-      return;
-    }
-
-    const alerte: Alerte = {
-      id: Date.now(),
-      motCle: this.searchTerm || "Tous les postes",
-      lieu: this.searchLocation || "Partout",
-      contrats: this.selectedContracts,
-      secteurs: this.selectedSectors,
-      teletravail: this.selectedRemote,
-      frequence: "hebdomadaire",
-      active: true,
-      dateCreation: new Date(),
-      email:  this.candidatConnecte!.email,
-    };
-  
-    // ✅ Enregistrer l’alerte via le service
-   this.alerteEmploiService.addAlerte(alerte).subscribe({
-      next: () => {
-        alert('Alerte créée avec succès !');
-      //  this.loadAlertes();
-      },
-      error: err => {
-        if (err.status === 400) {
-          alert(err.error); // Message du backend : "Nombre maximal d'alertes atteint"
-        } else {
-          console.error('Erreur création alerte:', err);
-        }
-      }
-    });
+ creerAlerte() {
+  // Vérifie qu’au moins un critère est présent
+  if (
+    !this.searchTerm &&
+    !this.searchLocation &&
+    this.selectedContracts.length === 0 &&
+    this.selectedSectors.length === 0 &&
+    this.selectedRemote.length === 0
+  ) {
+    alert(
+      "❗ Veuillez entrer au moins un critère ou un filtre avant de créer une alerte."
+    );
+    return;
   }
+
+  // Nettoyer les tableaux : supprimer les chaînes vides
+  const contratsClean = this.selectedContracts.filter(c => c && c.trim() !== "");
+  const secteursClean = this.selectedSectors.filter(s => s && s.trim() !== "");
+const teletravailClean = this.selectedRemote ? [this.selectedRemote] : [];
+
+
+
+  const alerte: Alerte = {
+    id: Date.now(),
+    motCle: this.searchTerm || "Tous les postes",
+    lieu: this.searchLocation || "Partout",
+    contrats: contratsClean,
+    secteurs: secteursClean,
+    teletravail: teletravailClean,
+    frequence: "hebdomadaire",
+    active: true,
+    dateCreation: new Date(),
+    email: this.candidatConnecte!.email,
+  };
+
+  // Envoi vers le backend
+  this.alerteEmploiService.addAlerte(alerte).subscribe({
+    next: () => {
+      alert('Alerte créée avec succès !');
+    },
+    error: err => {
+      if (err.status === 400) {
+        alert(err.error);
+      } else {
+        console.error('Erreur création alerte:', err);
+      }
+    }
+  });
+}
+
   // Pagination
   get pagedOffres(): Offre[] {
     const start = (this.currentPage - 1) * this.size;
