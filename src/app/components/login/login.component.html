@@ -1,72 +1,50 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-lg p-4">
+      <h2 class="text-center mb-4">Connexion</h2>
 
 
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card shadow-lg p-4">
-        <h2 class="text-center mb-4">Connexion</h2>
-        
-
-        <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
-          <!-- Email -->
-          <div class="form-group mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              name="email"
-              [(ngModel)]="loginData.email"
-              required
-              email
-              placeholder="Entrez votre email"
-            />
-            <div *ngIf="loginForm.submitted && !loginData.email" class="text-danger small">
-              Email est requis.
-            </div>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+        <!-- Email -->
+        <div class="form-group mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" name="email" [(ngModel)]="loginData.email" required email
+            placeholder="Entrez votre email" />
+          <div *ngIf="loginForm.submitted && !loginData.email" class="text-danger small">
+            Email est requis.
           </div>
+        </div>
 
-          <!-- Mot de passe -->
-          <div class="form-group mb-3">
-            <label for="password" class="form-label">Mot de passe</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              name="password"
-              [(ngModel)]="loginData.password"
-              required
-              placeholder="Entrez votre mot de passe"
-            />
-            <div *ngIf="loginForm.submitted && !loginData.password" class="text-danger small">
-              Mot de passe est requis.
-            </div>
+        <!-- Mot de passe -->
+        <div class="form-group mb-3">
+          <label for="password" class="form-label">Mot de passe</label>
+          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="loginData.password"
+            required placeholder="Entrez votre mot de passe" />
+          <div *ngIf="loginForm.submitted && !loginData.password" class="text-danger small">
+            Mot de passe est requis.
           </div>
+        </div>
 
-          <!-- Boutons -->
-          <button type="submit" class="btn btn-primary w-100 mb-3" [disabled]="!loginForm.valid">
-            Se connecter
-          </button>
+        <!-- Boutons -->
+        <button type="submit" class="btn btn-primary w-100 mb-3" [disabled]="!loginForm.valid">
+          Se connecter
+        </button>
         <!-- 🔹 Lien mot de passe oublié -->
-  <div class="mt-6 text-end">
-    <a routerLink="/forgot-password" class="text-decoration-none small">
-      Mot de passe oublié ?
-    </a>
-  </div>
-          <!-- Bouton Inscription -->
-          <a routerLink="/register" class="btn btn-outline-primary w-100 mb-2">
-            Créer un compte
+        <div class="mt-6 text-end">
+          <a routerLink="/forgot-password" class="text-decoration-none small">
+            Mot de passe oublié ?
           </a>
-<p> email: 'Abdelkader.candidat@gmail.com', password: '123456', role: 'condidat'email: ,</p>
-<p>    email: 'admin@gmail.com', password: 'admin', role: 'admin' </p>
-  <p> email: 'jobs@foodly.com', password: 'jobs',username: 'foodly', role: 'entreprise', refId: 2</p>
- <p>   'Lamine.candidat@gmail.com', password: '123456',username: 'Mohamed Lamine', role: 'candidat'</p>
- 
-          <!-- Login Google -->
+        </div>
+        <!-- Bouton Inscription -->
+        <a routerLink="/register" class="btn btn-outline-primary w-100 mb-2">
+          Créer un compte
+        </a>
+    
+        <!-- Login Google -->
         <button type="submit" class="btn btn-danger w-100 mb-3" (click)="loginWithGoogle()">
           <i class="fab fa-google me-2"></i> Connexion avec Google
         </button>
-        </form>
-      </div>
+      </form>
     </div>
   </div>
-
+</div>
