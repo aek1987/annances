@@ -15,7 +15,6 @@ import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { Candidature } from "src/app/modeles/candidature";
 
-
 @Component({
   selector: "app-offres-emploi",
   templateUrl: "./offres-emploi.component.html",
@@ -30,9 +29,7 @@ export class OffresEmploiComponent implements OnInit {
   // 🎯 Filtres
   selectedContract: string = "";
 
-  selectedExperience:string = "";
-
-
+  selectedExperience: string = "";
 
   selectedSector: string = "";
   sectors: string[] = ["Informatique", "Finance", "Santé", "Éducation"];
@@ -70,18 +67,15 @@ export class OffresEmploiComponent implements OnInit {
   isLoading = true;
 
   isExperienceDropdownOpen = false;
-  experiences = [  "Débutant",   "Intermédiaire",  "Senior",   "Expert"];
-
-
-
+  experiences = ["Débutant", "Intermédiaire", "Senior", "Expert"];
 
   isSalaireDropdownOpen = false;
   salaires: string[] = [
-    "Moins de 1 000 €",
-    "1 000 € - 2 000 €",
-    "2 000 € - 3 000 €",
-    "3 000 € - 5 000 €",
-    "Plus de 5 000 €",
+    "Moins de 10 000 €",
+    "10 000 € - 20 000 €",
+    "20 000 € - 30 000 €",
+    "30 000 € - 50 000 €",
+    "Plus de 50 000 €",
   ];
   selectedSalaires: string[] = [];
   selectedContracts: string[] = [];
@@ -94,7 +88,7 @@ export class OffresEmploiComponent implements OnInit {
     "Télétravail partiel",
     "100% Télétravail",
   ];
-  selectedRemote: string="";
+  selectedRemote: string = "";
   isRemoteDropdownOpen = false;
   entreprisesMap: Map<number, Entreprise> = new Map();
   favorisMap: { [offreId: number]: boolean } = {};
@@ -106,73 +100,89 @@ export class OffresEmploiComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
- ngOnInit(): void {
-  this.isLoading = false;
-  const data = this.route.snapshot.data["offresData"];
-  this.filteredOffres = data.content;
-  this.currentPage = data.number;
-  this.totalPages = data.totalPages;
+  ngOnInit(): void {
+    this.isLoading = false;
+    const data = this.route.snapshot.data["offresData"];
+    this.filteredOffres = data.content;
+    this.currentPage = data.number;
+    this.totalPages = data.totalPages;
 
-  console.log("Offres préchargées via resolver :", this.filteredOffres);
+    console.log("Offres préchargées via resolver :", this.filteredOffres);
 
-  // Charger le candidat connecté avant de vérifier les favoris
-  this.candidatService.getCandidatConnecte().subscribe({
-    next: (candidat) => {
-      this.candidatConnecte = candidat;
-    
-       console.log("👤 account Candidat connecté :", this.candidatConnecte);
-      if (!this.candidatConnecte!.refId) {
-        console.warn("⚠️ Aucun candidat connecté, favoris désactivés");
-        return;
-      }
+    // Charger le candidat connecté avant de vérifier les favoris
+    this.candidatService.getCandidatConnecte().subscribe({
+      next: (candidat) => {
+        this.candidatConnecte = candidat;
 
-      // Vérifier si chaque offre est un favori
-      this.filteredOffres.forEach((offre) => {
-        if (offre.id != null) {
-          this.candidatService.isFavori( this.candidatConnecte!.refId, offre.id!).subscribe({
-            next: (isFav: boolean) => {
-              this.favorisMap[offre.id!] = isFav;
-            },
-            error: (err) => {
-              console.error(`Erreur vérif favori pour offre ${offre.id}`, err);
-              this.favorisMap[offre.id!] = false;
-            }
-          });
+        console.log("👤 account Candidat connecté :", this.candidatConnecte);
+        if (!this.candidatConnecte!.refId) {
+          console.warn("⚠️ Aucun candidat connecté, favoris désactivés");
+          return;
         }
 
-        // Charger les entreprises
-        if (offre.entrepriseId && !this.entreprisesMap.has(offre.entrepriseId)) {
-          this.entrepriseService.getEntrepriseById(offre.entrepriseId).subscribe({
-            next: (entreprise) => this.entreprisesMap.set(offre.entrepriseId!, entreprise),
-            error: (err) => console.error(`Erreur chargement entreprise ${offre.entrepriseId}`, err),
-          });
-        }
-      });
-    },
-    error: (err) => console.error("❌ Erreur récupération candidat connecté :", err),
-  });
-}
+        // Vérifier si chaque offre est un favori
+        this.filteredOffres.forEach((offre) => {
+          if (offre.id != null) {
+            this.candidatService
+              .isFavori(this.candidatConnecte!.refId, offre.id!)
+              .subscribe({
+                next: (isFav: boolean) => {
+                  this.favorisMap[offre.id!] = isFav;
+                },
+                error: (err) => {
+                  console.error(
+                    `Erreur vérif favori pour offre ${offre.id}`,
+                    err
+                  );
+                  this.favorisMap[offre.id!] = false;
+                },
+              });
+          }
 
-loadOffres(page: number = 0) {
-  this.isLoading = true;
+          // Charger les entreprises
+          if (
+            offre.entrepriseId &&
+            !this.entreprisesMap.has(offre.entrepriseId)
+          ) {
+            this.entrepriseService
+              .getEntrepriseById(offre.entrepriseId)
+              .subscribe({
+                next: (entreprise) =>
+                  this.entreprisesMap.set(offre.entrepriseId!, entreprise),
+                error: (err) =>
+                  console.error(
+                    `Erreur chargement entreprise ${offre.entrepriseId}`,
+                    err
+                  ),
+              });
+          }
+        });
+      },
+      error: (err) =>
+        console.error("❌ Erreur récupération candidat connecté :", err),
+    });
+  }
 
-  this.offreService.getOffresPaged(page, this.size).subscribe({
-    next: (data: Page<Offre>) => {
-      this.offres = data.content;
-      this.totalPages = data.totalPages;
+  loadOffres(page: number = 0) {
+    this.isLoading = true;
 
-      this.page = data.number;           // backend index
-      this.currentPage = data.number + 1; // UI index
+    this.offreService.getOffresPaged(page, this.size).subscribe({
+      next: (data: Page<Offre>) => {
+        this.offres = data.content;
+        this.totalPages = data.totalPages;
 
-      this.filteredOffres = this.offres;
-      this.isLoading = false;
-    },
-    error: (err) => {
-      console.error(err);
-      this.isLoading = false;
-    }
-  });
-}
+        this.page = data.number; // backend index
+        this.currentPage = data.number + 1; // UI index
+
+        this.filteredOffres = this.offres;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.isLoading = false;
+      },
+    });
+  }
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
@@ -190,48 +200,39 @@ loadOffres(page: number = 0) {
     this.applyFilters(); // <-- appel API à chaque changement
   }
 
- onSectorCheckboxChange(event: any) {
+  onSectorCheckboxChange(event: any) {
     const value = event.target.value;
     if (event.target.checked) {
       this.selectedSectors.push(value); // ✔️ mettre dans selectedSectors
     } else {
-      this.selectedSectors = this.selectedSectors.filter(
-        (s) => s !== value
-      );
+      this.selectedSectors = this.selectedSectors.filter((s) => s !== value);
     }
     this.applyFilters();
-}
-
+  }
 
   onRemoteCheckboxChange(event: any) {
-  const value = event.target.value;
+    const value = event.target.value;
 
-  if (event.target.checked) {
-    this.selectedRemote = value;   // ✅ affectation correcte
-  } else {
-    this.selectedRemote = "";
+    if (event.target.checked) {
+      this.selectedRemote = value; // ✅ affectation correcte
+    } else {
+      this.selectedRemote = "";
+    }
+
+    this.applyFilters();
   }
 
-  this.applyFilters();
-}
+  onExperienceChange(event: any) {
+    const value = event.target.value;
 
+    if (event.target.checked) {
+      this.selectedExperience = value;
+    } else {
+      this.selectedExperience = "";
+    }
 
-
-
-onExperienceChange(event: any) {
-  const value = event.target.value;
-
-  if (event.target.checked) {
-    this.selectedExperience = value;
-  } else {
-    this.selectedExperience = "";
+    this.applyFilters();
   }
-
-  this.applyFilters();
-}
-
-
-
 
   onCheckboxChangeSalaire(event: Event) {
     const checkbox = event.target as HTMLInputElement;
@@ -242,7 +243,7 @@ onExperienceChange(event: any) {
     } else {
       this.selectedSalaires = this.selectedSalaires.filter((s) => s !== value);
     }
-      this.applyFilters();
+    this.applyFilters();
   }
   toggleSectorDropdown() {
     this.isSectorDropdownOpen = !this.isSectorDropdownOpen;
@@ -290,31 +291,32 @@ onExperienceChange(event: any) {
   }
 
   // ⭐ Favoris
-addFavoris(offre: Offre) {
-  if (!this.candidatConnecte?.refId || !offre.id) return;
+  addFavoris(offre: Offre) {
+    if (!this.candidatConnecte?.refId || !offre.id) return;
 
-  const candidatId = this.candidatConnecte.refId;
-  const offreId = offre.id;
-  const isFavori = this.favorisMap[offreId];
+    const candidatId = this.candidatConnecte.refId;
+    const offreId = offre.id;
+    const isFavori = this.favorisMap[offreId];
 
-  if (isFavori) {
-    this.candidatService.removeFavori(candidatId, offreId).subscribe({
-      next: () => {
-        this.favorisMap[offreId] = false;
-        console.log(`❌ Offre ${offreId} supprimée des favoris`);
-      },
-      error: (err) => console.error(`Erreur suppression favori ${offreId}`, err),
-    });
-  } else {
-    this.candidatService.addFavori(candidatId, offreId).subscribe({
-      next: () => {
-        this.favorisMap[offreId] = true;
-        console.log(`⭐ Offre ${offreId} ajoutée aux favoris`);
-      },
-      error: (err) => console.error(`Erreur ajout favori ${offreId}`, err),
-    });
+    if (isFavori) {
+      this.candidatService.removeFavori(candidatId, offreId).subscribe({
+        next: () => {
+          this.favorisMap[offreId] = false;
+          console.log(`❌ Offre ${offreId} supprimée des favoris`);
+        },
+        error: (err) =>
+          console.error(`Erreur suppression favori ${offreId}`, err),
+      });
+    } else {
+      this.candidatService.addFavori(candidatId, offreId).subscribe({
+        next: () => {
+          this.favorisMap[offreId] = true;
+          console.log(`⭐ Offre ${offreId} ajoutée aux favoris`);
+        },
+        error: (err) => console.error(`Erreur ajout favori ${offreId}`, err),
+      });
+    }
   }
-}
 
   estFavori(offreId: number): boolean {
     return !!this.favorisMap[offreId];
@@ -329,55 +331,57 @@ addFavoris(offre: Offre) {
       alert("Veuillez entrer un email.");
     }
   }
- creerAlerte() {
-  // Vérifie qu’au moins un critère est présent
-  if (
-    !this.searchTerm &&
-    !this.searchLocation &&
-    this.selectedContracts.length === 0 &&
-    this.selectedSectors.length === 0 &&
-    this.selectedRemote.length === 0
-  ) {
-    alert(
-      "❗ Veuillez entrer au moins un critère ou un filtre avant de créer une alerte."
-    );
-    return;
-  }
-
-  // Nettoyer les tableaux : supprimer les chaînes vides
-  const contratsClean = this.selectedContracts.filter(c => c && c.trim() !== "");
-  const secteursClean = this.selectedSectors.filter(s => s && s.trim() !== "");
-const teletravailClean = this.selectedRemote ? [this.selectedRemote] : [];
-
-
-
-  const alerte: Alerte = {
-    id: Date.now(),
-    motCle: this.searchTerm || "Tous les postes",
-    lieu: this.searchLocation || "Partout",
-    contrats: contratsClean,
-    secteurs: secteursClean,
-    teletravail: teletravailClean,
-    frequence: "hebdomadaire",
-    active: true,
-    dateCreation: new Date(),
-    email: this.candidatConnecte!.email,
-  };
-
-  // Envoi vers le backend
-  this.alerteEmploiService.addAlerte(alerte).subscribe({
-    next: () => {
-      alert('Alerte créée avec succès !');
-    },
-    error: err => {
-      if (err.status === 400) {
-        alert(err.error);
-      } else {
-        console.error('Erreur création alerte:', err);
-      }
+  creerAlerte() {
+    // Vérifie qu’au moins un critère est présent
+    if (
+      !this.searchTerm &&
+      !this.searchLocation &&
+      this.selectedContracts.length === 0 &&
+      this.selectedSectors.length === 0 &&
+      this.selectedRemote.length === 0
+    ) {
+      alert(
+        "❗ Veuillez entrer au moins un critère ou un filtre avant de créer une alerte."
+      );
+      return;
     }
-  });
-}
+
+    // Nettoyer les tableaux : supprimer les chaînes vides
+    const contratsClean = this.selectedContracts.filter(
+      (c) => c && c.trim() !== ""
+    );
+    const secteursClean = this.selectedSectors.filter(
+      (s) => s && s.trim() !== ""
+    );
+    const teletravailClean = this.selectedRemote ? [this.selectedRemote] : [];
+
+    const alerte: Alerte = {
+      id: Date.now(),
+      motCle: this.searchTerm || "Tous les postes",
+      lieu: this.searchLocation || "Partout",
+      contrats: contratsClean,
+      secteurs: secteursClean,
+      teletravail: teletravailClean,
+      frequence: "hebdomadaire",
+      active: true,
+      dateCreation: new Date(),
+      email: this.candidatConnecte!.email,
+    };
+
+    // Envoi vers le backend
+    this.alerteEmploiService.addAlerte(alerte).subscribe({
+      next: () => {
+        alert("Alerte créée avec succès !");
+      },
+      error: (err) => {
+        if (err.status === 400) {
+          alert(err.error);
+        } else {
+          console.error("Erreur création alerte:", err);
+        }
+      },
+    });
+  }
 
   // Pagination
   get pagedOffres(): Offre[] {
@@ -392,42 +396,42 @@ const teletravailClean = this.selectedRemote ? [this.selectedRemote] : [];
     this.isSalaireDropdownOpen = !this.isSalaireDropdownOpen;
   }
 
-nextPage() {
-  if (this.page < this.totalPages - 1) {
-    this.page++;              // Backend
-    this.loadOffres(this.page);
+  nextPage() {
+    if (this.page < this.totalPages - 1) {
+      this.page++; // Backend
+      this.loadOffres(this.page);
+    }
   }
-}
 
-prevPage() {
-  if (this.page > 0) {
-    this.page--;
-    this.loadOffres(this.page);
+  prevPage() {
+    if (this.page > 0) {
+      this.page--;
+      this.loadOffres(this.page);
+    }
   }
-}
 
-goToPage(page: number) {
-  if (page >= 1 && page <= this.totalPages) {
-    this.page = page - 1;     // UI -> Backend
-    this.loadOffres(this.page);
+  goToPage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.page = page - 1; // UI -> Backend
+      this.loadOffres(this.page);
+    }
   }
-}
 
- applyFilters() {
+  applyFilters() {
     this.closeAllDropdowns();
     this.isLoading = true;
-let salaireMin: number | undefined;
+    let salaireMin: number | undefined;
 let salaireMax: number | undefined;
 if (this.selectedSalaires?.length) {
-  const range = this.getSalaireRange(this.selectedSalaires[0]); // 🔥 1 choix
+  const range = this.getSalaireRange(this.selectedSalaires[0]);
   salaireMin = range.min;
   salaireMax = range.max;
 }
 
+    // 🔹 Affichage des filtres dans la console
 
-     // 🔹 Affichage des filtres dans la console
-
-    this.offreService.getOffresFiltered(
+    this.offreService
+      .getOffresFiltered(
         0, // première page
         this.size,
         this.searchTerm,
@@ -436,36 +440,39 @@ if (this.selectedSalaires?.length) {
         this.selectedSectors,
         this.selectedRemote,
         this.selectedExperience,
-     //   this.selectedSalaires
-      ) .subscribe({
+     salaireMin,
+  salaireMax
+      )
+      .subscribe({
         next: (data) => {
           this.filteredOffres = data.content;
           this.totalPages = data.totalPages;
           this.currentPage = 1;
           this.isLoading = false;
 
-   console.log('✅ Offres filtrées:', this.filteredOffres);
-// 🔥 Recharger les favoris après filtrage
+          console.log("✅ Offres filtrées:", this.filteredOffres);
+          // 🔥 Recharger les favoris après filtrage
 
-if (this.candidatConnecte?.refId) {
-  this.filteredOffres.forEach((offre) => {
-    if (offre.id != null) {
-      this.candidatService.isFavori(this.candidatConnecte!.refId, offre.id).subscribe({
-        next: (isFav) => {
-       
-          this.favorisMap[offre.id!] = isFav;
-        },
-        error: (err) => {
-          console.log(`❌ Erreur vérification favori pour offre ${offre.id}`, err);
-          this.favorisMap[offre.id!] = false;
-        }
-      });
-    }
-  });
-}
-
-
-
+          if (this.candidatConnecte?.refId) {
+            this.filteredOffres.forEach((offre) => {
+              if (offre.id != null) {
+                this.candidatService
+                  .isFavori(this.candidatConnecte!.refId, offre.id)
+                  .subscribe({
+                    next: (isFav) => {
+                      this.favorisMap[offre.id!] = isFav;
+                    },
+                    error: (err) => {
+                      console.log(
+                        `❌ Erreur vérification favori pour offre ${offre.id}`,
+                        err
+                      );
+                      this.favorisMap[offre.id!] = false;
+                    },
+                  });
+              }
+            });
+          }
 
           // Charger les entreprises pour chaque offre
           this.filteredOffres.forEach((offre) => {
@@ -489,37 +496,34 @@ if (this.candidatConnecte?.refId) {
       });
   }
 
-
-closeAllDropdowns() {
-  this.isDropdownOpen = false;
-  this.isSectorDropdownOpen = false;
-  this.isRemoteDropdownOpen = false;
-  this.isExperienceDropdownOpen = false;
-  this.isSalaireDropdownOpen = false;
-}
-
+  closeAllDropdowns() {
+    this.isDropdownOpen = false;
+    this.isSectorDropdownOpen = false;
+    this.isRemoteDropdownOpen = false;
+    this.isExperienceDropdownOpen = false;
+    this.isSalaireDropdownOpen = false;
+  }
 
 getSalaireRange(selected: string): { min?: number; max?: number } {
   switch (selected) {
-    case 'Moins de 1 000 €':
-      return { max: 1000 };
+    case 'Moins de 10 000 €':
+      return { max: 10000 };
 
-    case '1 000 € - 2 000 €':
-      return { min: 1000, max: 2000 };
+    case '10 000 € - 20 000 €':
+      return { min: 10000, max: 20000 };
 
-    case '2 000 € - 3 000 €':
-      return { min: 2000, max: 3000 };
+    case '20 000 € - 30 000 €':
+      return { min: 20000, max: 30000 };
 
-    case '3 000 € - 5 000 €':
-      return { min: 3000, max: 5000 };
+    case '30 000 € - 50 000 €':
+      return { min: 30000, max: 50000 };
 
-    case 'Plus de 5 000 €':
-      return { min: 5000 };
+    case 'Plus de 50 000 €':
+      return { min: 50000 };
 
     default:
       return {};
   }
 }
-
 
 }

@@ -267,15 +267,8 @@ if (experience) {
   params = params.set('experience', experience);
 }
 
-
-// ✅ ICI EXACTEMENT
-  if (salaireMin !== undefined) {
-    params = params.set('salaireMin', salaireMin.toString());
-  }
-
-  if (salaireMax !== undefined) {
-    params = params.set('salaireMax', salaireMax.toString());
-  }
+ if (salaireMin !== undefined) params = params.set('salaireMin', salaireMin.toString());
+  if (salaireMax !== undefined) params = params.set('salaireMax', salaireMax.toString());
 
     // 🔹 Affichage des paramètres envoyés
   console.log("📨 Paramètres envoyés au backend :", params.toString());
