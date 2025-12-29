@@ -77,22 +77,24 @@
   <div class="dropdown" [class.open]="isExperienceDropdownOpen">
     <button class="dropdown-btn" (click)="toggleExperienceDropdown()">
       Expérience
-      <span *ngIf="selectedExperiences.length" class="badge">{{
-        selectedExperiences.length
+      <span *ngIf="selectedExperience.length" class="badge">{{
+        selectedExperience.length
       }}</span>
       <i class="arrow" [class.up]="isExperienceDropdownOpen"></i>
     </button>
 
     <div class="dropdown-content">
       <label *ngFor="let experience of experiences" class="checkbox-label">
-        <input
-          type="checkbox"
-          [value]="experience"
-          (change)="onCheckboxChange($event)"
-          [checked]="selectedExperiences.includes(experience)"
-        />
-        {{ experience }}
-      </label>
+ <input
+  type="checkbox"
+  [value]="experience"
+  (change)="onExperienceChange($event)"
+  [checked]="selectedExperience.includes(experience)"
+/>
+
+
+  {{ experience }}
+</label>
     </div>
   </div>
   <!-- 💰 Salaire -->

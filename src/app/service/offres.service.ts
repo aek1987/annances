@@ -241,7 +241,7 @@ getOffresFiltered(
   contrats?: string[],
   secteurs?: string[],
   teletravail?: string,
-  experience?: string[],
+  experience?: string,
   salaireMin?: number,
   salaireMax?: number
 ): Observable<Page<Offre>> {
@@ -259,9 +259,13 @@ if (teletravail) {
   params = params.set('teletravail', teletravail);
 }
 
-  if (experience && experience.length) params = params.set('experience', experience.join(','));
+  //if (experience && experience.length) params = params.set('experience', experience.join(','));
+  
  // if (salaires && salaires.length) params = params.set('salaireMin', salaires.join(','));
 
+if (experience) {
+  params = params.set('experience', experience);
+}
 
 
 // ✅ ICI EXACTEMENT

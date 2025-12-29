@@ -26,9 +26,14 @@ export class OffresEmploiComponent implements OnInit {
   searchTerm: string = "";
   searchLocation: string = "";
   searchSalary: number | null = null;
-  searchExperience: string = "";
+
   // 🎯 Filtres
   selectedContract: string = "";
+
+  selectedExperience:string = "";
+
+
+
   selectedSector: string = "";
   sectors: string[] = ["Informatique", "Finance", "Santé", "Éducation"];
   // 📩 Alerte email
@@ -67,7 +72,7 @@ export class OffresEmploiComponent implements OnInit {
   isExperienceDropdownOpen = false;
   experiences = [  "Débutant",   "Intermédiaire",  "Senior",   "Expert"];
 
-selectedExperiences: string[] = [];
+
 
 
   isSalaireDropdownOpen = false;
@@ -209,6 +214,24 @@ loadOffres(page: number = 0) {
 
   this.applyFilters();
 }
+
+
+
+
+onExperienceChange(event: any) {
+  const value = event.target.value;
+
+  if (event.target.checked) {
+    this.selectedExperience = value;
+  } else {
+    this.selectedExperience = "";
+  }
+
+  this.applyFilters();
+}
+
+
+
 
   onCheckboxChangeSalaire(event: Event) {
     const checkbox = event.target as HTMLInputElement;
@@ -412,7 +435,7 @@ if (this.selectedSalaires?.length) {
         this.selectedContracts,
         this.selectedSectors,
         this.selectedRemote,
-        this.selectedExperiences,
+        this.selectedExperience,
      //   this.selectedSalaires
       ) .subscribe({
         next: (data) => {
