@@ -65,7 +65,7 @@ export class OffreDetailComponent implements OnInit {
     }
   }
 
-  // Récupérer toute l’entreprise (logo, site, etc.)
+
   getEntreprise(entrepriseId: number): void {
     this.entrepriseService.getEntrepriseById2(entrepriseId).subscribe({
       next: (data: Entreprise) => {

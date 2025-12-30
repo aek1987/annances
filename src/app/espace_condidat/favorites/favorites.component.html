@@ -1,27 +1,37 @@
 <div class="favorites-container">
   <h2>Mes offres favorites</h2>
+  <div class="favorites-grid">
+    <div *ngFor="let job of favoriteJobs" class="favorite-card">
+      <!-- 🔹 Header de la carte -->
+      <div class="card-header">
+        <button class="detail-btn" (click)="goToDetail(job.id)">
+          👁️ Détail
+        </button>
+      </div>
 
-  <div *ngIf="favoriteJobs.length === 0">
-    <p>Aucune offre favorite pour le moment.</p>
-  </div>
+      <div class="job-info">
+        <h3>{{ job.poste }}</h3>
+        <p>
+          <strong>Entreprise:</strong>
+          {{ entrepriseMap[job.entrepriseId] || "Chargement..." }}
+        </p>
 
-  <div *ngFor="let job of favoriteJobs" class="favorite-card">
-    <div class="job-info">
-      <h3>{{ job.poste }}</h3>
-      <p><strong>Entreprise:</strong> {{ job.entrepriseId }}</p>
-      <p><strong>Lieu:</strong> {{ job.localisation }}</p>
-      <p><strong>Date enregistrée:</strong> {{ job.datePublication| date:'longDate' }}</p>
-    </div>
+        <p><strong>Lieu:</strong> {{ job.localisation }}</p>
+        <p>
+          <strong>Date enregistrée:</strong>
+          {{ job.datePublication | date : "longDate" }}
+        </p>
+      </div>
 
-    <div class="job-actions">
-      <button (click)="removeFavorite(job.id)" class="remove-btn">
-        ❌ Supprimer
-      </button>
+      <div class="job-actions">
+        <button (click)="removeFavorite(job.id)" class="remove-btn">
+          ❌ Retirer
+        </button>
 
-      <!-- Si tu veux afficher un indicateur de favori -->
-      <span class="favorite-indicator" *ngIf="isFavori(job.id) | async">
-        ❤️ Favori
-      </span>
+        <span class="favorite-indicator" *ngIf="isFavori(job.id) | async">
+          ❤️ Favori
+        </span>
+      </div>
     </div>
   </div>
 </div>

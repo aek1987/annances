@@ -8,7 +8,7 @@ import { CandidatureService } from "src/app/service/candidature.service";
 import { EntrepriseService } from "src/app/service/entreprise.service";
 import { OffresService } from "src/app/service/offres.service";
 import { forkJoin, map, Observable, switchMap } from "rxjs";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-candidatures",
@@ -38,7 +38,7 @@ loading = false;
 
   constructor(    private route: ActivatedRoute,    private candidatService: CandidatService,
     private offresService: OffresService,    private candidature: CandidatureService,
-    private entrepriseService: EntrepriseService ) {}
+    private entrepriseService: EntrepriseService,private router: Router ) {}
   ngOnInit(): void {
     const data = this.route.snapshot.data["candidatures"];
   
@@ -118,8 +118,8 @@ loadCandidatures(page: number = 0) {
     this.candidatures = this.candidatures.filter((c) => c.id !== id);
   }
 
-  voirDetails(candidature: Candidature) {
-    //lert(`Détails candidature : ${candidature.poste} chez ${candidature.entreprise}`);
+  goToDetail(candidature: Candidature) {
+   this.router.navigate(['/candidat/offre', candidature.offreId]);
   }
 
   getOffre(offreId: number): Observable<Offre> {
