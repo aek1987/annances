@@ -12,7 +12,11 @@
     </option>
   </select>
 </div>
-
+   <!-- Date limite -->
+    <div class="form-group">
+      <label for="dateLimite">Date limite de candidature</label>
+      <input id="dateLimite" [(ngModel)]="newOffre.dateLimite" name="dateLimite" type="date" />
+    </div>
    <!-- Description -->
 <div class="form-group full-width">
   <label for="description">Description</label>
@@ -68,11 +72,7 @@
 
     
 
-    <!-- Date limite -->
-    <div class="form-group">
-      <label for="dateLimite">Date limite de candidature</label>
-      <input id="dateLimite" [(ngModel)]="newOffre.dateLimite" name="dateLimite" type="date" />
-    </div>
+ 
     <!-- Avantages -->
 <div class="form-group full-width">
   <label for="avantages">Avantages</label>
