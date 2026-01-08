@@ -52,7 +52,7 @@ retour() {
 }
 saveEntreprise() {
   if (this.entreprise) {
-  //  this.entrepriseService.updateEntreprise(this.entreprise);
+    this.entrepriseService.saveEntreprise(this.entreprise);
     console.log("✅ Entreprise mise à jour :", this.entreprise);
     this.editMode = false;
   }
