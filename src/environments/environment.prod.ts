@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://jobsbackend-1.onrender.com-1.onrender.com',
+  apiUrl: 'https://jobsbackend-1.onrender.com',
   firebase: {
     apiKey: "...",
     authDomain: "...",
