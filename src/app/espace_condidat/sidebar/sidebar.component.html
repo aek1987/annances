@@ -1,43 +1,61 @@
 <aside class="sidebar">
-  
-<!-- Photo + Nom -->
-<div class="profil-container text-center">
-  <h4>Mon Profil</h4>
+  <!-- Photo + Nom -->
+  <div class="profil-container text-center">
+    <h4>Mon Profil</h4>
 
- 
-  <img [src]="candidat?.photo ? candidat?.photo : 'assets/user.png'" alt="Photo de profil" class="profil-photo">
- 
-  <h3>{{ currentUser?.username || 'PROFIL' }}</h3>
+    <img
+      [src]="candidat?.photo ? candidat?.photo : 'assets/user.png'"
+      alt="Photo de profil"
+      class="profil-photo"
+    />
 
-  <!-- Status avec badge -->
-  <h4>
-  <span 
-  class="status-badge" 
-  [ngClass]="{
-    'active': candidat?.status === 'active',
-    'desactive': candidat?.status === 'desactive',
-    'en_attente_validation': candidat?.status === 'en_attente_validation',
-    'incomplet': candidat?.status === 'incomplet',
-    'complet': candidat?.status === 'pret'
-  }">
-  {{ candidat?.status || 'nouveau compte' }}
-</span>
-  </h4>
-</div>
+    <h3>{{ currentUser?.username || "PROFIL" }}</h3>
+
+    <!-- Status avec badge -->
+    <h4>
+      <span
+        class="status-badge"
+        [ngClass]="{
+          active: candidat?.status === 'active',
+          desactive: candidat?.status === 'desactive',
+          en_attente_validation: candidat?.status === 'en_attente_validation',
+          incomplet: candidat?.status === 'incomplet',
+          complet: candidat?.status === 'pret',
+        }"
+      >
+        {{ candidat?.status || "nouveau compte" }}
+      </span>
+    </h4>
+  </div>
 
   <!-- 📌 Liens rapides -->
   <div class="profile-links">
     <ul>
-      
       <li><a routerLink="/candidat/offres-emploi">💼 Voir les offres</a></li>
       <li><a routerLink="/candidat/settings">⚙️Mon compte</a></li>
-      <li><a routerLink="/candidat/mes-candidatures">📄 Mes candidatures</a></li>
+      <li>
+        <a routerLink="/candidat/mes-candidatures">📄 Mes candidatures</a>
+      </li>
       <li><a routerLink="/candidat/favorites">⭐ Offres sauvegardées</a></li>
       <li><a routerLink="/candidat/alerts">🔔 Mes alertes emploi</a></li>
-      
-     
-      <li><a routerLink="/candidat/aide-support">🆘 Support & Aide</a></li>     
-     <li><a routerLink="/login"><fa-icon [icon]="faLogout"></fa-icon>🚪 Déconnexion</a></li>
+
+       <!-- 🤖 Ask IA -->
+    <li class="ask-ia-link">
+      <a routerLink="/candidat/ask-ia">🤖 Ask IA</a>
+    </li>
+
+
+
+      <li><a routerLink="/candidat/aide-support">🆘 Support & Aide</a></li>
+      <li>
+
+
+
+        <a routerLink="/login"
+          ><fa-icon [icon]="faLogout"></fa-icon>🚪 Déconnexion</a
+        >
+      </li>
+
     </ul>
   </div>
 
@@ -50,4 +68,3 @@
     </ul>
   </div>
 </aside>
-

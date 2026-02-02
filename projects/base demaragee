@@ -1,0 +1,61 @@
+INSERT INTO offre (
+ poste, description, localisation, salaire, contrat, teletravail,
+ avantages, status, secteur, entreprise_id, experience,
+ date_publication, date_limite
+) VALUES
+-- 1
+('Développeur Angular',
+ 'Développement d’applications Angular 16 avec intégration REST et gestion des états.',
+ 'Paris', 40000, 'CDI', 'Télétravail partiel',
+ 'Tickets restaurant, Mutuelle, Flexibilité',
+ NULL, 'IT', 101, 'Intermédiaire',
+ '2025-01-10', '2025-02-10'),
+
+-- 2
+('Data Analyst',
+ 'Analyse et visualisation des données financières pour prise de décision.',
+ 'Lyon', 35000, 'CDD', 'Présentiel',
+ 'Tickets restaurant, Transport remboursé',
+ NULL, 'Data', 101, 'Junior',
+ '2025-02-05', '2025-03-05'),
+
+-- 3
+('Développeur Java',
+ 'Développement backend avec Spring Boot, intégration API et tests unitaires.',
+ 'Remote', 42000, 'Remote', '100% Télétravail',
+ 'Télétravail 100%, Formations, Mutuelle',
+ NULL, 'IT', 101, 'Senior',
+ '2025-03-15', '2025-04-15'),
+
+-- 4
+('UX/UI Designer',
+ 'Conception et prototypage d’interfaces web et mobile.',
+ 'Marseille', 38000, 'CDI', 'Télétravail partiel',
+ 'Flexibilité, Tickets restaurant, Formations',
+ NULL, 'Design', 102, 'Intermédiaire',
+ '2025-04-01', '2025-05-01'),
+
+-- 5
+('Chef de projet IT',
+ 'Gestion de projets informatiques, coordination des équipes et planning.',
+ 'Toulouse', 50000, 'CDI', 'Présentiel',
+ 'Mutuelle, Bonus, Tickets restaurant',
+ NULL, 'IT', 102, 'Senior',
+ '2025-04-10', '2025-05-10'),
+
+-- 6
+('Consultant Cloud',
+ 'Implémentation et optimisation des solutions cloud AWS/Azure.',
+ 'Remote', 45000, 'Freelance', '100% Télétravail',
+ 'Télétravail, Horaires flexibles',
+ NULL, 'Cloud', 102, 'Intermédiaire',
+ '2025-05-05', '2025-06-05'),
+
+-- 7
+('Marketing Digital',
+ 'Gestion des campagnes marketing, SEO/SEA et analyse des KPI.',
+ 'Bordeaux', 32000, 'Stage', 'Télétravail partiel',
+ 'Stage rémunéré, Tickets restaurant',
+ NULL, 'Marketing', 103, 'Junior',
+ '2025-05-15', '2025-06-15')
+;

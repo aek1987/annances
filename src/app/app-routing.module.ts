@@ -45,6 +45,7 @@ import { OffreDetailVisiteurComponent } from './espace-visiteur/offre-detail-vis
 import { CandidaturesOffreComponent } from './espace_entreprise/candidatures-offre/candidatures-offre.component';
 import { offreResolver } from './resolver/offre-resolver';
 import { CandidaturesResolver } from './resolver/candidatures.resolver';
+import { AskIAComponent } from './espace_condidat/ask-ia/ask-ia.component';
 
 
 
@@ -92,6 +93,7 @@ const routes: Routes = [
       { path: 'alerts', component: MesAlertesComponent },
       { path: 'mes-candidatures', component: CandidaturesComponent , resolve: { candidatures: CandidaturesResolver }},
       {path: 'offre/:id',  component: OffreDetailComponent },
+       { path: 'ask-ia', component: AskIAComponent },
       { path: 'aide-support', component: AideSupportComponent },
       { path: '', redirectTo: 'offres-emploi', pathMatch: 'full' },
     ]

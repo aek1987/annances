@@ -1,0 +1,24 @@
+<div class="chat-container">
+
+  <div class="chat-header">
+    🤖 Ask IA – Assistant emploi
+  </div>
+
+  <div class="chat-messages">
+    <div *ngFor="let msg of messages"
+         [ngClass]="msg.role === 'IA' ? 'msg-ia' : 'msg-user'">
+      <span class="role">{{ msg.role }}</span>
+      <p>{{ msg.text }}</p>
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input
+      [(ngModel)]="question"
+      placeholder="Posez votre question à l’IA..."
+      (keyup.enter)="send()"
+    />
+    <button (click)="send()">➤</button>
+  </div>
+
+</div>
